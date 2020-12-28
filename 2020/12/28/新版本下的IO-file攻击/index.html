@@ -4,14 +4,14 @@
   <meta charset="utf-8">
   
   
-  <title>(转)新版本下的IO_file攻击 | Volta</title>
+  <title>新版本下的IO_file攻击(转) | Volta</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="前言原本想在5月底发表这篇文章的，但是由于一些特殊的原因一直拖到现在，该篇文章主要讲了新版本下的io_file攻击，该种攻击手法可以实现非预期堆块的申请、释放和填充以及实现glibc2.29往上版本的srop攻击(搭配largebin attrack效果更佳) 攻击原理：在以前版本的IO_FILE攻击普遍上采用的是劫持IO函数的_chain字段为伪造的IO_FILE_plus然后进行利用，其中伪造">
+  <meta name="description" content="前言原文地址：https:&#x2F;&#x2F;www.anquanke.com&#x2F;post&#x2F;id&#x2F;216290 攻击原理：在以前版本的IO_FILE攻击普遍上采用的是劫持IO函数的_chain字段为伪造的IO_FILE_plus然后进行利用，其中伪造的IO_FILE_plus的vtable一般是io_str_overflow这种函数，而新版本的IO_FILE攻击也不例外，首先我们看一下libc2.32上的io_st">
 <meta property="og:type" content="article">
-<meta property="og:title" content="(转)新版本下的IO_file攻击">
+<meta property="og:title" content="新版本下的IO_file攻击(转)">
 <meta property="og:url" content="http://cnitlrt.top/2020/12/28/%E6%96%B0%E7%89%88%E6%9C%AC%E4%B8%8B%E7%9A%84IO-file%E6%94%BB%E5%87%BB/index.html">
 <meta property="og:site_name" content="Volta">
-<meta property="og:description" content="前言原本想在5月底发表这篇文章的，但是由于一些特殊的原因一直拖到现在，该篇文章主要讲了新版本下的io_file攻击，该种攻击手法可以实现非预期堆块的申请、释放和填充以及实现glibc2.29往上版本的srop攻击(搭配largebin attrack效果更佳) 攻击原理：在以前版本的IO_FILE攻击普遍上采用的是劫持IO函数的_chain字段为伪造的IO_FILE_plus然后进行利用，其中伪造">
+<meta property="og:description" content="前言原文地址：https:&#x2F;&#x2F;www.anquanke.com&#x2F;post&#x2F;id&#x2F;216290 攻击原理：在以前版本的IO_FILE攻击普遍上采用的是劫持IO函数的_chain字段为伪造的IO_FILE_plus然后进行利用，其中伪造的IO_FILE_plus的vtable一般是io_str_overflow这种函数，而新版本的IO_FILE攻击也不例外，首先我们看一下libc2.32上的io_st">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/20393921-a68b67299e74f43e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/20393921-61bf9ffe53851897.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
@@ -21,7 +21,7 @@
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/20393921-195a474d9cc2f582.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/20393921-f7c1f5083b47fcac.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="article:published_time" content="2020-12-28T11:58:04.000Z">
-<meta property="article:modified_time" content="2020-12-28T11:58:39.253Z">
+<meta property="article:modified_time" content="2020-12-28T12:41:05.026Z">
 <meta property="article:author" content="cnitlrt">
 <meta property="article:tag" content="pwn">
 <meta name="twitter:card" content="summary">
@@ -100,7 +100,7 @@
         
   
     <h1 class="p-name article-title" itemprop="headline name">
-      (转)新版本下的IO_file攻击
+      新版本下的IO_file攻击(转)
     </h1>
   
 
@@ -108,7 +108,7 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>原本想在5月底发表这篇文章的，但是由于一些特殊的原因一直拖到现在，该篇文章主要讲了新版本下的io_file攻击，该种攻击手法可以实现非预期堆块的申请、释放和填充以及实现glibc2.29往上版本的srop攻击(搭配largebin attrack效果更佳)</p>
+        <h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>原文地址：<a target="_blank" rel="noopener" href="https://www.anquanke.com/post/id/216290">https://www.anquanke.com/post/id/216290</a></p>
 <h4 id="攻击原理："><a href="#攻击原理：" class="headerlink" title="攻击原理："></a>攻击原理：</h4><p>在以前版本的IO_FILE攻击普遍上采用的是劫持IO函数的_chain字段为伪造的IO_FILE_plus然后进行利用，其中伪造的IO_FILE_plus的vtable一般是io_str_overflow这种函数，而新版本的IO_FILE攻击也不例外，首先我们看一下libc2.32上的io_str_overflow函数</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">int</span><br><span class="line">_IO_str_overflow (FILE *fp, int c)</span><br><span class="line">&#123;</span><br><span class="line">  int flush_only &#x3D; c &#x3D;&#x3D; EOF;</span><br><span class="line">  size_t pos;</span><br><span class="line">  if (fp-&gt;_flags &amp; _IO_NO_WRITES)</span><br><span class="line">      return flush_only ? 0 : EOF;</span><br><span class="line">  if ((fp-&gt;_flags &amp; _IO_TIED_PUT_GET) &amp;&amp; !(fp-&gt;_flags &amp; _IO_CURRENTLY_PUTTING))</span><br><span class="line">    &#123;</span><br><span class="line">      fp-&gt;_flags |&#x3D; _IO_CURRENTLY_PUTTING;</span><br><span class="line">      fp-&gt;_IO_write_ptr &#x3D; fp-&gt;_IO_read_ptr;</span><br><span class="line">      fp-&gt;_IO_read_ptr &#x3D; fp-&gt;_IO_read_end;</span><br><span class="line">    &#125;</span><br><span class="line">  pos &#x3D; fp-&gt;_IO_write_ptr - fp-&gt;_IO_write_base;</span><br><span class="line">  if (pos &gt;&#x3D; (size_t) (_IO_blen (fp) + flush_only))</span><br><span class="line">    &#123;</span><br><span class="line">      if (fp-&gt;_flags &amp; _IO_USER_BUF) &#x2F;* not allowed to enlarge *&#x2F;</span><br><span class="line">	return EOF;</span><br><span class="line">      else</span><br><span class="line">	&#123;</span><br><span class="line">	  char *new_buf;</span><br><span class="line">	  char *old_buf &#x3D; fp-&gt;_IO_buf_base;</span><br><span class="line">	  size_t old_blen &#x3D; _IO_blen (fp);</span><br><span class="line">	  size_t new_size &#x3D; 2 * old_blen + 100;</span><br><span class="line">	  if (new_size &lt; old_blen)</span><br><span class="line">	    return EOF;</span><br><span class="line">	  new_buf &#x3D; malloc (new_size);</span><br><span class="line">	  if (new_buf &#x3D;&#x3D; NULL)</span><br><span class="line">	    &#123;</span><br><span class="line">	      &#x2F;*	  __ferror(fp) &#x3D; 1; *&#x2F;</span><br><span class="line">	      return EOF;</span><br><span class="line">	    &#125;</span><br><span class="line">	  if (old_buf)</span><br><span class="line">	    &#123;</span><br><span class="line">	      memcpy (new_buf, old_buf, old_blen);</span><br><span class="line">	      free (old_buf);</span><br><span class="line">	      &#x2F;* Make sure _IO_setb won&#39;t try to delete _IO_buf_base. *&#x2F;</span><br><span class="line">	      fp-&gt;_IO_buf_base &#x3D; NULL;</span><br><span class="line">	    &#125;</span><br><span class="line">	  memset (new_buf + old_blen, &#39;\0&#39;, new_size - old_blen);</span><br><span class="line"></span><br><span class="line">	  _IO_setb (fp, new_buf, new_buf + new_size, 1);</span><br><span class="line">	  fp-&gt;_IO_read_base &#x3D; new_buf + (fp-&gt;_IO_read_base - old_buf);</span><br><span class="line">	  fp-&gt;_IO_read_ptr &#x3D; new_buf + (fp-&gt;_IO_read_ptr - old_buf);</span><br><span class="line">	  fp-&gt;_IO_read_end &#x3D; new_buf + (fp-&gt;_IO_read_end - old_buf);</span><br><span class="line">	  fp-&gt;_IO_write_ptr &#x3D; new_buf + (fp-&gt;_IO_write_ptr - old_buf);</span><br><span class="line"></span><br><span class="line">	  fp-&gt;_IO_write_base &#x3D; new_buf;</span><br><span class="line">	  fp-&gt;_IO_write_end &#x3D; fp-&gt;_IO_buf_end;</span><br><span class="line">	&#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">  if (!flush_only)</span><br><span class="line">    *fp-&gt;_IO_write_ptr++ &#x3D; (unsigned char) c;</span><br><span class="line">  if (fp-&gt;_IO_write_ptr &gt; fp-&gt;_IO_read_end)</span><br><span class="line">    fp-&gt;_IO_read_end &#x3D; fp-&gt;_IO_write_ptr;</span><br><span class="line">  return c;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>可以看到程序里面有malloc,memcpy,free等函数，并且参数我们都可以控制因此可以利用这一点来进行非预期的堆块申请释放和填充,而且我们看一下IO_str_overflow的汇编代码可以看到一个有意思的位置：</p>
@@ -140,7 +140,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://cnitlrt.top/2020/12/28/%E6%96%B0%E7%89%88%E6%9C%AC%E4%B8%8B%E7%9A%84IO-file%E6%94%BB%E5%87%BB/" data-id="ckj8jflb80000wgtebtb16930" data-title="(转)新版本下的IO_file攻击" class="article-share-link">分享</a>
+      <a data-url="http://cnitlrt.top/2020/12/28/%E6%96%B0%E7%89%88%E6%9C%AC%E4%B8%8B%E7%9A%84IO-file%E6%94%BB%E5%87%BB/" data-id="ckj8jvwax0000ooteagdzc84c" data-title="新版本下的IO_file攻击(转)" class="article-share-link">分享</a>
       
       
       
@@ -197,7 +197,7 @@
       <ul>
         
           <li>
-            <a href="/2020/12/28/%E6%96%B0%E7%89%88%E6%9C%AC%E4%B8%8B%E7%9A%84IO-file%E6%94%BB%E5%87%BB/">(转)新版本下的IO_file攻击</a>
+            <a href="/2020/12/28/%E6%96%B0%E7%89%88%E6%9C%AC%E4%B8%8B%E7%9A%84IO-file%E6%94%BB%E5%87%BB/">新版本下的IO_file攻击(转)</a>
           </li>
         
       </ul>
