@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Misc杂记 - 我的全新 Hugo 网站</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="Misc杂记" />
+<meta property="og:description" content="记录 ubuntu加内存 外部： 关机之后点击扩容然后选择想要扩容成的大小 内部： 安装gparted sudo apt-get install gparted 打开gparted,右键/dev/sda" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https:cnitlrt.github.io/posts/misc/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-01-01T02:13:25+08:00" />
+<meta property="article:modified_time" content="2022-01-01T02:13:25+08:00" /><meta property="og:site_name" content="My cool site" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Misc杂记"/>
+<meta name="twitter:description" content="记录 ubuntu加内存 外部： 关机之后点击扩容然后选择想要扩容成的大小 内部： 安装gparted sudo apt-get install gparted 打开gparted,右键/dev/sda"/>
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https:cnitlrt.github.io/posts/misc/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Misc杂记",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:cnitlrt.github.io\/posts\/misc\/"
+        },"genre": "posts","wordcount":  1262 ,
+        "url": "https:cnitlrt.github.io\/posts\/misc\/","datePublished": "2022-01-01T02:13:25+08:00","dateModified": "2022-01-01T02:13:25+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "cnitlrt"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="我的全新 Hugo 网站">My cool site</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="我的全新 Hugo 网站">My cool site</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Misc杂记</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>cnitlrt</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-01-01">2022-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1262 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#ubuntu加内存">ubuntu加内存</a></li>
+    <li><a href="#虚拟机繁忙无法关机">虚拟机繁忙，无法关机</a></li>
+    <li><a href="#zsh-corrupt-history-file-homexxxzsh_history">zsh: corrupt history file /home/XXX/.zsh_history</a></li>
+    <li><a href="#hugo-博客搭建-windows">hugo 博客搭建 (windows)</a></li>
+    <li><a href="#woboq-glibc">woboq glibc</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#obfuscator-llvm">obfuscator-llvm</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#linux-内核编译">linux 内核编译</a></li>
+    <li><a href="#kernel相关">kernel相关</a>
+      <ul>
+        <li><a href="#常用命令">常用命令</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><blockquote>
+<p>记录</p>
+</blockquote>
+<h2 id="ubuntu加内存">ubuntu加内存</h2>
+<p>外部：</p>
+<p>关机之后点击扩容然后选择想要扩容成的大小</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230125150856220.png"
+        data-srcset="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230125150856220.png, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230125150856220.png 1.5x, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230125150856220.png 2x"
+        data-sizes="auto"
+        alt="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230125150856220.png"
+        title="image-20230125150856220" /></p>
+<p>内部：</p>
+<p>安装gparted</p>
+<pre tabindex="0"><code>sudo apt-get install gparted
+</code></pre><p>打开gparted,右键/dev/sda1 更改大小，拖到最右，然后同样的方法/dev/sda5，最后点击上面的对勾即可</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230125151036336.png"
+        data-srcset="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230125151036336.png, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230125151036336.png 1.5x, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230125151036336.png 2x"
+        data-sizes="auto"
+        alt="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230125151036336.png"
+        title="image-20230125151036336" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230125151307095.png"
+        data-srcset="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230125151307095.png, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230125151307095.png 1.5x, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230125151307095.png 2x"
+        data-sizes="auto"
+        alt="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230125151307095.png"
+        title="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230125151307095.png" /></p>
+<h2 id="虚拟机繁忙无法关机">虚拟机繁忙，无法关机</h2>
+<p>找到<a href="https://so.csdn.net/so/search?q=VMware&amp;spm=1001.2101.3001.7020" target="_blank" rel="noopener noreffer ">VMware</a> workstation VMX 结束进程</p>
+<h2 id="zsh-corrupt-history-file-homexxxzsh_history">zsh: corrupt history file /home/XXX/.zsh_history</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">cp ~/.zsh_history ~/zsh_history
+</span></span><span class="line"><span class="cl">rm -f ~/.zsh_history 
+</span></span><span class="line"><span class="cl">strings ~/zsh_history ~/.zsh_history
+</span></span></code></pre></div><h2 id="hugo-博客搭建-windows">hugo 博客搭建 (windows)</h2>
+<p><a href="https://gohugo.io/installation/windows/" target="_blank" rel="noopener noreffer ">https://gohugo.io/installation/windows/</a></p>
+<p>在安装go 的前提下运行下面的命令</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">go env -w <span class="nv">CGO_ENABLED</span><span class="o">=</span><span class="m">1</span>
+</span></span><span class="line"><span class="cl">go install -tags extended github.com/gohugoio/hugo@latest
+</span></span></code></pre></div><p>验证</p>
+<pre tabindex="0"><code>hugo version
+</code></pre><p>(实测当直接下载release版本的时候会出现很多莫名其妙的错误因此最好还是自己编译)</p>
+<p>搭建博客,以loveIt为例</p>
+<pre tabindex="0"><code>hugo new site blog #创建blog站点
+cd blog
+git clone https://github.com/dillonzq/LoveIt.git themes/LoveIt
+</code></pre><p>修改blog/config.toml</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-toml" data-lang="toml"><span class="line"><span class="cl"><span class="nx">baseURL</span> <span class="p">=</span> <span class="s2">&#34;http://example.org/&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Change the default theme to be use when building the site with Hugo</span>
+</span></span><span class="line"><span class="cl"><span class="nx">theme</span> <span class="p">=</span> <span class="s2">&#34;LoveIt&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># website title</span>
+</span></span><span class="line"><span class="cl"><span class="nx">title</span> <span class="p">=</span> <span class="s2">&#34;My New Hugo Site&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># language code [&#34;en&#34;, &#34;zh-CN&#34;, &#34;fr&#34;, &#34;pl&#34;, ...]</span>
+</span></span><span class="line"><span class="cl"><span class="nx">languageCode</span> <span class="p">=</span> <span class="s2">&#34;en&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="c"># language name [&#34;English&#34;, &#34;简体中文&#34;, &#34;Français&#34;, &#34;Polski&#34;, ...]</span>
+</span></span><span class="line"><span class="cl"><span class="nx">languageName</span> <span class="p">=</span> <span class="s2">&#34;English&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Author config</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="nx">author</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">name</span> <span class="p">=</span> <span class="s2">&#34;xxxx&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">email</span> <span class="p">=</span> <span class="s2">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">link</span> <span class="p">=</span> <span class="s2">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Menu config</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="nx">menu</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">  <span class="p">[[</span><span class="nx">menu</span><span class="p">.</span><span class="nx">main</span><span class="p">]]</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">weight</span> <span class="p">=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">identifier</span> <span class="p">=</span> <span class="s2">&#34;posts&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="c"># you can add extra information before the name (HTML format is supported), such as icons</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">pre</span> <span class="p">=</span> <span class="s2">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="c"># you can add extra information after the name (HTML format is supported), such as icons</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">post</span> <span class="p">=</span> <span class="s2">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">name</span> <span class="p">=</span> <span class="s2">&#34;Posts&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">url</span> <span class="p">=</span> <span class="s2">&#34;/posts/&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="c"># title will be shown when you hover on this menu link</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">title</span> <span class="p">=</span> <span class="s2">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">[[</span><span class="nx">menu</span><span class="p">.</span><span class="nx">main</span><span class="p">]]</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">weight</span> <span class="p">=</span> <span class="mi">2</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">identifier</span> <span class="p">=</span> <span class="s2">&#34;tags&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">pre</span> <span class="p">=</span> <span class="s2">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">post</span> <span class="p">=</span> <span class="s2">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">name</span> <span class="p">=</span> <span class="s2">&#34;Tags&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">url</span> <span class="p">=</span> <span class="s2">&#34;/tags/&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">title</span> <span class="p">=</span> <span class="s2">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">[[</span><span class="nx">menu</span><span class="p">.</span><span class="nx">main</span><span class="p">]]</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">weight</span> <span class="p">=</span> <span class="mi">3</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">identifier</span> <span class="p">=</span> <span class="s2">&#34;categories&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">pre</span> <span class="p">=</span> <span class="s2">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">post</span> <span class="p">=</span> <span class="s2">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">name</span> <span class="p">=</span> <span class="s2">&#34;Categories&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">url</span> <span class="p">=</span> <span class="s2">&#34;/categories/&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">title</span> <span class="p">=</span> <span class="s2">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># Markup related configuration in Hugo</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="nx">markup</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">  <span class="c"># Syntax Highlighting (https://gohugo.io/content-management/syntax-highlighting)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">[</span><span class="nx">markup</span><span class="p">.</span><span class="nx">highlight</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="c"># false is a necessary configuration (https://github.com/dillonzq/LoveIt/issues/158)</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">noClasses</span> <span class="p">=</span> <span class="kc">false</span>
+</span></span></code></pre></div><p>hugo server -D</p>
+<p>访问http://127.0.0.1:1313/</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230128022049918.png"
+        data-srcset="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230128022049918.png, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230128022049918.png 1.5x, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230128022049918.png 2x"
+        data-sizes="auto"
+        alt="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230128022049918.png"
+        title="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230128022049918.png" /></p>
+<p>上传github</p>
+<p>在blog目录下运行</p>
+<pre tabindex="0"><code>hugo
+</code></pre><p>创建一个空白目录</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"></code></pre></div><h2 id="woboq-glibc">woboq glibc</h2>
+<blockquote>
+<p>woboq是一款优秀的代码阅读器</p>
+</blockquote>
+<h4 id="glibc源码">glibc源码</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git clone https://sourceware.org/git/glibc.git <span class="o">&amp;&amp;</span> <span class="nb">cd</span> glibc
+</span></span></code></pre></div><h4 id="安装bear">安装bear</h4>
+<pre tabindex="0"><code>sudo apt-get install bear
+</code></pre><h4 id="安装woboq">安装woboq</h4>
+<p>编译完后 <code>./generator/codebrowser_generator</code> 是代码生成器, <code>./indexgenerator/codebrowser_indexgenerator</code> 是索引生成器.</p>
+<pre tabindex="0"><code>sudo apt-get install llvm-12 clang-12 libclang-12-dev
+git clone https://github.com/KDAB/codebrowser
+cd codebrowser
+cmake . -DCMAKE_BUILD_TYPE=Release
+make
+</code></pre><h4 id="使用bear编译glibc源码-例如234">使用bear编译glibc源码 (例如2.34)</h4>
+<p>生成 <code>compile_commands.json</code> 文件</p>
+<p>中间会提示很多东西缺少或者版本太低了，缺啥补啥就行了</p>
+<pre tabindex="0"><code>cd glibc
+git checkout release/2.34/master
+../configure --prefix=/usr --disable-werror
+bear make
+</code></pre><h4 id="解析">解析</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># ./generator/codebrowser_generator -b $BUILD_DIRECTORY -a -o $OUTPUT_DIRECTORY -p codebrowser:$SOURCE_DIRECTORY:$VERSION</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># ./indexgenerator/codebrowser_indexgenerator $OUTPUT_DIRECTORY</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># cp -rv ./data $DATA_DIRECTORY</span>
+</span></span><span class="line"><span class="cl">./generator/codebrowser_generator -b /home/ubuntu/glibc/build -a -o /home/ubuntu/woboq/glibc/2.34 -p 2.34:/home/ubuntu/glibc:2.34
+</span></span><span class="line"><span class="cl">./indexgenerator/codebrowser_indexgenerator /home/ubuntu/woboq/glibc/2.34
+</span></span><span class="line"><span class="cl">cp -rv ./data /home/ubuntu/woboq/2.34/data
+</span></span></code></pre></div><h2 id="obfuscator-llvm">obfuscator-llvm</h2>
+<p>需要用gcc-8 g++-8</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git clone -b llvm-4.0 https://github.com/obfuscator-llvm/obfuscator.git
+</span></span><span class="line"><span class="cl">sudo apt-get install gcc-8 g++-8 -y
+</span></span><span class="line"><span class="cl">sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-8 <span class="m">8</span> <span class="c1">#配置优先级</span>
+</span></span><span class="line"><span class="cl">sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-8 <span class="m">8</span> <span class="c1">#配置优先级</span>
+</span></span></code></pre></div><p>修改/include/llvm/ExecutionEngine/Orc/OrcRemoteTargetClient.h</p>
+<p>定位到第690行 把char 改成 uint_8</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230125180925811.png"
+        data-srcset="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230125180925811.png, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230125180925811.png 1.5x, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230125180925811.png 2x"
+        data-sizes="auto"
+        alt="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230125180925811.png"
+        title="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230125180925811.png" /></p>
+<pre tabindex="0"><code>cd obfuscator
+mkdir build
+cd build
+cmake -DCMAKE_BUILD_TYPE=Release -DLLVM_INCLUDE_TESTS=OFF /home/ubuntu/obfuscator/
+sudo make -j7
+</code></pre><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230125181338709.png"
+        data-srcset="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230125181338709.png, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230125181338709.png 1.5x, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230125181338709.png 2x"
+        data-sizes="auto"
+        alt="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230125181338709.png"
+        title="image-20230125181338709" /></p>
+<p>编译到后面，即使没有到 100%全部成功， 只要4个关键文件clang clang++ clang-4.0 clang-format 是在的</p>
+<h4 id="开启控制流扁平化">开启控制流扁平化</h4>
+<p><code>-mllvm -fla</code> 开启控制流扁平化
+<code>-mllvm -split</code> 激活基本块划分。一起使用时能提高打平能力。
+<code>-mllvm -split_num=3</code> 如果激活控制流打平，对每一个基本块应用三次控制流打平。默认使用1次。</p>
+<h4 id="开启指令替换">开启指令替换</h4>
+<p><code>-mllvm -sub</code> 开启指令替换
+<code>-mllvm -sub_loop=3</code> 如果激活了指令替换，使用这个选项在一个函数中应用3次指令替换。默认应用1次。</p>
+<h4 id="开启虚假控制流">开启虚假控制流</h4>
+<p><code>-mllvm -bcf</code> 开启虚假控制流
+<code>bcf</code>可以配合下面参数使用
+<code>-mllvm -bcf_loop=3</code> 设置函数混淆次数为3次 不加此选项默认为1次
+<code>-mllvm -bcf_prob=40</code> 设置代码块被混淆的概率是40%，默认30%</p>
+<h2 id="linux-内核编译">linux 内核编译</h2>
+<pre tabindex="0"><code>sudo apt-get install git fakeroot build-essential ncurses-dev xz-utils libssl-dev bc flex libelf-dev bison zstd -y
+wget https://mirrors.tuna.tsinghua.edu.cn/kernel/v5.x/linux-5.10.102.tar.gz
+unar linux-5.10.102.tar.gz
+cd linux-5.10.102/
+make menuconfig
+</code></pre><p>勾选</p>
+<ul>
+<li><code>Kernel hacking -&gt; Compile-time checks and compiler options -&gt; Compile the kernel with debug info</code></li>
+<li><code>Kernel hacking -&gt; Generic Kernel Debugging Instruments -&gt; KGDB: kernel debugger</code></li>
+</ul>
+<pre tabindex="0"><code>sudo make bzImage -j$(nproc)
+</code></pre><p>编译出的在arch/x86_64/boot/bzImage</p>
+<h2 id="kernel相关">kernel相关</h2>
+<h3 id="常用命令">常用命令</h3>
+<h4 id="查看保护机制">查看保护机制</h4>
+<pre tabindex="0"><code>cat /sys/devices/system/cpu/vulnerabilities/*
+</code></pre><h4 id="查看slab">查看slab</h4>
+<pre tabindex="0"><code>cat /proc/slabinfo
+</code></pre><pre tabindex="0"><code># 打包命令
+find . | cpio -o --format=newc &gt; ../../rootfs.img
+# 解包命令
+cpio -idmv &lt; rootfs.img
+</code></pre></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2022-01-01</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https:cnitlrt.github.io/posts/misc/" data-title="Misc杂记"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https:cnitlrt.github.io/posts/misc/"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https:cnitlrt.github.io/posts/misc/" data-title="Misc杂记"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https:cnitlrt.github.io/posts/misc/" data-title="Misc杂记"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https:cnitlrt.github.io/posts/misc/" data-title="Misc杂记"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.110.0">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">cnitlrt</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
