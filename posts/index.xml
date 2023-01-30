@@ -13,12 +13,12 @@
     <description><![CDATA[保护机制：SMAP, SMEP, KPTI, KASLR 及常用的保护机制，并且仅用了msg_msg。版本是5.18.3 漏洞点 source code 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21]]></description>
 </item>
 <item>
-    <title></title>
+    <title>Misc杂记</title>
     <link>https://cnitlrt.github.io/misc/</link>
-    <pubDate>Mon, 01 Jan 0001 00:00:00 &#43;0000</pubDate>
+    <pubDate>Sat, 01 Jan 2022 04:06:14 &#43;0800</pubDate>
     <author>cnitlrt</author>
     <guid>https://cnitlrt.github.io/misc/</guid>
-    <description><![CDATA[title: &ldquo;Misc杂记&rdquo; date: 2022-01-01T04:06:14+08:00 draft: false tags: [&ldquo;tools&rdquo;] categories: [&ldquo;tools&rdquo;] description: 记录疑难杂症 ubuntu加内存 外部： 关机之后点击扩容然后选择想要扩容成的大小 内部]]></description>
+    <description><![CDATA[ubuntu加内存 外部： 关机之后点击扩容然后选择想要扩容成的大小 内部： 安装gparted 1 sudo apt-get install gparted 打开gparted,右键/dev/sda1]]></description>
 </item>
 </channel>
 </rss>
