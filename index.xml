@@ -4,9 +4,17 @@
         <link>https://cnitlrt.github.io/</link>
         <description>cnitlrtの博客</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>cnitlrt@gmail.com (cnitlrt)</managingEditor>
-            <webMaster>cnitlrt@gmail.com (cnitlrt)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sat, 01 Jan 2022 04:06:14 &#43;0800</lastBuildDate>
+            <webMaster>cnitlrt@gmail.com (cnitlrt)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sun, 29 Jan 2023 22:27:02 &#43;0800</lastBuildDate>
             <atom:link href="https://cnitlrt.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>corCTF 2022-cache-of-castaways复现 </title>
+    <link>https://cnitlrt.github.io/kernel/</link>
+    <pubDate>Sun, 29 Jan 2023 22:27:02 &#43;0800</pubDate>
+    <author>cnitlrt</author>
+    <guid>https://cnitlrt.github.io/kernel/</guid>
+    <description><![CDATA[保护机制：SMAP, SMEP, KPTI, KASLR 及常用的保护机制，并且仅用了msg_msg。版本是5.18.3 漏洞点 source code 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21]]></description>
+</item>
+<item>
     <title>Misc杂记</title>
     <link>https://cnitlrt.github.io/misc/</link>
     <pubDate>Sat, 01 Jan 2022 04:06:14 &#43;0800</pubDate>
