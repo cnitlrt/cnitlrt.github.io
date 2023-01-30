@@ -9,7 +9,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://cnitlrt.github.io/misc/" /><meta property="og:image" content="https://cnitlrt.github.io/logo.jpg"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-01-01T04:06:14+08:00" />
-<meta property="article:modified_time" content="2023-01-30T16:45:21+08:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2023-01-30T16:55:24+08:00" /><meta property="og:site_name" content="My cool site" />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://cnitlrt.github.io/logo.jpg"/>
 
@@ -34,8 +34,8 @@
                             "url": "https:\/\/cnitlrt.github.io\/images\/Apple-Devices-Preview.png",
                             "width":  3200 ,
                             "height":  2048 
-                        }],"genre": "posts","keywords": "tools","wordcount":  7318 ,
-        "url": "https:\/\/cnitlrt.github.io\/misc\/","datePublished": "2022-01-01T04:06:14+08:00","dateModified": "2023-01-30T16:45:21+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "tools","wordcount":  7514 ,
+        "url": "https:\/\/cnitlrt.github.io\/misc\/","datePublished": "2022-01-01T04:06:14+08:00","dateModified": "2023-01-30T16:55:24+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": {
                     "@type": "ImageObject",
@@ -113,7 +113,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Misc杂记</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>cnitlrt</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/tools/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>tools</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-01-01">2022-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 7318 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-01-01">2022-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 7514 字&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 15 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
@@ -145,6 +145,16 @@
                 <li><a href="#配置github-action">配置github action</a></li>
                 <li><a href="#更改网站图标">更改网站图标</a></li>
                 <li><a href="#修改模板">修改模板</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#powershell">powershell</a>
+          <ul>
+            <li>
+              <ul>
+                <li><a href="#安装oh-my-poshposh-git和readline">安装oh-my-posh，posh-git和Readline</a></li>
+                <li><a href="#修改配置文件">修改配置文件</a></li>
               </ul>
             </li>
           </ul>
@@ -2371,6 +2381,60 @@
 </span></span><span class="line"><span class="cl">tags: [&#34;&#34;]
 </span></span></code></pre></td></tr></table>
 </div>
+</div><h2 id="powershell">powershell</h2>
+<h4 id="安装oh-my-poshposh-git和readline">安装oh-my-posh，posh-git和Readline</h4>
+<p>请运行下列的命令</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">Install-Module</span> <span class="n">-Name</span> <span class="n">PowerShellGet</span> <span class="n">-Force</span>
+</span></span><span class="line"><span class="cl"><span class="n">winget</span> <span class="n">install</span> <span class="n">JanDeDobbeleer</span><span class="p">.</span><span class="py">OhMyPosh</span> <span class="n">-s</span> <span class="n">winget</span>
+</span></span><span class="line"><span class="cl"><span class="n">PowerShellGet</span><span class="p">\</span><span class="nb">Install-Module</span> <span class="nb">posh-git</span> <span class="n">-Scope</span> <span class="n">CurrentUser</span> <span class="n">-Force</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Install-Module</span> <span class="n">PSReadLine</span>
+</span></span><span class="line"><span class="cl"><span class="err">复制代码</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="修改配置文件">修改配置文件</h4>
+<p>接下来，我们需要修改我们Powershell的配置文件。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">code <span class="nv">$PROFILE</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>我们在这个文件中加入下列内容</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="c">#Set-PSReadLineKeyHandler -Key Tab -Function MenuComplete #Tab键会出现自动补全菜单</span>
+</span></span><span class="line"><span class="cl"><span class="c">#Set-PSReadlineKeyHandler -Key UpArrow -Function HistorySearchBackward</span>
+</span></span><span class="line"><span class="cl"><span class="c">#Set-PSReadlineKeyHandler -Key DownArrow -Function HistorySearchForward</span>
+</span></span><span class="line"><span class="cl"><span class="c"># 上下方向键箭头，搜索历史中进行自动补全</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">oh-my</span><span class="n">-posh</span> <span class="n">init</span> <span class="n">pwsh</span> <span class="p">-</span><span class="n">-config</span> <span class="s2">&#34;</span><span class="nv">$env:POSH_THEMES_PATH</span><span class="s2">/kali.omp.json&#34;</span> <span class="p">|</span> <span class="nb">Invoke-Expression</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Import-Module</span> <span class="nb">posh-git</span> <span class="c"># git的自动补全</span>
+</span></span><span class="line"><span class="cl"><span class="c">#Import-Module PSReadLine</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Set-PSReadLineOption</span> <span class="n">-PredictionSource</span> <span class="nb">History
+</span></span></span></code></pre></td></tr></table>
+</div>
 </div><h2 id="woboq-glibc">woboq glibc</h2>
 <blockquote>
 <p>woboq是一款优秀的代码阅读器</p>
@@ -2579,8 +2643,8 @@
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>更新于 2023-01-30&nbsp;<a class="git-hash" href="https://github.com/dillonzq/LoveIt/commit/73508d2c5b78e84bae6b298f323518cf4b2f8f76" target="_blank" title="commit by cnitlrt(1258175307@qq.com) 73508d2c5b78e84bae6b298f323518cf4b2f8f76: test">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>73508d2</a></span>
+                <span>更新于 2023-01-30&nbsp;<a class="git-hash" href="https://github.com/dillonzq/LoveIt/commit/9b90fd87a75166c962c92e7f4f3d9997e363e888" target="_blank" title="commit by cnitlrt(1258175307@qq.com) 9b90fd87a75166c962c92e7f4f3d9997e363e888: test">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>9b90fd8</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"></div>
