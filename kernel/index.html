@@ -9,7 +9,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://cnitlrt.github.io/kernel/" /><meta property="og:image" content="https://cnitlrt.github.io/logo.jpg"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-01-29T22:27:02+08:00" />
-<meta property="article:modified_time" content="2023-01-30T16:45:21+08:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2023-01-31T16:16:29+08:00" /><meta property="og:site_name" content="My cool site" />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://cnitlrt.github.io/logo.jpg"/>
 
@@ -34,8 +34,8 @@
                             "url": "https:\/\/cnitlrt.github.io\/images\/Apple-Devices-Preview.png",
                             "width":  3200 ,
                             "height":  2048 
-                        }],"genre": "posts","keywords": "kerne","wordcount":  7289 ,
-        "url": "https:\/\/cnitlrt.github.io\/kernel\/","datePublished": "2023-01-29T22:27:02+08:00","dateModified": "2023-01-30T16:45:21+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "kerne","wordcount":  7585 ,
+        "url": "https:\/\/cnitlrt.github.io\/kernel\/","datePublished": "2023-01-29T22:27:02+08:00","dateModified": "2023-01-31T16:16:29+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": {
                     "@type": "ImageObject",
@@ -113,8 +113,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">corCTF 2022-cache-of-castaways复现 </h1><h2 class="single-subtitle">NO PWN NO FUN</h2><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>cnitlrt</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/kernel/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>kernel</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-01-29">2023-01-29</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 7289 字&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 15 分钟&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-01-29">2023-01-29</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 7585 字&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 16 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>目录</span>
@@ -703,7 +703,17 @@
 </ul>
 <p>所以我们可以看出，<code>kmalloc-64</code> 这个mem_cache，每个slab有1个page也就是4K，每个对象是64B，所以每个slab能容纳的对象是 <code>4K / 64B = 64</code> 个. 如果分配了object数量超过了64个，就需要从别的slab分配，<strong>如果分配的对象超过了47808个，就需要申请新的slab，也就是向buddy system申请新的内存页.</strong></p>
 <h3 id="漏洞利用细节">漏洞利用细节</h3>
-<p>本题中通过<code>cat /proc/slabinfo</code>可以看到kmalloc-512的mem_cache</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-mysql" data-lang="mysql"><span class="line"><span class="cl"><span class="n">GFP_KERNEL</span><span class="o">`</span><span class="w"> </span><span class="err">与</span><span class="w"> </span><span class="o">`</span><span class="n">GFP_KERNEL_ACCOUNT</span><span class="o">`</span><span class="w"> </span><span class="err">是内核中最为常见与通用的分配</span><span class="w"> </span><span class="n">flag</span><span class="err">，常规情况下他们的分配都来自同一个</span><span class="w"> </span><span class="o">`</span><span class="n">kmem_cache</span><span class="o">`</span><span class="w"> </span><span class="err">——即通用的</span><span class="w"> </span><span class="o">`</span><span class="n">kmalloc</span><span class="o">-</span><span class="n">xx</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>这两种 flag 的区别主要在于 <code>GFP_KERNEL_ACCOUNT</code> 比 <code>GFP_KERNEL</code> 多了一个属性——<strong>表示该对象与来自用户空间的数据相关联</strong>，因此我们可以看到诸如 <code>msg_msg</code> 、<code>pipe_buffer</code>、<code>sk_buff的数据包</code> 的分配使用的都是 <code>GFP_KERNEL_ACCOUNT</code> ，而 <code>ldt_struct</code> 、<code>packet_socket</code> 等与用户空间数据没有直接关联的结构体则使用 <code>GFP_KERNEL</code></p>
+<p>自内核版本 5.14 起，在 <a href="https://github.com/torvalds/linux/commit/494c1dfe855ec1f70f89552fce5eadf4a1717552" target="_blank" rel="noopener noreffer ">这个 commit</a> 当中引入了新的隔离机制——对于开启了 <code>CONFIG_MEMCG_KMEM</code> 编译选项的 kernel 而言（通常都是默认开启），其会为使用 <code>GFP_KERNEL_ACCOUNT</code> 进行分配的通用对象<strong>创建一组独立的 <code>kmem_cache</code> ——名为 <code>kmalloc-cg-\*</code></strong> ，从而导致使用这两种 flag 的 object 之间的隔离：</p>
+<p>本题中通过<code>cat /proc/slabinfo</code>可以看到kmalloc-cg-512的mem_cache</p>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -715,12 +725,12 @@
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230130154948146.png"
-        data-srcset="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230130154948146.png, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230130154948146.png 1.5x, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230130154948146.png 2x"
+        data-src="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230131161317865.png"
+        data-srcset="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230131161317865.png, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230131161317865.png 1.5x, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230131161317865.png 2x"
         data-sizes="auto"
-        alt="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230130154948146.png"
-        title="image-20230130154948146" /></p>
-<p>可以看到其pagesperslab为1(2 ^ 0 ==1)，因此kmalloc-512需要order 0 page</p>
+        alt="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230131161317865.png"
+        title="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230131161317865.png" /></p>
+<p>可以看到其pagesperslab为1(2 ^ 0 ==1)，因此kmalloc-cg-512需要order 0 page</p>
 <p>同时可以注意到cred_jar也用的是order 0 page</p>
 <p><img
         class="lazyload"
@@ -731,7 +741,7 @@
         alt="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230130155528356.png"
         title="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230130155528356.png" /></p>
 <blockquote>
-<p>因此我们可以先排空 cred_jar，同时排空kmalloc-512。以便后面分配会在order-0，同时申请许多order-0 page同时避免合并的情况下进行释放，通过堆风水喷射cred 以及 kmalloc-512使得kmalloc-512在cred_jar的上方，通过溢出来篡改cred_jar进行提权</p>
+<p>因此我们可以先排空 cred_jar，同时排空kmalloc-cg-512。以便后面分配会在order-0，同时申请许多order-0 page同时避免合并的情况下进行释放，通过堆风水喷射cred 以及 kmalloc-cg-512使得kmalloc-cg-512在cred_jar的上方，通过溢出来篡改cred_jar进行提权</p>
 </blockquote>
 <p>要触发cred分配，只需要fork。尽管标准fork确实会在分配时产生大量noise，但这对于漏洞利用中的初始喷射并不重要。</p>
 <h4 id="页喷射">页喷射</h4>
@@ -1464,8 +1474,8 @@
 <ul>
 <li>清空cred_jar mem_cache</li>
 <li>利用 <code>setsockopt</code> 页喷方法，先申请很多 order-0 page 并释放两个其中1个，这样就有很多不会融合到 order-1 的 order-0 page 了；</li>
-<li>接着使用以上flag多次调用 <code>clone</code> ，触发分配 cred 对象；此时便会申请到刚刚释放的order-0 page。释放剩下的一半 order-0 page，喷射kmalloc-512。注意，漏洞对象也可以可能溢出内核其他对象，可能导致崩溃，但是作者没有遇到这种情况。</li>
-<li>触发所有kmalloc-512的溢出，前4字节（为1）是伪造 <code>cred-&gt;usage</code> 以确保通过内核检查，后2字节（为0）篡改 uid 为0。触发溢出后，通过pipe通知所有fork，检查自身的uid，提权成功则触发执行shell。</li>
+<li>接着使用以上flag多次调用 <code>clone</code> ，触发分配 cred 对象；此时便会申请到刚刚释放的order-0 page。释放剩下的一半 order-0 page，喷射kmalloc-cg-512。注意，漏洞对象也可以可能溢出内核其他对象，可能导致崩溃，但是作者没有遇到这种情况。</li>
+<li>触发所有kmalloc-cg-512的溢出，前4字节（为1）是伪造 <code>cred-&gt;usage</code> 以确保通过内核检查，后2字节（为0）篡改 uid 为0。触发溢出后，通过pipe通知所有fork，检查自身的uid，提权成功则触发执行shell。</li>
 </ul>
 <p><a href="https://bsauce.github.io/2022/11/07/castaways/" target="_blank" rel="noopener noreffer ">exp</a></p>
 <div class="highlight"><div class="chroma">
@@ -2212,12 +2222,14 @@
 <p><a href="http://brieflyx.me/2020/heap/linux-kernel-slab-101/" target="_blank" rel="noopener noreffer ">-Linux Kernel Heap 101 —— Buddy &amp; Slab</a></p>
 <p><a href="https://bsauce.github.io/2022/11/07/castaways/" target="_blank" rel="noopener noreffer ">【Exploit trick】针对cred结构的cross cache利用</a></p>
 <p><a href="https://www.willsroot.io/2022/08/reviving-exploits-against-cred-struct.html" target="_blank" rel="noopener noreffer ">Reviving Exploits Against Cred Structs - Six Byte Cross Cache Overflow to Leakless Data-Oriented Kernel Pwnage</a></p>
+<p><a href="https://github.com/torvalds/linux/commit/494c1dfe855ec1f70f89552fce5eadf4a1717552" target="_blank" rel="noopener noreffer ">commit</a></p>
+<p><a href="https://arttnba3.cn/2021/11/29/PWN-0X02-LINUX-KERNEL-PWN-PART-II/#%E2%9C%B3GFP-KERNEL-amp-GFP-KERNEL-ACCOUNT-%E7%9A%84%E9%9A%94%E7%A6%BB" target="_blank" rel="noopener noreffer ">GFP_KERNEL &amp; GFP_KERNEL_ACCOUNT 的隔离</a></p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>更新于 2023-01-30&nbsp;<a class="git-hash" href="https://github.com/dillonzq/LoveIt/commit/73508d2c5b78e84bae6b298f323518cf4b2f8f76" target="_blank" title="commit by cnitlrt(1258175307@qq.com) 73508d2c5b78e84bae6b298f323518cf4b2f8f76: test">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>73508d2</a></span>
+                <span>更新于 2023-01-31&nbsp;<a class="git-hash" href="https://github.com/dillonzq/LoveIt/commit/c1a8247690f48681544f46d42514558daa35ec76" target="_blank" title="commit by cnitlrt(1258175307@qq.com) c1a8247690f48681544f46d42514558daa35ec76: test">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>c1a8247</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"></div>
