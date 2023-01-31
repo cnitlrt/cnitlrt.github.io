@@ -9,7 +9,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://cnitlrt.github.io/kernel/" /><meta property="og:image" content="https://cnitlrt.github.io/logo.jpg"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-01-29T22:27:02+08:00" />
-<meta property="article:modified_time" content="2023-01-31T16:16:29+08:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2023-01-31T16:37:49+08:00" /><meta property="og:site_name" content="My cool site" />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://cnitlrt.github.io/logo.jpg"/>
 
@@ -34,8 +34,8 @@
                             "url": "https:\/\/cnitlrt.github.io\/images\/Apple-Devices-Preview.png",
                             "width":  3200 ,
                             "height":  2048 
-                        }],"genre": "posts","keywords": "kerne","wordcount":  7585 ,
-        "url": "https:\/\/cnitlrt.github.io\/kernel\/","datePublished": "2023-01-29T22:27:02+08:00","dateModified": "2023-01-31T16:16:29+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "kerne","wordcount":  7612 ,
+        "url": "https:\/\/cnitlrt.github.io\/kernel\/","datePublished": "2023-01-29T22:27:02+08:00","dateModified": "2023-01-31T16:37:49+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": {
                     "@type": "ImageObject",
@@ -111,9 +111,9 @@
                 <div class="container"><div class="toc" id="toc-auto">
             <h2 class="toc-title">目录</h2>
             <div class="toc-content" id="toc-content-auto"></div>
-        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">corCTF 2022-cache-of-castaways复现 </h1><h2 class="single-subtitle">NO PWN NO FUN</h2><div class="post-meta">
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">corCTF 2022-cache-of-castaways复现 </h1><h2 class="single-subtitle">菜鸡的kernel复现</h2><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>cnitlrt</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/kernel/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>kernel</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-01-29">2023-01-29</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 7585 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-01-29">2023-01-29</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 7612 字&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 16 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
@@ -524,7 +524,7 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>ioctl维护了两个功能，一个是<code>alloc</code>一个是<code>edit</code></p>
-<p>castaway_add： 申请大小为512大小的堆块，标识符为<code>GFP_KERNEL_ACCOUNT</code>，并将申请的地址放入到castaway_arr[idx]里面</p>
+<p>castaway_add： 申请大小为512大小的堆块，标识符为<code>GFP_KERNEL_ACCOUNT</code>，因此kmem_cache为kmalloc-cg-512并将申请的地址放入到castaway_arr[idx]里面</p>
 <p>castaway_edit:	根据idx,像castaway_arr[idx]-&gt;buf里面拷贝size大小的数据</p>
 <p>其中castaway的结构体如下</p>
 <div class="highlight"><div class="chroma">
@@ -2228,8 +2228,8 @@
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>更新于 2023-01-31&nbsp;<a class="git-hash" href="https://github.com/dillonzq/LoveIt/commit/c1a8247690f48681544f46d42514558daa35ec76" target="_blank" title="commit by cnitlrt(1258175307@qq.com) c1a8247690f48681544f46d42514558daa35ec76: test">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>c1a8247</a></span>
+                <span>更新于 2023-01-31&nbsp;<a class="git-hash" href="https://github.com/dillonzq/LoveIt/commit/c17c676d51532086fe05ed50808b33e1cba52004" target="_blank" title="commit by cnitlrt(1258175307@qq.com) c17c676d51532086fe05ed50808b33e1cba52004: test">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>c17c676</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"></div>
