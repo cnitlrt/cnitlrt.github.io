@@ -4,9 +4,17 @@
         <link>https://cnitlrt.github.io/</link>
         <description>cnitlrtの博客</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>cnitlrt@gmail.com (cnitlrt)</managingEditor>
-            <webMaster>cnitlrt@gmail.com (cnitlrt)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sun, 29 Jan 2023 22:27:02 &#43;0800</lastBuildDate>
+            <webMaster>cnitlrt@gmail.com (cnitlrt)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 15 Feb 2023 00:02:42 &#43;0800</lastBuildDate>
             <atom:link href="https://cnitlrt.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>Leetcode</title>
+    <link>https://cnitlrt.github.io/leetcode/</link>
+    <pubDate>Wed, 15 Feb 2023 00:02:42 &#43;0800</pubDate>
+    <author>cnitlrt</author>
+    <guid>https://cnitlrt.github.io/leetcode/</guid>
+    <description><![CDATA[1. 两数之和 1.暴力搜索 1 2 3 4 5 6 7 8 9 10 11 class Solution(object): def twoSum(self, nums, target): &#34;&#34;&#34; :type nums: List[int] :type target: int :rtype: List[int] &#34;&#34;&#34; for i in range(len(nums)): for j in range(i+1,len(nums)): if nums[i] + nums[j] == target: return i,j 2.哈希表 理论基础 （摘自http]]></description>
+</item>
+<item>
     <title>corCTF 2022-cache-of-castaways复现 </title>
     <link>https://cnitlrt.github.io/kernel/</link>
     <pubDate>Sun, 29 Jan 2023 22:27:02 &#43;0800</pubDate>
