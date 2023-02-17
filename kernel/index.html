@@ -4,17 +4,17 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
-        <title>corCTF 2022-cache-of-castaways复现  - cnitlrtの博客</title><meta name="Description" content="cnitlrtの博客"><meta property="og:title" content="corCTF 2022-cache-of-castaways复现 " />
-<meta property="og:description" content="保护机制：SMAP, SMEP, KPTI, KASLR 及常用的保护机制，并且仅用了msg_msg。版本是5.18.3 漏洞点 source code 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21" />
+        <title>corCTF 2022-cache-of-castaways复现  - cnitlrtの博客</title><meta name="Description" content="菜鸡的kernel复现"><meta property="og:title" content="corCTF 2022-cache-of-castaways复现 " />
+<meta property="og:description" content="菜鸡的kernel复现" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://cnitlrt.github.io/kernel/" /><meta property="og:image" content="https://cnitlrt.github.io/logo.jpg"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-01-29T22:27:02+08:00" />
-<meta property="article:modified_time" content="2023-01-31T16:37:49+08:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2023-02-17T19:49:42+08:00" /><meta property="og:site_name" content="My cool site" />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://cnitlrt.github.io/logo.jpg"/>
 
 <meta name="twitter:title" content="corCTF 2022-cache-of-castaways复现 "/>
-<meta name="twitter:description" content="保护机制：SMAP, SMEP, KPTI, KASLR 及常用的保护机制，并且仅用了msg_msg。版本是5.18.3 漏洞点 source code 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21"/>
+<meta name="twitter:description" content="菜鸡的kernel复现"/>
 <meta name="application-name" content="LoveIt">
 <meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -35,7 +35,7 @@
                             "width":  3200 ,
                             "height":  2048 
                         }],"genre": "posts","keywords": "kerne","wordcount":  7612 ,
-        "url": "https:\/\/cnitlrt.github.io\/kernel\/","datePublished": "2023-01-29T22:27:02+08:00","dateModified": "2023-01-31T16:37:49+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+        "url": "https:\/\/cnitlrt.github.io\/kernel\/","datePublished": "2023-01-29T22:27:02+08:00","dateModified": "2023-02-17T19:49:42+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": {
                     "@type": "ImageObject",
@@ -45,7 +45,7 @@
                 }},"author": {
                 "@type": "Person",
                 "name": "cnitlrt"
-            },"description": ""
+            },"description": "菜鸡的kernel复现"
     }
     </script></head>
     <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
@@ -111,7 +111,7 @@
                 <div class="container"><div class="toc" id="toc-auto">
             <h2 class="toc-title">目录</h2>
             <div class="toc-content" id="toc-content-auto"></div>
-        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">corCTF 2022-cache-of-castaways复现 </h1><h2 class="single-subtitle">菜鸡的kernel复现</h2><div class="post-meta">
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">corCTF 2022-cache-of-castaways复现 </h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>cnitlrt</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/kernel/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>kernel</a></span></div>
             <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-01-29">2023-01-29</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 7612 字&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 16 分钟&nbsp;</div>
@@ -2223,13 +2223,12 @@
 <p><a href="https://bsauce.github.io/2022/11/07/castaways/" target="_blank" rel="noopener noreffer ">【Exploit trick】针对cred结构的cross cache利用</a></p>
 <p><a href="https://www.willsroot.io/2022/08/reviving-exploits-against-cred-struct.html" target="_blank" rel="noopener noreffer ">Reviving Exploits Against Cred Structs - Six Byte Cross Cache Overflow to Leakless Data-Oriented Kernel Pwnage</a></p>
 <p><a href="https://github.com/torvalds/linux/commit/494c1dfe855ec1f70f89552fce5eadf4a1717552" target="_blank" rel="noopener noreffer ">commit</a></p>
-<p><a href="https://arttnba3.cn/2021/11/29/PWN-0X02-LINUX-KERNEL-PWN-PART-II/#%E2%9C%B3GFP-KERNEL-amp-GFP-KERNEL-ACCOUNT-%E7%9A%84%E9%9A%94%E7%A6%BB" target="_blank" rel="noopener noreffer ">GFP_KERNEL &amp; GFP_KERNEL_ACCOUNT 的隔离</a></p>
-</div><div class="post-footer" id="post-footer">
+<p><a href="https://arttnba3.cn/2021/11/29/PWN-0X02-LINUX-KERNEL-PWN-PART-II/#%E2%9C%B3GFP-KERNEL-amp-GFP-KERNEL-ACCOUNT-%E7%9A%84%E9%9A%94%E7%A6%BB" target="_blank" rel="noopener noreffer ">GFP_KERNEL &amp; GFP_KERNEL_ACCOUNT 的隔离</a></p></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>更新于 2023-01-31&nbsp;<a class="git-hash" href="https://github.com/dillonzq/LoveIt/commit/c17c676d51532086fe05ed50808b33e1cba52004" target="_blank" title="commit by cnitlrt(1258175307@qq.com) c17c676d51532086fe05ed50808b33e1cba52004: test">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>c17c676</a></span>
+                <span>更新于 2023-02-17&nbsp;<a class="git-hash" href="https://github.com/dillonzq/LoveIt/commit/66d0b7fa34d945858ed7177a3a177b082e92f33a" target="_blank" title="commit by cnitlrt(1258175307@qq.com) 66d0b7fa34d945858ed7177a3a177b082e92f33a: test">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>66d0b7f</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"></div>
@@ -2246,7 +2245,7 @@
         </section>
     </div>
 
-    <div class="post-nav"><a href="/misc/" class="prev" rel="prev" title="Misc杂记"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Misc杂记</a>
+    <div class="post-nav"><a href="/misc/" class="prev" rel="prev" title="杂记"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>杂记</a>
             <a href="/leetcode/" class="next" rel="next" title="Leetcode 刷题 ...">Leetcode 刷题 ...<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 <div id="comments"><div id="gitalk" class="comment"></div><noscript>

@@ -10,7 +10,7 @@
     <pubDate>Wed, 15 Feb 2023 00:02:42 &#43;0800</pubDate>
     <author>cnitlrt</author>
     <guid>https://cnitlrt.github.io/leetcode/</guid>
-    <description><![CDATA[1. 两数之和 1.暴力搜索 1 2 3 4 5 6 7 8 9 10 11 class Solution(object): def twoSum(self, nums, target): &#34;&#34;&#34; :type nums: List[int] :type target: int :rtype: List[int] &#34;&#34;&#34; for i in range(len(nums)): for j in range(i+1,len(nums)): if nums[i] + nums[j] == target: return i,j 2.哈希表 理论基础 （摘自http]]></description>
+    <description><![CDATA[leetcode 刷题]]></description>
 </item>
 <item>
     <title>corCTF 2022-cache-of-castaways复现 </title>
@@ -18,15 +18,15 @@
     <pubDate>Sun, 29 Jan 2023 22:27:02 &#43;0800</pubDate>
     <author>cnitlrt</author>
     <guid>https://cnitlrt.github.io/kernel/</guid>
-    <description><![CDATA[保护机制：SMAP, SMEP, KPTI, KASLR 及常用的保护机制，并且仅用了msg_msg。版本是5.18.3 漏洞点 source code 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21]]></description>
+    <description><![CDATA[菜鸡的kernel复现]]></description>
 </item>
 <item>
-    <title>Misc杂记</title>
+    <title>杂记</title>
     <link>https://cnitlrt.github.io/misc/</link>
     <pubDate>Sat, 01 Jan 2022 04:06:14 &#43;0800</pubDate>
     <author>cnitlrt</author>
     <guid>https://cnitlrt.github.io/misc/</guid>
-    <description><![CDATA[ubuntu加内存 外部： 关机之后点击扩容然后选择想要扩容成的大小 内部： 安装gparted 1 sudo apt-get install gparted 打开gparted,右键/dev/sda1]]></description>
+    <description><![CDATA[记录一些遇到的疑难杂症]]></description>
 </item>
 </channel>
 </rss>

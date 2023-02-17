@@ -10,7 +10,7 @@
     <pubDate>Wed, 15 Feb 2023 00:02:42 &#43;0800</pubDate>
     <author>cnitlrt</author>
     <guid>https://cnitlrt.github.io/leetcode/</guid>
-    <description><![CDATA[1. 两数之和 1.暴力搜索 1 2 3 4 5 6 7 8 9 10 11 class Solution(object): def twoSum(self, nums, target): &#34;&#34;&#34; :type nums: List[int] :type target: int :rtype: List[int] &#34;&#34;&#34; for i in range(len(nums)): for j in range(i+1,len(nums)): if nums[i] + nums[j] == target: return i,j 2.哈希表 理论基础 （摘自http]]></description>
+    <description><![CDATA[leetcode 刷题]]></description>
 </item>
 </channel>
 </rss>
