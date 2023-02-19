@@ -164,7 +164,11 @@
         </li>
         <li><a href="#seq_operations-kmalloc-32--gfp_kernel_account">seq_operations （kmalloc-32 | GFP_KERNEL_ACCOUNT）</a></li>
         <li><a href="#dirty_cred">dirty_cred</a></li>
-        <li><a href="#slub分配器">SLUB分配器</a>
+      </ul>
+    </li>
+    <li><a href="#slub分配器">SLUB分配器</a>
+      <ul>
+        <li>
           <ul>
             <li>
               <ul>
@@ -205,7 +209,7 @@
 <h3 id="usma">USMA</h3>
 <h2 id="seq_operations-kmalloc-32--gfp_kernel_account">seq_operations （kmalloc-32 | GFP_KERNEL_ACCOUNT）</h2>
 <h2 id="dirty_cred">dirty_cred</h2>
-<h2 id="slub分配器">SLUB分配器</h2>
+<h1 id="slub分配器">SLUB分配器</h1>
 <h4 id="为什么需要内核分配器">为什么需要内核分配器</h4>
 <p>操作系统虚拟内存中用于内存管理的最小数据单位是页面，大多数体系结构的传统大小为 4KB(0x1000)。由于每次进程请求某些东西时分配 4KB 内存是不切实际的，即使小到几十个字节，也需要一种中间机制来微管理页面的内容。</p>
 <p>虽然在用户空间中这是由 malloc 系列执行的，但内核需要一个不同的系统，与系统本身更紧密地集成，可以在中断上下文中工作，符合 DMA 限制.</p>
