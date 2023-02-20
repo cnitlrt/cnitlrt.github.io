@@ -34,7 +34,7 @@
                             "url": "https:\/\/cnitlrt.github.io\/images\/Apple-Devices-Preview.png",
                             "width":  3200 ,
                             "height":  2048 
-                        }],"genre": "posts","keywords": "kernel","wordcount":  1633 ,
+                        }],"genre": "posts","keywords": "kernel","wordcount":  1636 ,
         "url": "https:\/\/cnitlrt.github.io\/kernel%E6%80%BB%E7%BB%93\/","datePublished": "2023-02-07T16:57:51+08:00","dateModified": "2023-02-07T16:57:51+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": {
@@ -133,7 +133,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Kernel总结</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>cnitlrt</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/kernel/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>kernel</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-02-07">2023-02-07</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 1633 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-02-07">2023-02-07</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 1636 字&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 4 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
@@ -154,16 +154,17 @@
           <ul>
             <li><a href="#dirty_pipe">dirty_pipe</a></li>
             <li><a href="#pipe_prime">pipe_prime</a></li>
+            <li><a href="#dirty_cred">dirty_cred</a></li>
           </ul>
         </li>
         <li><a href="#skb_buffer--512">skb_buffer (&gt;= 512)</a></li>
         <li><a href="#pgv-与页级内存页分配">pgv 与页级内存页分配</a>
           <ul>
             <li><a href="#usma">USMA</a></li>
+            <li><a href="#cross-cache-attack">Cross cache attack</a></li>
           </ul>
         </li>
         <li><a href="#seq_operations-kmalloc-32--gfp_kernel_account">seq_operations （kmalloc-32 | GFP_KERNEL_ACCOUNT）</a></li>
-        <li><a href="#dirty_cred">dirty_cred</a></li>
       </ul>
     </li>
     <li><a href="#slub分配器">SLUB分配器</a>
@@ -204,11 +205,12 @@
 <h2 id="pipe_buffer">pipe_buffer</h2>
 <h3 id="dirty_pipe">dirty_pipe</h3>
 <h3 id="pipe_prime">pipe_prime</h3>
+<h3 id="dirty_cred">dirty_cred</h3>
 <h2 id="skb_buffer--512">skb_buffer (&gt;= 512)</h2>
 <h2 id="pgv-与页级内存页分配">pgv 与页级内存页分配</h2>
 <h3 id="usma">USMA</h3>
+<h3 id="cross-cache-attack">Cross cache attack</h3>
 <h2 id="seq_operations-kmalloc-32--gfp_kernel_account">seq_operations （kmalloc-32 | GFP_KERNEL_ACCOUNT）</h2>
-<h2 id="dirty_cred">dirty_cred</h2>
 <h1 id="slub分配器">SLUB分配器</h1>
 <h4 id="为什么需要内核分配器">为什么需要内核分配器</h4>
 <p>操作系统虚拟内存中用于内存管理的最小数据单位是页面，大多数体系结构的传统大小为 4KB(0x1000)。由于每次进程请求某些东西时分配 4KB 内存是不切实际的，即使小到几十个字节，也需要一种中间机制来微管理页面的内容。</p>
