@@ -9,7 +9,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://cnitlrt.github.io/leetcode/" /><meta property="og:image" content="https://cnitlrt.github.io/logo.jpg"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-02-15T00:02:42+08:00" />
-<meta property="article:modified_time" content="2023-02-20T22:14:10+08:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2023-02-21T16:10:19+08:00" /><meta property="og:site_name" content="My cool site" />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://cnitlrt.github.io/logo.jpg"/>
 
@@ -34,8 +34,8 @@
                             "url": "https:\/\/cnitlrt.github.io\/images\/Apple-Devices-Preview.png",
                             "width":  3200 ,
                             "height":  2048 
-                        }],"genre": "posts","keywords": "leetcode","wordcount":  4081 ,
-        "url": "https:\/\/cnitlrt.github.io\/leetcode\/","datePublished": "2023-02-15T00:02:42+08:00","dateModified": "2023-02-20T22:14:10+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "leetcode","wordcount":  4382 ,
+        "url": "https:\/\/cnitlrt.github.io\/leetcode\/","datePublished": "2023-02-15T00:02:42+08:00","dateModified": "2023-02-21T16:10:19+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": {
                     "@type": "ImageObject",
@@ -113,7 +113,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Leetcode 刷题 ...</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>cnitlrt</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/leetcode/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>leetcode</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-02-15">2023-02-15</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 4081 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-02-15">2023-02-15</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 4382 字&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 9 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
@@ -188,6 +188,8 @@
         <li><a href="#454-四数相加-ii">454. 四数相加 II</a></li>
         <li><a href="#383-赎金信">383. 赎金信</a></li>
         <li><a href="#15-三数之和">15. 三数之和</a></li>
+        <li><a href="#344-反转字符串">344. 反转字符串</a></li>
+        <li><a href="#18-四数之和">18. 四数之和</a></li>
       </ul>
     </li>
   </ul>
@@ -1775,7 +1777,7 @@
 </span></span><span class="line"><span class="cl">        <span class="n">dummy</span> <span class="o">=</span> <span class="p">[]</span>
 </span></span><span class="line"><span class="cl">        <span class="n">size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)):</span>
-</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span> <span class="c1">#如果该数大于0 则表明结束</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span> <span class="c1">#如果该数大于0 则表明后续没有没有任何两个数和当前数和为0</span>
 </span></span><span class="line"><span class="cl">                <span class="k">break</span>
 </span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">:</span> <span class="c1">#判断是否和上个数字重复，如果重复则继续</span>
 </span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]:</span>
@@ -1805,12 +1807,105 @@
 </span></span><span class="line"><span class="cl">        
 </span></span></code></pre></td></tr></table>
 </div>
+</div><h2 id="344-反转字符串">344. 反转字符串</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">reverseString</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">        Do not return anything, modify s in-place instead.
+</span></span></span><span class="line"><span class="cl"><span class="s2">        &#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">l</span> <span class="o">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">        <span class="n">r</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="n">l</span> <span class="o">&lt;=</span> <span class="n">r</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">            <span class="n">s</span><span class="p">[</span><span class="n">l</span><span class="p">],</span><span class="n">s</span><span class="p">[</span><span class="n">r</span><span class="p">]</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="n">r</span><span class="p">],</span><span class="n">s</span><span class="p">[</span><span class="n">l</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">            <span class="n">l</span> <span class="o">+=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">            <span class="n">r</span> <span class="o">-=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="18-四数之和">18. 四数之和</h2>
+<p>和三数之和类似，加一个for循环</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">fourSum</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nums</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">target</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]]:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">nums</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">nums</span><span class="p">)</span><span class="c1">#升序排序</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># print(nums)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ans</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">size</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]:</span> <span class="k">continue</span> <span class="c1"># 去重</span>
+</span></span><span class="line"><span class="cl">            <span class="c1"># if nums[i] &gt; target: return ans </span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span><span class="n">size</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="n">m</span> <span class="o">&gt;</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">nums</span><span class="p">[</span><span class="n">m</span><span class="p">]</span> <span class="o">==</span> <span class="n">nums</span><span class="p">[</span><span class="n">m</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]:</span> <span class="k">continue</span> <span class="c1">#如果当前字符和上一个字符相同则继续,即去重</span>
+</span></span><span class="line"><span class="cl">                <span class="n">l</span> <span class="o">=</span> <span class="n">m</span> <span class="o">+</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">                <span class="n">r</span> <span class="o">=</span> <span class="n">size</span> <span class="o">-</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">                <span class="k">while</span><span class="p">(</span><span class="n">l</span> <span class="o">&lt;</span> <span class="n">r</span><span class="p">):</span> <span class="c1">#双指针</span>
+</span></span><span class="line"><span class="cl">                    <span class="nb">sum</span> <span class="o">=</span> <span class="n">nums</span><span class="p">[</span><span class="n">l</span><span class="p">]</span> <span class="o">+</span> <span class="n">nums</span><span class="p">[</span><span class="n">r</span><span class="p">]</span> <span class="o">+</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">nums</span><span class="p">[</span><span class="n">m</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">if</span><span class="p">(</span><span class="nb">sum</span> <span class="o">==</span> <span class="n">target</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">ans</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">nums</span><span class="p">[</span><span class="n">m</span><span class="p">],</span><span class="n">nums</span><span class="p">[</span><span class="n">l</span><span class="p">],</span><span class="n">nums</span><span class="p">[</span><span class="n">r</span><span class="p">]])</span>
+</span></span><span class="line"><span class="cl">                        <span class="k">while</span><span class="p">(</span><span class="n">l</span> <span class="o">&lt;</span> <span class="n">r</span><span class="p">)</span> <span class="ow">and</span> <span class="n">nums</span><span class="p">[</span><span class="n">l</span><span class="p">]</span> <span class="o">==</span> <span class="n">nums</span><span class="p">[</span><span class="n">l</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]:</span> <span class="n">l</span> <span class="o">+=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">                        <span class="k">while</span><span class="p">(</span><span class="n">l</span> <span class="o">&lt;</span> <span class="n">r</span><span class="p">)</span> <span class="ow">and</span> <span class="n">nums</span><span class="p">[</span><span class="n">r</span><span class="p">]</span> <span class="o">==</span> <span class="n">nums</span><span class="p">[</span><span class="n">r</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]:</span> <span class="n">r</span> <span class="o">-=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">l</span> <span class="o">+=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">r</span> <span class="o">-=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">elif</span> <span class="nb">sum</span> <span class="o">&lt;</span> <span class="n">target</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">l</span> <span class="o">+=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">elif</span> <span class="nb">sum</span> <span class="o">&gt;</span> <span class="n">target</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">r</span> <span class="o">-=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="n">ans</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">ans</span>
+</span></span></code></pre></td></tr></table>
+</div>
 </div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>更新于 2023-02-20&nbsp;<a class="git-hash" href="https://github.com/dillonzq/LoveIt/commit/e7e720cd1debedc88596ce56fcac6d91c17dfe2e" target="_blank" title="commit by cnitlrt(1258175307@qq.com) e7e720cd1debedc88596ce56fcac6d91c17dfe2e: test">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>e7e720c</a></span>
+                <span>更新于 2023-02-21&nbsp;<a class="git-hash" href="https://github.com/dillonzq/LoveIt/commit/1265dc1a33ae4774aa5a0b8baf7f86f072ab67a5" target="_blank" title="commit by cnitlrt(1258175307@qq.com) 1265dc1a33ae4774aa5a0b8baf7f86f072ab67a5: test">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>1265dc1</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"></div>
