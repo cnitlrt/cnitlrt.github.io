@@ -34,7 +34,7 @@
                             "url": "https:\/\/cnitlrt.github.io\/images\/Apple-Devices-Preview.png",
                             "width":  3200 ,
                             "height":  2048 
-                        }],"genre": "posts","keywords": "kernel","wordcount":  1636 ,
+                        }],"genre": "posts","keywords": "kernel","wordcount":  1669 ,
         "url": "https:\/\/cnitlrt.github.io\/kernel%E6%80%BB%E7%BB%93\/","datePublished": "2023-02-07T16:57:51+08:00","dateModified": "2023-02-07T16:57:51+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": {
@@ -133,7 +133,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Kernel总结</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>cnitlrt</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/kernel/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>kernel</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-02-07">2023-02-07</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 1636 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-02-07">2023-02-07</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 1669 字&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 4 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
@@ -145,7 +145,16 @@
     <li><a href="#一些好用的结构体以及衍生出来的攻击方法">一些好用的结构体以及衍生出来的攻击方法</a>
       <ul>
         <li><a href="#user_key_payload">user_key_payload</a></li>
-        <li><a href="#poll_list">poll_list</a></li>
+        <li><a href="#poll_list">poll_list</a>
+          <ul>
+            <li><a href="#分配">分配</a>
+              <ul>
+                <li><a href="#add_key---gfp_kernel--__gfp_hardwall--__gfp_nowarn">add_key - （GFP_KERNEL | __GFP_HARDWALL | __GFP_NOWARN）</a></li>
+              </ul>
+            </li>
+            <li><a href="#释放">释放</a></li>
+          </ul>
+        </li>
         <li><a href="#msg_msg">msg_msg</a></li>
         <li><a href="#pt_regs">pt_regs</a></li>
         <li><a href="#setxattr">setxattr</a></li>
@@ -198,6 +207,9 @@
 <h2 id="user_key_payload">user_key_payload</h2>
 <p>限制是只能分配最多200个最长20000字节</p>
 <h2 id="poll_list">poll_list</h2>
+<h3 id="分配">分配</h3>
+<h4 id="add_key---gfp_kernel--__gfp_hardwall--__gfp_nowarn">add_key - （GFP_KERNEL | __GFP_HARDWALL | __GFP_NOWARN）</h4>
+<h3 id="释放">释放</h3>
 <h2 id="msg_msg">msg_msg</h2>
 <h2 id="pt_regs">pt_regs</h2>
 <h2 id="setxattr">setxattr</h2>

@@ -9,7 +9,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://cnitlrt.github.io/misc/" /><meta property="og:image" content="https://cnitlrt.github.io/logo.jpg"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-01-01T04:06:14+08:00" />
-<meta property="article:modified_time" content="2023-02-20T22:35:10+08:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2023-03-13T23:01:05+08:00" /><meta property="og:site_name" content="My cool site" />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://cnitlrt.github.io/logo.jpg"/>
 
@@ -34,8 +34,8 @@
                             "url": "https:\/\/cnitlrt.github.io\/images\/Apple-Devices-Preview.png",
                             "width":  3200 ,
                             "height":  2048 
-                        }],"genre": "posts","keywords": "tools","wordcount":  7876 ,
-        "url": "https:\/\/cnitlrt.github.io\/misc\/","datePublished": "2022-01-01T04:06:14+08:00","dateModified": "2023-02-20T22:35:10+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "tools","wordcount":  7969 ,
+        "url": "https:\/\/cnitlrt.github.io\/misc\/","datePublished": "2022-01-01T04:06:14+08:00","dateModified": "2023-03-13T23:01:05+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": {
                     "@type": "ImageObject",
@@ -113,7 +113,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">杂记</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>cnitlrt</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/tools/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>tools</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-01-01">2022-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 7876 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-01-01">2022-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 7969 字&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 16 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
@@ -164,15 +164,21 @@
         </li>
         <li><a href="#gdb调试相关">gdb调试相关</a></li>
         <li><a href="#莫名奇妙的bug">莫名奇妙的bug</a></li>
-        <li><a href="#woboq-glibc">woboq glibc</a>
+        <li><a href="#woboq">woboq</a>
           <ul>
-            <li>
+            <li><a href="#glibc">glibc</a>
               <ul>
                 <li><a href="#glibc源码">glibc源码</a></li>
                 <li><a href="#安装bear">安装bear</a></li>
                 <li><a href="#安装woboq">安装woboq</a></li>
                 <li><a href="#使用bear编译glibc源码-例如234">使用bear编译glibc源码 (例如2.34)</a></li>
                 <li><a href="#解析">解析</a></li>
+              </ul>
+            </li>
+            <li><a href="#woboq-afl">woboq afl</a>
+              <ul>
+                <li><a href="#生成compile_commandsjson文件">生成compile_commands.json文件</a></li>
+                <li><a href="#解析-1">解析</a></li>
               </ul>
             </li>
           </ul>
@@ -2517,10 +2523,11 @@
 </span></span><span class="line"><span class="cl">禁用usb间接性暂停
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="woboq-glibc">woboq glibc</h2>
+</div><h2 id="woboq">woboq</h2>
 <blockquote>
 <p>woboq是一款优秀的代码阅读器</p>
 </blockquote>
+<h3 id="glibc">glibc</h3>
 <h4 id="glibc源码">glibc源码</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -2609,6 +2616,62 @@
         data-sizes="auto"
         alt="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230220223230920.png"
         title="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230220223230920.png" /></p>
+<h3 id="woboq-afl">woboq afl</h3>
+<p>前提：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">afl源码、woboq、bear
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="生成compile_commandsjson文件">生成compile_commands.json文件</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">cd ~
+</span></span><span class="line"><span class="cl">git clone https://github.com/google/AFL afl
+</span></span><span class="line"><span class="cl">cd afl
+</span></span><span class="line"><span class="cl">sudo bear make
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="解析-1">解析</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">cd</span> ~/codebrowser
+</span></span><span class="line"><span class="cl">./generator/codebrowser_generator -b /home/ubuntu/afl/ -a -o /home/ubuntu/woboq/afl/2.57 -p 2.57:/home/ubuntu/afl:2.57
+</span></span><span class="line"><span class="cl">./indexgenerator/codebrowser_indexgenerator /home/ubuntu/woboq/afl/2.57
+</span></span><span class="line"><span class="cl">sudo cp -rv ./data /home/ubuntu/woboq/afl/data
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">cd</span> /home/ubuntu/woboq/afl/ <span class="o">&amp;&amp;</span> python3 -m http.server <span class="m">9999</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230313225940580.png"
+        data-srcset="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230313225940580.png, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230313225940580.png 1.5x, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230313225940580.png 2x"
+        data-sizes="auto"
+        alt="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230313225940580.png"
+        title="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230313225940580.png" /></p>
 <h2 id="obfuscator-llvm">obfuscator-llvm</h2>
 <p>需要用gcc-8 g++-8</p>
 <div class="highlight"><div class="chroma">
@@ -2813,8 +2876,8 @@
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>更新于 2023-02-20&nbsp;<a class="git-hash" href="https://github.com/dillonzq/LoveIt/commit/6d7ee22e682dfbdb1e8217b6775ea7f0b64b92ce" target="_blank" title="commit by cnitlrt(1258175307@qq.com) 6d7ee22e682dfbdb1e8217b6775ea7f0b64b92ce: test">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>6d7ee22</a></span>
+                <span>更新于 2023-03-13&nbsp;<a class="git-hash" href="https://github.com/dillonzq/LoveIt/commit/b951cc8007cd6027440c3cfde92ad92ec5758848" target="_blank" title="commit by cnitlrt(1258175307@qq.com) b951cc8007cd6027440c3cfde92ad92ec5758848: test">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>b951cc8</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"></div>
