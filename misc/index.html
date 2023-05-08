@@ -9,7 +9,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://cnitlrt.github.io/misc/" /><meta property="og:image" content="https://cnitlrt.github.io/logo.jpg"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-01-01T04:06:14+08:00" />
-<meta property="article:modified_time" content="2023-03-29T17:40:29+08:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2023-05-08T17:46:04+08:00" /><meta property="og:site_name" content="My cool site" />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://cnitlrt.github.io/logo.jpg"/>
 
@@ -34,8 +34,8 @@
                             "url": "https:\/\/cnitlrt.github.io\/images\/Apple-Devices-Preview.png",
                             "width":  3200 ,
                             "height":  2048 
-                        }],"genre": "posts","keywords": "tools","wordcount":  11997 ,
-        "url": "https:\/\/cnitlrt.github.io\/misc\/","datePublished": "2022-01-01T04:06:14+08:00","dateModified": "2023-03-29T17:40:29+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "tools","wordcount":  13752 ,
+        "url": "https:\/\/cnitlrt.github.io\/misc\/","datePublished": "2022-01-01T04:06:14+08:00","dateModified": "2023-05-08T17:46:04+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": {
                     "@type": "ImageObject",
@@ -113,8 +113,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">杂记</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>cnitlrt</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/tools/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>tools</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-01-01">2022-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 11997 字&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 24 分钟&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-01-01">2022-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 13752 字&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 28 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>目录</span>
@@ -124,6 +124,27 @@
   <ul>
     <li>
       <ul>
+        <li><a href="#linux调试版本不一致">linux调试版本不一致</a></li>
+        <li><a href="#添加swap交换分区空间"><strong>添加swap交换分区空间</strong></a></li>
+        <li><a href="#附删除swap交换分区"><strong>附：删除swap交换分区</strong></a></li>
+        <li><a href="#解包">解包</a></li>
+        <li><a href="#打包">打包</a></li>
+        <li><a href="#取消byteswaring">取消byteswaring</a></li>
+        <li><a href="#删除none镜像">删除none镜像</a></li>
+        <li><a href="#一些系统调用">一些系统调用</a>
+          <ul>
+            <li><a href="#connect">connect</a></li>
+            <li><a href="#mmap">mmap</a></li>
+            <li><a href="#openat">openat</a></li>
+            <li><a href="#ptrace">ptrace</a></li>
+            <li><a href="#arch_prctl">arch_prctl</a></li>
+            <li><a href="#writev">writev</a></li>
+            <li><a href="#prlimit">prlimit</a></li>
+          </ul>
+        </li>
+        <li><a href="#idapython-常见指令">idapython 常见指令</a></li>
+        <li><a href="#dump_elf32idc">dump_elf32.idc</a></li>
+        <li><a href="#ida右键菜单打开">IDA右键菜单打开</a></li>
         <li><a href="#ubuntu加内存">ubuntu加内存</a></li>
         <li><a href="#虚拟机繁忙无法关机">虚拟机繁忙，无法关机</a></li>
         <li><a href="#python-显示某某decode不了或者encode不了">python 显示某某decode不了或者encode不了</a></li>
@@ -213,6 +234,7 @@
           <ul>
             <li>
               <ul>
+                <li><a href="#例子">例子</a></li>
                 <li><a href="#开启控制流扁平化">开启控制流扁平化</a></li>
                 <li><a href="#开启指令替换">开启指令替换</a></li>
                 <li><a href="#开启虚假控制流">开启虚假控制流</a></li>
@@ -221,6 +243,16 @@
           </ul>
         </li>
         <li><a href="#pwn题批量部署">pwn题批量部署</a></li>
+        <li><a href="#ida静态编译符号表恢复">ida静态编译符号表恢复</a></li>
+        <li><a href="#syzkaller环境搭建">syzkaller环境搭建</a>
+          <ul>
+            <li>
+              <ul>
+                <li><a href="#vim-config">vim .config</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
         <li><a href="#linux-内核编译">linux 内核编译</a></li>
         <li><a href="#kernel相关">kernel相关</a>
           <ul>
@@ -228,6 +260,7 @@
               <ul>
                 <li><a href="#查看保护机制">查看保护机制</a></li>
                 <li><a href="#查看slab">查看slab</a></li>
+                <li><a href="#查看slab-1">查看slab</a></li>
                 <li><a href="#查看最大文件打开数量">查看最大文件打开数量</a></li>
               </ul>
             </li>
@@ -249,7 +282,557 @@
     </li>
   </ul>
 </nav></div>
-            </div><div class="content" id="content"><h2 id="ubuntu加内存">ubuntu加内存</h2>
+            </div><div class="content" id="content"><h2 id="linux调试版本不一致">linux调试版本不一致</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">CONFIG_MODVERSIONS = n
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="添加swap交换分区空间"><strong>添加swap交换分区空间</strong></h2>
+<p>1.查看当前内存和swap空间大小</p>
+<p>$free -mh</p>
+<p>2.创建swap交换分区文件/swap/swapfile，大小为8G</p>
+<p>$ sudo mkdir /swap</p>
+<p>$ sudo dd if=/dev/zero of=/swap/swapfile bs=1G count=8</p>
+<p>3.格式化swap分区：</p>
+<p>$sudo mkswap /swap/swapfile</p>
+<p>4.设置交换分区：</p>
+<p>$sudo mkswap -f /swap/swapfile</p>
+<p>5.修改权限：</p>
+<p>$sudo chmod 600 /swap/swapfile</p>
+<p>6.激活swap分区：</p>
+<p>$sudo swapon /swap/swapfile</p>
+<p>6.设为开机自动启用：</p>
+<p>$sudo vi /etc/fstab</p>
+<p>在该文件底部添加如下内容：</p>
+<p>/swap/swapfile swap swap default 0 0</p>
+<h2 id="附删除swap交换分区"><strong>附：删除swap交换分区</strong></h2>
+<p>1.停止正在使用的swap分区：</p>
+<p>$sudo swapoff /swap/swapfile</p>
+<p>2.删除swap分区文件：</p>
+<p>$sudo rm /swap/swapfile</p>
+<p>3.删除或注释在/etc/fstab文件中的以下开机自动挂载内容：</p>
+<p>/swap/swapfile swap swap default 0 0</p>
+<h2 id="解包">解包</h2>
+<p>img镜像文件</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">sudo mount
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="打包">打包</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">sudo ~/ROM_toolbox-linux/make_ext4fs -s -l 268435456 new_system.img ./core
+</span></span><span class="line"><span class="cl">sudo ~/ROM_toolbox-linux/simg2img new_system.img system_out.img
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="取消byteswaring">取消byteswaring</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">warnings</span>
+</span></span><span class="line"><span class="cl"><span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="删除none镜像">删除none镜像</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">sudo docker rmi -f $(sudo docker images | grep &#34;none&#34; | awk &#39;{print $3}&#39;)
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="一些系统调用">一些系统调用</h2>
+<h3 id="connect">connect</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">connect(ip,port)
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="mmap">mmap</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">## 映射fd
+</span></span><span class="line"><span class="cl">mmap(0x100000, 0x1000, 1, 3, &#39;rax&#39;, 0);
+</span></span><span class="line"><span class="cl">## mmap一块区域
+</span></span><span class="line"><span class="cl">mmap(0x100000, 0x1000, 0x7, 34, -1, 0);
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="openat">openat</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">openat(0, &#34;/flag&#34;, 0)
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="ptrace">ptrace</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">long` `ptrace(enum __ptrace_request request, pid_t pid, void ``*``addr,void ``*``data);
+</span></span><span class="line"><span class="cl">1``). enum __ptrace_request request：参数执行的行为
+</span></span><span class="line"><span class="cl">2``). pid_t pid: ptrace要跟踪的进程号。
+</span></span><span class="line"><span class="cl">3``). void ``*``addr: 存放数据的地址。
+</span></span><span class="line"><span class="cl">4``). void ``*``data: 存放读取出的或者要写入的数据。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">enum __ptrace_request
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">    PTRACE_TRACEME = 0,        //被调试进程调用
+</span></span><span class="line"><span class="cl">    PTRACE_PEEKTEXT = 1， //从内存addr处读取一个字节
+</span></span><span class="line"><span class="cl">    PTRACE_PEEKDATA = 2,    //查看内存addr处的一个字节
+</span></span><span class="line"><span class="cl">    PTRACE_PEEKUSER = 3,    //查看struct user 结构体的值
+</span></span><span class="line"><span class="cl">    PTRACE_POKETEXT = 4， //查看内存addr处一个字大小的内存（4字节）
+</span></span><span class="line"><span class="cl">    PTRACE_POKEDATA = 5,    //修改内存addr处一个字大小的内存（4字节）
+</span></span><span class="line"><span class="cl">    PTRACE_POKEUSER = 6,    //修改struct user结构体的值
+</span></span><span class="line"><span class="cl">    PTRACE_CONT = 7,        //被调试进程pid继续
+</span></span><span class="line"><span class="cl">    PTRACE_SINGLESTEP = 9,    //被调试进程pid执行一条汇编指令
+</span></span><span class="line"><span class="cl">    PTRACE_GETREGS = 12,    //获取寄存器(struct user_regs_struct)到内存data中
+</span></span><span class="line"><span class="cl">    PTRACE_SETREGS = 13,    //设置内存data上的数据为寄存器(struct user_regs_struct)
+</span></span><span class="line"><span class="cl">    PTRACE_ATTACH = 16,        //附加进程pid
+</span></span><span class="line"><span class="cl">    PTRACE_DETACH = 17,        //解除附加进程pid
+</span></span><span class="line"><span class="cl">    PTRACE_SYSCALL = 24,    //让被调试进程pid在系统调用入口或出口停止
+</span></span><span class="line"><span class="cl">};
+</span></span><span class="line"><span class="cl">long int ptrace (enum __ptrace_request __request, ...)
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-mysql" data-lang="mysql"><span class="line"><span class="cl"><span class="c1">##/arch/x86/include/uapi/asm/ptrace-abi.h
+</span></span></span><span class="line"><span class="cl"><span class="c1">#define R15 0
+</span></span></span><span class="line"><span class="cl"><span class="c1">#define R14 8
+</span></span></span><span class="line"><span class="cl"><span class="c1">#define R13 16
+</span></span></span><span class="line"><span class="cl"><span class="c1">#define R12 24
+</span></span></span><span class="line"><span class="cl"><span class="c1">#define RBP 32
+</span></span></span><span class="line"><span class="cl"><span class="c1">#define RBX 40
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="o">/``*`</span><span class="w"> </span><span class="o">`</span><span class="n">These</span><span class="w"> </span><span class="n">regs</span><span class="w"> </span><span class="n">are</span><span class="w"> </span><span class="n">callee</span><span class="o">``-``</span><span class="n">clobbered</span><span class="p">.</span><span class="w"> </span><span class="n">Always</span><span class="w"> </span><span class="n">saved</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">kernel</span><span class="w"> </span><span class="n">entry</span><span class="p">.</span><span class="w"> </span><span class="o">``*``/</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">#define R11 48
+</span></span></span><span class="line"><span class="cl"><span class="c1">#define R10 56
+</span></span></span><span class="line"><span class="cl"><span class="c1">#define R9 64
+</span></span></span><span class="line"><span class="cl"><span class="c1">#define R8 72
+</span></span></span><span class="line"><span class="cl"><span class="c1">#define RAX 80
+</span></span></span><span class="line"><span class="cl"><span class="c1">#define RCX 88
+</span></span></span><span class="line"><span class="cl"><span class="c1">#define RDX 96
+</span></span></span><span class="line"><span class="cl"><span class="c1">#define RSI 104
+</span></span></span><span class="line"><span class="cl"><span class="c1">#define RDI 112
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="o">/``*</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="o">``*`</span><span class="w"> </span><span class="o">`</span><span class="k">On</span><span class="w"> </span><span class="n">syscall</span><span class="w"> </span><span class="n">entry</span><span class="p">,</span><span class="w"> </span><span class="n">this</span><span class="w"> </span><span class="o">``</span><span class="k">is</span><span class="o">`</span><span class="w"> </span><span class="o">`</span><span class="n">syscall</span><span class="o">``</span><span class="c1">#. On CPU exception, this is error code.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w"> </span><span class="o">``*`</span><span class="w"> </span><span class="o">`</span><span class="k">On</span><span class="w"> </span><span class="n">hw</span><span class="w"> </span><span class="n">interrupt</span><span class="p">,</span><span class="w"> </span><span class="n">it</span><span class="s1">&#39;s IRQ number:
+</span></span></span><span class="line"><span class="cl"><span class="s1"> ``*``/
+</span></span></span><span class="line"><span class="cl"><span class="s1">#define ORIG_RAX 120
+</span></span></span><span class="line"><span class="cl"><span class="s1">/``*` `Return frame ``for` `iretq ``*``/
+</span></span></span><span class="line"><span class="cl"><span class="s1">#define RIP 128
+</span></span></span><span class="line"><span class="cl"><span class="s1">#define CS 136
+</span></span></span><span class="line"><span class="cl"><span class="s1">#define EFLAGS 144
+</span></span></span><span class="line"><span class="cl"><span class="s1">#define RSP 152
+</span></span></span><span class="line"><span class="cl"><span class="s1">#define SS 160
+</span></span></span><span class="line"><span class="cl"><span class="s1">#endif /* __ASSEMBLY__ */
+</span></span></span><span class="line"><span class="cl"><span class="s1">/``*` `top of stack page ``*``/
+</span></span></span><span class="line"><span class="cl"><span class="s1">#define FRAME_SIZE 168
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="arch_prctl">arch_prctl</h3>
+<p>会将heap[0]设置为0xdeadbeef</p>
+<p>ARCH_SET_GS == 0x1001</p>
+<p>ARCH_GET_GS == 0x1004</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">arch_prctl(ARCH_SET_GS, 0xdeadbeef);
+</span></span><span class="line"><span class="cl">arch_prctl(ARCH_GET_GS, $heap);
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="writev">writev</h3>
+<p>addr[0] = want_leak_addr</p>
+<p>addr[1] = size</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">syscall(20, 1, addr, 1)
+</span></span><span class="line"><span class="cl">writev(1,addr,1)
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="prlimit">prlimit</h3>
+<p><a href="https://hackmd.io/@ptr-yudai/SJEgM1vzq" target="_blank" rel="noopener noreffer ">https://hackmd.io/@ptr-yudai/SJEgM1vzq</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">perlimt(ppid,9,new_limit,NULL)
+</span></span><span class="line"><span class="cl">prlimit(ppid,9,remove_limit, NULL)
+</span></span><span class="line"><span class="cl">new_limit:
+</span></span><span class="line"><span class="cl">  dq 0                          ; soft limit
+</span></span><span class="line"><span class="cl">  dq 0x133700000000             ; hard limit
+</span></span><span class="line"><span class="cl">remove_limit:
+</span></span><span class="line"><span class="cl">  dq 0x133700000000             ; soft limit
+</span></span><span class="line"><span class="cl">  dq 0x133700000000             ; hard limit
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>可以修改申请内存限制</p>
+<h2 id="idapython-常见指令">idapython 常见指令</h2>
+<p>获取数值</p>
+<table>
+<thead>
+<tr>
+<th>旧的函数</th>
+<th>新的函数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Byte(addr)</strong></td>
+<td>idc.get_wide_byte(addr)</td>
+</tr>
+<tr>
+<td><strong>Word(addr)</strong></td>
+<td>idc.get_wide_word(addr)</td>
+</tr>
+<tr>
+<td><strong>Dword(addr)</strong></td>
+<td>idc.get_wide_dword(addr)</td>
+</tr>
+<tr>
+<td><strong>Qword(addr)</strong></td>
+<td>idc.get_qword(addr)</td>
+</tr>
+</tbody>
+</table>
+<p>数值操作</p>
+<table>
+<thead>
+<tr>
+<th>旧函数</th>
+<th>新函数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>idc.PatchByte(addr,value)</strong></td>
+<td>ida_bytes.patch_byte(addr,value)</td>
+</tr>
+<tr>
+<td><strong>idc.PatchWord(addr,value)</strong></td>
+<td>ida_bytes.patch_word(addr,value)</td>
+</tr>
+<tr>
+<td><strong>idc.PatchDword(addr,value)</strong></td>
+<td>ida_bytes.patch_Dword(addr,value)</td>
+</tr>
+<tr>
+<td><strong>idc.PatchQword(addr,value)</strong></td>
+<td>ida_bytes.patch_Qword(addr,value)</td>
+</tr>
+</tbody>
+</table>
+<p>获取地址</p>
+<table>
+<thead>
+<tr>
+<th>老版函数</th>
+<th>当前7.5支持函数</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>idc.ScreenEA()</strong></td>
+<td><strong>idc.get_screen_ea()</strong></td>
+<td>获取当前指令地址</td>
+</tr>
+<tr>
+<td><strong>idc.MinEA() idc.StartEA() idc.BeginEA()</strong></td>
+<td><strong>ida_ida.inf_get_min_ea()</strong></td>
+<td>获取当前最小地址. 其中老版的三个函数都替换为了新版.使用的是同一个函数</td>
+</tr>
+<tr>
+<td><strong>idc.MaxEA()</strong></td>
+<td><strong>ida_ida.inf_get_max_ea()</strong></td>
+<td>获取当前最大地址</td>
+</tr>
+<tr>
+<td><strong>idc.SelStart()</strong></td>
+<td><strong>idc.read_selection_start()</strong></td>
+<td>获取当前光标选择的的块中的 起始地址</td>
+</tr>
+<tr>
+<td><strong>idc.SelEnd()</strong></td>
+<td><strong>idc.read_selection_end()</strong></td>
+<td>同上 返回结束地址</td>
+</tr>
+</tbody>
+</table>
+<h2 id="dump_elf32idc">dump_elf32.idc</h2>
+<p>其中ImageBase是Load段的地址，可能需要根据实际情况进行修改</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;idc.idc&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define PT_LOAD              1
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define PT_DYNAMIC           2
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="k">static</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">Message</span><span class="p">(</span><span class="s">&#34;start&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">auto</span> <span class="n">ImageBase</span><span class="p">,</span><span class="n">StartImg</span><span class="p">,</span><span class="n">EndImg</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">auto</span> <span class="n">e_phoff</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">auto</span> <span class="n">e_phnum</span><span class="p">,</span><span class="n">p_offset</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">auto</span> <span class="n">i</span><span class="p">,</span><span class="n">dumpfile</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ImageBase</span><span class="o">=</span><span class="mh">0x8048000</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">StartImg</span><span class="o">=</span><span class="mh">0x8000000</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">EndImg</span><span class="o">=</span><span class="mh">0x0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="nf">Dword</span><span class="p">(</span><span class="n">ImageBase</span><span class="p">)</span><span class="o">==</span><span class="mh">0x7f454c46</span> <span class="o">||</span> <span class="nf">Dword</span><span class="p">(</span><span class="n">ImageBase</span><span class="p">)</span><span class="o">==</span><span class="mh">0x464c457f</span> <span class="p">){</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span><span class="p">(</span><span class="n">dumpfile</span><span class="o">=</span><span class="nf">fopen</span><span class="p">(</span><span class="s">&#34;dumpfile&#34;</span><span class="p">,</span><span class="s">&#34;wb&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">                <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">e_phoff</span><span class="o">=</span><span class="n">ImageBase</span><span class="o">+</span><span class="nf">Dword</span><span class="p">(</span><span class="n">ImageBase</span><span class="o">+</span><span class="mh">0x1c</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                        <span class="nf">Message</span><span class="p">(</span><span class="s">&#34;e_phoff = 0x%x</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">e_phoff</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                        <span class="n">e_phnum</span><span class="o">=</span><span class="nf">Word</span><span class="p">(</span><span class="n">ImageBase</span><span class="o">+</span><span class="mh">0x30</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                        <span class="nf">Message</span><span class="p">(</span><span class="s">&#34;e_phnum = 0x%x</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">e_phnum</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                        <span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">e_phnum</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                                <span class="k">if</span> <span class="p">(</span><span class="nf">Dword</span><span class="p">(</span><span class="n">e_phoff</span><span class="p">)</span><span class="o">==</span><span class="n">PT_LOAD</span> <span class="o">||</span> <span class="nf">Dword</span><span class="p">(</span><span class="n">e_phoff</span><span class="p">)</span><span class="o">==</span><span class="n">PT_DYNAMIC</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                                <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                                        <span class="n">p_offset</span><span class="o">=</span><span class="nf">Dword</span><span class="p">(</span><span class="n">e_phoff</span><span class="o">+</span><span class="mh">0x4</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                                        <span class="n">StartImg</span><span class="o">=</span><span class="nf">Dword</span><span class="p">(</span><span class="n">e_phoff</span><span class="o">+</span><span class="mh">0x8</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                                        <span class="n">EndImg</span><span class="o">=</span><span class="n">StartImg</span><span class="o">+</span><span class="nf">Dword</span><span class="p">(</span><span class="n">e_phoff</span><span class="o">+</span><span class="mh">0x14</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                                        <span class="nf">Message</span><span class="p">(</span><span class="s">&#34;start = 0x%x, end = 0x%x, offset = 0x%x</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">StartImg</span><span class="p">,</span> <span class="n">EndImg</span><span class="p">,</span> <span class="n">p_offset</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                                        <span class="nf">dump</span><span class="p">(</span><span class="n">dumpfile</span><span class="p">,</span><span class="n">StartImg</span><span class="p">,</span><span class="n">EndImg</span><span class="p">,</span><span class="n">p_offset</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                                        <span class="nf">Message</span><span class="p">(</span><span class="s">&#34;dump segment %d ok.</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span><span class="n">i</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                                <span class="n">e_phoff</span><span class="o">=</span><span class="n">e_phoff</span><span class="o">+</span><span class="mh">0x20</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                        <span class="nf">fseek</span><span class="p">(</span><span class="n">dumpfile</span><span class="p">,</span><span class="mh">0x20</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                        <span class="nf">fputc</span><span class="p">(</span><span class="mh">0x00</span><span class="p">,</span><span class="n">dumpfile</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                        <span class="nf">fputc</span><span class="p">(</span><span class="mh">0x00</span><span class="p">,</span><span class="n">dumpfile</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                        <span class="nf">fputc</span><span class="p">(</span><span class="mh">0x00</span><span class="p">,</span><span class="n">dumpfile</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                        <span class="nf">fputc</span><span class="p">(</span><span class="mh">0x00</span><span class="p">,</span><span class="n">dumpfile</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                        <span class="nf">fseek</span><span class="p">(</span><span class="n">dumpfile</span><span class="p">,</span><span class="mh">0x30</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                        <span class="nf">fputc</span><span class="p">(</span><span class="mh">0x00</span><span class="p">,</span><span class="n">dumpfile</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                        <span class="nf">fputc</span><span class="p">(</span><span class="mh">0x00</span><span class="p">,</span><span class="n">dumpfile</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                        <span class="nf">fputc</span><span class="p">(</span><span class="mh">0x00</span><span class="p">,</span><span class="n">dumpfile</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                        <span class="nf">fputc</span><span class="p">(</span><span class="mh">0x00</span><span class="p">,</span><span class="n">dumpfile</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                        <span class="nf">fclose</span><span class="p">(</span><span class="n">dumpfile</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span><span class="k">else</span> <span class="nf">Message</span><span class="p">(</span><span class="s">&#34;dump err.&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="k">static</span> <span class="nf">dump</span><span class="p">(</span><span class="n">dumpfile</span><span class="p">,</span><span class="n">startimg</span><span class="p">,</span><span class="n">endimg</span><span class="p">,</span><span class="n">offset</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">auto</span> <span class="n">i</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">auto</span> <span class="n">size</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">size</span><span class="o">=</span><span class="n">endimg</span><span class="o">-</span><span class="n">startimg</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">fseek</span><span class="p">(</span><span class="n">dumpfile</span><span class="p">,</span><span class="n">offset</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">size</span><span class="p">;</span> <span class="n">i</span><span class="o">=</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="nf">fputc</span><span class="p">(</span><span class="nf">Byte</span><span class="p">(</span><span class="n">startimg</span><span class="o">+</span><span class="n">i</span><span class="p">),</span><span class="n">dumpfile</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="ida右键菜单打开">IDA右键菜单打开</h2>
+<p>换成自己的ida的路径即可</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-react" data-lang="react"><span class="line"><span class="cl"><span class="nx">Windows</span> <span class="nx">Registry</span> <span class="nx">Editor</span> <span class="nx">Version</span> <span class="mf">5.00</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="nx">HKEY_CLASSES_ROOT</span><span class="err">\</span><span class="o">*</span><span class="err">\</span><span class="nx">shell</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="nx">HKEY_CLASSES_ROOT</span><span class="err">\</span><span class="o">*</span><span class="err">\</span><span class="nx">shell</span><span class="err">\</span><span class="nx">DASM</span> <span class="kd">with</span> <span class="nx">IDA</span> <span class="nx">x64</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="err">@</span><span class="o">=</span><span class="s2">&#34;IDA x64&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;Icon&#34;</span><span class="o">=</span><span class="s2">&#34;\&#34;F:\\IDA7.7\\ida64.exe\&#34;, 4&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="nx">HKEY_CLASSES_ROOT</span><span class="err">\</span><span class="o">*</span><span class="err">\</span><span class="nx">shell</span><span class="err">\</span><span class="nx">DASM</span> <span class="kd">with</span> <span class="nx">IDA</span> <span class="nx">x64</span><span class="err">\</span><span class="nx">Command</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="err">@</span><span class="o">=</span><span class="s2">&#34;\&#34;F:\\IDA7.7\\ida64.exe\&#34; \&#34;%1\&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="nx">HKEY_CLASSES_ROOT</span><span class="err">\</span><span class="o">*</span><span class="err">\</span><span class="nx">shell</span><span class="err">\</span><span class="nx">DASM</span> <span class="kd">with</span> <span class="nx">IDA</span> <span class="nx">x86</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="err">@</span><span class="o">=</span><span class="s2">&#34;IDA x32&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;Icon&#34;</span><span class="o">=</span><span class="s2">&#34;\&#34;F:\\IDA7.7\\ida.exe\&#34;, 4&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="nx">HKEY_CLASSES_ROOT</span><span class="err">\</span><span class="o">*</span><span class="err">\</span><span class="nx">shell</span><span class="err">\</span><span class="nx">DASM</span> <span class="kd">with</span> <span class="nx">IDA</span> <span class="nx">x86</span><span class="err">\</span><span class="nx">Command</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="err">@</span><span class="o">=</span><span class="s2">&#34;\&#34;F:\\IDA7.7\\ida.exe\&#34; \&#34;%1\&#34;&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="ubuntu加内存">ubuntu加内存</h2>
 <p>外部：</p>
 <p>关机之后点击扩容然后选择想要扩容成的大小</p>
 <p><img
@@ -2994,13 +3577,25 @@
 <h2 id="afl-qemu-32bit">AFL++ qemu 32bit</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt-get install libini-config-dev libtool-bin automake bison libglib2.0-dev qemu -y 
+</span></span><span class="line"><span class="cl">sudo apt install ninja-build
+</span></span><span class="line"><span class="cl">sudo apt install gcc-9-plugin-dev
+</span></span><span class="line"><span class="cl">sudo apt-get install llvm
+</span></span><span class="line"><span class="cl">sudo apt-get install build-essential module-assistant  
+</span></span><span class="line"><span class="cl">sudo apt-get install gcc-multilib g++-multilib
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> ~
 </span></span><span class="line"><span class="cl">git clone https://github.com/AFLplusplus/AFLplusplus
 </span></span><span class="line"><span class="cl"><span class="nb">cd</span> AFLplusplus
 </span></span><span class="line"><span class="cl">sudo make <span class="o">&amp;&amp;</span> <span class="nb">cd</span> qemu_mode <span class="o">&amp;&amp;</span> <span class="nv">CPU_TARGET</span><span class="o">=</span>i386 ./build_qemu_support.sh <span class="o">&amp;&amp;</span> <span class="nb">cd</span> .. <span class="o">&amp;&amp;</span> sudo make install
@@ -4634,7 +5229,16 @@
         alt="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230125181338709.png"
         title="image-20230125181338709" /></p>
 <p>编译到后面，即使没有到 100%全部成功， 只要4个关键文件clang clang++ clang-4.0 clang-format 是在的</p>
-<h4 id="开启控制流扁平化">开启控制流扁平化</h4>
+<h4 id="例子">例子</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">~/obfuscator/build/bin/clang pwn.c -o pwn -mllvm -fla -mllvm -sub -mllvm -sub_loop=3 -mllvm -bcf -mllvm -bcf_prob=40 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="开启控制流扁平化">开启控制流扁平化</h4>
 <p><code>-mllvm -fla</code> 开启控制流扁平化
 <code>-mllvm -split</code> 激活基本块划分。一起使用时能提高打平能力。
 <code>-mllvm -split_num=3</code> 如果激活控制流打平，对每一个基本块应用三次控制流打平。默认使用1次。</p>
@@ -4647,7 +5251,104 @@
 <code>-mllvm -bcf_loop=3</code> 设置函数混淆次数为3次 不加此选项默认为1次
 <code>-mllvm -bcf_prob=40</code> 设置代码块被混淆的概率是40%，默认30%</p>
 <h2 id="pwn题批量部署">pwn题批量部署</h2>
-<h2 id="linux-内核编译">linux 内核编译</h2>
+<h2 id="ida静态编译符号表恢复">ida静态编译符号表恢复</h2>
+<p>快捷键：shift + f5</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">git clone https://github.com/push0ebp/sig-database.git
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>把需要的sig文件放到对应架构的文件夹下面即可</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="C:/Users/cnitl/AppData/Roaming/Typora/typora-user-images/image-20230414215213372.png"
+        data-srcset="C:/Users/cnitl/AppData/Roaming/Typora/typora-user-images/image-20230414215213372.png, C:/Users/cnitl/AppData/Roaming/Typora/typora-user-images/image-20230414215213372.png 1.5x, C:/Users/cnitl/AppData/Roaming/Typora/typora-user-images/image-20230414215213372.png 2x"
+        data-sizes="auto"
+        alt="C:/Users/cnitl/AppData/Roaming/Typora/typora-user-images/image-20230414215213372.png"
+        title="image-20230414215213372" /></p>
+<h2 id="syzkaller环境搭建">syzkaller环境搭建</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">sudo apt-get install golang
+</span></span><span class="line"><span class="cl">sudo apt install build-essential flex bison libssl-dev libelf-dev bc qemu
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">git clone git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git kernel
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">cd kernel
+</span></span><span class="line"><span class="cl"># 生成默认配置
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">make defconfig
+</span></span><span class="line"><span class="cl">make kvm_guest.config
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="vim-config">vim .config</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># Coverage collection.
+</span></span><span class="line"><span class="cl">CONFIG_KCOV=y
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># Debug info for symbolization.
+</span></span><span class="line"><span class="cl">CONFIG_DEBUG_INFO=y
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># Memory bug detector
+</span></span><span class="line"><span class="cl">CONFIG_KASAN=y
+</span></span><span class="line"><span class="cl">CONFIG_KASAN_INLINE=y
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># Required for Debian Stretch
+</span></span><span class="line"><span class="cl">CONFIG_CONFIGFS_FS=y
+</span></span><span class="line"><span class="cl">CONFIG_SECURITYFS=y
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># 由于启用这些选项会导致更多子选项可用，我们需要重新生成配置
+</span></span><span class="line"><span class="cl">make olddefconfig
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">make -j 16
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="linux-内核编译">linux 内核编译</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -4696,6 +5397,25 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">cat /proc/slabinfo
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="查看slab-1">查看slab</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">admin@vm:~$ sudo cat /sys/kernel/slab/filp/object_size # 每个object的大小
+</span></span><span class="line"><span class="cl">256
+</span></span><span class="line"><span class="cl">admin@vm:~$ sudo cat /sys/kernel/slab/filp/objs_per_slab # 每个slab中可容纳多少object
+</span></span><span class="line"><span class="cl">16
+</span></span><span class="line"><span class="cl">admin@vm:~$ sudo cat /sys/kernel/slab/filp/cpu_partial # cpu partial list最大阈值
+</span></span><span class="line"><span class="cl">13
 </span></span></code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
@@ -4788,8 +5508,8 @@
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>更新于 2023-03-29&nbsp;<a class="git-hash" href="https://github.com/dillonzq/LoveIt/commit/d08eefc2bd07c998dcfbb23b9ec9b111dc66f80e" target="_blank" title="commit by cnitlrt(1258175307@qq.com) d08eefc2bd07c998dcfbb23b9ec9b111dc66f80e: test">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>d08eefc</a></span>
+                <span>更新于 2023-05-08&nbsp;<a class="git-hash" href="https://github.com/dillonzq/LoveIt/commit/1ad18d323d35736dc816bf7e9685821276ccb56a" target="_blank" title="commit by cnitlrt(1258175307@qq.com) 1ad18d323d35736dc816bf7e9685821276ccb56a: test">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>1ad18d3</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"></div>
