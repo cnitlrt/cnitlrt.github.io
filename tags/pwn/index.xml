@@ -1,24 +1,16 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>kernel - 标签 - cnitlrtの博客</title>
-        <link>https://cnitlrt.github.io/tags/kernel/</link>
-        <description>kernel - 标签 - cnitlrtの博客</description>
+        <title>pwn - 标签 - cnitlrtの博客</title>
+        <link>https://cnitlrt.github.io/tags/pwn/</link>
+        <description>pwn - 标签 - cnitlrtの博客</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>cnitlrt@gmail.com (cnitlrt)</managingEditor>
-            <webMaster>cnitlrt@gmail.com (cnitlrt)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Thu, 22 Jun 2023 04:18:31 &#43;0800</lastBuildDate><atom:link href="https://cnitlrt.github.io/tags/kernel/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>cnitlrt@gmail.com (cnitlrt)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Thu, 22 Jun 2023 04:18:31 &#43;0800</lastBuildDate><atom:link href="https://cnitlrt.github.io/tags/pwn/" rel="self" type="application/rss+xml" /><item>
     <title>Sctf内核题目复现</title>
     <link>https://cnitlrt.github.io/sctf%E5%86%85%E6%A0%B8%E9%A2%98%E7%9B%AE%E5%A4%8D%E7%8E%B0/</link>
     <pubDate>Thu, 22 Jun 2023 04:18:31 &#43;0800</pubDate>
     <author>cnitlrt</author>
     <guid>https://cnitlrt.github.io/sctf%E5%86%85%E6%A0%B8%E9%A2%98%E7%9B%AE%E5%A4%8D%E7%8E%B0/</guid>
     <description><![CDATA[sycrop 漏洞点 有任意地址读以及可以控制RSP到任意的地方 分析 start.sh 开了smep smap kaslr 1 2 3 4 5 6 7 8 9 10 11 #!/bin/sh qemu-system-x86_64 \ -m 128M \ -kernel ./bzImage \ -initrd ./rootfs.cpio \ -monitor /dev/null \ -append &#34;root=/dev/ram console=ttyS0 oops=panic panic=1 quiet kaslr&#34; \]]></description>
-</item>
-<item>
-    <title>Kernel总结</title>
-    <link>https://cnitlrt.github.io/kernel%E6%80%BB%E7%BB%93/</link>
-    <pubDate>Tue, 07 Feb 2023 16:57:51 &#43;0800</pubDate>
-    <author>cnitlrt</author>
-    <guid>https://cnitlrt.github.io/kernel%E6%80%BB%E7%BB%93/</guid>
-    <description><![CDATA[kernel总结]]></description>
 </item>
 </channel>
 </rss>
