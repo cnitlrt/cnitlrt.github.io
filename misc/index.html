@@ -9,7 +9,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://cnitlrt.github.io/misc/" /><meta property="og:image" content="https://cnitlrt.github.io/logo.jpg"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-01-01T04:06:14+08:00" />
-<meta property="article:modified_time" content="2023-05-08T17:46:04+08:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2023-06-22T18:07:14+08:00" /><meta property="og:site_name" content="My cool site" />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://cnitlrt.github.io/logo.jpg"/>
 
@@ -34,8 +34,8 @@
                             "url": "https:\/\/cnitlrt.github.io\/images\/Apple-Devices-Preview.png",
                             "width":  3200 ,
                             "height":  2048 
-                        }],"genre": "posts","keywords": "tools","wordcount":  13752 ,
-        "url": "https:\/\/cnitlrt.github.io\/misc\/","datePublished": "2022-01-01T04:06:14+08:00","dateModified": "2023-05-08T17:46:04+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "tools","wordcount":  14290 ,
+        "url": "https:\/\/cnitlrt.github.io\/misc\/","datePublished": "2022-01-01T04:06:14+08:00","dateModified": "2023-06-22T18:07:14+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": {
                     "@type": "ImageObject",
@@ -113,8 +113,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">杂记</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>cnitlrt</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/tools/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>tools</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-01-01">2022-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 13752 字&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 28 分钟&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-01-01">2022-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 14290 字&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 29 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>目录</span>
@@ -124,6 +124,22 @@
   <ul>
     <li>
       <ul>
+        <li><a href="#airodump-使用">airodump 使用</a></li>
+        <li><a href="#wifi钓鱼">wifi钓鱼</a></li>
+        <li><a href="#出题相关">出题相关</a>
+          <ul>
+            <li><a href="#dockerfile">Dockerfile</a></li>
+            <li><a href="#ctfxinetd">ctf.xinetd</a></li>
+            <li><a href="#stripsh">strip.sh</a></li>
+            <li><a href="#startsh">start.sh</a></li>
+          </ul>
+        </li>
+        <li><a href="#命令">命令</a></li>
+        <li><a href="#afl工具使用">AFL工具使用</a>
+          <ul>
+            <li><a href="#afl-tmin">afl-tmin</a></li>
+          </ul>
+        </li>
         <li><a href="#linux调试版本不一致">linux调试版本不一致</a></li>
         <li><a href="#添加swap交换分区空间"><strong>添加swap交换分区空间</strong></a></li>
         <li><a href="#附删除swap交换分区"><strong>附：删除swap交换分区</strong></a></li>
@@ -147,7 +163,11 @@
         <li><a href="#ida右键菜单打开">IDA右键菜单打开</a></li>
         <li><a href="#ubuntu加内存">ubuntu加内存</a></li>
         <li><a href="#虚拟机繁忙无法关机">虚拟机繁忙，无法关机</a></li>
-        <li><a href="#python-显示某某decode不了或者encode不了">python 显示某某decode不了或者encode不了</a></li>
+        <li><a href="#python-显示某某decode不了或者encode不了">python 显示某某decode不了或者encode不了</a>
+          <ul>
+            <li><a href="#pwntools-使用">pwntools 使用</a></li>
+          </ul>
+        </li>
         <li><a href="#共享文件夹突然消失">共享文件夹突然消失</a></li>
         <li><a href="#编译32bit程序">编译32bit程序</a></li>
         <li><a href="#pwntools解决tmux-waiting-for-debugger">pwntools解决tmux waiting for debugger</a></li>
@@ -207,6 +227,7 @@
         </li>
         <li><a href="#gdb调试相关">gdb调试相关</a>
           <ul>
+            <li><a href="#父子进程调试">父子进程调试</a></li>
             <li><a href="#pwngdbpy">pwngdb.py</a></li>
           </ul>
         </li>
@@ -282,7 +303,236 @@
     </li>
   </ul>
 </nav></div>
-            </div><div class="content" id="content"><h2 id="linux调试版本不一致">linux调试版本不一致</h2>
+            </div><div class="content" id="content"><h2 id="airodump-使用">airodump 使用</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">sudo airmon-ng
+</span></span><span class="line"><span class="cl">sudo airmon-ng start wlan0
+</span></span><span class="line"><span class="cl">sudo airodump-ng wlan0mon
+</span></span><span class="line"><span class="cl">sudo airodump-ng -c 11 --bssid 10:9F:4F:80:8A:EA -w hach wlan0mon
+</span></span><span class="line"><span class="cl">sudo aireplay-ng -0 20 -a 10:9F:4F:80:8A:EA -c 58:8F:CF:84:7D:EE wlan0mon
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="wifi钓鱼">wifi钓鱼</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">sudo apt install wifiphisher
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="出题相关">出题相关</h2>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230601005304003.png"
+        data-srcset="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230601005304003.png, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230601005304003.png 1.5x, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230601005304003.png 2x"
+        data-sizes="auto"
+        alt="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230601005304003.png"
+        title="image-20230601005304003" /></p>
+<h3 id="dockerfile">Dockerfile</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">FROM ubuntu:20.04
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">RUN sed -i &#34;s/http:\/\/archive.ubuntu.com/http:\/\/mirrors.tuna.tsinghua.edu.cn/g&#34; /etc/apt/sources.list &amp;&amp; \
+</span></span><span class="line"><span class="cl">    apt-get update &amp;&amp; apt-get -y dist-upgrade &amp;&amp; \
+</span></span><span class="line"><span class="cl">    apt-get install -y lib32z1 xinetd
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">RUN useradd -m ctf
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">WORKDIR /home/ctf
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">RUN cp -R /usr/lib* /home/ctf
+</span></span><span class="line"><span class="cl"># RUN cp -R /lib* /home/ctf
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">RUN mkdir /home/ctf/dev &amp;&amp; \
+</span></span><span class="line"><span class="cl">    mknod /home/ctf/dev/null c 1 3 &amp;&amp; \
+</span></span><span class="line"><span class="cl">    mknod /home/ctf/dev/zero c 1 5 &amp;&amp; \
+</span></span><span class="line"><span class="cl">    mknod /home/ctf/dev/random c 1 8 &amp;&amp; \
+</span></span><span class="line"><span class="cl">    mknod /home/ctf/dev/urandom c 1 9 &amp;&amp; \
+</span></span><span class="line"><span class="cl">    chmod 666 /home/ctf/dev/*
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">RUN mkdir /home/ctf/bin &amp;&amp; \
+</span></span><span class="line"><span class="cl">    cp /bin/sh /home/ctf/bin &amp;&amp; \
+</span></span><span class="line"><span class="cl">    cp /bin/ls /home/ctf/bin &amp;&amp; \
+</span></span><span class="line"><span class="cl">    cp /bin/cat /home/ctf/bin
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">COPY ./ctf.xinetd /etc/xinetd.d/ctf
+</span></span><span class="line"><span class="cl">COPY ./start.sh /start.sh
+</span></span><span class="line"><span class="cl">RUN echo &#34;Blocked by ctf_xinetd&#34; &gt; /etc/banner_fail
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">RUN chmod +x /start.sh
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">COPY ./bin/ /home/ctf/
+</span></span><span class="line"><span class="cl">RUN chown -R root:ctf /home/ctf &amp;&amp; \
+</span></span><span class="line"><span class="cl">    chmod -R 750 /home/ctf &amp;&amp; \
+</span></span><span class="line"><span class="cl">    chmod 740 /home/ctf/flag
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">ENV NS_FLAG &#34;flag{test}&#34;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">COPY script.sh /
+</span></span><span class="line"><span class="cl">RUN chmod +x /script.sh
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">CMD /bin/bash -c &#39;/script.sh &amp;&amp; /start.sh&#39;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">EXPOSE 8888
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="ctfxinetd">ctf.xinetd</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">service ctf
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">    disable = no
+</span></span><span class="line"><span class="cl">    socket_type = stream
+</span></span><span class="line"><span class="cl">    protocol    = tcp
+</span></span><span class="line"><span class="cl">    wait        = no
+</span></span><span class="line"><span class="cl">    user        = root
+</span></span><span class="line"><span class="cl">    type        = UNLISTED
+</span></span><span class="line"><span class="cl">    port        = 8888
+</span></span><span class="line"><span class="cl">    bind        = 0.0.0.0
+</span></span><span class="line"><span class="cl">    server      = /usr/sbin/chroot
+</span></span><span class="line"><span class="cl">    # replace helloworld to your program
+</span></span><span class="line"><span class="cl">    server_args = --userspec=1000:1000 /home/ctf ./pwn
+</span></span><span class="line"><span class="cl">    banner_fail = /etc/banner_fail
+</span></span><span class="line"><span class="cl">    # safety options
+</span></span><span class="line"><span class="cl">    per_source	= 10 # the maximum instances of this service per source IP address
+</span></span><span class="line"><span class="cl">    rlimit_cpu	= 20 # the maximum number of CPU seconds that the service may use
+</span></span><span class="line"><span class="cl">    #rlimit_as  = 1024M # the Address Space resource limit for the service
+</span></span><span class="line"><span class="cl">    #access_times = 2:00-9:00 12:00-24:00
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="stripsh">strip.sh</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="cp">#!/bin/bash
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="nb">echo</span> <span class="s2">&#34;</span><span class="nv">$NS_FLAG</span><span class="s2">&#34;</span> &gt; /home/ctf/flag
+</span></span><span class="line"><span class="cl"><span class="nb">exec</span> <span class="s2">&#34;</span><span class="nv">$@</span><span class="s2">&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="startsh">start.sh</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="cp">#!/bin/sh
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="c1"># Add your startup script</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># DO NOT DELETE</span>
+</span></span><span class="line"><span class="cl">/etc/init.d/xinetd start<span class="p">;</span>
+</span></span><span class="line"><span class="cl">sleep infinity<span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="命令">命令</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">sudo docker build -t imageName .
+</span></span><span class="line"><span class="cl">sudo docker run -tid -e NS_FLAG=&#34;flag{abcdefg}&#34; -p &#34;0.0.0.0:pub_port:8888&#34; -h &#34;CONTAINER_NAME&#34; --name=&#34;CONTAINER_NAME&#34; imageName
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="afl工具使用">AFL工具使用</h2>
+<p><a href="https://paper.seebug.org/841/" target="_blank" rel="noopener noreffer ">https://paper.seebug.org/841/</a></p>
+<h3 id="afl-tmin">afl-tmin</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">afl-cmin -i input_dir -o output_dir -- /path/to/tested/program [params]
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="linux调试版本不一致">linux调试版本不一致</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -874,7 +1124,16 @@
 <p>找到<a href="https://so.csdn.net/so/search?q=VMware&amp;spm=1001.2101.3001.7020" target="_blank" rel="noopener noreffer ">VMware</a> workstation VMX 结束进程</p>
 <h2 id="python-显示某某decode不了或者encode不了">python 显示某某decode不了或者encode不了</h2>
 <p>试试<code>latin-1</code></p>
-<h2 id="共享文件夹突然消失">共享文件夹突然消失</h2>
+<h3 id="pwntools-使用">pwntools 使用</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">asm(&#34;syscall; ret&#34;).encode(&#39;hex&#39;)
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="共享文件夹突然消失">共享文件夹突然消失</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -3656,6 +3915,21 @@
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="gdb调试相关">gdb调试相关</h2>
+<h3 id="父子进程调试">父子进程调试</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">set follow-fork-mode parent
+</span></span><span class="line"><span class="cl">set detach-on-fork on
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>on: 断开调试follow-fork-mode指定的进程。</li>
+<li>off: gdb将控制父进程和子进程。follow-fork-mode指定的进程将被调试，另一个进程置于暂停（suspended）状态。</li>
+</ul>
 <h3 id="pwngdbpy">pwngdb.py</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -5508,8 +5782,8 @@
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>更新于 2023-05-08&nbsp;<a class="git-hash" href="https://github.com/dillonzq/LoveIt/commit/1ad18d323d35736dc816bf7e9685821276ccb56a" target="_blank" title="commit by cnitlrt(1258175307@qq.com) 1ad18d323d35736dc816bf7e9685821276ccb56a: test">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>1ad18d3</a></span>
+                <span>更新于 2023-06-22&nbsp;<a class="git-hash" href="https://github.com/dillonzq/LoveIt/commit/9dde8890eaf05228b1578b779cd0add1a4eb72a7" target="_blank" title="commit by cnitlrt(1258175307@qq.com) 9dde8890eaf05228b1578b779cd0add1a4eb72a7: test">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>9dde889</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"></div>
