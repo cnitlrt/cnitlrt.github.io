@@ -4,9 +4,17 @@
         <link>https://cnitlrt.github.io/</link>
         <description>cnitlrtの博客</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>cnitlrt@gmail.com (cnitlrt)</managingEditor>
-            <webMaster>cnitlrt@gmail.com (cnitlrt)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 30 Jun 2023 03:10:19 &#43;0800</lastBuildDate>
+            <webMaster>cnitlrt@gmail.com (cnitlrt)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 30 Jun 2023 16:39:57 &#43;0800</lastBuildDate>
             <atom:link href="https://cnitlrt.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>Gooexec复现</title>
+    <link>https://cnitlrt.github.io/gooexec%E5%A4%8D%E7%8E%B0/</link>
+    <pubDate>Fri, 30 Jun 2023 16:39:57 &#43;0800</pubDate>
+    <author>cnitlrt</author>
+    <guid>https://cnitlrt.github.io/gooexec%E5%A4%8D%E7%8E%B0/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
     <title>Qwbswap复现</title>
     <link>https://cnitlrt.github.io/qwbswap%E5%A4%8D%E7%8E%B0/</link>
     <pubDate>Fri, 30 Jun 2023 03:10:19 &#43;0800</pubDate>
