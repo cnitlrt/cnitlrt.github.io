@@ -165,7 +165,7 @@
 </div>
 </div><h2 id="搜索栈的方法">搜索栈的方法</h2>
 <p>在PebLdr里面可以找到peb,<del>通过peb可以求得ted</del>,在teb里面存在stack_addr,PebLdr属于ntdll段，因此只要泄露出了ntdll_addr就可以得出PebLdr</p>
-<p>但实际上，peb和teb的偏移并不是固定的，(至少调试的时候是这样的。但是我们发现在peb上是存在栈地址，<strong>因此可以直接通过pie来将stack地址给leak出来</strong></p>
+<p>但实际上，peb和teb的偏移并不是固定的，(至少调试的时候是这样的。但是我们发现在peb上是存在栈地址，<strong>因此可以直接通过peb来将stack地址给leak出来</strong></p>
 <h1 id="漏洞点">漏洞点</h1>
 <p><img
         class="lazyload"
