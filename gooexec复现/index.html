@@ -34,7 +34,7 @@
                             "url": "https:\/\/cnitlrt.github.io\/images\/Apple-Devices-Preview.png",
                             "width":  3200 ,
                             "height":  2048 
-                        }],"genre": "posts","keywords": "chrome pwn","wordcount":  3136 ,
+                        }],"genre": "posts","keywords": "chrome pwn","wordcount":  3157 ,
         "url": "https:\/\/cnitlrt.github.io\/gooexec%E5%A4%8D%E7%8E%B0\/","datePublished": "2023-06-30T16:39:57+08:00","dateModified": "2023-06-30T16:39:57+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": {
@@ -113,7 +113,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Gooexec复现</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>cnitlrt</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/chrome-pwn/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>chrome pwn</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-06-30">2023-06-30</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 3136 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-06-30">2023-06-30</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 3157 字&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 7 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
@@ -125,26 +125,16 @@
     <li><a href="#编译">编译</a></li>
     <li><a href="#漏洞利用">漏洞利用</a>
       <ul>
-        <li>
+        <li><a href="#poc">poc</a></li>
+        <li><a href="#exphtml">exp.html</a></li>
+        <li><a href="#no_wasm疑难杂症">no_wasm疑难杂症</a>
           <ul>
-            <li><a href="#poc">poc</a></li>
-            <li><a href="#exphtml">exp.html</a></li>
+            <li><a href="#解决">解决</a></li>
+            <li><a href="#覆写flag_expose_wasm">覆写FLAG_expose_wasm</a></li>
+            <li><a href="#调试方法">调试方法：</a></li>
           </ul>
         </li>
-        <li><a href="#疑难杂症">疑难杂症</a>
-          <ul>
-            <li><a href="#解决">解决</a>
-              <ul>
-                <li>
-                  <ul>
-                    <li><a href="#覆写flag_expose_wasm">覆写FLAG_expose_wasm</a></li>
-                  </ul>
-                </li>
-                <li><a href="#调试方法">调试方法：</a></li>
-              </ul>
-            </li>
-          </ul>
-        </li>
+        <li><a href="#hijack-jit">hijack jit</a></li>
       </ul>
     </li>
   </ul>
@@ -171,7 +161,7 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h1 id="漏洞利用">漏洞利用</h1>
-<h3 id="poc">poc</h3>
+<h2 id="poc">poc</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -241,7 +231,7 @@
 <p>节点a和b可能是同一对象，在节点a发生优化，类型转化后，b节点由于没有KillMaps操作，删除了节点前的CheckMaps，导致访问b时是按照原先的类型来访问优化后的类型，形成类型混淆漏洞。</p>
 </blockquote>
 <p>构造出read_dataview和write_dataview就可以一把梭了</p>
-<h3 id="exphtml">exp.html</h3>
+<h2 id="exphtml">exp.html</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">  1
@@ -506,7 +496,7 @@
 </span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="疑难杂症">疑难杂症</h2>
+</div><h2 id="no_wasm疑难杂症">no_wasm疑难杂症</h2>
 <p>上面的exp是 打的wasm，但是这个环境好像关闭了wasm,所以需要采用劫持free_hook的方法来做..但是只能打通d8,chrome好像暂时不能打</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -813,7 +803,7 @@
         alt="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230702222652200.png"
         title="image-20230702222652200" /></p>
 <p>因此上面打不通，根据<a href="https://xz.aliyun.com/t/8427z" target="_blank" rel="noopener noreffer ">参考连接</a>知道可以将FLAG_expose_wasm给置1就可以重新开启wasm,因此可以通过任意地址写将该值写为1,然后再次运行exp.html即可</p>
-<h5 id="覆写flag_expose_wasm">覆写FLAG_expose_wasm</h5>
+<h3 id="覆写flag_expose_wasm">覆写FLAG_expose_wasm</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">  1
@@ -1046,7 +1036,7 @@
 </span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="err">/body&gt;</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="调试方法">调试方法：</h4>
+</div><h3 id="调试方法">调试方法：</h3>
 <p>打开浏览器<code>./chrome --js-flags=&quot;--noexpose_wasm --allow-natives-syntax&quot; --no-sandbox</code></p>
 <p>然后输入shift + esc来打开进程，查看脚本的进程，例如我这里的poc1.html是14230，然后通过sudo gdb然后attach 14230即可附加调试。</p>
 <p><img
@@ -1085,7 +1075,10 @@
         data-srcset="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230702222546149.png, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230702222546149.png 1.5x, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230702222546149.png 2x"
         data-sizes="auto"
         alt="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230702222546149.png"
-        title="image-20230702222546149" /></p></div><div class="post-footer" id="post-footer">
+        title="image-20230702222546149" /></p>
+<h2 id="hijack-jit">hijack jit</h2>
+<p><a href="https://anvbis.au/posts/code-execution-in-chromiums-v8-heap-sandbox/" target="_blank" rel="noopener noreffer ">参考链接</a></p>
+<p>好像不行。。。寄</p></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
