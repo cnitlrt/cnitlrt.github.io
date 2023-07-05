@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Kernel总结 - cnitlrtの博客</title><meta name="Description" content="kernel总结"><meta property="og:title" content="Kernel总结" />
+<meta property="og:description" content="kernel总结" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://cnitlrt.github.io/kernel%E6%80%BB%E7%BB%93/" /><meta property="og:image" content="https://cnitlrt.github.io/logo.jpg"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-02-07T16:57:51+08:00" />
+<meta property="article:modified_time" content="2023-02-07T16:57:51+08:00" /><meta property="og:site_name" content="My cool site" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://cnitlrt.github.io/logo.jpg"/>
+
+<meta name="twitter:title" content="Kernel总结"/>
+<meta name="twitter:description" content="kernel总结"/>
+<meta name="application-name" content="LoveIt">
+<meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://cnitlrt.github.io/kernel%E6%80%BB%E7%BB%93/" /><link rel="prev" href="https://cnitlrt.github.io/kernel/" /><link rel="next" href="https://cnitlrt.github.io/%E5%AE%89%E5%8D%93%E9%80%86%E5%90%91/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Kernel总结",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/cnitlrt.github.io\/kernel%E6%80%BB%E7%BB%93\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/cnitlrt.github.io\/images\/Apple-Devices-Preview.png",
+                            "width":  3200 ,
+                            "height":  2048 
+                        }],"genre": "posts","keywords": "kernel","wordcount":  1814 ,
+        "url": "https:\/\/cnitlrt.github.io\/kernel%E6%80%BB%E7%BB%93\/","datePublished": "2023-02-07T16:57:51+08:00","dateModified": "2023-02-07T16:57:51+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "xxxx","logo": {
+                    "@type": "ImageObject",
+                    "url": "https:\/\/cnitlrt.github.io\/images\/avatar.jpg",
+                    "width":  1080 ,
+                    "height":  1080 
+                }},"author": {
+                "@type": "Person",
+                "name": "cnitlrt"
+            },"description": "kernel总结"
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="cnitlrtの博客"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span><span id="id-1" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/about/"> 关于 </a><a class="menu-item" href="https://github.com/cnitlrt" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i> Github </a><a class="menu-item" href="/friend/"> 友链 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="cnitlrtの博客"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span><span id="id-2" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/about/" title="">关于</a><a class="menu-item" href="https://github.com/cnitlrt" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i>Github</a><a class="menu-item" href="/friend/" title="">友链</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><noscript><meta http-equiv="refresh" content="0; url=/404.html" /></noscript>
+        <script type="text/javascript" src="/js/pwd.js"></script>
+        <script>
+            (function(){
+                document.body.style.display="none"
+                if("nihao"){
+                    if(""){
+                        if (!checkCookie("","nihao")) {
+                            if (prompt('请输入文章密码') != "nihao"){
+                                return errorPwd();
+                            } else {
+                                setCookie("","nihao",1);
+                            }
+                        }
+                    } else if (prompt('请输入文章密码') != "nihao"){
+                        return errorPwd();
+                    }
+                }
+                document.body.style.display="inherit"
+            })();
+        </script><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Kernel总结</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>cnitlrt</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/kernel/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>kernel</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-02-07">2023-02-07</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 1814 字&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 4 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#一些好用的结构体以及衍生出来的攻击方法">一些好用的结构体以及衍生出来的攻击方法</a>
+      <ul>
+        <li><a href="#user_key_payload">user_key_payload</a>
+          <ul>
+            <li><a href="#分配">分配</a></li>
+            <li><a href="#分配一-size--0x18gfp_kernel">分配一: size &gt;= 0x18（GFP_kernel）</a></li>
+            <li><a href="#释放">释放</a></li>
+          </ul>
+        </li>
+        <li><a href="#poll_list">poll_list</a></li>
+        <li><a href="#msg_msg">msg_msg</a></li>
+        <li><a href="#pt_regs">pt_regs</a></li>
+        <li><a href="#setxattr">setxattr</a></li>
+        <li><a href="#shm_file_data">shm_file_data</a></li>
+        <li><a href="#pipe_buffer">pipe_buffer</a>
+          <ul>
+            <li><a href="#dirty_pipe">dirty_pipe</a></li>
+            <li><a href="#pipe_prime">pipe_prime</a></li>
+            <li><a href="#dirty_cred">dirty_cred</a></li>
+          </ul>
+        </li>
+        <li><a href="#skb_buffer--512">skb_buffer (&gt;= 512)</a></li>
+        <li><a href="#pgv-与页级内存页分配">pgv 与页级内存页分配</a>
+          <ul>
+            <li><a href="#usma">USMA</a></li>
+            <li><a href="#cross-cache-attack">Cross cache attack</a></li>
+          </ul>
+        </li>
+        <li><a href="#seq_operations-kmalloc-32--gfp_kernel_account">seq_operations （kmalloc-32 | GFP_KERNEL_ACCOUNT）</a></li>
+      </ul>
+    </li>
+    <li><a href="#slub分配器">SLUB分配器</a>
+      <ul>
+        <li>
+          <ul>
+            <li>
+              <ul>
+                <li><a href="#为什么需要内核分配器">为什么需要内核分配器</a></li>
+                <li><a href="#slab">SLAB</a></li>
+                <li><a href="#slub">SLUB</a></li>
+                <li><a href="#例子">例子</a>
+                  <ul>
+                    <li><a href="#standard-allocation">Standard allocation</a></li>
+                    <li><a href="#allocation-that-fills-up-the-active-slab-with-an-available-partial">Allocation that fills up the active slab, with an available partial</a></li>
+                    <li><a href="#allocation-that-fills-up-the-active-slab-with-no-available-partial">Allocation that fills up the active slab, with no available partial</a></li>
+                  </ul>
+                </li>
+                <li><a href="#standard-free">Standard free</a></li>
+                <li><a href="#free-from-empty">Free from empty</a></li>
+                <li><a href="#free-from-full">Free from full</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="一些好用的结构体以及衍生出来的攻击方法">一些好用的结构体以及衍生出来的攻击方法</h1>
+<h2 id="user_key_payload">user_key_payload</h2>
+<p>限制是只能分配最多200个最长20000字节</p>
+<h3 id="分配">分配</h3>
+<h3 id="分配一-size--0x18gfp_kernel">分配一: size &gt;= 0x18（GFP_kernel）</h3>
+<p>__x64_sys_add_key-&gt;kmalloc</p>
+<p>plen可以控制，同时_payload为用户传进来的变量</p>
+<p>但是需要注意的是后面会将其free掉，所以和send_msg类似</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl">	<span class="nf">SYSCALL_DEFINE5</span><span class="p">(</span><span class="n">add_key</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="n">__user</span> <span class="o">*</span><span class="p">,</span> <span class="n">_type</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="mi">75</span>			<span class="k">const</span> <span class="kt">char</span> <span class="n">__user</span> <span class="o">*</span><span class="p">,</span> <span class="n">_description</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="mi">76</span>			<span class="k">const</span> <span class="kt">void</span> <span class="n">__user</span> <span class="o">*</span><span class="p">,</span> <span class="n">_payload</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="mi">77</span>			<span class="kt">size_t</span><span class="p">,</span> <span class="n">plen</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="mi">78</span>			<span class="kt">key_serial_t</span><span class="p">,</span> <span class="n">ringid</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">...</span>
+</span></span><span class="line"><span class="cl"><span class="p">...</span>
+</span></span><span class="line"><span class="cl"><span class="mi">111</span>		<span class="cm">/* pull the payload in if one was supplied */</span>
+</span></span><span class="line"><span class="cl"><span class="mi">112</span>		<span class="n">payload</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="mi">113</span>	
+</span></span><span class="line"><span class="cl"><span class="mi">114</span>		<span class="nf">if</span> <span class="p">(</span><span class="n">plen</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="mi">115</span>			<span class="n">ret</span> <span class="o">=</span> <span class="o">-</span><span class="n">ENOMEM</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="mi">116</span>			<span class="n">payload</span> <span class="o">=</span> <span class="nf">kvmalloc</span><span class="p">(</span><span class="n">plen</span><span class="p">,</span> <span class="n">GFP_KERNEL</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="mi">117</span>			<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">payload</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="mi">118</span>				<span class="k">goto</span> <span class="n">error2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="mi">119</span>	
+</span></span><span class="line"><span class="cl"><span class="mi">120</span>			<span class="n">ret</span> <span class="o">=</span> <span class="o">-</span><span class="n">EFAULT</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="mi">121</span>			<span class="k">if</span> <span class="p">(</span><span class="nf">copy_from_user</span><span class="p">(</span><span class="n">payload</span><span class="p">,</span> <span class="n">_payload</span><span class="p">,</span> <span class="n">plen</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span>	
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="释放">释放</h3>
+<h2 id="poll_list">poll_list</h2>
+<h2 id="msg_msg">msg_msg</h2>
+<h2 id="pt_regs">pt_regs</h2>
+<h2 id="setxattr">setxattr</h2>
+<h2 id="shm_file_data">shm_file_data</h2>
+<h2 id="pipe_buffer">pipe_buffer</h2>
+<h3 id="dirty_pipe">dirty_pipe</h3>
+<h3 id="pipe_prime">pipe_prime</h3>
+<h3 id="dirty_cred">dirty_cred</h3>
+<h2 id="skb_buffer--512">skb_buffer (&gt;= 512)</h2>
+<h2 id="pgv-与页级内存页分配">pgv 与页级内存页分配</h2>
+<h3 id="usma">USMA</h3>
+<h3 id="cross-cache-attack">Cross cache attack</h3>
+<h2 id="seq_operations-kmalloc-32--gfp_kernel_account">seq_operations （kmalloc-32 | GFP_KERNEL_ACCOUNT）</h2>
+<h1 id="slub分配器">SLUB分配器</h1>
+<h4 id="为什么需要内核分配器">为什么需要内核分配器</h4>
+<p>操作系统虚拟内存中用于内存管理的最小数据单位是页面，大多数体系结构的传统大小为 4KB(0x1000)。由于每次进程请求某些东西时分配 4KB 内存是不切实际的，即使小到几十个字节，也需要一种中间机制来微管理页面的内容。</p>
+<p>虽然在用户空间中这是由 malloc 系列执行的，但内核需要一个不同的系统，与系统本身更紧密地集成，可以在中断上下文中工作，符合 DMA 限制.</p>
+<p>为此，内核实现了一个管理页面分配、碎片和重新分配的分配器。它基本上作为零售供应商工作：它获取大库存（4KB 页），然后在模块需要时将它们分成小块进行交易。这个分配器的基本版本称为 SLAB。</p>
+<h4 id="slab">SLAB</h4>
+<p>当内核子系统请求（或释放）对象的数据时，主要开销在于初始化（或销毁）它，而不是为其分配内存。如果有一组频繁分配和释放的公共内核对象，将它们放在一个快速可达的地方可以使整个过程更有效率。</p>
+<p>这就是 SLAB 的原理：分配器会跟踪这些称为缓存的块，以便在收到为某种类型的数据对象分配内存的请求时，它可以立即用已经分配的槽满足请求。在此上下文中，slab 是内存中包含预分配内存块的一个或多个连续页面。</p>
+<p>Slab 可能存在于以下状态之一：</p>
+<ul>
+<li>empty：slab 中的所有对象都是空闲的</li>
+<li>partial: slab 由自由对象和被占用对象组成</li>
+<li>full：slab中的所有对象都为占用状态</li>
+</ul>
+<p>当然，分配器的目的是尽可能快地处理请求，因此跟踪部分 slab 是至关重要的。这是通过缓存完成的，每个对象类型有一个缓存。</p>
+<h4 id="slub">SLUB</h4>
+<p>SLUB 是我们感兴趣的 SLAB 变体，旨在实现更好的调试、更少的碎片和更好的性能。它继续采用基于 slab 的基本模型，但修复了 SLAB 设计中的几个缺陷，特别是围绕具有大量处理器的系统。自 2008 年 2.6.23 以来，它已在主线 Linux 内核中被默认采用。</p>
+<p>让我们看看 SLUB 的实现细节，通过常见用例场景的示例。</p>
+<p>首先，slab 中的对象在内存中是连续存储的，但它们通过链表在逻辑上相互连接：这样分配器总能找到下一个空闲对象，而无需关心已经使用的数据。</p>
+<p>Fresh slab</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230209174053937.png"
+        data-srcset="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230209174053937.png, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230209174053937.png 1.5x, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230209174053937.png 2x"
+        data-sizes="auto"
+        alt="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230209174053937.png"
+        title="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230209174053937.png" /></p>
+<p>Partial slab</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230209174109789.png"
+        data-srcset="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230209174109789.png, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230209174109789.png 1.5x, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230209174109789.png 2x"
+        data-sizes="auto"
+        alt="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230209174109789.png"
+        title="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230209174109789.png" /></p>
+<p>在 SLUB 中，与 SLAB 不同，指向下一个空闲对象的指针直接存储在对象本身内部，不需要额外的元数据空间并实现 100% 的 slab 利用率。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230209174228006.png"
+        data-srcset="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230209174228006.png, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230209174228006.png 1.5x, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230209174228006.png 2x"
+        data-sizes="auto"
+        alt="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230209174228006.png"
+        title="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230209174228006.png" /></p>
+<p>其中 objsize 是对象本身的大小，offset 是下一个指针之前的空间量，size 是总大小。</p>
+<p>所有这些信息以及更多信息都存储在 off-slab 中，存储在跟踪此类元数据的数据结构中：kmem_cache。</p>
+<p>每种对象类型只有一个 kmem_cache，并且该对象的所有 slab 都由同一个 kmem_cache 管理。这些结构通过双链表相互链接，可以通过导出的 slab_caches 变量从内核中的任何地方访问。</p>
+<p>在 kmem_cache 内部，存储了两种指针以跟踪 slab：一个 kmem_cache_node 数组和一个指向 kmem_cache_cpu 的指针。后者管理 active slab：它只有一个，并且与当前 cpu 相关（SMD 处理器可以有不同的 active 缓存）。下一次分配的结果将始终从active  slab 返回，由 freelist 字段指向。另一方面，kmem_cache_node 跟踪不活动的部分和完整的 slab：它们在free的情况下被访问，或者当partial slab 被填满并且另一个部分需要取代它的位置时。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230209174339469.png"
+        data-srcset="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230209174339469.png, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230209174339469.png 1.5x, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230209174339469.png 2x"
+        data-sizes="auto"
+        alt="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230209174339469.png"
+        title="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230209174339469.png" /></p>
+<h4 id="例子">例子</h4>
+<h5 id="standard-allocation">Standard allocation</h5>
+<p>分配器从 kmem_cache 导航到 kmem_cache_cpu 并访问空闲列表以找到第一个空闲对象，该对象被返回（红色）。相应地更新指针以将其从链接列表中删除，并且空闲列表指向下一个空闲对象。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230209174616262.png"
+        data-srcset="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230209174616262.png, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230209174616262.png 1.5x, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230209174616262.png 2x"
+        data-sizes="auto"
+        alt="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230209174616262.png"
+        title="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230209174616262.png" /></p>
+<h5 id="allocation-that-fills-up-the-active-slab-with-an-available-partial">Allocation that fills up the active slab, with an available partial</h5>
+<p>返回活动 slab 中的最后一个对象后，已填满的页面将在完整列表中移动，而部分列表中的另一个 slab 将成为活动 slab。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230209174702128.png"
+        data-srcset="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230209174702128.png, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230209174702128.png 1.5x, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230209174702128.png 2x"
+        data-sizes="auto"
+        alt="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230209174702128.png"
+        title="image-20230209174702128" /></p>
+<h5 id="allocation-that-fills-up-the-active-slab-with-no-available-partial">Allocation that fills up the active slab, with no available partial</h5>
+<p>返回active slab中的最后一个对象后，填满的页面在full list中移动，然后系统分配一个新的slab成为active slab。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230209174754407.png"
+        data-srcset="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230209174754407.png, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230209174754407.png 1.5x, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230209174754407.png 2x"
+        data-sizes="auto"
+        alt="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230209174754407.png"
+        title="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230209174754407.png" /></p>
+<h4 id="standard-free">Standard free</h4>
+<p>当内核释放属于部分 slab（或活动的 slab）的对象时，SLUB 只是将其标记为空闲并更新指针。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230209175222460.png"
+        data-srcset="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230209175222460.png, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230209175222460.png 1.5x, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230209175222460.png 2x"
+        data-sizes="auto"
+        alt="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230209175222460.png"
+        title="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230209175222460.png" /></p>
+<h4 id="free-from-empty">Free from empty</h4>
+<p>当内核释放属于部分 slab 的最后一个对象时，该 slab 被释放并交给内存管理单元。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230209175338042.png"
+        data-srcset="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230209175338042.png, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230209175338042.png 1.5x, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230209175338042.png 2x"
+        data-sizes="auto"
+        alt="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230209175338042.png"
+        title="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230209175338042.png" /></p>
+<h4 id="free-from-full">Free from full</h4>
+<p>当内核释放一个属于完整 slab 的对象时，该 slab 不再是完整的并被移动到部分列表。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230209175413104.png"
+        data-srcset="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230209175413104.png, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230209175413104.png 1.5x, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230209175413104.png 2x"
+        data-sizes="auto"
+        alt="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230209175413104.png"
+        title="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230209175413104.png" /></p></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2023-02-07</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://cnitlrt.github.io/kernel%E6%80%BB%E7%BB%93/" data-title="Kernel总结" data-hashtags="kernel"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://cnitlrt.github.io/kernel%E6%80%BB%E7%BB%93/" data-hashtag="kernel"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="https://cnitlrt.github.io/kernel%E6%80%BB%E7%BB%93/" data-title="Kernel总结"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://cnitlrt.github.io/kernel%E6%80%BB%E7%BB%93/" data-title="Kernel总结"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://cnitlrt.github.io/kernel%E6%80%BB%E7%BB%93/" data-title="Kernel总结"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/kernel/">kernel</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/kernel/" class="prev" rel="prev" title="corCTF 2022-cache-of-castaways复现 "><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>corCTF 2022-cache-of-castaways复现 </a>
+            <a href="/%E5%AE%89%E5%8D%93%E9%80%86%E5%90%91/" class="next" rel="next" title="安卓逆向学习">安卓逆向学习<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div id="comments"><div id="gitalk" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.110.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2021 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">cnitlrt</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/algoliasearch@4.13.1/dist/algoliasearch-lite.umd.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/typeit@8.6.0/dist/index.umd.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/copy-tex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{"gitalk":{"admin":["cnitlrt"],"clientID":"2a776c3dc5f0100884f8","clientSecret":"148adb4f82e540cd5b1e77e16152f6844be4b240","id":"2023-02-07T16:57:51+08:00","owner":"cnitlrt","repo":"cnitlrt.github.io","title":"Kernel总结"}},"data":{"id-1":"cnitlrtの博客","id-2":"cnitlrtの博客"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"algoliaAppID":"PASDMWALPK","algoliaIndex":"index.zh-cn","algoliaSearchKey":"b42948e51daaa93df92381c8e2ac0f93","highlightTag":"em","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"algolia"},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
