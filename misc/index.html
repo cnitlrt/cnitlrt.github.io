@@ -9,7 +9,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://cnitlrt.github.io/misc/" /><meta property="og:image" content="https://cnitlrt.github.io/logo.jpg"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-01-01T04:06:14+08:00" />
-<meta property="article:modified_time" content="2023-07-29T16:43:36+08:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2023-08-02T22:26:48+08:00" /><meta property="og:site_name" content="My cool site" />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://cnitlrt.github.io/logo.jpg"/>
 
@@ -34,8 +34,8 @@
                             "url": "https:\/\/cnitlrt.github.io\/images\/Apple-Devices-Preview.png",
                             "width":  3200 ,
                             "height":  2048 
-                        }],"genre": "posts","keywords": "tools","wordcount":  14713 ,
-        "url": "https:\/\/cnitlrt.github.io\/misc\/","datePublished": "2022-01-01T04:06:14+08:00","dateModified": "2023-07-29T16:43:36+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "tools","wordcount":  14938 ,
+        "url": "https:\/\/cnitlrt.github.io\/misc\/","datePublished": "2022-01-01T04:06:14+08:00","dateModified": "2023-08-02T22:26:48+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": {
                     "@type": "ImageObject",
@@ -113,7 +113,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">疑难杂症宝典</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>cnitlrt</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/tools/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>tools</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-01-01">2022-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 14713 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-01-01">2022-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 14938 字&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 30 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
@@ -124,6 +124,9 @@
   <ul>
     <li>
       <ul>
+        <li><a href="#docker-build的时候使用代理">docker build的时候使用代理</a></li>
+        <li><a href="#解包类的指令尽量不要在共享文件夹中使用">解包类的指令尽量不要在共享文件夹中使用！！！</a></li>
+        <li><a href="#binwalk安装">binwalk安装</a></li>
         <li><a href="#hackmd">hackmd</a></li>
         <li><a href="#hyper打开和关闭">hyper打开和关闭</a>
           <ul>
@@ -325,7 +328,93 @@
     </li>
   </ul>
 </nav></div>
-            </div><div class="content" id="content"><h2 id="hackmd">hackmd</h2>
+            </div><div class="content" id="content"><h2 id="docker-build的时候使用代理">docker build的时候使用代理</h2>
+<p>后面加一个参数</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="o">--</span><span class="n">build</span><span class="o">-</span><span class="n">arg</span> <span class="n">https_proxy</span><span class="o">=</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">192.168.223.164</span><span class="p">:</span><span class="mi">2222</span> <span class="o">--</span><span class="n">build</span><span class="o">-</span><span class="n">arg</span> <span class="n">http_proxy</span><span class="o">=</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="mf">192.168.223.164</span><span class="p">:</span><span class="mi">2222</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="解包类的指令尽量不要在共享文件夹中使用">解包类的指令尽量不要在共享文件夹中使用！！！</h2>
+<h2 id="binwalk安装">binwalk安装</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">pip3</span> <span class="n">install</span> <span class="n">git</span><span class="o">+</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">ReFirmLabs</span><span class="o">/</span><span class="n">binwalk</span><span class="o">.</span><span class="n">git</span> <span class="o">--</span><span class="n">user</span>
+</span></span><span class="line"><span class="cl"><span class="n">pip3</span> <span class="n">install</span> <span class="n">pycryptodome</span> <span class="o">--</span><span class="n">user</span>
+</span></span><span class="line"><span class="cl"><span class="n">pip3</span> <span class="n">install</span> <span class="n">matplotlib</span> <span class="n">PyQt5</span> <span class="n">pyqtgraph</span> <span class="o">--</span><span class="n">user</span>
+</span></span><span class="line"><span class="cl"><span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="n">libxkbcommon</span><span class="o">-</span><span class="n">x11</span><span class="o">-</span><span class="mi">0</span>
+</span></span><span class="line"><span class="cl"><span class="n">pip3</span> <span class="n">install</span> <span class="n">capstone</span> <span class="o">--</span><span class="n">user</span>
+</span></span><span class="line"><span class="cl"><span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="n">mtd</span><span class="o">-</span><span class="n">utils</span> <span class="n">gzip</span> <span class="n">bzip2</span> <span class="n">tar</span> <span class="n">arj</span> <span class="n">lhasa</span> <span class="n">p7zip</span> <span class="n">p7zip</span><span class="o">-</span><span class="n">full</span> <span class="n">cabextract</span> <span class="n">cramfsswap</span> <span class="n">squashfs</span><span class="o">-</span><span class="n">tools</span> <span class="n">sleuthkit</span> <span class="n">default</span><span class="o">-</span><span class="n">jdk</span> <span class="n">lzop</span> <span class="n">srecord</span>
+</span></span><span class="line"><span class="cl"><span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="n">build</span><span class="o">-</span><span class="n">essential</span> <span class="n">liblzma</span><span class="o">-</span><span class="n">dev</span> <span class="n">liblzo2</span><span class="o">-</span><span class="n">dev</span> <span class="n">zlib1g</span><span class="o">-</span><span class="n">dev</span>
+</span></span><span class="line"><span class="cl"><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">devttys0</span><span class="o">/</span><span class="n">sasquatch</span>
+</span></span><span class="line"><span class="cl"><span class="n">cd</span> <span class="n">sasquatch</span>
+</span></span><span class="line"><span class="cl"><span class="n">wget</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">downloads</span><span class="o">.</span><span class="n">sourceforge</span><span class="o">.</span><span class="n">net</span><span class="o">/</span><span class="n">project</span><span class="o">/</span><span class="n">squashfs</span><span class="o">/</span><span class="n">squashfs</span><span class="o">/</span><span class="n">squashfs4</span><span class="mf">.3</span><span class="o">/</span><span class="n">squashfs4</span><span class="mf">.3</span><span class="o">.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span>
+</span></span><span class="line"><span class="cl"><span class="n">rm</span> <span class="o">-</span><span class="n">rf</span> <span class="n">squashfs4</span><span class="mf">.3</span>
+</span></span><span class="line"><span class="cl"><span class="n">tar</span> <span class="o">-</span><span class="n">zxvf</span> <span class="n">squashfs4</span><span class="mf">.3</span><span class="o">.</span><span class="n">tar</span><span class="o">.</span><span class="n">gz</span>
+</span></span><span class="line"><span class="cl"><span class="n">cd</span> <span class="n">squashfs4</span><span class="mf">.3</span>
+</span></span><span class="line"><span class="cl"><span class="n">patch</span> <span class="o">-</span><span class="n">p0</span> <span class="o">&lt;</span> <span class="o">../</span><span class="n">patches</span><span class="o">/</span><span class="n">patch0</span><span class="o">.</span><span class="n">txt</span>
+</span></span><span class="line"><span class="cl"><span class="n">cd</span> <span class="n">squashfs</span><span class="o">-</span><span class="n">tools</span>
+</span></span><span class="line"><span class="cl"><span class="n">cd</span> <span class="n">LZMA</span><span class="o">/</span><span class="n">lzmadaptive</span><span class="o">/</span><span class="n">C</span><span class="o">/</span><span class="mi">7</span><span class="nb">zip</span><span class="o">/</span><span class="n">Compress</span><span class="o">/</span><span class="n">LZMA</span><span class="o">/</span>
+</span></span><span class="line"><span class="cl"><span class="n">mv</span> <span class="n">LZMA</span><span class="o">.</span><span class="n">h</span> <span class="n">LZMA2</span><span class="o">.</span><span class="n">h</span>
+</span></span><span class="line"><span class="cl"><span class="n">cd</span> <span class="o">../../../../../../</span><span class="n">LZMA</span><span class="o">/</span><span class="n">lzmalt</span><span class="o">/</span>
+</span></span><span class="line"><span class="cl"><span class="n">mv</span> <span class="n">LZMA</span><span class="o">.</span><span class="n">h</span> <span class="n">LZMA3</span><span class="o">.</span><span class="n">h</span>
+</span></span><span class="line"><span class="cl"><span class="n">cd</span> <span class="o">../../</span>
+</span></span><span class="line"><span class="cl"><span class="n">sed</span> <span class="o">-</span><span class="n">i</span> <span class="s2">&#34;s/#include </span><span class="se">\&#34;</span><span class="s2">LZMA.h</span><span class="se">\&#34;</span><span class="s2">/#include </span><span class="se">\&#34;</span><span class="s2">LZMA2.h</span><span class="se">\&#34;</span><span class="s2">/g&#34;</span> <span class="n">LZMA</span><span class="o">/</span><span class="n">lzmadaptive</span><span class="o">/</span><span class="n">C</span><span class="o">/</span><span class="mi">7</span><span class="nb">zip</span><span class="o">/</span><span class="n">Compress</span><span class="o">/</span><span class="n">LZMA</span><span class="o">/</span><span class="n">LZMADecoder</span><span class="o">.</span><span class="n">h</span>
+</span></span><span class="line"><span class="cl"><span class="n">sed</span> <span class="o">-</span><span class="n">i</span> <span class="s2">&#34;s/#include </span><span class="se">\&#34;</span><span class="s2">LZMA.h</span><span class="se">\&#34;</span><span class="s2">/#include </span><span class="se">\&#34;</span><span class="s2">LZMA2.h</span><span class="se">\&#34;</span><span class="s2">/g&#34;</span> <span class="n">LZMA</span><span class="o">/</span><span class="n">lzmadaptive</span><span class="o">/</span><span class="n">C</span><span class="o">/</span><span class="mi">7</span><span class="nb">zip</span><span class="o">/</span><span class="n">Compress</span><span class="o">/</span><span class="n">LZMA</span><span class="o">/</span><span class="n">LZMAEncoder</span><span class="o">.</span><span class="n">h</span>
+</span></span><span class="line"><span class="cl"><span class="n">sed</span> <span class="o">-</span><span class="n">i</span> <span class="s2">&#34;s/#include </span><span class="se">\&#34;</span><span class="s2">LZMA.h</span><span class="se">\&#34;</span><span class="s2">/#include </span><span class="se">\&#34;</span><span class="s2">LZMA3.h</span><span class="se">\&#34;</span><span class="s2">/g&#34;</span> <span class="n">LZMA</span><span class="o">/</span><span class="n">lzmalt</span><span class="o">/</span><span class="n">LZMADecoder</span><span class="o">.</span><span class="n">h</span>
+</span></span><span class="line"><span class="cl"><span class="n">make</span>
+</span></span><span class="line"><span class="cl"><span class="n">cp</span> <span class="o">./</span><span class="n">sasquatch</span> <span class="o">~/.</span><span class="n">local</span><span class="o">/</span><span class="nb">bin</span>
+</span></span><span class="line"><span class="cl"><span class="n">cd</span> <span class="o">../../../</span>
+</span></span><span class="line"><span class="cl"><span class="n">rm</span> <span class="o">-</span><span class="n">rf</span> <span class="n">sasquatch</span>
+</span></span><span class="line"><span class="cl"><span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="n">liblzma</span><span class="o">-</span><span class="n">dev</span>
+</span></span><span class="line"><span class="cl"><span class="n">pip2</span> <span class="n">install</span> <span class="n">pyliblzma</span> <span class="n">cstruct</span> <span class="o">--</span><span class="n">user</span>
+</span></span><span class="line"><span class="cl"><span class="n">pip2</span> <span class="n">install</span> <span class="n">git</span><span class="o">+</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">sviehb</span><span class="o">/</span><span class="n">jefferson</span><span class="o">.</span><span class="n">git</span> <span class="o">--</span><span class="n">user</span>
+</span></span><span class="line"><span class="cl"><span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="n">liblzo2</span><span class="o">-</span><span class="n">dev</span>
+</span></span><span class="line"><span class="cl"><span class="n">pip3</span> <span class="n">install</span> <span class="n">python</span><span class="o">-</span><span class="n">lzo</span>
+</span></span><span class="line"><span class="cl"><span class="n">pip3</span> <span class="n">install</span> <span class="n">git</span><span class="o">+</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">jrspruitt</span><span class="o">/</span><span class="n">ubi_reader</span><span class="o">.</span><span class="n">git</span> <span class="o">--</span><span class="n">user</span>
+</span></span><span class="line"><span class="cl"><span class="n">pip2</span> <span class="n">install</span> <span class="n">git</span><span class="o">+</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">devttys0</span><span class="o">/</span><span class="n">yaffshiv</span> <span class="o">--</span><span class="n">user</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="hackmd">hackmd</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -5999,8 +6088,8 @@
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>更新于 2023-07-29&nbsp;<a class="git-hash" href="https://github.com/dillonzq/LoveIt/commit/3d859681b2107f19d768e208471176ee6ba6987a" target="_blank" title="commit by cnitlrt(1258175307@qq.com) 3d859681b2107f19d768e208471176ee6ba6987a: test">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>3d85968</a></span>
+                <span>更新于 2023-08-02&nbsp;<a class="git-hash" href="https://github.com/dillonzq/LoveIt/commit/05835b0feaca8d6d16e2adc9e7e698a5e65250f6" target="_blank" title="commit by cnitlrt(1258175307@qq.com) 05835b0feaca8d6d16e2adc9e7e698a5e65250f6: test">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>05835b0</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"></div>
