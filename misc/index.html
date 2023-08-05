@@ -9,7 +9,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://cnitlrt.github.io/misc/" /><meta property="og:image" content="https://cnitlrt.github.io/logo.jpg"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-01-01T04:06:14+08:00" />
-<meta property="article:modified_time" content="2023-08-02T22:26:48+08:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2023-08-05T17:05:04+08:00" /><meta property="og:site_name" content="My cool site" />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://cnitlrt.github.io/logo.jpg"/>
 
@@ -34,8 +34,8 @@
                             "url": "https:\/\/cnitlrt.github.io\/images\/Apple-Devices-Preview.png",
                             "width":  3200 ,
                             "height":  2048 
-                        }],"genre": "posts","keywords": "tools","wordcount":  14938 ,
-        "url": "https:\/\/cnitlrt.github.io\/misc\/","datePublished": "2022-01-01T04:06:14+08:00","dateModified": "2023-08-02T22:26:48+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "tools","wordcount":  15044 ,
+        "url": "https:\/\/cnitlrt.github.io\/misc\/","datePublished": "2022-01-01T04:06:14+08:00","dateModified": "2023-08-05T17:05:04+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": {
                     "@type": "ImageObject",
@@ -113,8 +113,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">疑难杂症宝典</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>cnitlrt</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/tools/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>tools</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-01-01">2022-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 14938 字&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 30 分钟&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-01-01">2022-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 15044 字&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 31 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>目录</span>
@@ -124,6 +124,8 @@
   <ul>
     <li>
       <ul>
+        <li><a href="#docker-gdbserver调试">docker gdbserver调试</a></li>
+        <li><a href="#docker-image上传dockerhub">docker image上传dockerhub</a></li>
         <li><a href="#docker-build的时候使用代理">docker build的时候使用代理</a></li>
         <li><a href="#解包类的指令尽量不要在共享文件夹中使用">解包类的指令尽量不要在共享文件夹中使用！！！</a></li>
         <li><a href="#binwalk安装">binwalk安装</a></li>
@@ -328,7 +330,28 @@
     </li>
   </ul>
 </nav></div>
-            </div><div class="content" id="content"><h2 id="docker-build的时候使用代理">docker build的时候使用代理</h2>
+            </div><div class="content" id="content"><h2 id="docker-gdbserver调试">docker gdbserver调试</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo docker run -tid --security-opt <span class="nv">seccomp</span><span class="o">=</span>unconfined -p 127.0.0.1:2333:2333
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="docker-image上传dockerhub">docker image上传dockerhub</h2>
+<p>在dockerhub上新建一个docker仓库</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo docker tag imageid username/仓库名字:容器名字
+</span></span><span class="line"><span class="cl">sudo docker push username/仓库名字:容器名字
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="docker-build的时候使用代理">docker build的时候使用代理</h2>
 <p>后面加一个参数</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -6088,8 +6111,8 @@
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>更新于 2023-08-02&nbsp;<a class="git-hash" href="https://github.com/dillonzq/LoveIt/commit/05835b0feaca8d6d16e2adc9e7e698a5e65250f6" target="_blank" title="commit by cnitlrt(1258175307@qq.com) 05835b0feaca8d6d16e2adc9e7e698a5e65250f6: test">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>05835b0</a></span>
+                <span>更新于 2023-08-05&nbsp;<a class="git-hash" href="https://github.com/dillonzq/LoveIt/commit/a073b0c3a268128b8eed5118e9d5c4df59ea83fa" target="_blank" title="commit by cnitlrt(1258175307@qq.com) a073b0c3a268128b8eed5118e9d5c4df59ea83fa: test">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>a073b0c</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"></div>
