@@ -5,7 +5,7 @@
         <description>所有文章 | cnitlrtの博客</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>cnitlrt@gmail.com (cnitlrt)</managingEditor>
             <webMaster>cnitlrt@gmail.com (cnitlrt)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sat, 28 Oct 2023 21:11:16 &#43;0800</lastBuildDate><atom:link href="https://cnitlrt.github.io/posts/" rel="self" type="application/rss+xml" /><item>
-    <title>actf easy netlink</title>
+    <title>ACTF 2023 easy netlink</title>
     <link>https://cnitlrt.github.io/netlink/</link>
     <pubDate>Sat, 28 Oct 2023 21:11:16 &#43;0800</pubDate>
     <author>cnitlrt</author>
@@ -13,7 +13,7 @@
     <description><![CDATA[actf easy netlink]]></description>
 </item>
 <item>
-    <title>N1sub</title>
+    <title>n1ctf-2023-N1sub</title>
     <link>https://cnitlrt.github.io/n1sub/</link>
     <pubDate>Sat, 21 Oct 2023 11:35:12 &#43;0800</pubDate>
     <author>cnitlrt</author>
