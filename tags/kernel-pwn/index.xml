@@ -4,7 +4,15 @@
         <link>https://cnitlrt.github.io/tags/kernel-pwn/</link>
         <description>kernel pwn - 标签 - cnitlrtの博客</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>cnitlrt@gmail.com (cnitlrt)</managingEditor>
-            <webMaster>cnitlrt@gmail.com (cnitlrt)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Mon, 04 Jul 2022 22:20:17 &#43;0800</lastBuildDate><atom:link href="https://cnitlrt.github.io/tags/kernel-pwn/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>cnitlrt@gmail.com (cnitlrt)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sat, 28 Oct 2023 21:11:16 &#43;0800</lastBuildDate><atom:link href="https://cnitlrt.github.io/tags/kernel-pwn/" rel="self" type="application/rss+xml" /><item>
+    <title>actf easy netlink</title>
+    <link>https://cnitlrt.github.io/netlink/</link>
+    <pubDate>Sat, 28 Oct 2023 21:11:16 &#43;0800</pubDate>
+    <author>cnitlrt</author>
+    <guid>https://cnitlrt.github.io/netlink/</guid>
+    <description><![CDATA[actf easy netlink]]></description>
+</item>
+<item>
     <title>QWB2021</title>
     <link>https://cnitlrt.github.io/qwb2021/</link>
     <pubDate>Mon, 04 Jul 2022 22:20:17 &#43;0800</pubDate>
