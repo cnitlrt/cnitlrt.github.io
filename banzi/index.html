@@ -9,7 +9,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://cnitlrt.github.io/banzi/" /><meta property="og:image" content="https://cnitlrt.github.io/Apple-Devices-Preview.png" /><meta property="article:section" content="" />
 
-<meta property="article:modified_time" content="2023-10-27T14:17:28+08:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2023-11-09T12:52:57+08:00" /><meta property="og:site_name" content="My cool site" />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://cnitlrt.github.io/Apple-Devices-Preview.png"/>
 
@@ -34,8 +34,8 @@
                             "url": "https:\/\/cnitlrt.github.io\/images\/Apple-Devices-Preview.png",
                             "width":  3200 ,
                             "height":  2048 
-                        }],"genre": "page","wordcount":  2645 ,
-        "url": "https:\/\/cnitlrt.github.io\/banzi\/","dateModified": "2023-10-27T14:17:28+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "page","wordcount":  2678 ,
+        "url": "https:\/\/cnitlrt.github.io\/banzi\/","dateModified": "2023-11-09T12:52:57+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": {
                     "@type": "ImageObject",
@@ -108,8 +108,7 @@
     <div class="search-dropdown mobile">
         <div id="search-dropdown-mobile"></div>
     </div><main class="main">
-                <div class="container"><div class="page single special"><h1 class="single-title animate__animated animate__pulse animate__faster">banzi</h1><div class="content" id="content"><h3 id="banzih">banzi.h</h3>
-<div class="highlight"><div class="chroma">
+                <div class="container"><div class="page single special"><h1 class="single-title animate__animated animate__pulse animate__faster">banzi</h1><div class="content" id="content"><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">  1
 </span><span class="lnt">  2
@@ -877,6 +876,16 @@
 </span><span class="lnt">764
 </span><span class="lnt">765
 </span><span class="lnt">766
+</span><span class="lnt">767
+</span><span class="lnt">768
+</span><span class="lnt">769
+</span><span class="lnt">770
+</span><span class="lnt">771
+</span><span class="lnt">772
+</span><span class="lnt">773
+</span><span class="lnt">774
+</span><span class="lnt">775
+</span><span class="lnt">776
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#define _GNU_SOURCE
@@ -969,6 +978,7 @@
 </span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">ss</span><span class="p">[</span><span class="mh">0x1000</span><span class="p">][</span><span class="mi">2</span><span class="p">];</span>
 </span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">fds</span><span class="p">[</span><span class="mh">0x1000</span><span class="p">];</span>
 </span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">keys</span><span class="p">[</span><span class="mh">0x1000</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">page_fds</span><span class="p">[</span><span class="mh">0x1000</span><span class="p">];</span>
 </span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">corrupted_key</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">n_keys</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">fd</span><span class="p">;</span>
@@ -1525,6 +1535,12 @@
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">change_pipe_buff_size</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">size</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="nf">fcntl</span><span class="p">(</span><span class="n">pipes</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span><span class="n">F_SETPIPE_SZ</span><span class="p">,</span><span class="mh">0x1000</span><span class="o">*</span><span class="p">(</span><span class="n">size</span><span class="o">/</span><span class="mh">0x40</span><span class="p">))</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">perror</span><span class="p">(</span><span class="s">&#34;fcntl&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">release_pipe_buff</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
@@ -1644,6 +1660,9 @@
 </span></span><span class="line"><span class="cl">        <span class="nf">perror</span><span class="p">(</span><span class="s">&#34;[-] write&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">splice_fd</span><span class="p">(</span><span class="kt">int</span> <span class="n">attack_fd</span><span class="p">,</span><span class="kt">loff_t</span> <span class="n">offset</span><span class="p">,</span><span class="kt">int</span> <span class="n">i</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">splice</span><span class="p">(</span><span class="n">attack_fd</span><span class="p">,</span><span class="o">&amp;</span><span class="n">offset</span><span class="p">,</span><span class="n">pipes</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="nb">NULL</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
