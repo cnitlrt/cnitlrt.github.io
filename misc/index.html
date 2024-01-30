@@ -9,7 +9,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://cnitlrt.github.io/misc/" /><meta property="og:image" content="https://cnitlrt.github.io/logo.jpg"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-01-01T04:06:14+08:00" />
-<meta property="article:modified_time" content="2023-11-26T01:18:38+08:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2024-01-30T22:23:09+08:00" /><meta property="og:site_name" content="My cool site" />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://cnitlrt.github.io/logo.jpg"/>
 
@@ -34,8 +34,8 @@
                             "url": "https:\/\/cnitlrt.github.io\/images\/Apple-Devices-Preview.png",
                             "width":  3200 ,
                             "height":  2048 
-                        }],"genre": "posts","keywords": "tools","wordcount":  16993 ,
-        "url": "https:\/\/cnitlrt.github.io\/misc\/","datePublished": "2022-01-01T04:06:14+08:00","dateModified": "2023-11-26T01:18:38+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "tools","wordcount":  18529 ,
+        "url": "https:\/\/cnitlrt.github.io\/misc\/","datePublished": "2022-01-01T04:06:14+08:00","dateModified": "2024-01-30T22:23:09+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": {
                     "@type": "ImageObject",
@@ -113,8 +113,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">疑难杂症宝典</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>cnitlrt</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/tools/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>tools</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-01-01">2022-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 16993 字&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 34 分钟&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-01-01">2022-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 18529 字&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 37 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>目录</span>
@@ -125,6 +125,25 @@
     <li>
       <ul>
         <li>
+          <ul>
+            <li><a href="#正则">正则</a></li>
+            <li><a href="#git-rebase">git rebase</a></li>
+            <li><a href="#afl">AFL++</a></li>
+            <li><a href="#debug_shellcode起不来">debug_shellcode起不来</a></li>
+            <li><a href="#python虚拟环境">python虚拟环境</a></li>
+            <li><a href="#python310和python38共存">python3.10和python3.8共存</a></li>
+            <li><a href="#buildroot编译">buildroot编译</a>
+              <ul>
+                <li><a href="#mipsel">mipsel</a></li>
+              </ul>
+            </li>
+            <li><a href="#vscode配置代理">vscode配置代理</a></li>
+            <li><a href="#route配置路由表">route配置路由表</a></li>
+            <li><a href="#oh-my-zsh卡顿">oh my zsh卡顿</a></li>
+          </ul>
+        </li>
+        <li><a href="#obsidian-picgo配置">obsidian picgo配置</a></li>
+        <li><a href="#ida-script使用">ida script使用</a>
           <ul>
             <li><a href="#ubuntu-bp安装">ubuntu bp安装</a></li>
             <li><a href="#ubuntu-bp抓不到包">ubuntu BP抓不到包</a></li>
@@ -139,9 +158,11 @@
           <ul>
             <li><a href="#intellicode">intellicode</a></li>
             <li><a href="#tabnine">tabnine</a></li>
+            <li><a href="#codeql">codeql</a></li>
+            <li><a href="#vscode--counter">Vscode  counter</a></li>
+            <li><a href="#sarif-view">sarif view</a></li>
           </ul>
         </li>
-        <li><a href="#安装ret-sync">安装ret-sync</a></li>
         <li><a href="#docker-gdbserver调试">docker gdbserver调试</a></li>
         <li><a href="#docker-image上传dockerhub">docker image上传dockerhub</a></li>
         <li><a href="#docker-build的时候使用代理">docker build的时候使用代理</a></li>
@@ -204,7 +225,7 @@
         <li><a href="#idapython-常见指令">idapython 常见指令</a></li>
         <li><a href="#dump_elf32idc">dump_elf32.idc</a></li>
         <li><a href="#ida右键菜单打开">IDA右键菜单打开</a></li>
-        <li><a href="#ubuntu加内存">ubuntu加内存</a></li>
+        <li><a href="#ubuntu加内存内存扩展">ubuntu加内存（内存扩展）</a></li>
         <li><a href="#虚拟机繁忙无法关机">虚拟机繁忙，无法关机</a></li>
         <li><a href="#python-显示某某decode不了或者encode不了">python 显示某某decode不了或者encode不了</a>
           <ul>
@@ -314,7 +335,15 @@
         <li><a href="#pwn题批量部署">pwn题批量部署</a></li>
         <li><a href="#ida静态编译符号表恢复">ida静态编译符号表恢复</a></li>
         <li><a href="#syzkaller环境搭建">syzkaller环境搭建</a></li>
-        <li><a href="#linux-内核编译">linux 内核编译</a></li>
+        <li><a href="#linux-内核编译">linux 内核编译</a>
+          <ul>
+            <li>
+              <ul>
+                <li><a href="#可能存在的问题">可能存在的问题</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
         <li><a href="#kernel相关">kernel相关</a>
           <ul>
             <li><a href="#常用命令">常用命令</a>
@@ -350,7 +379,598 @@
     </li>
   </ul>
 </nav></div>
-            </div><div class="content" id="content"><h3 id="ubuntu-bp安装">ubuntu bp安装</h3>
+            </div><div class="content" id="content"><h3 id="正则">正则</h3>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="image/image-20240128123103954.png"
+        data-srcset="image/image-20240128123103954.png, image/image-20240128123103954.png 1.5x, image/image-20240128123103954.png 2x"
+        data-sizes="auto"
+        alt="image/image-20240128123103954.png"
+        title="image-20240128123103954" /></p>
+<h3 id="git-rebase">git rebase</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">pick c50221f commit B
+</span></span><span class="line"><span class="cl">pick 73deeed commit C
+</span></span><span class="line"><span class="cl">pick d9623b0 commit D
+</span></span><span class="line"><span class="cl">pick e7c7111 commit E
+</span></span><span class="line"><span class="cl">pick 74199ce commit F
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 变基 ef13725..74199ce 到 ef13725（5 个提交）</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 命令:</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># p, pick &lt;提交&gt; = 使用提交</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># r, reword &lt;提交&gt; = 使用提交，但修改提交说明</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># e, edit &lt;提交&gt; = 使用提交，进入 shell 以便进行提交修补</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># s, squash &lt;提交&gt; = 使用提交，但融合到前一个提交</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># f, fixup &lt;提交&gt; = 类似于 &#34;squash&#34;，但丢弃提交说明日志</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># x, exec &lt;命令&gt; = 使用 shell 运行命令（此行剩余部分）</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># b, break = 在此处停止（使用 &#39;git rebase --continue&#39; 继续变基）</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># d, drop &lt;提交&gt; = 删除提交</span>
+</span></span><span class="line"><span class="cl">......
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="afl">AFL++</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">PYTHONPATH=`dirname /src/home/ubuntu/test/fuzz/test_fuzz.py` AFL_PYTHON_MODULE=test_fuzz AFL_DEBUG=1 AFL_CUSTOM_MUTATOR_ONLY=1 afl-fuzz -i in -o out -m none -Q ./1
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="debug_shellcode起不来">debug_shellcode起不来</h3>
+<p>别在共享文件夹中运行</p>
+<h3 id="python虚拟环境">python虚拟环境</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">python</span><span class="o">-</span><span class="n">dev</span> <span class="n">libffi</span><span class="o">-</span><span class="n">dev</span> <span class="n">build</span><span class="o">-</span><span class="n">essential</span> <span class="n">virtualenvwrapper</span>
+</span></span><span class="line"><span class="cl"><span class="n">export</span> <span class="n">WORKON_HOME</span><span class="o">=~/</span><span class="n">Envs</span>
+</span></span><span class="line"><span class="cl"><span class="n">mkdir</span> <span class="o">-</span><span class="n">p</span> <span class="err">$</span><span class="n">WORKON_HOME</span>
+</span></span><span class="line"><span class="cl"><span class="n">source</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">virtualenvwrapper</span><span class="o">/</span><span class="n">virtualenvwrapper</span><span class="o">.</span><span class="n">sh</span>
+</span></span><span class="line"><span class="cl"><span class="n">mkvirtualenv</span> <span class="n">angr</span> <span class="o">&amp;&amp;</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">angr</span> <span class="o">-</span><span class="n">i</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">pypi</span><span class="o">.</span><span class="n">tuna</span><span class="o">.</span><span class="n">tsinghua</span><span class="o">.</span><span class="n">edu</span><span class="o">.</span><span class="n">cn</span><span class="o">/</span><span class="n">simple</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="python310和python38共存">python3.10和python3.8共存</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">proxychains4 curl -sS https://bootstrap.pypa.io/get-pip.py | python3.8
+</span></span><span class="line"><span class="cl">proxychains4 curl -sS https://bootstrap.pypa.io/get-pip.py | python3.10
+</span></span><span class="line"><span class="cl">proxychains4 curl -sS https://bootstrap.pypa.io/get-pip.py | sudo python3.8
+</span></span><span class="line"><span class="cl">proxychains4 curl -sS https://bootstrap.pypa.io/get-pip.py | sudo python3.10
+</span></span><span class="line"><span class="cl">proxychains4 curl -sS https://bootstrap.pypa.io/get-pip.py | python3
+</span></span><span class="line"><span class="cl">proxychains4 curl -sS https://bootstrap.pypa.io/get-pip.py | sudo python3
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="buildroot编译">buildroot编译</h3>
+<h4 id="mipsel">mipsel</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo make qemu_mips32r2el_malta_defconfig
+</span></span><span class="line"><span class="cl">sudo make
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="vscode配置代理">vscode配置代理</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">export http_proxy=http://IP地址:port
+</span></span><span class="line"><span class="cl">export https_proxy=http://IP地址:port
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="route配置路由表">route配置路由表</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">route print
+</span></span><span class="line"><span class="cl">route add 192.168.1.0 mask 255.255.255.0 192.168.1.1
+</span></span><span class="line"><span class="cl">route add 0.0.0.0 mask 0.0.0.0 192.168.10.66
+</span></span><span class="line"><span class="cl">route add 要走的ip mask 掩码 网关
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="oh-my-zsh卡顿">oh my zsh卡顿</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">git config --add oh-my-zsh.hide-dirty 1 &amp;&amp; git config --add oh-my-zsh.hide-status 1
+</span></span><span class="line"><span class="cl">取消
+</span></span><span class="line"><span class="cl">git config --remove-section oh-my-zsh
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="obsidian-picgo配置">obsidian picgo配置</h2>
+<p><a href="https://www.cnblogs.com/NFTO21/p/16285829.html" target="_blank" rel="noopener noreffer ">参考链接</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">npm install picgo -g
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>配置文件</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">linux 和 macOS 均为<span class="sb">`</span>~/.picgo/config.json<span class="sb">`</span>。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">windows 则为<span class="sb">`</span>C:<span class="se">\U</span>sers<span class="se">\你</span>的用户名<span class="se">\.</span>picgo<span class="se">\c</span>onfig.json<span class="sb">`</span>。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20231220120309-831.png"
+        data-srcset="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20231220120309-831.png, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20231220120309-831.png 1.5x, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20231220120309-831.png 2x"
+        data-sizes="auto"
+        alt="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20231220120309-831.png"
+        title="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20231220120309-831.png" /></p>
+<h2 id="ida-script使用">ida script使用</h2>
+<p>修改</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20231216151010-970.png"
+        data-srcset="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20231216151010-970.png, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20231216151010-970.png 1.5x, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20231216151010-970.png 2x"
+        data-sizes="auto"
+        alt="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20231216151010-970.png"
+        title="image-20231216151008651" /></p>
+<p>为ifconfig即主机ip</p>
+<p>然后gdb里面执行</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20231216151040-749.png"
+        data-srcset="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20231216151040-749.png, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20231216151040-749.png 1.5x, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20231216151040-749.png 2x"
+        data-sizes="auto"
+        alt="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20231216151040-749.png"
+        title="image-20231216151039723" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20231216151052-262.png"
+        data-srcset="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20231216151052-262.png, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20231216151052-262.png 1.5x, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20231216151052-262.png 2x"
+        data-sizes="auto"
+        alt="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20231216151052-262.png"
+        title="image-20231216151051306" /></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">attach(p,&#34;set ida-enabled on\nset ida-rpc-host 192.168.48.1\nboff {}&#34;.format(sys.argv[1]))
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span><span class="lnt">151
+</span><span class="lnt">152
+</span><span class="lnt">153
+</span><span class="lnt">154
+</span><span class="lnt">155
+</span><span class="lnt">156
+</span><span class="lnt">157
+</span><span class="lnt">158
+</span><span class="lnt">159
+</span><span class="lnt">160
+</span><span class="lnt">161
+</span><span class="lnt">162
+</span><span class="lnt">163
+</span><span class="lnt">164
+</span><span class="lnt">165
+</span><span class="lnt">166
+</span><span class="lnt">167
+</span><span class="lnt">168
+</span><span class="lnt">169
+</span><span class="lnt">170
+</span><span class="lnt">171
+</span><span class="lnt">172
+</span><span class="lnt">173
+</span><span class="lnt">174
+</span><span class="lnt">175
+</span><span class="lnt">176
+</span><span class="lnt">177
+</span><span class="lnt">178
+</span><span class="lnt">179
+</span><span class="lnt">180
+</span><span class="lnt">181
+</span><span class="lnt">182
+</span><span class="lnt">183
+</span><span class="lnt">184
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="ch">#!/usr/bin/env python</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">datetime</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">threading</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">xmlrpc.client</span> <span class="k">as</span> <span class="nn">xmlclient</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">xml.sax.saxutils</span> <span class="kn">import</span> <span class="n">escape</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">xmlrpc.server</span> <span class="kn">import</span> <span class="n">SimpleXMLRPCServer</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">idaapi</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">idc</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Wait for any processing to get done</span>
+</span></span><span class="line"><span class="cl"><span class="n">idaapi</span><span class="o">.</span><span class="n">auto_wait</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># On Windows with NTFS filesystem a filepath with &#39;:&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># is treated as NTFS ADS (Alternative Data Stream)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># and so saving file with such name fails</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># dt = datetime.datetime.now().isoformat().replace(&#34;:&#34;, &#34;-&#34;)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Save the database so nothing gets lost.</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># idc.save_database(idc.get_idb_path() + &#34;.&#34; + dt)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">DEBUG_MARSHALLING</span> <span class="o">=</span> <span class="kc">False</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">create_marshaller</span><span class="p">(</span><span class="n">use_format</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">just_to_str</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">assert</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">use_format</span> <span class="ow">or</span> <span class="n">just_to_str</span>
+</span></span><span class="line"><span class="cl">    <span class="p">),</span> <span class="s2">&#34;Either pass format to use or make it converting the value to str.&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="n">_marshaller</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">appender</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">use_format</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">marshalled</span> <span class="o">=</span> <span class="n">use_format</span> <span class="o">%</span> <span class="n">value</span>
+</span></span><span class="line"><span class="cl">        <span class="k">elif</span> <span class="n">just_to_str</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">marshalled</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&#34;&lt;value&gt;&lt;string&gt;</span><span class="si">{</span><span class="n">escape</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">))</span><span class="si">}</span><span class="s2">&lt;/string&gt;&lt;/value&gt;&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">DEBUG_MARSHALLING</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Marshalled: &#39;</span><span class="si">{</span><span class="n">marshalled</span><span class="si">}</span><span class="s2">&#39;&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">appender</span><span class="p">(</span><span class="n">marshalled</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">wrapper</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">xmlclient</span><span class="o">.</span><span class="n">Marshaller</span><span class="o">.</span><span class="n">dispatch</span><span class="p">[</span><span class="nb">type</span><span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">63</span><span class="p">)]</span> <span class="o">=</span> <span class="n">create_marshaller</span><span class="p">(</span><span class="s2">&#34;&lt;value&gt;&lt;i8&gt;</span><span class="si">%d</span><span class="s2">&lt;/i8&gt;&lt;/value&gt;&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">xmlclient</span><span class="o">.</span><span class="n">Marshaller</span><span class="o">.</span><span class="n">dispatch</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">create_marshaller</span><span class="p">(</span><span class="s2">&#34;&lt;value&gt;&lt;i8&gt;</span><span class="si">%d</span><span class="s2">&lt;/i8&gt;&lt;/value&gt;&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">xmlclient</span><span class="o">.</span><span class="n">Marshaller</span><span class="o">.</span><span class="n">dispatch</span><span class="p">[</span><span class="n">idaapi</span><span class="o">.</span><span class="n">cfuncptr_t</span><span class="p">]</span> <span class="o">=</span> <span class="n">create_marshaller</span><span class="p">(</span><span class="n">just_to_str</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">host</span> <span class="o">=</span> <span class="s2">&#34;192.168.48.1&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">port</span> <span class="o">=</span> <span class="mi">31337</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">mutex</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Condition</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">wrap</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">rv</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">        <span class="n">error</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">def</span> <span class="nf">work</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">            <span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="n">result</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="n">rv</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="n">error</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">with</span> <span class="n">mutex</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">flags</span> <span class="o">=</span> <span class="n">idaapi</span><span class="o">.</span><span class="n">MFF_WRITE</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">f</span> <span class="o">==</span> <span class="n">idc</span><span class="o">.</span><span class="n">set_color</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="n">flags</span> <span class="o">|=</span> <span class="n">idaapi</span><span class="o">.</span><span class="n">MFF_NOWAIT</span>
+</span></span><span class="line"><span class="cl">                <span class="n">rv</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="n">idaapi</span><span class="o">.</span><span class="n">execute_sync</span><span class="p">(</span><span class="n">work</span><span class="p">,</span> <span class="n">flags</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">error</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&#34;Failed on calling </span><span class="si">{</span><span class="n">f</span><span class="o">.</span><span class="vm">__module__</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">f</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> with args: </span><span class="si">{</span><span class="n">a</span><span class="si">}</span><span class="s2">, kwargs: </span><span class="si">{</span><span class="n">kw</span><span class="si">}</span><span class="se">\n</span><span class="s2">Exception: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="si">}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;[!!!] ERROR:&#34;</span><span class="p">,</span> <span class="n">msg</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">raise</span> <span class="n">error</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">rv</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">wrapper</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">register_module</span><span class="p">(</span><span class="n">module</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">function</span> <span class="ow">in</span> <span class="n">module</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="s2">&#34;__call__&#34;</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">            <span class="n">server</span><span class="o">.</span><span class="n">register_function</span><span class="p">(</span><span class="n">wrap</span><span class="p">(</span><span class="n">function</span><span class="p">),</span> <span class="n">name</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">decompile</span><span class="p">(</span><span class="n">addr</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    Function that overwrites `idaapi.decompile` for xmlrpc so that instead
+</span></span></span><span class="line"><span class="cl"><span class="s2">    of throwing an exception on `idaapi.DecompilationFailure` it just returns `None`.
+</span></span></span><span class="line"><span class="cl"><span class="s2">    (so that we don&#39;t have to parse xmlrpc Fault&#39;s exception string on pwndbg side
+</span></span></span><span class="line"><span class="cl"><span class="s2">    as it differs between IDA versions).
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">idaapi</span><span class="o">.</span><span class="n">decompile</span><span class="p">(</span><span class="n">addr</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">except</span> <span class="n">idaapi</span><span class="o">.</span><span class="n">DecompilationFailure</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="kc">None</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">get_decompile_coord_by_ea</span><span class="p">(</span><span class="n">cfunc</span><span class="p">,</span> <span class="n">addr</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">idaapi</span><span class="o">.</span><span class="n">IDA_SDK_VERSION</span> <span class="o">&gt;=</span> <span class="mi">720</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">item</span> <span class="o">=</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">body</span><span class="o">.</span><span class="n">find_closest_addr</span><span class="p">(</span><span class="n">addr</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">y_holder</span> <span class="o">=</span> <span class="n">idaapi</span><span class="o">.</span><span class="n">int_pointer</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="ow">not</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">find_item_coords</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">y_holder</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="kc">None</span>
+</span></span><span class="line"><span class="cl">        <span class="n">y</span> <span class="o">=</span> <span class="n">y_holder</span><span class="o">.</span><span class="n">value</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">lnmap</span> <span class="o">=</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">cfunc</span><span class="o">.</span><span class="n">pseudocode</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">            <span class="n">phead</span> <span class="o">=</span> <span class="n">idaapi</span><span class="o">.</span><span class="n">ctree_item_t</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">            <span class="n">pitem</span> <span class="o">=</span> <span class="n">idaapi</span><span class="o">.</span><span class="n">ctree_item_t</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">            <span class="n">ptail</span> <span class="o">=</span> <span class="n">idaapi</span><span class="o">.</span><span class="n">ctree_item_t</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">            <span class="n">ret</span> <span class="o">=</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">get_line_item</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">line</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="n">phead</span><span class="p">,</span> <span class="n">pitem</span><span class="p">,</span> <span class="n">ptail</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">ret</span> <span class="ow">and</span> <span class="n">pitem</span><span class="o">.</span><span class="n">it</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="n">lnmap</span><span class="p">[</span><span class="n">pitem</span><span class="o">.</span><span class="n">it</span><span class="o">.</span><span class="n">ea</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span>
+</span></span><span class="line"><span class="cl">        <span class="n">y</span> <span class="o">=</span> <span class="kc">None</span>
+</span></span><span class="line"><span class="cl">        <span class="n">closest_ea</span> <span class="o">=</span> <span class="n">idaapi</span><span class="o">.</span><span class="n">BADADDR</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">ea</span><span class="p">,</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lnmap</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">closest_ea</span> <span class="o">==</span> <span class="n">idaapi</span><span class="o">.</span><span class="n">BADADDR</span> <span class="ow">or</span> <span class="nb">abs</span><span class="p">(</span><span class="n">closest_ea</span> <span class="o">-</span> <span class="n">addr</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nb">abs</span><span class="p">(</span><span class="n">ea</span> <span class="o">-</span> <span class="n">addr</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">                <span class="n">closest_ea</span> <span class="o">=</span> <span class="n">ea</span>
+</span></span><span class="line"><span class="cl">                <span class="n">y</span> <span class="o">=</span> <span class="n">lnmap</span><span class="p">[</span><span class="n">ea</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">y</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">decompile_context</span><span class="p">(</span><span class="n">addr</span><span class="p">,</span> <span class="n">context_lines</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">cfunc</span> <span class="o">=</span> <span class="n">decompile</span><span class="p">(</span><span class="n">addr</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">cfunc</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="kc">None</span>
+</span></span><span class="line"><span class="cl">    <span class="n">y</span> <span class="o">=</span> <span class="n">get_decompile_coord_by_ea</span><span class="p">(</span><span class="n">cfunc</span><span class="p">,</span> <span class="n">addr</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">y</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">cfunc</span>
+</span></span><span class="line"><span class="cl">    <span class="n">lines</span> <span class="o">=</span> <span class="n">cfunc</span><span class="o">.</span><span class="n">get_pseudocode</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">retlines</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">lnnum</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span> <span class="o">-</span> <span class="n">context_lines</span><span class="p">),</span> <span class="nb">min</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">lines</span><span class="p">),</span> <span class="n">y</span> <span class="o">+</span> <span class="n">context_lines</span><span class="p">)):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">retlines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">idaapi</span><span class="o">.</span><span class="n">tag_remove</span><span class="p">(</span><span class="n">lines</span><span class="p">[</span><span class="n">lnnum</span><span class="p">]</span><span class="o">.</span><span class="n">line</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">lnnum</span> <span class="o">==</span> <span class="n">y</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">retlines</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&#34;&gt;&#34;</span> <span class="o">+</span> <span class="n">retlines</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">:]</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">retlines</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">versions</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;Returns IDA &amp; Python versions&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">import</span> <span class="nn">sys</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;python&#34;</span><span class="p">:</span> <span class="n">sys</span><span class="o">.</span><span class="n">version</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;ida&#34;</span><span class="p">:</span> <span class="n">idaapi</span><span class="o">.</span><span class="n">get_kernel_version</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;hexrays&#34;</span><span class="p">:</span> <span class="n">idaapi</span><span class="o">.</span><span class="n">get_hexrays_version</span><span class="p">()</span> <span class="k">if</span> <span class="n">idaapi</span><span class="o">.</span><span class="n">init_hexrays_plugin</span><span class="p">()</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">server</span> <span class="o">=</span> <span class="n">SimpleXMLRPCServer</span><span class="p">((</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="p">),</span> <span class="n">logRequests</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">allow_none</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">register_module</span><span class="p">(</span><span class="n">idaapi</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">register_module</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="n">idc</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>  <span class="c1"># prioritize idc functions over above (e.g. idc.get_next_seg/ida_segment.get_next_seg)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">server</span><span class="o">.</span><span class="n">register_function</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="nb">eval</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="nb">globals</span><span class="p">(),</span> <span class="nb">locals</span><span class="p">()),</span> <span class="s2">&#34;eval&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">server</span><span class="o">.</span><span class="n">register_function</span><span class="p">(</span><span class="n">wrap</span><span class="p">(</span><span class="n">decompile</span><span class="p">))</span>  <span class="c1"># overwrites idaapi/ida_hexrays.decompile</span>
+</span></span><span class="line"><span class="cl"><span class="n">server</span><span class="o">.</span><span class="n">register_function</span><span class="p">(</span><span class="n">wrap</span><span class="p">(</span><span class="n">decompile_context</span><span class="p">),</span> <span class="s2">&#34;decompile_context&#34;</span><span class="p">)</span>  <span class="c1"># support context decompile</span>
+</span></span><span class="line"><span class="cl"><span class="n">server</span><span class="o">.</span><span class="n">register_function</span><span class="p">(</span><span class="n">wrap</span><span class="p">(</span><span class="n">versions</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="n">server</span><span class="o">.</span><span class="n">register_introspection_functions</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;IDA Pro xmlrpc hosted on http://</span><span class="si">{</span><span class="n">host</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">port</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Call `shutdown()` to shutdown the IDA Pro xmlrpc server.&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">thread</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">server</span><span class="o">.</span><span class="n">serve_forever</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">thread</span><span class="o">.</span><span class="n">daemon</span> <span class="o">=</span> <span class="kc">True</span>
+</span></span><span class="line"><span class="cl"><span class="n">thread</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">shutdown</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="k">global</span> <span class="n">server</span>
+</span></span><span class="line"><span class="cl">    <span class="k">global</span> <span class="n">thread</span>
+</span></span><span class="line"><span class="cl">    <span class="n">server</span><span class="o">.</span><span class="n">shutdown</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">server</span><span class="o">.</span><span class="n">server_close</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="k">del</span> <span class="n">server</span>
+</span></span><span class="line"><span class="cl">    <span class="k">del</span> <span class="n">thread</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="ubuntu-bp安装">ubuntu bp安装</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -706,7 +1326,9 @@
 <h2 id="vscode-常用扩展">vscode 常用扩展</h2>
 <h3 id="intellicode">intellicode</h3>
 <h3 id="tabnine">tabnine</h3>
-<h2 id="安装ret-sync">安装ret-sync</h2>
+<h3 id="codeql">codeql</h3>
+<h3 id="vscode--counter">Vscode  counter</h3>
+<h3 id="sarif-view">sarif view</h3>
 <h2 id="docker-gdbserver调试">docker gdbserver调试</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -978,8 +1600,25 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="v8相关">v8相关</h2>
-<p>fetch v8之后卡住不动</p>
-<p>先执行<strong>gclinet</strong>然后再删除.gclient然后再fetch v8</p>
+<p>fetch v8之后卡住不动
+尽量不要用proxychains4</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git config --global http.proxy http://192.168.48.1:2222
+</span></span><span class="line"><span class="cl">git config --global http.proxy socks://192.168.48.1:2222
+</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">http_proxy</span><span class="o">=</span>http://192.168.48.1:2222
+</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">https_proxy</span><span class="o">=</span>http://192.168.48.1:2222
+</span></span><span class="line"><span class="cl">git config --global --unset http.proxy
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>先执行<strong>gclinet</strong>然后再删除.gclient然后再fetch v8</p>
 <h2 id="ens33网卡失效">ens33网卡失效</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -2099,7 +2738,7 @@
 </span></span><span class="line"><span class="cl"><span class="err">@</span><span class="o">=</span><span class="s2">&#34;\&#34;F:\\IDA7.7\\ida.exe\&#34; \&#34;%1\&#34;&#34;</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="ubuntu加内存">ubuntu加内存</h2>
+</div><h2 id="ubuntu加内存内存扩展">ubuntu加内存（内存扩展）</h2>
 <p>外部：</p>
 <p>关机之后点击扩容然后选择想要扩容成的大小</p>
 <p><img
@@ -6673,31 +7312,47 @@
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">sudo apt-get install golang
-</span></span><span class="line"><span class="cl">sudo apt install build-essential flex bison libssl-dev libelf-dev bc qemu
-</span></span><span class="line"><span class="cl">git clone https://github.com/google/syzkaller
-</span></span><span class="line"><span class="cl">cd syzkaller
-</span></span><span class="line"><span class="cl">sudo make all
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-mysql" data-lang="mysql"><span class="line"><span class="cl"><span class="n">wget</span><span class="w"> </span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">dl</span><span class="p">.</span><span class="n">google</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="n">go</span><span class="o">/</span><span class="n">go1</span><span class="p">.</span><span class="mi">21</span><span class="p">.</span><span class="mi">4</span><span class="p">.</span><span class="n">linux</span><span class="o">-</span><span class="n">amd64</span><span class="p">.</span><span class="n">tar</span><span class="p">.</span><span class="n">gz</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">tar</span><span class="w"> </span><span class="o">-</span><span class="n">xf</span><span class="w"> </span><span class="n">go1</span><span class="p">.</span><span class="mi">21</span><span class="p">.</span><span class="mi">4</span><span class="p">.</span><span class="n">linux</span><span class="o">-</span><span class="n">amd64</span><span class="p">.</span><span class="n">tar</span><span class="p">.</span><span class="n">gz</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">export</span><span class="w"> </span><span class="n">GOROOT</span><span class="o">=`</span><span class="n">pwd</span><span class="o">`/</span><span class="n">go</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">export</span><span class="w"> </span><span class="n">PATH</span><span class="o">=</span><span class="err">$</span><span class="n">GOROOT</span><span class="o">/</span><span class="n">bin</span><span class="p">:</span><span class="err">$</span><span class="n">PATH</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">sudo</span><span class="w"> </span><span class="n">apt</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="n">build</span><span class="o">-</span><span class="n">essential</span><span class="w"> </span><span class="n">flex</span><span class="w"> </span><span class="n">bison</span><span class="w"> </span><span class="n">libssl</span><span class="o">-</span><span class="n">dev</span><span class="w"> </span><span class="n">libelf</span><span class="o">-</span><span class="n">dev</span><span class="w"> </span><span class="n">bc</span><span class="w"> </span><span class="n">qemu</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">git</span><span class="w"> </span><span class="n">clone</span><span class="w"> </span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="n">google</span><span class="o">/</span><span class="n">syzkaller</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">cd</span><span class="w"> </span><span class="n">syzkaller</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">sudo</span><span class="w"> </span><span class="n">make</span><span class="w"> </span><span class="k">all</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="linux-内核编译">linux 内核编译</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">sudo apt-get install git fakeroot build-essential ncurses-dev xz-utils libssl-dev bc flex libelf-dev bison zstd -y
-</span></span><span class="line"><span class="cl">wget https://mirrors.tuna.tsinghua.edu.cn/kernel/v5.x/linux-5.10.102.tar.gz
-</span></span><span class="line"><span class="cl">unar linux-5.10.102.tar.gz
-</span></span><span class="line"><span class="cl">cd linux-5.10.102/
-</span></span><span class="line"><span class="cl">make menuconfig
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-mysql" data-lang="mysql"><span class="line"><span class="cl"><span class="n">sudo</span><span class="w"> </span><span class="n">apt</span><span class="o">-</span><span class="n">get</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="n">git</span><span class="w"> </span><span class="n">fakeroot</span><span class="w"> </span><span class="n">build</span><span class="o">-</span><span class="n">essential</span><span class="w"> </span><span class="n">ncurses</span><span class="o">-</span><span class="n">dev</span><span class="w"> </span><span class="n">xz</span><span class="o">-</span><span class="n">utils</span><span class="w"> </span><span class="n">libssl</span><span class="o">-</span><span class="n">dev</span><span class="w"> </span><span class="n">bc</span><span class="w"> </span><span class="n">flex</span><span class="w"> </span><span class="n">libelf</span><span class="o">-</span><span class="n">dev</span><span class="w"> </span><span class="n">bison</span><span class="w"> </span><span class="n">zstd</span><span class="w"> </span><span class="o">-</span><span class="n">y</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">wget</span><span class="w"> </span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">mirrors</span><span class="p">.</span><span class="n">tuna</span><span class="p">.</span><span class="n">tsinghua</span><span class="p">.</span><span class="n">edu</span><span class="p">.</span><span class="n">cn</span><span class="o">/</span><span class="n">kernel</span><span class="o">/</span><span class="n">v5</span><span class="p">.</span><span class="n">x</span><span class="o">/</span><span class="n">linux</span><span class="o">-</span><span class="mi">5</span><span class="p">.</span><span class="mi">10</span><span class="p">.</span><span class="mi">102</span><span class="p">.</span><span class="n">tar</span><span class="p">.</span><span class="n">gz</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">unar</span><span class="w"> </span><span class="n">linux</span><span class="o">-</span><span class="mi">5</span><span class="p">.</span><span class="mi">10</span><span class="p">.</span><span class="mi">102</span><span class="p">.</span><span class="n">tar</span><span class="p">.</span><span class="n">gz</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">cd</span><span class="w"> </span><span class="n">linux</span><span class="o">-</span><span class="mi">5</span><span class="p">.</span><span class="mi">10</span><span class="p">.</span><span class="mi">102</span><span class="o">/</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">make</span><span class="w"> </span><span class="n">menuconfig</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">or</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">make</span><span class="w"> </span><span class="n">defconfig</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">增加</span><span class="n">config</span><span class="err">中的内容</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">make</span><span class="w"> </span><span class="n">olddefconfig</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">make</span><span class="w"> </span><span class="o">-</span><span class="n">j</span><span class="w"> </span><span class="o">`</span><span class="n">nproc</span><span class="o">`</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>勾选</p>
 <ul>
@@ -6727,6 +7382,7 @@
 </span><span class="lnt">18
 </span><span class="lnt">19
 </span><span class="lnt">20
+</span><span class="lnt">21
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-makefile" data-lang="makefile"><span class="line"><span class="cl"><span class="c"># Coverage collection.
@@ -6745,6 +7401,7 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="nv">CONFIG_CMDLINE_BOOL</span><span class="o">=</span>y
 </span></span><span class="line"><span class="cl"><span class="nv">CONFIG_CMDLINE</span><span class="o">=</span><span class="s2">&#34;net.ifnames=0&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">CONFIG_BINFMT_MISC</span><span class="o">=</span>y
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="nv">CONFIG_VIRTIO_NET</span><span class="o">=</span>y
 </span></span><span class="line"><span class="cl"><span class="nv">CONFIG_E1000</span><span class="o">=</span>y
@@ -6760,7 +7417,58 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>编译出的在arch/x86_64/boot/bzImage</p>
-<h2 id="kernel相关">kernel相关</h2>
+<h4 id="可能存在的问题">可能存在的问题</h4>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20240105215005-231.png"
+        data-srcset="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20240105215005-231.png, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20240105215005-231.png 1.5x, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20240105215005-231.png 2x"
+        data-sizes="auto"
+        alt="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20240105215005-231.png"
+        title="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20240105215005-231.png" /></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;target&#34;</span><span class="o">:</span> <span class="s">&#34;linux/amd64&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;http&#34;</span><span class="o">:</span> <span class="s">&#34;0.0.0.0:56741&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;workdir&#34;</span><span class="o">:</span> <span class="s">&#34;/root/syzkaller/workdirr&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;kernel_obj&#34;</span><span class="o">:</span> <span class="s">&#34;/root/linux&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;image&#34;</span><span class="o">:</span> <span class="s">&#34;/root/linux/image/bullseye.img&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;sshkey&#34;</span><span class="o">:</span> <span class="s">&#34;/root/linux/image/bullseye.id_rsa&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;syzkaller&#34;</span><span class="o">:</span> <span class="s">&#34;/root/syzkaller&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;procs&#34;</span><span class="o">:</span> <span class="mi">8</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;type&#34;</span><span class="o">:</span> <span class="s">&#34;qemu&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;vm&#34;</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s">&#34;count&#34;</span><span class="o">:</span> <span class="mi">4</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s">&#34;cmdline&#34;</span><span class="o">:</span> <span class="s">&#34;net.ifnames=0&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s">&#34;kernel&#34;</span><span class="o">:</span> <span class="s">&#34;/root/linux/arch/x86/boot/bzImage&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s">&#34;cpu&#34;</span><span class="o">:</span> <span class="mi">4</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s">&#34;mem&#34;</span><span class="o">:</span> <span class="mi">4096</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="kernel相关">kernel相关</h2>
 <h3 id="常用命令">常用命令</h3>
 <h4 id="查看保护机制">查看保护机制</h4>
 <div class="highlight"><div class="chroma">
@@ -6919,8 +7627,8 @@
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>更新于 2023-11-26&nbsp;<a class="git-hash" href="https://github.com/dillonzq/LoveIt/commit/bd97330cc0b5cdb711e24388ffdf2d41595c6e6d" target="_blank" title="commit by cnitlrt(1258175307@qq.com) bd97330cc0b5cdb711e24388ffdf2d41595c6e6d: blog">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>bd97330</a></span>
+                <span>更新于 2024-01-30&nbsp;<a class="git-hash" href="https://github.com/dillonzq/LoveIt/commit/9de6b7f636cf0b5081d5bc036ad12ecea658cb12" target="_blank" title="commit by cnitlrt(1258175307@qq.com) 9de6b7f636cf0b5081d5bc036ad12ecea658cb12: blog">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>9de6b7f</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"></div>
@@ -6945,7 +7653,7 @@
             </noscript></div></article></div>
             </main><footer class="footer">
         <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.110.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
-                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2021 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">cnitlrt</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">cnitlrt</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
         </div>
     </footer></div>
 

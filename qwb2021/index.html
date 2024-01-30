@@ -9,7 +9,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://cnitlrt.github.io/qwb2021/" /><meta property="og:image" content="https://cnitlrt.github.io/logo.jpg"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-07-04T22:20:17+08:00" />
-<meta property="article:modified_time" content="2023-10-27T13:57:48+08:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2024-01-30T22:23:09+08:00" /><meta property="og:site_name" content="My cool site" />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://cnitlrt.github.io/logo.jpg"/>
 
@@ -34,8 +34,8 @@
                             "url": "https:\/\/cnitlrt.github.io\/images\/Apple-Devices-Preview.png",
                             "width":  3200 ,
                             "height":  2048 
-                        }],"genre": "posts","keywords": "pwn, windows pwn, kernel pwn, v8","wordcount":  13465 ,
-        "url": "https:\/\/cnitlrt.github.io\/qwb2021\/","datePublished": "2022-07-04T22:20:17+08:00","dateModified": "2023-10-27T13:57:48+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "pwn, windows pwn, kernel pwn, v8","wordcount":  13467 ,
+        "url": "https:\/\/cnitlrt.github.io\/qwb2021\/","datePublished": "2022-07-04T22:20:17+08:00","dateModified": "2024-01-30T22:23:09+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": {
                     "@type": "ImageObject",
@@ -113,7 +113,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">QWB2021</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>cnitlrt</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/pwn/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>pwn</a>&nbsp;<a href="/categories/windows-pwn/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>windows pwn</a>&nbsp;<a href="/categories/kernel-pwn/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>kernel pwn</a>&nbsp;<a href="/categories/v8/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>v8</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-07-04">2022-07-04</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 13465 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-07-04">2022-07-04</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 13467 字&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 27 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
@@ -4616,7 +4616,7 @@
 </div><p>add rbx,rax是写入的位置，假设我们可以控制rbx或者rax那么我们就可以控制write地址写入的位置。</p>
 <p>可以看一下rbx的赋值过程</p>
 <p><code>mov    rbx,QWORD PTR [r8]</code>=&gt;<code>lea    r8,[rax+rdx*8]</code>=&gt;<code>mov    rax,QWORD PTR [rax+0x8]</code>=&gt;<code>mov    rax,QWORD PTR [r10+0xf8]</code></p>
-<p>所以我们如果想控制rbx，那么就需要控制<code>r10 + 0xf8</code>的地方这样rbx =[[[r10 + 0xf8] + 0x8]],只能说不太好控制，但是也不是不可控制，然后再看rax</p>
+<p>所以我们如果想控制rbx，那么就需要控制<code>r10 + 0xf8</code>的地方这样rbx =[/[/[r10 + 0xf8] + 0x8/]/],只能说不太好控制，但是也不是不可控制，然后再看rax</p>
 <p><code>mov    rax,QWORD PTR [r10]</code>,可以看到就是将r10里面的值给rax进行赋值。而r10就是我们的<code>struct link_map *l</code>,此值在libc里面，因此我们可以申请一个大的堆块，此时就会通过mmap来申请一块内存，这块内存紧挨着libc,这样就可以通过我们的任意地址写将该值里面的值进行覆盖，可以写入的东西在相对于got的0~0xff的位置处，因此可以通过错位的方法将size覆盖为0，从而无限制的调用任意地址写</p>
 <h3 id="修改rel_addr控制写入位置">修改rel_addr控制写入位置</h3>
 <p>首先我们需要得出我们申请的地址,建议关闭aslr来调试</p>
@@ -5266,8 +5266,8 @@
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>更新于 2023-10-27&nbsp;<a class="git-hash" href="https://github.com/dillonzq/LoveIt/commit/e26aab1baa1417833e13303c26371a9ef7132b0a" target="_blank" title="commit by cnitlrt(1258175307@qq.com) e26aab1baa1417833e13303c26371a9ef7132b0a: blog">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>e26aab1</a></span>
+                <span>更新于 2024-01-30&nbsp;<a class="git-hash" href="https://github.com/dillonzq/LoveIt/commit/9de6b7f636cf0b5081d5bc036ad12ecea658cb12" target="_blank" title="commit by cnitlrt(1258175307@qq.com) 9de6b7f636cf0b5081d5bc036ad12ecea658cb12: blog">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>9de6b7f</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"></div>
@@ -5292,7 +5292,7 @@
             </noscript></div></article></div>
             </main><footer class="footer">
         <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.110.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
-                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2021 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">cnitlrt</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">cnitlrt</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
         </div>
     </footer></div>
 
