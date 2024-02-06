@@ -9,7 +9,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://cnitlrt.github.io/kernel01/" /><meta property="og:image" content="https://cnitlrt.github.io/logo.jpg"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-11-09T09:15:58+08:00" />
-<meta property="article:modified_time" content="2024-02-04T05:46:51+08:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2024-02-07T03:24:21+08:00" /><meta property="og:site_name" content="My cool site" />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://cnitlrt.github.io/logo.jpg"/>
 
@@ -34,8 +34,8 @@
                             "url": "https:\/\/cnitlrt.github.io\/images\/Apple-Devices-Preview.png",
                             "width":  3200 ,
                             "height":  2048 
-                        }],"genre": "posts","keywords": "kernel","wordcount":  14205 ,
-        "url": "https:\/\/cnitlrt.github.io\/kernel01\/","datePublished": "2023-11-09T09:15:58+08:00","dateModified": "2024-02-04T05:46:51+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "kernel","wordcount":  14618 ,
+        "url": "https:\/\/cnitlrt.github.io\/kernel01\/","datePublished": "2023-11-09T09:15:58+08:00","dateModified": "2024-02-07T03:24:21+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": {
                     "@type": "ImageObject",
@@ -113,8 +113,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Kernel01</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>cnitlrt</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Categories</a>&nbsp;<a href="/categories/kernel/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>kernel</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-11-09">2023-11-09</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 14205 字&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 29 分钟&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-11-09">2023-11-09</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 14618 字&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 30 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>目录</span>
@@ -180,6 +180,7 @@
                 <li><a href="#kmalloc-cg-512">kmalloc-cg-512</a></li>
               </ul>
             </li>
+            <li><a href="#独立页的uaf">独立页的uaf</a></li>
           </ul>
         </li>
         <li><a href="#off-by-null">off by null</a>
@@ -204,6 +205,7 @@
         </li>
       </ul>
     </li>
+    <li><a href="#参考链接">参考链接</a></li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><h2 id="例子">例子</h2>
@@ -3880,7 +3882,57 @@
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="off-by-null">off by null</h2>
+</div><h3 id="独立页的uaf">独立页的uaf</h3>
+<p>从最简单的开始做起，可以申请无限制数量的堆块</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo cat /sys/kernel/slab/kmalloc-512/cpu_partial
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>按照道理来说将page释放的操作应该是</p>
+<ol>
+<li>
+<p>申请(cpu_partial + 0x2) * one_page_object个object</p>
+</li>
+<li>
+<p>然后申请1个vuln_object</p>
+</li>
+<li>
+<p>然后再申请one_page_object个object</p>
+</li>
+<li>
+<p>然后释放掉vuln_object以及其前后各one_page_object的object</p>
+</li>
+<li>
+<p>然后再释放(cpu_partial + 0x1) 每个页释放一个 此时便可以将vuln_object的页释放进buddy_system中</p>
+</li>
+</ol>
+<p>但是实际操作发现，成功率非常低，但是如果无脑的申请很多堆块，然后释放掉 成功率却很高</p>
+<p>大概需要保证申请的object的数量*其size是0x10000才能成功</p>
+</blockquote>
+<p>A: 真相了，实际上对比的是cpu_partial_slabs</p>
+<p>cpu_partial_slabs(暂时没找到在哪获取的)</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/kernel01/image/image-20240206031406283.png"
+        data-srcset="/kernel01/image/image-20240206031406283.png, /kernel01/image/image-20240206031406283.png 1.5x, /kernel01/image/image-20240206031406283.png 2x"
+        data-sizes="auto"
+        alt="/kernel01/image/image-20240206031406283.png"
+        title="image-20240206031406283" width="608" height="1170" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/kernel01/image/image-20240206034000274.png"
+        data-srcset="/kernel01/image/image-20240206034000274.png, /kernel01/image/image-20240206034000274.png 1.5x, /kernel01/image/image-20240206034000274.png 2x"
+        data-sizes="auto"
+        alt="/kernel01/image/image-20240206034000274.png"
+        title="image-20240206034000274" width="2317" height="1200" /></p>
+<h2 id="off-by-null">off by null</h2>
 <h3 id="独立页的-off-by-null-kmalloc-0x200">独立页的 off by null (kmalloc-0x200)</h3>
 <h4 id="前置知识">前置知识</h4>
 <p>page 申请的时候是从高地址向低地址申请的 (从下往上)</p>
@@ -5025,12 +5077,17 @@ pte-&gt; mmap_page_addr
         data-srcset="/kernel01/image/image-20240204053142651.png, /kernel01/image/image-20240204053142651.png 1.5x, /kernel01/image/image-20240204053142651.png 2x"
         data-sizes="auto"
         alt="/kernel01/image/image-20240204053142651.png"
-        title="image-20240204053142651" width="1611" height="1071" /></p></div><div class="post-footer" id="post-footer">
+        title="image-20240204053142651" width="1611" height="1071" /></p>
+<h1 id="参考链接">参考链接</h1>
+<p><a href="https://yanglingxi1993.github.io/dirty_pagetable/dirty_pagetable.html" target="_blank" rel="noopener noreffer ">dirty_pageable</a></p>
+<p>[<a href="https://ptr-yudai.hatenablog.com/entry/2023/12/08/093606" target="_blank" rel="noopener noreffer ">Understanding Dirty Pagetable - m0leCon Finals 2023 CTF Writeup</a>]</p>
+<p><a href="https://www.cnblogs.com/smilingsusu/articles/14541573.html" target="_blank" rel="noopener noreffer ">Linux内核-如何获取虚拟地址对应的物理地址</a></p>
+<p><a href="https://0x434b.dev/learning-linux-kernel-exploitation-part-2-cve-2022-0847/" target="_blank" rel="noopener noreffer ">cve-2022-0847-v2p</a></p></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>更新于 2024-02-04&nbsp;<a class="git-hash" href="https://github.com/dillonzq/LoveIt/commit/c3a3a3ea0208557acb05385b9c2d9a3efab7a54c" target="_blank" title="commit by cnitlrt(1258175307@qq.com) c3a3a3ea0208557acb05385b9c2d9a3efab7a54c: blog">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>c3a3a3e</a></span>
+                <span>更新于 2024-02-07&nbsp;<a class="git-hash" href="https://github.com/dillonzq/LoveIt/commit/23f39b9fa3519039e16ee55f6d68bce9bfcac3de" target="_blank" title="commit by cnitlrt(1258175307@qq.com) 23f39b9fa3519039e16ee55f6d68bce9bfcac3de: blog">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>23f39b9</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"></div>
