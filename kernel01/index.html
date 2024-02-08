@@ -9,7 +9,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://cnitlrt.github.io/kernel01/" /><meta property="og:image" content="https://cnitlrt.github.io/logo.jpg"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-11-09T09:15:58+08:00" />
-<meta property="article:modified_time" content="2024-02-09T01:17:03+08:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2024-02-09T01:27:16+08:00" /><meta property="og:site_name" content="My cool site" />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://cnitlrt.github.io/logo.jpg"/>
 
@@ -34,8 +34,8 @@
                             "url": "https:\/\/cnitlrt.github.io\/images\/Apple-Devices-Preview.png",
                             "width":  3200 ,
                             "height":  2048 
-                        }],"genre": "posts","keywords": "kernel","wordcount":  15670 ,
-        "url": "https:\/\/cnitlrt.github.io\/kernel01\/","datePublished": "2023-11-09T09:15:58+08:00","dateModified": "2024-02-09T01:17:03+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "kernel","wordcount":  15660 ,
+        "url": "https:\/\/cnitlrt.github.io\/kernel01\/","datePublished": "2023-11-09T09:15:58+08:00","dateModified": "2024-02-09T01:27:16+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": {
                     "@type": "ImageObject",
@@ -113,7 +113,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Kernel01</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>cnitlrt</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Categories</a>&nbsp;<a href="/categories/kernel/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>kernel</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-11-09">2023-11-09</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 15670 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-11-09">2023-11-09</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 15660 字&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 32 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
@@ -3921,22 +3921,22 @@
 <p>A: 真相了，实际上对比的是cpu_partial_slabs</p>
 <p>cpu_partial_slabs(暂时没找到在哪获取的)</p>
 <p>调试技巧，将断点下在__unfreeze_partials处即可</p>
-<p>p *s 或者tele $rdi 20
-<img
+<p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/kernel01/image/image-20240206031406283.png"
-        data-srcset="/kernel01/image/image-20240206031406283.png, /kernel01/image/image-20240206031406283.png 1.5x, /kernel01/image/image-20240206031406283.png 2x"
+        data-src="/kernel01/image/image-20240209012445459.png"
+        data-srcset="/kernel01/image/image-20240209012445459.png, /kernel01/image/image-20240209012445459.png 1.5x, /kernel01/image/image-20240209012445459.png 2x"
         data-sizes="auto"
-        alt="/kernel01/image/image-20240206031406283.png"
-        title="image-20240206031406283" width="608" height="1170" /><img
+        alt="/kernel01/image/image-20240209012445459.png"
+        title="image-20240209012445459" width="423" height="814" /></p>
+<p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/kernel01/image/image-20240206034000274.png"
-        data-srcset="/kernel01/image/image-20240206034000274.png, /kernel01/image/image-20240206034000274.png 1.5x, /kernel01/image/image-20240206034000274.png 2x"
+        data-src="/kernel01/image/image-20240209012500352.png"
+        data-srcset="/kernel01/image/image-20240209012500352.png, /kernel01/image/image-20240209012500352.png 1.5x, /kernel01/image/image-20240209012500352.png 2x"
         data-sizes="auto"
-        alt="/kernel01/image/image-20240206034000274.png"
-        title="image-20240206034000274" width="2317" height="1200" /></p>
+        alt="/kernel01/image/image-20240209012500352.png"
+        title="image-20240209012500352" width="1720" height="895" /></p>
 <h4 id="方法1-重叠攻击pipe-buffer">方法1 重叠攻击pipe buffer</h4>
 <ul>
 <li>申请0x80(13 + 0x3)  * 0x8 个object,然后释放掉他们</li>
@@ -4387,11 +4387,11 @@
 </div><p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/kernel01/image/image-20240207041158244.png"
-        data-srcset="/kernel01/image/image-20240207041158244.png, /kernel01/image/image-20240207041158244.png 1.5x, /kernel01/image/image-20240207041158244.png 2x"
+        data-src="/kernel01/image/image-20240209012516213.png"
+        data-srcset="/kernel01/image/image-20240209012516213.png, /kernel01/image/image-20240209012516213.png 1.5x, /kernel01/image/image-20240209012516213.png 2x"
         data-sizes="auto"
-        alt="/kernel01/image/image-20240207041158244.png"
-        title="image-20240207041158244" width="1020" height="482" /></p>
+        alt="/kernel01/image/image-20240209012516213.png"
+        title="image-20240209012516213" width="1722" height="808" /></p>
 <blockquote>
 <p>Q: 假设不能用show还能做吗</p>
 </blockquote>
@@ -4405,21 +4405,21 @@
 <img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/kernel01/image/image-20240204015435221.png"
-        data-srcset="/kernel01/image/image-20240204015435221.png, /kernel01/image/image-20240204015435221.png 1.5x, /kernel01/image/image-20240204015435221.png 2x"
+        data-src="/kernel01/image/image-20240209012534338.png"
+        data-srcset="/kernel01/image/image-20240209012534338.png, /kernel01/image/image-20240209012534338.png 1.5x, /kernel01/image/image-20240209012534338.png 2x"
         data-sizes="auto"
-        alt="/kernel01/image/image-20240204015435221.png"
-        title="image-20240204015435221" width="1485" height="853" /></p>
+        alt="/kernel01/image/image-20240209012534338.png"
+        title="image-20240209012534338" width="1726" height="988" /></p>
 <h4 id="漏洞利用">漏洞利用</h4>
 <p>可以看到 512 大小的堆块属于 order-0 的页面 1 = 2^0</p>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/kernel01/image/image-20240204020151763.png"
-        data-srcset="/kernel01/image/image-20240204020151763.png, /kernel01/image/image-20240204020151763.png 1.5x, /kernel01/image/image-20240204020151763.png 2x"
+        data-src="/kernel01/image/image-20240209012545869.png"
+        data-srcset="/kernel01/image/image-20240209012545869.png, /kernel01/image/image-20240209012545869.png 1.5x, /kernel01/image/image-20240209012545869.png 2x"
         data-sizes="auto"
-        alt="/kernel01/image/image-20240204020151763.png"
-        title="image-20240204020151763" width="2035" height="1408" /></p>
+        alt="/kernel01/image/image-20240209012545869.png"
+        title="image-20240209012545869" width="1728" height="1197" /></p>
 <ol>
 <li>首先申请一些页, 以及对 pipe_buffer 进行初始化</li>
 </ol>
@@ -4810,38 +4810,30 @@
 <img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/kernel01/image/image-20240204052633271.png"
-        data-srcset="/kernel01/image/image-20240204052633271.png, /kernel01/image/image-20240204052633271.png 1.5x, /kernel01/image/image-20240204052633271.png 2x"
+        data-src="/kernel01/image/image-20240209012606407.png"
+        data-srcset="/kernel01/image/image-20240209012606407.png, /kernel01/image/image-20240209012606407.png 1.5x, /kernel01/image/image-20240209012606407.png 2x"
         data-sizes="auto"
-        alt="/kernel01/image/image-20240204052633271.png"
-        title="image-20240204052633271" width="910" height="346" />
-<img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="/kernel01/image/image-20240204052341233.png"
-        data-srcset="/kernel01/image/image-20240204052341233.png, /kernel01/image/image-20240204052341233.png 1.5x, /kernel01/image/image-20240204052341233.png 2x"
-        data-sizes="auto"
-        alt="/kernel01/image/image-20240204052341233.png"
-        title="image-20240204052341233" width="1258" height="628" /></p>
+        alt="/kernel01/image/image-20240209012606407.png"
+        title="image-20240209012606407" width="1633" height="624" /></p>
 <p>修改之后
 pte-&gt; mmap_page_addr
 <img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/kernel01/image/image-20240204052521824.png"
-        data-srcset="/kernel01/image/image-20240204052521824.png, /kernel01/image/image-20240204052521824.png 1.5x, /kernel01/image/image-20240204052521824.png 2x"
+        data-src="/kernel01/image/image-20240209012632782.png"
+        data-srcset="/kernel01/image/image-20240209012632782.png, /kernel01/image/image-20240209012632782.png 1.5x, /kernel01/image/image-20240209012632782.png 2x"
         data-sizes="auto"
-        alt="/kernel01/image/image-20240204052521824.png"
-        title="image-20240204052521824" width="1140" height="346" /></p>
+        alt="/kernel01/image/image-20240209012632782.png"
+        title="image-20240209012632782" width="1716" height="520" /></p>
 <p>物理地址
 <img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/kernel01/image/image-20240204052258846.png"
-        data-srcset="/kernel01/image/image-20240204052258846.png, /kernel01/image/image-20240204052258846.png 1.5x, /kernel01/image/image-20240204052258846.png 2x"
+        data-src="/kernel01/image/image-20240209012643088.png"
+        data-srcset="/kernel01/image/image-20240209012643088.png, /kernel01/image/image-20240209012643088.png 1.5x, /kernel01/image/image-20240209012643088.png 2x"
         data-sizes="auto"
-        alt="/kernel01/image/image-20240204052258846.png"
-        title="image-20240204052258846" width="1360" height="354" /></p>
+        alt="/kernel01/image/image-20240209012643088.png"
+        title="image-20240209012643088" width="1716" height="442" /></p>
 <h4 id="完整-exp">完整 exp</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -5538,11 +5530,11 @@ pte-&gt; mmap_page_addr
 </div><p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/kernel01/image/image-20240204053142651.png"
-        data-srcset="/kernel01/image/image-20240204053142651.png, /kernel01/image/image-20240204053142651.png 1.5x, /kernel01/image/image-20240204053142651.png 2x"
+        data-src="/kernel01/image/image-20240209012702257.png"
+        data-srcset="/kernel01/image/image-20240209012702257.png, /kernel01/image/image-20240209012702257.png 1.5x, /kernel01/image/image-20240209012702257.png 2x"
         data-sizes="auto"
-        alt="/kernel01/image/image-20240204053142651.png"
-        title="image-20240204053142651" width="1611" height="1071" /></p>
+        alt="/kernel01/image/image-20240209012702257.png"
+        title="image-20240209012702257" width="1632" height="1134" /></p>
 <h1 id="参考链接">参考链接</h1>
 <p><a href="https://yanglingxi1993.github.io/dirty_pagetable/dirty_pagetable.html" target="_blank" rel="noopener noreffer ">dirty_pageable</a></p>
 <p>[<a href="https://ptr-yudai.hatenablog.com/entry/2023/12/08/093606" target="_blank" rel="noopener noreffer ">Understanding Dirty Pagetable - m0leCon Finals 2023 CTF Writeup</a>]</p>
@@ -5551,8 +5543,8 @@ pte-&gt; mmap_page_addr
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>更新于 2024-02-09&nbsp;<a class="git-hash" href="https://github.com/dillonzq/LoveIt/commit/a62b7b562e0bb373ede3aa233d4dd3e214edca42" target="_blank" title="commit by cnitlrt(1258175307@qq.com) a62b7b562e0bb373ede3aa233d4dd3e214edca42: blog">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>a62b7b5</a></span>
+                <span>更新于 2024-02-09&nbsp;<a class="git-hash" href="https://github.com/dillonzq/LoveIt/commit/3dcd62a043f1e980fc9803c24a39f0305cb8026f" target="_blank" title="commit by cnitlrt(1258175307@qq.com) 3dcd62a043f1e980fc9803c24a39f0305cb8026f: blog">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>3dcd62a</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"></div>
