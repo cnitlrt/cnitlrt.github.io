@@ -9,7 +9,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://cnitlrt.github.io/misc/" /><meta property="og:image" content="https://cnitlrt.github.io/logo.jpg"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-01-01T04:06:14+08:00" />
-<meta property="article:modified_time" content="2024-02-07T03:24:21+08:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2024-02-09T01:17:03+08:00" /><meta property="og:site_name" content="My cool site" />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://cnitlrt.github.io/logo.jpg"/>
 
@@ -34,8 +34,8 @@
                             "url": "https:\/\/cnitlrt.github.io\/images\/Apple-Devices-Preview.png",
                             "width":  3200 ,
                             "height":  2048 
-                        }],"genre": "posts","keywords": "tools","wordcount":  18682 ,
-        "url": "https:\/\/cnitlrt.github.io\/misc\/","datePublished": "2022-01-01T04:06:14+08:00","dateModified": "2024-02-07T03:24:21+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "tools","wordcount":  18641 ,
+        "url": "https:\/\/cnitlrt.github.io\/misc\/","datePublished": "2022-01-01T04:06:14+08:00","dateModified": "2024-02-09T01:17:03+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": {
                     "@type": "ImageObject",
@@ -113,7 +113,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">疑难杂症宝典</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>cnitlrt</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/tools/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>tools</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-01-01">2022-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 18682 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-01-01">2022-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 18641 字&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 38 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
@@ -5511,9 +5511,7 @@
 <p>将该域名改成代理即可</p>
 <h4 id="配置github-action">配置github action</h4>
 <p>在settings-&gt;developer settings-&gt;personal access tokens-&gt;tokens ( classic)里面添加一个personal key把所有的权限都打上，然后将key记录下来</p>
-<p>创建两个分支：</p>
-<p>一个blog (用来保存hugo网站目录)</p>
-<p>一个master(用来保存blog目录)</p>
+<p>创建两个仓库</p>
 <p>在根目录建立.github/workflows/mian.yml</p>
 <p>内容如下</p>
 <div class="highlight"><div class="chroma">
@@ -5557,7 +5555,7 @@
 </span></span><span class="line"><span class="cl">on:
 </span></span><span class="line"><span class="cl">  push:
 </span></span><span class="line"><span class="cl">    branches:
-</span></span><span class="line"><span class="cl">      - blog
+</span></span><span class="line"><span class="cl">      - master
 </span></span><span class="line"><span class="cl">jobs:
 </span></span><span class="line"><span class="cl">  build-deploy:
 </span></span><span class="line"><span class="cl">    runs-on: ubuntu-latest
@@ -5599,7 +5597,7 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">hugo &amp;&amp; git add . &amp;&amp; git commit -m &#34;test&#34; &amp;&amp; git push -u origin blog
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">hugo &amp;&amp; git add . &amp;&amp; git commit -m &#34;blog&#34; &amp;&amp; git push -u origin master
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p><img
@@ -7700,8 +7698,8 @@
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>更新于 2024-02-07&nbsp;<a class="git-hash" href="https://github.com/dillonzq/LoveIt/commit/23f39b9fa3519039e16ee55f6d68bce9bfcac3de" target="_blank" title="commit by cnitlrt(1258175307@qq.com) 23f39b9fa3519039e16ee55f6d68bce9bfcac3de: blog">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>23f39b9</a></span>
+                <span>更新于 2024-02-09&nbsp;<a class="git-hash" href="https://github.com/dillonzq/LoveIt/commit/a62b7b562e0bb373ede3aa233d4dd3e214edca42" target="_blank" title="commit by cnitlrt(1258175307@qq.com) a62b7b562e0bb373ede3aa233d4dd3e214edca42: blog">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>a62b7b5</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"></div>
