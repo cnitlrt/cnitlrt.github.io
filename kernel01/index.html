@@ -9,7 +9,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://cnitlrt.github.io/kernel01/" /><meta property="og:image" content="https://cnitlrt.github.io/logo.jpg"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-11-09T09:15:58+08:00" />
-<meta property="article:modified_time" content="2024-02-09T02:00:13+08:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2024-02-18T00:31:43+08:00" /><meta property="og:site_name" content="My cool site" />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://cnitlrt.github.io/logo.jpg"/>
 
@@ -34,8 +34,8 @@
                             "url": "https:\/\/cnitlrt.github.io\/images\/Apple-Devices-Preview.png",
                             "width":  3200 ,
                             "height":  2048 
-                        }],"genre": "posts","keywords": "kernel","wordcount":  15670 ,
-        "url": "https:\/\/cnitlrt.github.io\/kernel01\/","datePublished": "2023-11-09T09:15:58+08:00","dateModified": "2024-02-09T02:00:13+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "kernel","wordcount":  15465 ,
+        "url": "https:\/\/cnitlrt.github.io\/kernel01\/","datePublished": "2023-11-09T09:15:58+08:00","dateModified": "2024-02-18T00:31:43+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": {
                     "@type": "ImageObject",
@@ -113,8 +113,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Kernel01</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>cnitlrt</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Categories</a>&nbsp;<a href="/categories/kernel/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>kernel</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-11-09">2023-11-09</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 15670 字&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 32 分钟&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-11-09">2023-11-09</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 15465 字&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 31 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>目录</span>
@@ -180,9 +180,9 @@
                 <li><a href="#kmalloc-cg-512">kmalloc-cg-512</a></li>
               </ul>
             </li>
-            <li><a href="#独立页的uaf">独立页的uaf</a>
+            <li><a href="#独立页的-uaf">独立页的 uaf</a>
               <ul>
-                <li><a href="#方法1-重叠攻击pipe-buffer">方法1 重叠攻击pipe buffer</a></li>
+                <li><a href="#方法-1-重叠攻击-pipe-buffer">方法 1 重叠攻击 pipe buffer</a></li>
               </ul>
             </li>
           </ul>
@@ -3886,7 +3886,7 @@
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="独立页的uaf">独立页的uaf</h3>
+</div><h3 id="独立页的-uaf">独立页的 uaf</h3>
 <p>从最简单的开始做起，可以申请无限制数量的堆块</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -3897,31 +3897,31 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><blockquote>
-<p>按照道理来说将page释放的操作应该是</p>
+<p>按照道理来说将 page 释放的操作应该是</p>
 <ol>
 <li>
-<p>申请(cpu_partial + 0x2) * one_page_object个object</p>
+<p>申请(cpu_partial + 0x2) * one_page_object 个 object</p>
 </li>
 <li>
-<p>然后申请1个vuln_object</p>
+<p>然后申请 1 个 vuln_object</p>
 </li>
 <li>
-<p>然后再申请one_page_object个object</p>
+<p>然后再申请 one_page_object 个 object</p>
 </li>
 <li>
-<p>然后释放掉vuln_object以及其前后各one_page_object的object</p>
+<p>然后释放掉 vuln_object 以及其前后各 one_page_object 的 object</p>
 </li>
 <li>
-<p>然后再释放(cpu_partial + 0x1) 每个页释放一个 此时便可以将vuln_object的页释放进buddy_system中</p>
+<p>然后再释放(cpu_partial + 0x1) 每个页释放一个 此时便可以将 vuln_object 的页释放进 buddy_system 中</p>
 </li>
 </ol>
 <p>但是实际操作发现，成功率非常低，但是如果无脑的申请很多堆块，然后释放掉 成功率却很高</p>
-<p>大概需要保证申请的object的数量*其size是0x10000才能成功</p>
+<p>大概需要保证申请的 object 的数量*其 size 是 0x10000 才能成功</p>
 </blockquote>
-<p>A: 真相了，实际上对比的是cpu_partial_slabs</p>
+<p>A: 真相了，实际上对比的是 cpu_partial_slabs</p>
 <p>cpu_partial_slabs(暂时没找到在哪获取的)</p>
-<p>调试技巧，将断点下在__unfreeze_partials处即可</p>
-<p>p *s 或者tele $rdi 20</p>
+<p>调试技巧，将断点下在__unfreeze_partials 处即可</p>
+<p>p *s 或者 tele $rdi 20</p>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -3938,12 +3938,12 @@
         data-sizes="auto"
         alt="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20240209015248-226.png"
         title="image-20240206034000274" /></p>
-<h4 id="方法1-重叠攻击pipe-buffer">方法1 重叠攻击pipe buffer</h4>
+<h4 id="方法-1-重叠攻击-pipe-buffer">方法 1 重叠攻击 pipe buffer</h4>
 <ul>
-<li>申请0x80(13 + 0x3)  * 0x8 个object,然后释放掉他们</li>
-<li>喷射sk_buffer来复用buddy system</li>
-<li>释放和uaf的object然后用pipe-buffer进行占位</li>
-<li>读取sk_buffer内容使用pipe-prime来劫持busybox</li>
+<li>申请 0x80(13 + 0x3)  * 0x8 个 object, 然后释放掉他们</li>
+<li>喷射 sk_buffer 来复用 buddy system</li>
+<li>释放和 uaf 的 object 然后用 pipe-buffer 进行占位</li>
+<li>读取 sk_buffer 内容使用 pipe-prime 来劫持 busybox</li>
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -4320,10 +4320,10 @@
 </span></span><span class="line"><span class="cl">        <span class="nf">del</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// logd(&#34;spary some 0x200 pipe-buffers&#34;);
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// for(int i = 0;i &lt; 0x8;i++){
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// for(int i = 0; i &lt; 0x8; i++){
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">//     change_pipe_buff_size(i,0x200);
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">//     memset(buf,&#39;a&#39; + i,0x100);
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">//     write(pipes[i][1],buf,i + 1);
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">//     write(pipes [i][1], buf, i + 1);
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// }
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">logd</span><span class="p">(</span><span class="s">&#34;spary some sk-buffer&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span> <span class="o">&lt;</span> <span class="mh">0x8</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
@@ -4394,7 +4394,7 @@
         alt="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20240209015808-705.png"
         title="image-20240207041158244" /></p>
 <blockquote>
-<p>Q: 假设不能用show还能做吗</p>
+<p>Q: 假设不能用 show 还能做吗</p>
 </blockquote>
 <h2 id="off-by-null">off by null</h2>
 <h3 id="独立页的-off-by-null-kmalloc-0x200">独立页的 off by null (kmalloc-0x200)</h3>
@@ -4406,20 +4406,20 @@
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20240209015808-705.png"
-        data-srcset="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20240209015808-705.png, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20240209015808-705.png 1.5x, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20240209015808-705.png 2x"
+        data-src="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20240218002622-584.png"
+        data-srcset="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20240218002622-584.png, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20240218002622-584.png 1.5x, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20240218002622-584.png 2x"
         data-sizes="auto"
-        alt="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20240209015808-705.png"
+        alt="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20240218002622-584.png"
         title="image-20240204015435221" /></p>
 <h4 id="漏洞利用">漏洞利用</h4>
 <p>可以看到 512 大小的堆块属于 order-0 的页面 1 = 2^0</p>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20240209015808-705.png"
-        data-srcset="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20240209015808-705.png, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20240209015808-705.png 1.5x, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20240209015808-705.png 2x"
+        data-src="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20240218002622-585.png"
+        data-srcset="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20240218002622-585.png, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20240218002622-585.png 1.5x, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20240218002622-585.png 2x"
         data-sizes="auto"
-        alt="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20240209015808-705.png"
+        alt="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20240218002622-585.png"
         title="image-20240204020151763" /></p>
 <ol>
 <li>首先申请一些页, 以及对 pipe_buffer 进行初始化</li>
@@ -4811,36 +4811,29 @@
 <img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20240209015808-705.png"
-        data-srcset="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20240209015808-705.png, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20240209015808-705.png 1.5x, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20240209015808-705.png 2x"
+        data-src="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20240218003026-708.png"
+        data-srcset="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20240218003026-708.png, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20240218003026-708.png 1.5x, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20240218003026-708.png 2x"
         data-sizes="auto"
-        alt="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20240209015808-705.png"
+        alt="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20240218003026-708.png"
         title="image-20240204052633271" />
-<img
+修改之后</p>
+<p>pte-&gt; mmap_page_addr</p>
+<p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20240209015808-705.png"
-        data-srcset="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20240209015808-705.png, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20240209015808-705.png 1.5x, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20240209015808-705.png 2x"
+        data-src="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20240218003020-844.png"
+        data-srcset="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20240218003020-844.png, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20240218003020-844.png 1.5x, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20240218003020-844.png 2x"
         data-sizes="auto"
-        alt="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20240209015808-705.png"
-        title="image-20240204052341233" />修改之后
-pte-&gt; mmap_page_addr
-<img
+        alt="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20240218003020-844.png"
+        title="image-20240204052341233" /></p>
+<p>物理地址<img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20240209015808-705.png"
-        data-srcset="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20240209015808-705.png, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20240209015808-705.png 1.5x, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20240209015808-705.png 2x"
+        data-src="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20240218003015-467.png"
+        data-srcset="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20240218003015-467.png, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20240218003015-467.png 1.5x, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20240218003015-467.png 2x"
         data-sizes="auto"
-        alt="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20240209015808-705.png"
-        title="image-20240204052521824" /> 物理地址
-<img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20240209015808-705.png"
-        data-srcset="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20240209015808-705.png, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20240209015808-705.png 1.5x, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20240209015808-705.png 2x"
-        data-sizes="auto"
-        alt="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20240209015808-705.png"
-        title="image-20240204052258846" /></p>
+        alt="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20240218003015-467.png"
+        title="image-20240204052521824" /></p>
 <h4 id="完整-exp">完整 exp</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -5537,21 +5530,21 @@ pte-&gt; mmap_page_addr
 </div><p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20240209015808-705.png"
-        data-srcset="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20240209015808-705.png, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20240209015808-705.png 1.5x, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20240209015808-705.png 2x"
+        data-src="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20240218003035-396.png"
+        data-srcset="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20240218003035-396.png, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20240218003035-396.png 1.5x, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20240218003035-396.png 2x"
         data-sizes="auto"
-        alt="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20240209015808-705.png"
-        title="image-20240204053142651" /></p>
+        alt="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20240218003035-396.png"
+        title="image-20240204052258846" /></p>
 <h1 id="参考链接">参考链接</h1>
 <p><a href="https://yanglingxi1993.github.io/dirty_pagetable/dirty_pagetable.html" target="_blank" rel="noopener noreffer ">dirty_pageable</a></p>
 <p>[<a href="https://ptr-yudai.hatenablog.com/entry/2023/12/08/093606" target="_blank" rel="noopener noreffer ">Understanding Dirty Pagetable - m0leCon Finals 2023 CTF Writeup</a>]</p>
-<p><a href="https://www.cnblogs.com/smilingsusu/articles/14541573.html" target="_blank" rel="noopener noreffer ">Linux内核-如何获取虚拟地址对应的物理地址</a></p>
+<p><a href="https://www.cnblogs.com/smilingsusu/articles/14541573.html" target="_blank" rel="noopener noreffer ">Linux 内核-如何获取虚拟地址对应的物理地址</a></p>
 <p><a href="https://0x434b.dev/learning-linux-kernel-exploitation-part-2-cve-2022-0847/" target="_blank" rel="noopener noreffer ">cve-2022-0847-v2p</a></p></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>更新于 2024-02-09&nbsp;<a class="git-hash" href="https://github.com/dillonzq/LoveIt/commit/ea1d52436c06ac68e97d331f9383db331f16eff2" target="_blank" title="commit by cnitlrt(1258175307@qq.com) ea1d52436c06ac68e97d331f9383db331f16eff2: blog">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>ea1d524</a></span>
+                <span>更新于 2024-02-18&nbsp;<a class="git-hash" href="https://github.com/dillonzq/LoveIt/commit/c9581fad898697afacf8f036f7a9f20becac5660" target="_blank" title="commit by cnitlrt(1258175307@qq.com) c9581fad898697afacf8f036f7a9f20becac5660: blog">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>c9581fa</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"></div>
