@@ -9,7 +9,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://cnitlrt.github.io/misc/" /><meta property="og:image" content="https://cnitlrt.github.io/logo.jpg"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-01-01T04:06:14+08:00" />
-<meta property="article:modified_time" content="2024-03-18T16:24:57+08:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2024-04-26T01:22:22+08:00" /><meta property="og:site_name" content="My cool site" />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://cnitlrt.github.io/logo.jpg"/>
 
@@ -34,8 +34,8 @@
                             "url": "https:\/\/cnitlrt.github.io\/images\/Apple-Devices-Preview.png",
                             "width":  3200 ,
                             "height":  2048 
-                        }],"genre": "posts","keywords": "tools","wordcount":  18757 ,
-        "url": "https:\/\/cnitlrt.github.io\/misc\/","datePublished": "2022-01-01T04:06:14+08:00","dateModified": "2024-03-18T16:24:57+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "tools","wordcount":  19660 ,
+        "url": "https:\/\/cnitlrt.github.io\/misc\/","datePublished": "2022-01-01T04:06:14+08:00","dateModified": "2024-04-26T01:22:22+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": {
                     "@type": "ImageObject",
@@ -113,8 +113,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">疑难杂症宝典</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>cnitlrt</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/tools/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>tools</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-01-01">2022-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 18757 字&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 38 分钟&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-01-01">2022-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 19660 字&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 40 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>目录</span>
@@ -124,6 +124,19 @@
   <ul>
     <li>
       <ul>
+        <li><a href="#linux使用云盘">linux使用云盘</a>
+          <ul>
+            <li><a href="#安装">安装</a></li>
+            <li><a href="#使用">使用</a></li>
+          </ul>
+        </li>
+        <li><a href="#不能正常vnc连接">不能正常vnc连接</a></li>
+        <li><a href="#ubuntu-desktop删除开机界面">ubuntu desktop删除开机界面</a></li>
+        <li><a href="#解决nuc无显卡问题需要ubuntu2204">解决nuc无显卡问题(需要&gt;=ubuntu22.04)</a></li>
+        <li><a href="#ubuntu安装google浏览器">ubuntu安装google浏览器</a></li>
+        <li><a href="#google启动时使用代理">google启动时使用代理</a></li>
+        <li><a href="#ssh-display">ssh display</a></li>
+        <li><a href="#gef常用指令">gef常用指令</a></li>
         <li><a href="#linux-激活typora">linux 激活typora</a></li>
         <li><a href="#gdb-has-unknown-type-cast-it-to-its-declared-type">gdb has unknown type; cast it to its declared type</a></li>
         <li><a href="#copilot-gpt4-service使用">copilot-gpt4-service使用</a>
@@ -167,6 +180,17 @@
             <li><a href="#codeql">codeql</a></li>
             <li><a href="#vscode--counter">Vscode  counter</a></li>
             <li><a href="#sarif-view">sarif view</a></li>
+          </ul>
+        </li>
+        <li><a href="#docker-gui显示错误">docker gui显示错误</a>
+          <ul>
+            <li>
+              <ul>
+                <li><a href="#dockefile">dockefile</a></li>
+                <li><a href="#docker-composeyml">docker-compose.yml</a></li>
+                <li><a href="#bash">bash</a></li>
+              </ul>
+            </li>
           </ul>
         </li>
         <li><a href="#docker-gdbserver调试">docker gdbserver调试</a></li>
@@ -265,7 +289,7 @@
           <ul>
             <li>
               <ul>
-                <li><a href="#安装">安装</a></li>
+                <li><a href="#安装-1">安装</a></li>
                 <li><a href="#增加友链-所有的目录都在根目录">增加友链 （所有的目录都在根目录）</a>
                   <ul>
                     <li><a href="#增加菜单栏configtoml">增加菜单栏（config.toml）</a></li>
@@ -343,7 +367,7 @@
         <li><a href="#syzkaller环境搭建">syzkaller环境搭建</a></li>
         <li><a href="#linux-内核编译">linux 内核编译</a>
           <ul>
-            <li>
+            <li><a href="#使用-1">使用</a>
               <ul>
                 <li><a href="#可能存在的问题">可能存在的问题</a></li>
               </ul>
@@ -362,7 +386,7 @@
             </li>
             <li><a href="#pahole安装">pahole安装</a>
               <ul>
-                <li><a href="#使用">使用</a></li>
+                <li><a href="#使用-2">使用</a></li>
               </ul>
             </li>
           </ul>
@@ -385,7 +409,224 @@
     </li>
   </ul>
 </nav></div>
-            </div><div class="content" id="content"><h2 id="linux-激活typora">linux 激活typora</h2>
+            </div><div class="content" id="content"><h2 id="linux使用云盘">linux使用云盘</h2>
+<p>需求是使用github-action来编译文件时会用到</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">https://github.com/tickstep/cloudpan189-go
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="安装">安装</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">sudo curl -fsSL http://file.tickstep.com/apt/pgp | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/tickstep-packages-archive-keyring.gpg &gt; /dev/null &amp;&amp; echo &#34;deb [signed-by=/etc/apt/trusted.gpg.d/tickstep-packages-archive-keyring.gpg arch=amd64,arm64] http://file.tickstep.com/apt cloudpan189-go main&#34; | sudo tee /etc/apt/sources.list.d/tickstep-cloudpan189-go.list &gt; /dev/null &amp;&amp; sudo apt-get update &amp;&amp; sudo apt-get install -y cloudpan189-go
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="使用">使用</h3>
+<p>USER为用户名 PASSWORD为密码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">     backup           备份文件或目录
+</span></span><span class="line"><span class="cl">     <span class="nb">cd</span>               切换工作目录
+</span></span><span class="line"><span class="cl">     cp               拷贝文件/目录
+</span></span><span class="line"><span class="cl">     download, d      下载文件/目录
+</span></span><span class="line"><span class="cl">     <span class="nb">export</span>           导出文件/目录元数据
+</span></span><span class="line"><span class="cl">     import           导入文件
+</span></span><span class="line"><span class="cl">     ls, l, ll        列出目录
+</span></span><span class="line"><span class="cl">     mkdir            创建目录
+</span></span><span class="line"><span class="cl">     mv               移动文件/目录
+</span></span><span class="line"><span class="cl">     <span class="nb">pwd</span>              输出工作目录
+</span></span><span class="line"><span class="cl">     rapidupload, ru  手动秒传文件
+</span></span><span class="line"><span class="cl">     rename           重命名文件
+</span></span><span class="line"><span class="cl">     rm               删除文件/目录
+</span></span><span class="line"><span class="cl">     share            分享文件/目录
+</span></span><span class="line"><span class="cl">     upload, u        上传文件/目录
+</span></span><span class="line"><span class="cl">     xcp              转存拷贝文件/目录，个人云和家庭云之间转存文件
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">cloudpan189-go login -username<span class="o">=</span><span class="nv">$USER</span> -password<span class="o">=</span><span class="nv">$PASSWORD</span>
+</span></span><span class="line"><span class="cl">cloudpan189-go upload retdec.7z /tmp
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="不能正常vnc连接">不能正常vnc连接</h2>
+<p><a href="https://blog.csdn.net/a_1_1_1_2/article/details/130243284" target="_blank" rel="noopener noreffer ">https://blog.csdn.net/a_1_1_1_2/article/details/130243284</a>
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20240402154415-379.png"
+        data-srcset="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20240402154415-379.png, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20240402154415-379.png 1.5x, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20240402154415-379.png 2x"
+        data-sizes="auto"
+        alt="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20240402154415-379.png"
+        title="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20240402154415-379.png" /></p>
+<h2 id="ubuntu-desktop删除开机界面">ubuntu desktop删除开机界面</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">cd</span> /usr/share/lightdm/lightdm.conf.d
+</span></span><span class="line"><span class="cl">vim  50-greeter-wrapper.conf
+</span></span><span class="line"><span class="cl">加入下面三行
+</span></span><span class="line"><span class="cl"><span class="o">[</span>SeatDefaults<span class="o">]</span>
+</span></span><span class="line"><span class="cl">greeter-session<span class="o">=</span>lightdm-gtk-greeter
+</span></span><span class="line"><span class="cl">autologin-user<span class="o">=</span>ubuntu
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="解决nuc无显卡问题需要ubuntu2204">解决nuc无显卡问题(需要&gt;=ubuntu22.04)</h2>
+<p><a href="https://dgpu-docs.intel.com/driver/client/overview.html" target="_blank" rel="noopener noreffer ">https://dgpu-docs.intel.com/driver/client/overview.html</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">wget -qO - https://repositories.intel.com/gpu/intel-graphics.key <span class="p">|</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  sudo gpg --dearmor --output /usr/share/keyrings/intel-graphics.gpg
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;deb [arch=amd64,i386 signed-by=/usr/share/keyrings/intel-graphics.gpg] https://repositories.intel.com/gpu/ubuntu jammy client&#34;</span> <span class="p">|</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  sudo tee /etc/apt/sources.list.d/intel-gpu-jammy.list
+</span></span><span class="line"><span class="cl">sudo apt update
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">sudo apt install -y <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  intel-opencl-icd intel-level-zero-gpu level-zero <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  intel-media-va-driver-non-free libmfx1 libmfxgen1 libvpl2 <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  libegl-mesa0 libegl1-mesa libegl1-mesa-dev libgbm1 libgl1-mesa-dev libgl1-mesa-dri <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  libglapi-mesa libgles2-mesa-dev libglx-mesa0 libigdgmm12 libxatracker2 mesa-va-drivers <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  mesa-vdpau-drivers mesa-vulkan-drivers va-driver-all vainfo hwinfo clinfo
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">sudo apt install -y <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  libigc-dev intel-igc-cm libigdfcl-dev libigfxcmrt-dev level-zero-dev
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">sudo apt update <span class="o">&amp;&amp;</span> sudo apt install  -y --install-suggests  linux-generic-hwe-22.04 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">sudo reboot
+</span></span><span class="line"><span class="cl">uname -r
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">sudo apt update
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">sudo apt -y install <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    gawk <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    dkms <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    linux-headers-<span class="k">$(</span>uname -r<span class="k">)</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    libc6-dev
+</span></span><span class="line"><span class="cl">sudo apt install -y <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  intel-i915-dkms intel-platform-vsec-dkms <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  intel-platform-cse-dkms intel-fw-gpu 
+</span></span><span class="line"><span class="cl">sudo reboot -h now
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="ubuntu安装google浏览器">ubuntu安装google浏览器</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+</span></span><span class="line"><span class="cl">sudo dpkg -i google-chrome-stable_current_amd64.deb 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="google启动时使用代理">google启动时使用代理</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">google-chrome --proxy-server<span class="o">=</span>socks5://127.0.0.1:2222
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="ssh-display">ssh display</h2>
+<p>使用ssh -Y</p>
+<h2 id="gef常用指令">gef常用指令</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">slub-contains + 地址
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20240321093431-431.png"
+        data-srcset="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20240321093431-431.png, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20240321093431-431.png 1.5x, https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20240321093431-431.png 2x"
+        data-sizes="auto"
+        alt="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20240321093431-431.png"
+        title="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20240321093431-431.png" /></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">slub-dump kmemcache名称 -q -n -v
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="linux-激活typora">linux 激活typora</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -1439,6 +1680,7 @@
 <li>将申请的堆块赋值给全局变量，需要赋值两次</li>
 <li>假设有结构体，赋值给全局变量，只free了整个结构体</li>
 <li>给局部变量申请一个堆块之后再申请一个堆块</li>
+<li>没检测出来可能是加了沙箱，把run去掉</li>
 </ul>
 <h2 id="vscode-常用扩展">vscode 常用扩展</h2>
 <h3 id="intellicode">intellicode</h3>
@@ -1446,7 +1688,89 @@
 <h3 id="codeql">codeql</h3>
 <h3 id="vscode--counter">Vscode  counter</h3>
 <h3 id="sarif-view">sarif view</h3>
-<h2 id="docker-gdbserver调试">docker gdbserver调试</h2>
+<h2 id="docker-gui显示错误">docker gui显示错误</h2>
+<h4 id="dockefile">dockefile</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Dockerfile" data-lang="Dockerfile"><span class="line"><span class="cl"><span class="k">FROM</span><span class="s"> ubuntu:22.04</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ENV</span> <span class="nv">DEBIAN_FRONTEND</span><span class="o">=</span>noninteractive
+</span></span><span class="line"><span class="cl"><span class="k">WORKDIR</span><span class="s"> /root/</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">COPY</span> ./autogen.sh /tmp/autogen.sh<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> sed -i <span class="s2">&#34;s/http:\/\/archive.ubuntu.com/http:\/\/mirrors.tuna.tsinghua.edu.cn/g&#34;</span> /etc/apt/sources.list<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> sed -i <span class="s2">&#34;s/deb http:\/\/se/#/g&#34;</span> /etc/apt/sources.list<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> sed -i <span class="s2">&#34;s/deb-src http:\/\/se/#/g&#34;</span> /etc/apt/sources.list <span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> apt-get update<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> apt-get install <span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> apt-get install libxml2-dev libxslt1-dev libsqlite3-dev libwebkit2gtk-4.0-dev libjson-glib-dev libgirepository1.0-dev libpeas-dev libfribidi-dev gsettings-desktop-schemas-dev python3 libtool intltool git libsoup-3.0 webkit2gtk-4.1 autoconf gedit -y<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> git config --global http.proxy http://192.168.1.9:2222<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> git config --global http.proxy socks://192.168.1.9:2222<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> git clone https://github.com/lwindolf/liferea<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> <span class="nb">cd</span> liferea<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">CMD</span> <span class="p">[</span> <span class="s2">&#34;/bin/sh&#34;</span> <span class="p">]</span><span class="err">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="docker-composeyml">docker-compose.yml</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="line"><span class="cl"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;3&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">services</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">app</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">check:latest</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">build</span><span class="p">:</span><span class="w"> </span><span class="l">.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">DISPLAY=${DISPLAY}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">/tmp/.X11-unix:/tmp/.X11-unix</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">network_mode</span><span class="p">:</span><span class="w"> </span><span class="l">host</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">tty</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="bash">bash</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo docker-compose up --build -d
+</span></span><span class="line"><span class="cl">sudo xhost + local:docker
+</span></span><span class="line"><span class="cl">sudo xhost +
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="docker-gdbserver调试">docker gdbserver调试</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -3558,7 +3882,7 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="hugo-博客搭建-windows">hugo 博客搭建 (windows)</h2>
-<h4 id="安装">安装</h4>
+<h4 id="安装-1">安装</h4>
 <p>在安装go 的前提下运行下面的命令</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -5790,10 +6114,24 @@
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">set follow-fork-mode parent
-</span></span><span class="line"><span class="cl">set detach-on-fork on
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1">#调试父进程,断开与父进程的连接</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#当发生fork时跟踪父进程</span>
+</span></span><span class="line"><span class="cl"><span class="nb">set</span> follow-fork-mode parent
+</span></span><span class="line"><span class="cl"><span class="nb">set</span> detach-on-fork on
+</span></span><span class="line"><span class="cl">调试子进程并不断开与父进程的连接
+</span></span><span class="line"><span class="cl"><span class="nb">set</span> follow-fork-mode child
+</span></span><span class="line"><span class="cl"><span class="nb">set</span> detach-on-fork off
+</span></span><span class="line"><span class="cl"><span class="c1">#调试器将在多个线程之间进行调度，并监视它们的活动</span>
+</span></span><span class="line"><span class="cl"><span class="nb">set</span> schedule-multiple on
 </span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
@@ -5808,7 +6146,7 @@
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">ptype/o struct 获取结构体的偏移量
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ptype/o struct 获取结构体的偏移量
 </span></span><span class="line"><span class="cl">ptype/o struct user_key_payload
 </span></span><span class="line"><span class="cl">ptype 获取定义
 </span></span><span class="line"><span class="cl">ptype sturct user_key_payload
@@ -7484,7 +7822,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">make</span><span class="w"> </span><span class="n">defconfig</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">增加</span><span class="n">config</span><span class="err">中的内容</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">make</span><span class="w"> </span><span class="n">olddefconfig</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">make</span><span class="w"> </span><span class="o">-</span><span class="n">j</span><span class="w"> </span><span class="o">`</span><span class="n">nproc</span><span class="o">`</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">make</span><span class="w"> </span><span class="o">-</span><span class="n">j</span><span class="o">`</span><span class="n">nproc</span><span class="o">`</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>勾选</p>
@@ -7516,6 +7854,8 @@
 </span><span class="lnt">19
 </span><span class="lnt">20
 </span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-makefile" data-lang="makefile"><span class="line"><span class="cl"><span class="c"># Coverage collection.
@@ -7523,6 +7863,8 @@
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c"># Debug info for symbolization.
 </span></span></span><span class="line"><span class="cl"><span class="c"></span><span class="nv">CONFIG_DEBUG_INFO</span><span class="o">=</span>y
+</span></span><span class="line"><span class="cl"><span class="nv">CONFIG_RANDOMIZE_BASE</span><span class="o">=</span>n
+</span></span><span class="line"><span class="cl"><span class="nv">CONFIG_DEBUG_INFO_DWARF4</span><span class="o">=</span>y
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c"># Memory bug detector
 </span></span></span><span class="line"><span class="cl"><span class="c"></span><span class="nv">CONFIG_KASAN</span><span class="o">=</span>y
@@ -7550,7 +7892,66 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>编译出的在arch/x86_64/boot/bzImage</p>
-<h4 id="可能存在的问题">可能存在的问题</h4>
+<h3 id="使用-1">使用</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt-get install debootstrap qemu-system
+</span></span><span class="line"><span class="cl">mkdir image  
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> image/  
+</span></span><span class="line"><span class="cl">wget https://raw.githubusercontent.com/google/syzkaller/master/tools/create-image.sh -O create-image.sh  
+</span></span><span class="line"><span class="cl">chmod +x create-image.sh  
+</span></span><span class="line"><span class="cl">./create-image.sh
+</span></span><span class="line"><span class="cl">vim start.sh
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">qemu-system-x86_64 <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  -m 2G <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  -smp <span class="m">2</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  -kernel /home/ubuntu/fuzz/linux-6.2/arch/x86/boot/bzImage <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  -append <span class="s2">&#34;console=ttyS0 root=/dev/sda earlyprintk=serial net.ifnames=0&#34;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  -drive <span class="nv">file</span><span class="o">=</span>/home/ubuntu/fuzz_tools/image/bullseye.img,format<span class="o">=</span>raw <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  -net user,host<span class="o">=</span>10.0.2.10,hostfwd<span class="o">=</span>tcp:127.0.0.1:10021-:22 <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  -net nic,model<span class="o">=</span>e1000 <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  -enable-kvm <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  -nographic <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  -pidfile vm.pid <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  2&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">|</span> tee vm.log
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ssh -i bullseye.id_rsa -p <span class="m">10021</span> -o <span class="s2">&#34;StrictHostKeyChecking no&#34;</span> root@localhost
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="可能存在的问题">可能存在的问题</h4>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -7584,17 +7985,17 @@
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="s">&#34;target&#34;</span><span class="o">:</span> <span class="s">&#34;linux/amd64&#34;</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">  <span class="s">&#34;http&#34;</span><span class="o">:</span> <span class="s">&#34;0.0.0.0:56741&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">  <span class="s">&#34;workdir&#34;</span><span class="o">:</span> <span class="s">&#34;/root/syzkaller/workdirr&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">  <span class="s">&#34;kernel_obj&#34;</span><span class="o">:</span> <span class="s">&#34;/root/linux&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">  <span class="s">&#34;image&#34;</span><span class="o">:</span> <span class="s">&#34;/root/linux/image/bullseye.img&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">  <span class="s">&#34;sshkey&#34;</span><span class="o">:</span> <span class="s">&#34;/root/linux/image/bullseye.id_rsa&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">  <span class="s">&#34;syzkaller&#34;</span><span class="o">:</span> <span class="s">&#34;/root/syzkaller&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;workdir&#34;</span><span class="o">:</span> <span class="s">&#34;/home/ubuntu/fuzz_tools/image/workdirr&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;kernel_obj&#34;</span><span class="o">:</span> <span class="s">&#34;/home/ubuntu/fuzz/linux-6.2&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;image&#34;</span><span class="o">:</span> <span class="s">&#34;/home/ubuntu/fuzz_tools/image/bullseye.img&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;sshkey&#34;</span><span class="o">:</span> <span class="s">&#34;/home/ubuntu/fuzz_tools/image/bullseye.id_rsa&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="s">&#34;syzkaller&#34;</span><span class="o">:</span> <span class="s">&#34;/home/ubuntu/fuzz_tools/syzkaller&#34;</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">  <span class="s">&#34;procs&#34;</span><span class="o">:</span> <span class="mi">8</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">  <span class="s">&#34;type&#34;</span><span class="o">:</span> <span class="s">&#34;qemu&#34;</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">  <span class="s">&#34;vm&#34;</span><span class="o">:</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="s">&#34;count&#34;</span><span class="o">:</span> <span class="mi">4</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">    <span class="s">&#34;cmdline&#34;</span><span class="o">:</span> <span class="s">&#34;net.ifnames=0&#34;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="s">&#34;kernel&#34;</span><span class="o">:</span> <span class="s">&#34;/root/linux/arch/x86/boot/bzImage&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s">&#34;kernel&#34;</span><span class="o">:</span> <span class="s">&#34;/home/ubuntu/fuzz/linux-6.2/arch/x86/boot/bzImage&#34;</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">    <span class="s">&#34;cpu&#34;</span><span class="o">:</span> <span class="mi">4</span><span class="p">,</span>
 </span></span><span class="line"><span class="cl">    <span class="s">&#34;mem&#34;</span><span class="o">:</span> <span class="mi">4096</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
@@ -7720,7 +8121,7 @@
         data-sizes="auto"
         alt="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/image-20230203170356109.png"
         title="image-20230203170356109" /></p>
-<h4 id="使用">使用</h4>
+<h4 id="使用-2">使用</h4>
 <p><code>pahole ./file</code></p>
 <h2 id="挂载ptmx">挂载ptmx</h2>
 <div class="highlight"><div class="chroma">
@@ -7760,8 +8161,8 @@
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>更新于 2024-03-18&nbsp;<a class="git-hash" href="https://github.com/dillonzq/LoveIt/commit/4acffd53b2708b2919fd9229109c7a5e5e0b85aa" target="_blank" title="commit by cnitlrt(cnitlrt@gmail.com) 4acffd53b2708b2919fd9229109c7a5e5e0b85aa: blog">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>4acffd5</a></span>
+                <span>更新于 2024-04-26&nbsp;<a class="git-hash" href="https://github.com/dillonzq/LoveIt/commit/f07fee44a3f309138dd27fd350e71cdce39e83dc" target="_blank" title="commit by cnitlrt(1258175307@qq.com) f07fee44a3f309138dd27fd350e71cdce39e83dc: blog">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>f07fee4</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"></div>
