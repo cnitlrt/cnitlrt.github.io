@@ -4,63 +4,7 @@
         <link>https://cnitlrt.github.io/tags/</link>
         <description>Tags - 标签 - cnitlrtの博客</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>cnitlrt@gmail.com (cnitlrt)</managingEditor>
-            <webMaster>cnitlrt@gmail.com (cnitlrt)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sun, 26 Nov 2023 00:46:08 &#43;0800</lastBuildDate><atom:link href="https://cnitlrt.github.io/tags/" rel="self" type="application/rss+xml" /><item>
-    <title>kernel</title>
-    <link>https://cnitlrt.github.io/tags/kernel/</link>
-    <pubDate>Sun, 26 Nov 2023 00:46:08 &#43;0800</pubDate>
-    <author>cnitlrt</author>
-    <guid>https://cnitlrt.github.io/tags/kernel/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>kernel pwn</title>
-    <link>https://cnitlrt.github.io/tags/kernel-pwn/</link>
-    <pubDate>Sat, 21 Oct 2023 11:35:12 &#43;0800</pubDate>
-    <author>cnitlrt</author>
-    <guid>https://cnitlrt.github.io/tags/kernel-pwn/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>Android逆向</title>
-    <link>https://cnitlrt.github.io/tags/android%E9%80%86%E5%90%91/</link>
-    <pubDate>Wed, 19 Apr 2023 02:00:18 &#43;0800</pubDate>
-    <author>cnitlrt</author>
-    <guid>https://cnitlrt.github.io/tags/android%E9%80%86%E5%90%91/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>leetcode</title>
-    <link>https://cnitlrt.github.io/tags/leetcode/</link>
-    <pubDate>Wed, 15 Feb 2023 00:02:42 &#43;0800</pubDate>
-    <author>cnitlrt</author>
-    <guid>https://cnitlrt.github.io/tags/leetcode/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>pwn</title>
-    <link>https://cnitlrt.github.io/tags/pwn/</link>
-    <pubDate>Mon, 04 Jul 2022 22:20:17 &#43;0800</pubDate>
-    <author>cnitlrt</author>
-    <guid>https://cnitlrt.github.io/tags/pwn/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>v8</title>
-    <link>https://cnitlrt.github.io/tags/v8/</link>
-    <pubDate>Mon, 04 Jul 2022 22:20:17 &#43;0800</pubDate>
-    <author>cnitlrt</author>
-    <guid>https://cnitlrt.github.io/tags/v8/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
-    <title>windows pwn</title>
-    <link>https://cnitlrt.github.io/tags/windows-pwn/</link>
-    <pubDate>Mon, 04 Jul 2022 22:20:17 &#43;0800</pubDate>
-    <author>cnitlrt</author>
-    <guid>https://cnitlrt.github.io/tags/windows-pwn/</guid>
-    <description><![CDATA[]]></description>
-</item>
-<item>
+            <webMaster>cnitlrt@gmail.com (cnitlrt)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sat, 01 Jan 2022 04:06:14 &#43;0800</lastBuildDate><atom:link href="https://cnitlrt.github.io/tags/" rel="self" type="application/rss+xml" /><item>
     <title>tools</title>
     <link>https://cnitlrt.github.io/tags/tools/</link>
     <pubDate>Sat, 01 Jan 2022 04:06:14 &#43;0800</pubDate>
