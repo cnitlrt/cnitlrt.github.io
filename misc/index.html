@@ -9,7 +9,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://cnitlrt.github.io/misc/" /><meta property="og:image" content="https://cnitlrt.github.io/logo.jpg"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-01-01T04:06:14+08:00" />
-<meta property="article:modified_time" content="2024-06-16T15:04:53+08:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2024-08-30T22:02:29+08:00" /><meta property="og:site_name" content="My cool site" />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://cnitlrt.github.io/logo.jpg"/>
 
@@ -34,8 +34,8 @@
                             "url": "https:\/\/cnitlrt.github.io\/images\/Apple-Devices-Preview.png",
                             "width":  3200 ,
                             "height":  2048 
-                        }],"genre": "posts","keywords": "tools","wordcount":  19739 ,
-        "url": "https:\/\/cnitlrt.github.io\/misc\/","datePublished": "2022-01-01T04:06:14+08:00","dateModified": "2024-06-16T15:04:53+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "tools","wordcount":  20013 ,
+        "url": "https:\/\/cnitlrt.github.io\/misc\/","datePublished": "2022-01-01T04:06:14+08:00","dateModified": "2024-08-30T22:02:29+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": {
                     "@type": "ImageObject",
@@ -113,7 +113,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">疑难杂症宝典</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>cnitlrt</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/tools/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>tools</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-01-01">2022-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 19739 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-01-01">2022-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 20013 字&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 40 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
@@ -124,9 +124,25 @@
   <ul>
     <li>
       <ul>
-        <li>
+        <li><a href="#buzzer环境搭建">buzzer环境搭建</a>
           <ul>
-            <li><a href="#rrfuzz使用">RRfuzz使用</a></li>
+            <li><a href="#首先安装brazel">首先安装brazel</a></li>
+            <li><a href="#run">RUN</a></li>
+          </ul>
+        </li>
+        <li><a href="#配置npc自动连接">配置npc自动连接</a></li>
+        <li><a href="#vscode设置不自动进入虚拟环境">vscode设置不自动进入虚拟环境</a></li>
+        <li><a href="#docker使用代理">docker使用代理</a>
+          <ul>
+            <li>
+              <ul>
+                <li><a href="#创建etcsystemdsystemdockerserviced路径">创建/etc/systemd/system/docker.service.d路径</a></li>
+                <li><a href="#创建-http-proxyconf">创建 http-proxy.conf</a></li>
+                <li><a href="#写入配置">写入配置</a></li>
+                <li><a href="#粘贴下方配置代理并wq退出">粘贴下方配置代理并wq退出</a></li>
+                <li><a href="#重启服务">重启服务</a></li>
+              </ul>
+            </li>
           </ul>
         </li>
         <li><a href="#linux使用云盘">linux使用云盘</a>
@@ -420,8 +436,185 @@
     </li>
   </ul>
 </nav></div>
-            </div><div class="content" id="content"><h3 id="rrfuzz使用">RRfuzz使用</h3>
-<h2 id="linux使用云盘">linux使用云盘</h2>
+            </div><div class="content" id="content"><h2 id="buzzer环境搭建">buzzer环境搭建</h2>
+<h3 id="首先安装brazel">首先安装brazel</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">sudo apt install apt-transport-https curl gnupg -y
+</span></span><span class="line"><span class="cl">curl -fsSL https://bazel.build/bazel-release.pub.gpg | gpg --dearmor &gt;bazel-archive-keyring.gpg
+</span></span><span class="line"><span class="cl">sudo mv bazel-archive-keyring.gpg /usr/share/keyrings
+</span></span><span class="line"><span class="cl">echo &#34;deb [arch=amd64 signed-by=/usr/share/keyrings/bazel-archive-keyring.gpg] https://storage.googleapis.com/bazel-apt stable jdk1.8&#34; | sudo tee /etc/apt/sources.list.d/bazel.list
+</span></span><span class="line"><span class="cl">sudo apt update &amp;&amp; sudo apt install bazel
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="run">RUN</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">bazel build :buzzer
+</span></span><span class="line"><span class="cl">sudo ./bazel-bin/buzzer_/buzzer
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="配置npc自动连接">配置npc自动连接</h2>
+<p>新建npc.servcice放入到
+/lib/systemd/system/</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[Unit]
+</span></span><span class="line"><span class="cl">Description=npc
+</span></span><span class="line"><span class="cl">After=network.target
+</span></span><span class="line"><span class="cl">​
+</span></span><span class="line"><span class="cl">[Service]
+</span></span><span class="line"><span class="cl">Type=simple
+</span></span><span class="line"><span class="cl">ExecStart=/home/ubuntu/linux_amd64_client/start.sh
+</span></span><span class="line"><span class="cl">Restart=always
+</span></span><span class="line"><span class="cl">RestartSec=5
+</span></span><span class="line"><span class="cl">PrivateTmp=true
+</span></span><span class="line"><span class="cl">​
+</span></span><span class="line"><span class="cl">[Install]
+</span></span><span class="line"><span class="cl">WantedBy=multi-user.target
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>新建start.sh</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="cp">#!/bin/bash
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> /home/ubuntu/linux_amd64_client <span class="o">&amp;&amp;</span> /home/ubuntu/linux_amd64_client/npc -server<span class="o">=</span>150.158.32.70:8024 -vkey<span class="o">=</span>fu080r3eg6tb3q4r -type<span class="o">=</span>tcp-
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="vscode设置不自动进入虚拟环境">vscode设置不自动进入虚拟环境</h2>
+<p>ctrl+shift+p 输入</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&gt;preferences:open remote settings json
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="s2">&#34;python.terminal.activateEnvironment&#34;</span><span class="err">:</span> <span class="kc">false</span><span class="err">,</span>
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;python.terminal.activateEnvInCurrentTerminal&#34;</span><span class="err">:</span> <span class="kc">false</span><span class="err">,</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Linux下有三个命令：<code>ls</code>、<code>grep</code>、<code>wc</code>。通过这三个命令的组合可以统计目录下文件及文件夹的个数。</p>
+<ul>
+<li>统计当前目录下文件的个数（不包括目录）</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ls -l <span class="p">|</span> grep <span class="s2">&#34;^-&#34;</span> <span class="p">|</span> wc -l
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>统计当前目录下文件的个数（包括子目录）</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"> ls -lR<span class="p">|</span> grep <span class="s2">&#34;^-&#34;</span> <span class="p">|</span> wc -l
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>查看某目录下文件夹(目录)的个数（包括子目录）</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ls -lR <span class="p">|</span> grep <span class="s2">&#34;^d&#34;</span> <span class="p">|</span> wc -l
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="docker使用代理">docker使用代理</h2>
+<h4 id="创建etcsystemdsystemdockerserviced路径">创建/etc/systemd/system/docker.service.d路径</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo mkdir -p /etc/systemd/system/docker.service.d
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="创建-http-proxyconf">创建 http-proxy.conf</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo touch /etc/systemd/system/docker.service.d/http-proxy.conf
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="写入配置">写入配置</h4>
+<p>vim /etc/systemd/system/docker.service.d/http-proxy.conf</p>
+<h4 id="粘贴下方配置代理并wq退出">粘贴下方配置代理并wq退出</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">[</span>Service<span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="nv">Environment</span><span class="o">=</span><span class="s2">&#34;HTTP_PROXY=http://192.168.48.1:3333/&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">Environment</span><span class="o">=</span><span class="s2">&#34;HTTPS_PROXY=http://192.168.48.1:3333/&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">Environment</span><span class="o">=</span><span class="s2">&#34;NO_PROXY=localhost,127.0.0.1,.example.com&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="重启服务">重启服务</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo systemctl daemon-reload 
+</span></span><span class="line"><span class="cl">sudo systemctl restart docker
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="linux使用云盘">linux使用云盘</h2>
 <p>需求是使用github-action来编译文件时会用到</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1471,124 +1664,10 @@
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">wget https://download.qemu.org/qemu-8.0.5.tar.xz
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">wget https://download.qemu.org/qemu-8.0.5.tar.xz
 </span></span><span class="line"><span class="cl">mkdir build
-</span></span><span class="line"><span class="cl">cd build
-</span></span><span class="line"><span class="cl">../configure --gdb=/usr/bin/gdb --enable-debug --prefix=/usr/local
-</span></span></code></pre></td></tr></table>
-</div>
-</div><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">## seccomp
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">```c
-</span></span><span class="line"><span class="cl">//gcc -g simple_syscall_seccomp.c -o simple_syscall_seccomp -lseccomp
-</span></span><span class="line"><span class="cl">#include &lt;unistd.h&gt;
-</span></span><span class="line"><span class="cl">#include &lt;seccomp.h&gt;
-</span></span><span class="line"><span class="cl">#include &lt;linux/seccomp.h&gt;
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">int main(void){
-</span></span><span class="line"><span class="cl">	scmp_filter_ctx ctx;
-</span></span><span class="line"><span class="cl">	ctx = seccomp_init(SCMP_ACT_ALLOW);
-</span></span><span class="line"><span class="cl">    //seccomp_rule_add(ctx, SCMP_ACT_KILL, SCMP_SYS(execve),0);
-</span></span><span class="line"><span class="cl">	seccomp_rule_add(ctx, SCMP_ACT_KILL, 59, 0);
-</span></span><span class="line"><span class="cl">	seccomp_load(ctx);
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">	char * filename = &#34;/bin/sh&#34;;
-</span></span><span class="line"><span class="cl">	char * argv[] = {&#34;/bin/sh&#34;,NULL};
-</span></span><span class="line"><span class="cl">	char * envp[] = {NULL};
-</span></span><span class="line"><span class="cl">	write(1,&#34;i will give you a shell\n&#34;,24);
-</span></span><span class="line"><span class="cl">	syscall(59,filename,argv,envp);//execve
-</span></span><span class="line"><span class="cl">	return 0;
-</span></span><span class="line"><span class="cl">}
-</span></span></code></pre></td></tr></table>
-</div>
-</div><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;unistd.h&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;sys/prctl.h&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;linux/filter.h&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;linux/seccomp.h&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
-</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
-</span></span><span class="line"><span class="cl">	
-</span></span><span class="line"><span class="cl">	<span class="nf">prctl</span><span class="p">(</span><span class="n">PR_SET_NO_NEW_PRIVS</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="k">struct</span> <span class="n">sock_filter</span> <span class="n">sfi</span><span class="p">[]</span> <span class="o">=</span><span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="p">{</span><span class="mh">0x20</span><span class="p">,</span><span class="mh">0x00</span><span class="p">,</span><span class="mh">0x00</span><span class="p">,</span><span class="mh">0x00000004</span><span class="p">},</span>
-</span></span><span class="line"><span class="cl">        <span class="p">{</span><span class="mh">0x15</span><span class="p">,</span><span class="mh">0x00</span><span class="p">,</span><span class="mh">0x05</span><span class="p">,</span><span class="mh">0xc000003e</span><span class="p">},</span>
-</span></span><span class="line"><span class="cl">        <span class="p">{</span><span class="mh">0x20</span><span class="p">,</span><span class="mh">0x00</span><span class="p">,</span><span class="mh">0x00</span><span class="p">,</span><span class="mh">0x00000000</span><span class="p">},</span>
-</span></span><span class="line"><span class="cl">        <span class="p">{</span><span class="mh">0x35</span><span class="p">,</span><span class="mh">0x00</span><span class="p">,</span><span class="mh">0x01</span><span class="p">,</span><span class="mh">0x40000000</span><span class="p">},</span>
-</span></span><span class="line"><span class="cl">        <span class="p">{</span><span class="mh">0x15</span><span class="p">,</span><span class="mh">0x00</span><span class="p">,</span><span class="mh">0x02</span><span class="p">,</span><span class="mh">0xffffffff</span><span class="p">},</span>
-</span></span><span class="line"><span class="cl">        <span class="p">{</span><span class="mh">0x15</span><span class="p">,</span><span class="mh">0x01</span><span class="p">,</span><span class="mh">0x00</span><span class="p">,</span><span class="mh">0x0000003b</span><span class="p">},</span>
-</span></span><span class="line"><span class="cl">        <span class="p">{</span><span class="mh">0x06</span><span class="p">,</span><span class="mh">0x00</span><span class="p">,</span><span class="mh">0x00</span><span class="p">,</span><span class="mh">0x7fff0000</span><span class="p">},</span>
-</span></span><span class="line"><span class="cl">        <span class="p">{</span><span class="mh">0x06</span><span class="p">,</span><span class="mh">0x00</span><span class="p">,</span><span class="mh">0x00</span><span class="p">,</span><span class="mh">0x00000000</span><span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="p">};</span>
-</span></span><span class="line"><span class="cl">    <span class="k">struct</span> <span class="n">sock_fprog</span> <span class="n">sfp</span> <span class="o">=</span> <span class="p">{</span><span class="mi">8</span><span class="p">,</span> <span class="n">sfi</span><span class="p">};</span> <span class="c1">//这里8要和数据的行数一致
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">prctl</span><span class="p">(</span><span class="n">PR_SET_SECCOMP</span><span class="p">,</span> <span class="n">SECCOMP_MODE_FILTER</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">sfp</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">	
-</span></span><span class="line"><span class="cl">	<span class="kt">char</span> <span class="o">*</span> <span class="n">filename</span> <span class="o">=</span> <span class="s">&#34;/bin/sh&#34;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">	<span class="kt">char</span> <span class="o">*</span> <span class="n">argv</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#34;/bin/sh&#34;</span><span class="p">,</span><span class="nb">NULL</span><span class="p">};</span>
-</span></span><span class="line"><span class="cl">	<span class="kt">char</span> <span class="o">*</span> <span class="n">envp</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="nb">NULL</span><span class="p">};</span>
-</span></span><span class="line"><span class="cl">	<span class="nf">write</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="s">&#34;i will give you a shell</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span><span class="mi">24</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">	<span class="nf">write</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="s">&#34;1234567812345678&#34;</span><span class="p">,</span><span class="mh">0x10</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">	<span class="nf">syscall</span><span class="p">(</span><span class="mh">0x4000003b</span><span class="p">,</span><span class="n">filename</span><span class="p">,</span><span class="n">argv</span><span class="p">,</span><span class="n">envp</span><span class="p">);</span><span class="c1">//execve
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> build
+</span></span><span class="line"><span class="cl">../configure --gdb<span class="o">=</span>/usr/bin/gdb --enable-debug --prefix<span class="o">=</span>/usr/local
 </span></span></code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
@@ -1686,7 +1765,31 @@
 </span></span><span class="line"><span class="cl"><span class="k">return</span> <span class="nf">ERRNO</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>seccomp-tools asm rule.asm -a amd64  -f carray</p>
+</div><p>i386</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">A</span> <span class="o">=</span> <span class="n">arch</span>
+</span></span><span class="line"><span class="cl"><span class="n">A</span> <span class="o">==</span> <span class="n">ARCH_I386</span> <span class="o">?</span> <span class="nl">next</span> <span class="p">:</span> <span class="n">dead</span>
+</span></span><span class="line"><span class="cl"><span class="n">A</span> <span class="o">=</span> <span class="n">sys_number</span>
+</span></span><span class="line"><span class="cl"><span class="n">A</span> <span class="o">==</span> <span class="n">execve</span> <span class="o">?</span> <span class="nl">dead</span> <span class="p">:</span> <span class="n">next</span>
+</span></span><span class="line"><span class="cl"><span class="nl">allow</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl"><span class="k">return</span> <span class="n">ALLOW</span>
+</span></span><span class="line"><span class="cl"><span class="nl">dead</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl"><span class="k">return</span> <span class="nf">ERRNO</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>seccomp-tools asm rule.asm -a i386  -f carray
+seccomp-tools asm rule.asm -a amd64  -f carray</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -1821,6 +1924,14 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo docker run -tid --security-opt <span class="nv">seccomp</span><span class="o">=</span>unconfined -p 127.0.0.1:2333:2333
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">./gdbserver 0.0.0.0:1234 ./pwn
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="docker-image上传dockerhub">docker image上传dockerhub</h2>
@@ -6007,7 +6118,7 @@
 </span></span><span class="line"><span class="cl">      - name: Deploy Hugo to gh-pages
 </span></span><span class="line"><span class="cl">        uses: peaceiris/actions-gh-pages@v2
 </span></span><span class="line"><span class="cl">        env:
-</span></span><span class="line"><span class="cl">          PERSONAL_TOKEN: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+</span></span><span class="line"><span class="cl">          PERSONAL_TOKEN: ${{ secrets.BLOG_TEST }}
 </span></span><span class="line"><span class="cl">          EXTERNAL_REPOSITORY: cnitlrt/cnitlrt.github.io
 </span></span><span class="line"><span class="cl">          PUBLISH_BRANCH: master
 </span></span><span class="line"><span class="cl">          PUBLISH_DIR: ./public
@@ -6016,7 +6127,7 @@
 </div>
 </div><ul>
 <li>
-<p>其中ACTIONS_DEPLOY_KEY在仓库-&gt;settings-&gt;secrets and variables-&gt;actions新建名字为ACTIONS_DEPLOY_KEY的secret里面的内容填之前的那个personal key</p>
+<p>其中ACTIONS_DEPLOY_KEY在仓库-&gt;settings-&gt;secrets and variables-&gt;actions新建名字为BLOG_TEST的secret里面的内容填之前的那个personal key</p>
 </li>
 <li>
 <p>EXTERNAL_REPOSITORY: 填入自己的仓库</p>
@@ -7906,6 +8017,13 @@
 </span><span class="lnt">27
 </span><span class="lnt">28
 </span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-makefile" data-lang="makefile"><span class="line"><span class="cl"><span class="c"># Coverage collection.
@@ -7937,6 +8055,13 @@
 </span></span><span class="line"><span class="cl"><span class="nv">CONFIG_VIRTIO_NET</span><span class="o">=</span>y
 </span></span><span class="line"><span class="cl"><span class="nv">CONFIG_E1000</span><span class="o">=</span>y
 </span></span><span class="line"><span class="cl"><span class="nv">CONFIG_E1000E</span><span class="o">=</span>y
+</span></span><span class="line"><span class="cl"><span class="nv">CONFIG_UBSAN</span><span class="o">=</span>y
+</span></span><span class="line"><span class="cl"><span class="nv">CONFIG_KCSAN</span><span class="o">=</span>y
+</span></span><span class="line"><span class="cl"><span class="nv">CONFIG_BPF_SYSCALL</span><span class="o">=</span>y
+</span></span><span class="line"><span class="cl"><span class="nv">CONFIG_BPF_JIT</span><span class="o">=</span>y
+</span></span><span class="line"><span class="cl"><span class="nv">CONFIG_BPF_JIT_ALWAYS_ON</span><span class="o">=</span>y
+</span></span><span class="line"><span class="cl"><span class="nv">CONFIG_UBSAN_SHIFT</span><span class="o">=</span>y
+</span></span><span class="line"><span class="cl"><span class="nv">CONFIG_UBSAN_DIV_ZERO</span><span class="o">=</span>y
 </span></span></code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
@@ -8217,8 +8342,8 @@
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>更新于 2024-06-16&nbsp;<a class="git-hash" href="https://github.com/dillonzq/LoveIt/commit/f3ce9b1cc67ee33c88da299853be71d4de5e9738" target="_blank" title="commit by cnitlrt(1258175307@qq.com) f3ce9b1cc67ee33c88da299853be71d4de5e9738: blog">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>f3ce9b1</a></span>
+                <span>更新于 2024-08-30&nbsp;<a class="git-hash" href="https://github.com/dillonzq/LoveIt/commit/40fd1536ee4af0ade6d5d7eece40b7eb3f6274d9" target="_blank" title="commit by cnitlrt(1258175307@qq.com) 40fd1536ee4af0ade6d5d7eece40b7eb3f6274d9: blog">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>40fd153</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"></div>
