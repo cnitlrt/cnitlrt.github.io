@@ -9,7 +9,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://cnitlrt.github.io/kernel01/" /><meta property="og:image" content="https://cnitlrt.github.io/logo.jpg"/><meta property="article:section" content="" />
 <meta property="article:published_time" content="2023-11-09T09:15:58+08:00" />
-<meta property="article:modified_time" content="2024-10-30T22:22:09+08:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2024-10-31T08:45:28+08:00" /><meta property="og:site_name" content="My cool site" />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://cnitlrt.github.io/logo.jpg"/>
 
@@ -34,8 +34,8 @@
                             "url": "https:\/\/cnitlrt.github.io\/images\/Apple-Devices-Preview.png",
                             "width":  3200 ,
                             "height":  2048 
-                        }],"genre": "page","wordcount":  22768 ,
-        "url": "https:\/\/cnitlrt.github.io\/kernel01\/","datePublished": "2023-11-09T09:15:58+08:00","dateModified": "2024-10-30T22:22:09+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "page","wordcount":  22945 ,
+        "url": "https:\/\/cnitlrt.github.io\/kernel01\/","datePublished": "2023-11-09T09:15:58+08:00","dateModified": "2024-10-31T08:45:28+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": {
                     "@type": "ImageObject",
@@ -784,7 +784,15 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="pahole">pahole</h2>
-<h1 id="需要掌握的知识">需要掌握的知识</h1>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt install pahole
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h1 id="需要掌握的知识">需要掌握的知识</h1>
 <h2 id="页表解析">页表解析</h2>
 <p>vmemmap_base 是存放 page 结构体的基地址</p>
 <p>page_offset_base: 是线性映射区的基地址 可以理解为内核堆栈代码段等的基地址</p>
@@ -9059,7 +9067,98 @@
 </span></span><span class="line"><span class="cl">    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">bytes</span><span class="p">(</span><span class="n">payload</span><span class="p">))</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h1 id="附录">附录</h1>
+</div><h1 id="脚本相关">脚本相关</h1>
+<h2 id="ext2-文件解包">ext2 文件解包</h2>
+<p>首先创建一个10块1M的ext2文件</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">sudo dd if=/dev/zero of=/home/ubuntu/download/pwn/zer0ctf/new_rootfs.ext2 bs=1M count=10
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">mkdir core
+</span></span><span class="line"><span class="cl">mkdir core1
+</span></span><span class="line"><span class="cl">sudo mount -o loop rootfs.ext2 ./core # origin filesystem
+</span></span><span class="line"><span class="cl">sudo mount -o loop new_rootfs.ext2 ./core1 
+</span></span><span class="line"><span class="cl">sudo cp -a ./core/* ./core1/
+</span></span><span class="line"><span class="cl">sudo umount core1
+</span></span><span class="line"><span class="cl">sudo umount core
+</span></span><span class="line"><span class="cl">sudo mv new_rootfs.ext2 rootfs.ext2
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="packsh">pack.sh</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="cp">#!/bin/bash
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>gcc <span class="nv">$1</span> -o exp --static <span class="o">&amp;&amp;</span> find . <span class="p">|</span> cpio -o --format<span class="o">=</span>newc &gt; ../rootfs.cpio <span class="o">&amp;&amp;</span> <span class="nb">pushd</span> ../ <span class="o">&amp;&amp;</span> ./run.sh <span class="o">&amp;&amp;</span> <span class="nb">popd</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="unpacksh">unpack.sh</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">cpio -idmv &lt; ../rootfs.cpio
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="gdbsh">gdb.sh</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo gdb ./vmlinux -ex <span class="s2">&#34;target remote :1234&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="qa">QA</h3>
+<p>Q: if lsmod display that,how to get address?</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://nuc-1304629987.cos.ap-chongqing.myqcloud.com/image/image-20241030234157391.png"
+        data-srcset="https://nuc-1304629987.cos.ap-chongqing.myqcloud.com/image/image-20241030234157391.png, https://nuc-1304629987.cos.ap-chongqing.myqcloud.com/image/image-20241030234157391.png 1.5x, https://nuc-1304629987.cos.ap-chongqing.myqcloud.com/image/image-20241030234157391.png 2x"
+        data-sizes="auto"
+        alt="https://nuc-1304629987.cos.ap-chongqing.myqcloud.com/image/image-20241030234157391.png"
+        title="image-20241030234157391" /></p>
+<p>A:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">cd /sys/module/flipper/sections &amp;&amp; cat .data 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>如果还是没有那就只能gef里面执行kmod获取地址，base极为mod的地址</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://nuc-1304629987.cos.ap-chongqing.myqcloud.com/image/image-20241030234430658.png"
+        data-srcset="https://nuc-1304629987.cos.ap-chongqing.myqcloud.com/image/image-20241030234430658.png, https://nuc-1304629987.cos.ap-chongqing.myqcloud.com/image/image-20241030234430658.png 1.5x, https://nuc-1304629987.cos.ap-chongqing.myqcloud.com/image/image-20241030234430658.png 2x"
+        data-sizes="auto"
+        alt="https://nuc-1304629987.cos.ap-chongqing.myqcloud.com/image/image-20241030234430658.png"
+        title="image-20241030234430658" /></p>
+<h1 id="附录">附录</h1>
 <p>punch hole可以达到和userfaultfd同等效果
 可以使用提权以后vfork的方式顺利的返回用户态</p>
 <h1 id="参考链接">参考链接</h1>
