@@ -9,7 +9,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://cnitlrt.github.io/kernel01/" /><meta property="og:image" content="https://cnitlrt.github.io/logo.jpg"/><meta property="article:section" content="" />
 <meta property="article:published_time" content="2023-11-09T09:15:58+08:00" />
-<meta property="article:modified_time" content="2024-11-05T02:39:05+08:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2024-11-05T03:44:38+08:00" /><meta property="og:site_name" content="My cool site" />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://cnitlrt.github.io/logo.jpg"/>
 
@@ -34,8 +34,8 @@
                             "url": "https:\/\/cnitlrt.github.io\/images\/Apple-Devices-Preview.png",
                             "width":  3200 ,
                             "height":  2048 
-                        }],"genre": "page","wordcount":  23234 ,
-        "url": "https:\/\/cnitlrt.github.io\/kernel01\/","datePublished": "2023-11-09T09:15:58+08:00","dateModified": "2024-11-05T02:39:05+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "page","wordcount":  23279 ,
+        "url": "https:\/\/cnitlrt.github.io\/kernel01\/","datePublished": "2023-11-09T09:15:58+08:00","dateModified": "2024-11-05T03:44:38+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": {
                     "@type": "ImageObject",
@@ -5928,36 +5928,18 @@
         data-sizes="auto"
         alt="https://tuchuang-1304629987.cos.ap-chengdu.myqcloud.com//image/20240218003035-396.png"
         title="image-20240204052258846" /></p>
-<p>patch 277 setresuid</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl">   <span class="mh">0xffffffff810fc7d6</span> <span class="o">&lt;</span><span class="n">__sys_setresuid</span><span class="o">+</span><span class="mi">246</span><span class="o">&gt;:</span>	<span class="n">je</span>     <span class="mh">0xffffffff810fc90e</span> <span class="o">&lt;</span><span class="n">__sys_setresuid</span><span class="o">+</span><span class="mi">558</span><span class="o">&gt;</span>
-</span></span><span class="line"><span class="cl">   <span class="mh">0xffffffff810fc7dc</span> <span class="o">&lt;</span><span class="n">__sys_setresuid</span><span class="o">+</span><span class="mi">252</span><span class="o">&gt;:</span>	<span class="n">mov</span>    <span class="n">rdi</span><span class="p">,</span><span class="n">QWORD</span> <span class="n">PTR</span> <span class="p">[</span><span class="n">r15</span><span class="o">+</span><span class="mh">0x88</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">   <span class="mh">0xffffffff810fc7e3</span> <span class="o">&lt;</span><span class="n">__sys_setresuid</span><span class="o">+</span><span class="mi">259</span><span class="o">&gt;:</span>	<span class="n">mov</span>    <span class="n">esi</span><span class="p">,</span><span class="mh">0x7</span>
-</span></span><span class="line"><span class="cl">   <span class="mh">0xffffffff810fc7e8</span> <span class="o">&lt;</span><span class="n">__sys_setresuid</span><span class="o">+</span><span class="mi">264</span><span class="o">&gt;:</span>	<span class="n">mov</span>    <span class="n">DWORD</span> <span class="n">PTR</span> <span class="p">[</span><span class="n">rbp</span><span class="o">-</span><span class="mh">0x38</span><span class="p">],</span><span class="n">ecx</span>
-</span></span><span class="line"><span class="cl">   <span class="mh">0xffffffff810fc7eb</span> <span class="o">&lt;</span><span class="n">__sys_setresuid</span><span class="o">+</span><span class="mi">267</span><span class="o">&gt;:</span>	<span class="n">call</span>   <span class="mh">0xffffffff810eab50</span> <span class="o">&lt;</span><span class="n">ns_capable_setid</span><span class="o">&gt;</span>
-</span></span><span class="line"><span class="cl">   <span class="mh">0xffffffff810fc7f0</span> <span class="o">&lt;</span><span class="n">__sys_setresuid</span><span class="o">+</span><span class="mi">272</span><span class="o">&gt;:</span>	<span class="n">mov</span>    <span class="n">ecx</span><span class="p">,</span><span class="n">DWORD</span> <span class="n">PTR</span> <span class="p">[</span><span class="n">rbp</span><span class="o">-</span><span class="mh">0x38</span><span class="p">]</span>
-</span></span><span class="line"><span class="cl">   <span class="mh">0xffffffff810fc7f3</span> <span class="o">&lt;</span><span class="n">__sys_setresuid</span><span class="o">+</span><span class="mi">275</span><span class="o">&gt;:</span>	<span class="n">test</span>   <span class="n">al</span><span class="p">,</span><span class="n">al</span>
-</span></span><span class="line"><span class="cl">   <span class="mh">0xffffffff810fc7f5</span> <span class="o">&lt;</span><span class="n">__sys_setresuid</span><span class="o">+</span><span class="mi">277</span><span class="o">&gt;:</span>	<span class="n">jne</span>    <span class="mh">0xffffffff810fc996</span> <span class="o">&lt;</span><span class="n">__sys_setresuid</span><span class="o">+</span><span class="mi">694</span><span class="o">&gt;</span>
-</span></span><span class="line"><span class="cl">   <span class="mh">0xffffffff810fc7fb</span> <span class="o">&lt;</span><span class="n">__sys_setresuid</span><span class="o">+</span><span class="mi">283</span><span class="o">&gt;:</span>	<span class="n">mov</span>    <span class="n">DWORD</span> <span class="n">PTR</span> <span class="p">[</span><span class="n">rbp</span><span class="o">-</span><span class="mh">0x38</span><span class="p">],</span><span class="n">ecx</span>
-</span></span><span class="line"><span class="cl">   <span class="mh">0xffffffff810fc7fe</span> <span class="o">&lt;</span><span class="n">__sys_setresuid</span><span class="o">+</span><span class="mi">286</span><span class="o">&gt;:</span>	<span class="n">call</span>   <span class="mh">0xffffffff81116330</span> <span class="o">&lt;</span><span class="n">prepare_creds</span><span class="o">&gt;</span>
-</span></span><span class="line"><span class="cl">   <span class="mh">0xffffffff810fc803</span> <span class="o">&lt;</span><span class="n">__sys_setresuid</span><span class="o">+</span><span class="mi">291</span><span class="o">&gt;:</span>	<span class="n">mov</span>    <span class="n">ecx</span><span class="p">,</span><span class="n">DWORD</span> <span class="n">PTR</span> <span class="p">[</span><span class="n">rbp</span><span class="o">-</span><span class="mh">0x38</span><span class="p">]</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="任意地址读写">任意地址读写</h2>
+<p>patch setresuid或者ns_capable_setid</p>
+<p><a href="https://elixir.bootlin.com/linux/v6.11.6/source/kernel/sys.c#L676" target="_blank" rel="noopener noreffer ">https://elixir.bootlin.com/linux/v6.11.6/source/kernel/sys.c#L676</a></p>
+<p>不同版本可能略有差别，但最终我们都是让ns_capable_setid返回1，即可以运行到commit_creds</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://nuc-1304629987.cos.ap-chongqing.myqcloud.com/image/image-20241105033550067.png"
+        data-srcset="https://nuc-1304629987.cos.ap-chongqing.myqcloud.com/image/image-20241105033550067.png, https://nuc-1304629987.cos.ap-chongqing.myqcloud.com/image/image-20241105033550067.png 1.5x, https://nuc-1304629987.cos.ap-chongqing.myqcloud.com/image/image-20241105033550067.png 2x"
+        data-sizes="auto"
+        alt="https://nuc-1304629987.cos.ap-chongqing.myqcloud.com/image/image-20241105033550067.png"
+        title="image-20241105033550067" /></p>
+<h2 id="任意地址读写">任意地址读写</h2>
 <h3 id="只有任意地址写">只有任意地址写</h3>
 <h3 id="有任意地址读写">有任意地址读写</h3>
 <h2 id="非例题">非例题</h2>
@@ -9312,7 +9294,7 @@ A: heap overflow (off by null| off by x| flip)</p>
 <h2 id="n1ctf-kfile-file_struct-uaf的利用">n1ctf kfile (file_struct uaf的利用)</h2>
 <h1 id="附录">附录</h1>
 <p>punch hole可以达到和userfaultfd同等效果
-可以使用提权以后vfork的方式顺利的返回用户态</p>
+可以提权（pop rdi;init_cred;commit_creds）以后通过vfork的方式顺利的返回用户态</p>
 <h1 id="参考链接">参考链接</h1>
 <p><a href="https://yanglingxi1993.github.io/dirty_pagetable/dirty_pagetable.html" target="_blank" rel="noopener noreffer ">dirty_pageable</a></p>
 <p>[<a href="https://ptr-yudai.hatenablog.com/entry/2023/12/08/093606" target="_blank" rel="noopener noreffer ">Understanding Dirty Pagetable - m0leCon Finals 2023 CTF Writeup</a>]</p>
