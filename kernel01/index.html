@@ -9,7 +9,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://cnitlrt.github.io/kernel01/" /><meta property="og:image" content="https://cnitlrt.github.io/logo.jpg"/><meta property="article:section" content="" />
 <meta property="article:published_time" content="2023-11-09T09:15:58+08:00" />
-<meta property="article:modified_time" content="2024-11-21T21:07:39+08:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2024-12-20T07:55:33+08:00" /><meta property="og:site_name" content="My cool site" />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://cnitlrt.github.io/logo.jpg"/>
 
@@ -34,8 +34,8 @@
                             "url": "https:\/\/cnitlrt.github.io\/images\/Apple-Devices-Preview.png",
                             "width":  3200 ,
                             "height":  2048 
-                        }],"genre": "page","wordcount":  25362 ,
-        "url": "https:\/\/cnitlrt.github.io\/kernel01\/","datePublished": "2023-11-09T09:15:58+08:00","dateModified": "2024-11-21T21:07:39+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "page","wordcount":  25417 ,
+        "url": "https:\/\/cnitlrt.github.io\/kernel01\/","datePublished": "2023-11-09T09:15:58+08:00","dateModified": "2024-12-20T07:55:33+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": {
                     "@type": "ImageObject",
@@ -9688,7 +9688,22 @@ A: OF COURSE</p>
 <p>Q: when can use page allocate aka page fengshuii
 A: heap overflow (off by null| off by x| flip)</p>
 <h1 id="kernel题目">kernel题目</h1>
-<h2 id="l3hctf-kpid-pid-uaf-的利用">l3hctf kpid (pid uaf 的利用)</h2>
+<h2 id="ebpf">ebpf</h2>
+<h3 id="httpsgithubcomchujdkd3ctf2022-pwn-d3bpf-and-v2"><a href="https://github.com/chujDK/d3ctf2022-pwn-d3bpf-and-v2" target="_blank" rel="noopener noreffer ">https://github.com/chujDK/d3ctf2022-pwn-d3bpf-and-v2</a></h3>
+<h2 id="qwbs8">qwbs8</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git clone git://git.launchpad.net/~ubuntu-kernel/ubuntu/+source/linux/+git/focal
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> focal
+</span></span><span class="line"><span class="cl">git checkout Ubuntu-hwe-5.15-5.15.0-127.137_20.04.1
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="l3hctf-kpid-pid-uaf-的利用">l3hctf kpid (pid uaf 的利用)</h2>
 <h3 id="题目分析">题目分析</h3>
 <h3 id="0x69003">0x69003</h3>
 <p>执行put_pid</p>
@@ -10316,10 +10331,26 @@ A: heap overflow (off by null| off by x| flip)</p>
 </span></span><span class="line"><span class="cl">  int3
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h1 id="附录">附录</h1>
+</div><h2 id="realworld">realworld</h2>
+<h3 id="cve-2023-1829">CVE-2023-1829</h3>
+<h3 id="环境搭建">环境搭建</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">wget https://launchpad.net/ubuntu/+archive/primary/+sourcefiles/linux/5.15.0-25.25/linux_5.15.0.orig.tar.gz
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="漏洞原理分析">漏洞原理分析</h3>
+<h4 id="patch文件分析">patch文件分析</h4>
+<h3 id="poc">poc</h3>
+<h3 id="参考链接">参考链接</h3>
+<p><a href="https://starlabs.sg/blog/2023/06-breaking-the-code-exploiting-and-examining-cve-2023-1829-in-cls_tcindex-classifier-vulnerability/" target="_blank" rel="noopener noreffer ">Breaking the Code - Exploiting and Examining CVE-2023-1829 in cls_tcindex Classifier Vulnerability</a></p>
+<h1 id="附录">附录</h1>
 <p>punch hole可以达到和userfaultfd同等效果
 可以提权（pop rdi;init_cred;commit_creds）以后通过vfork的方式顺利的返回用户态</p>
-<h1 id="参考链接">参考链接</h1>
+<h1 id="参考链接-1">参考链接</h1>
 <p><a href="https://yanglingxi1993.github.io/dirty_pagetable/dirty_pagetable.html" target="_blank" rel="noopener noreffer ">dirty_pageable</a></p>
 <p>[<a href="https://ptr-yudai.hatenablog.com/entry/2023/12/08/093606" target="_blank" rel="noopener noreffer ">Understanding Dirty Pagetable - m0leCon Finals 2023 CTF Writeup</a>]</p>
 <p><a href="https://www.cnblogs.com/smilingsusu/articles/14541573.html" target="_blank" rel="noopener noreffer ">Linux 内核-如何获取虚拟地址对应的物理地址</a></p>
