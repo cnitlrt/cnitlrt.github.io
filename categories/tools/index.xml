@@ -5,12 +5,12 @@
         <description>tools - 分类 - cnitlrtの博客</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>cnitlrt@gmail.com (cnitlrt)</managingEditor>
             <webMaster>cnitlrt@gmail.com (cnitlrt)</webMaster><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sat, 01 Jan 2022 04:06:14 &#43;0800</lastBuildDate><atom:link href="https://cnitlrt.github.io/categories/tools/" rel="self" type="application/rss+xml" /><item>
-    <title>Misc杂记</title>
+    <title>疑难杂症宝典</title>
     <link>https://cnitlrt.github.io/misc/</link>
     <pubDate>Sat, 01 Jan 2022 04:06:14 &#43;0800</pubDate>
     <author>cnitlrt</author>
     <guid>https://cnitlrt.github.io/misc/</guid>
-    <description><![CDATA[ubuntu加内存 外部： 关机之后点击扩容然后选择想要扩容成的大小 内部： 安装gparted 1 sudo apt-get install gparted 打开gparted,右键/dev/sda1]]></description>
+    <description><![CDATA[记录一些遇到的疑难杂症]]></description>
 </item>
 </channel>
 </rss>
