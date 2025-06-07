@@ -139,7 +139,7 @@
 </nav></div>
             </div><div class="content" id="content"><h2 id="前言">前言</h2>
 <p>在周六结束的d3ctf中，我参与了d3kheap2与d3kshrm的解题，d3kheap2是一个独立cache的UAF，大小为0x800，漏洞为UAF漏洞，赛中的思路是堆喷该堆块，然后将其全部free掉即可将其回收进buddy system中然后再用sk_buffer占位，此时我们便将独立cache的UAF转化为了general cache 的UAF，接着我们通过UAF将sk_buffer和pipe_buffer重合做<a href="https://github.com/veritas501/pipe-primitive" target="_blank" rel="noopener noreffer ">pipe-primitive</a>即可.</p>
-<p>这是我的exp (banzi.h你可以在<a href="" rel="">这里</a>找到)</p>
+<p>这是我的exp (banzi.h你可以在<a href="https://cnitlrt.github.io/banzi" target="_blank" rel="noopener noreffer ">这里</a>找到)</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">  1
