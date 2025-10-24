@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>正在跳转...</title>
+  <script>
+    // 与 index.html 相同的逻辑：保留路径/参数/锚点
+    const target = "https://blog.idapro.tech";
+    const path = window.location.pathname;
+    const search = window.location.search;
+    const hash = window.location.hash;
+    window.location.replace(target + path + search + hash);
+  </script>
+</head>
+<body>
+  <h2>页面不存在，正在跳转到 blog.idapro.tech...</h2>
+  <p>如果没有自动跳转，请 <a id="link" href="#">点击这里</a>。</p>
+  <script>
+    const t="https://blog.idapro.tech";
+    document.getElementById("link").href = t + window.location.pathname + window.location.search + window.location.hash;
+  </script>
+</body>
+</html>
