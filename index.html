@@ -4,27 +4,18 @@
   <meta charset="UTF-8">
   <title>正在跳转...</title>
   <script>
-    // 获取当前页面的路径、参数和哈希
+    const target = "https://blog.idapro.tech";
     const path = window.location.pathname;
     const search = window.location.search;
     const hash = window.location.hash;
-
-    // 目标域名
-    const target = "https://blog.idapro.tech";
-
-    // 拼接完整的新地址
-    const newUrl = target + path + search + hash;
-
-    // 跳转
-    window.location.replace(newUrl);
+    window.location.replace(target + path + search + hash);
   </script>
 </head>
 <body>
-  <h2>正在跳转到 blog.idapro.tech...</h2>
-  <p>如果没有自动跳转，请 <a id="link" href="#">点击这里</a>。</p>
-
+  <p>正在跳转到 <a id="link" href="#">blog.idapro.tech</a> ...</p>
   <script>
-    document.getElementById("link").href = target + path + search + hash;
+    const t="https://blog.idapro.tech";
+    document.getElementById("link").href = t + window.location.pathname + window.location.search + window.location.hash;
   </script>
 </body>
 </html>
